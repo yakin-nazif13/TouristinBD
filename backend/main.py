@@ -19,6 +19,7 @@ from fastapi.responses import JSONResponse, RedirectResponse
 from backend import db
 from backend.routers import (
     analytics,
+    chat,
     discovery,
     meta,
     places,
@@ -41,7 +42,7 @@ rebuilding the database refreshes all endpoints with no code change.
 
 app = FastAPI(
     title="TouristinBD API",
-    version="0.8.0",
+    version="0.9.0",
     description=DESCRIPTION,
     openapi_tags=[
         {"name": "meta", "description": "Health, build provenance, dataset overview."},
@@ -51,16 +52,17 @@ app = FastAPI(
         {"name": "analytics", "description": "Aggregates equivalent to the Phase 7 tables."},
         {"name": "research", "description": "Phase 5 validation and Phase 6 sensitivity."},
         {"name": "discovery", "description": "Search, preference ranking, place comparison."},
+        {"name": "chat", "description": "Retrieval-based chatbot built on the discovery endpoints."},
     ],
 )
 
 # The frontend demo is opened straight from disk (file://) and later served from
-# a different host, so allow any origin — the API is read-only and public.
+# a different host, so allow any origin — the API is read-only except for /api/chat.
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
     allow_credentials=False,
-    allow_methods=["GET"],
+    allow_methods=["GET", "POST"],
     allow_headers=["*"],
 )
 
@@ -82,6 +84,7 @@ app.include_router(taxonomy.router)
 app.include_router(analytics.router)
 app.include_router(research.router)
 app.include_router(discovery.router)
+app.include_router(chat.router)
 
 
 def run() -> None:

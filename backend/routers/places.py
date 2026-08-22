@@ -1,4 +1,9 @@
-"""Places and cities."""
+"""Places and cities.
+
+Like `discovery.py`, each endpoint is a thin wrapper around a plain-Python
+`_*_impl` function so `backend/routers/chat.py` can call the same logic
+in-process without tripping over `Query(...)` sentinel defaults.
+"""
 
 from __future__ import annotations
 
@@ -13,23 +18,21 @@ from backend.queries import review_summary_sql
 router = APIRouter(prefix="/api", tags=["places"])
 
 
-@router.get("/places", response_model=Page[Place])
-def list_places(
-    conn: sqlite3.Connection = Depends(db.get_conn),
-    city: str | None = Query(None, description="Exact city name (case-insensitive)"),
+def _list_places_impl(
+    conn: sqlite3.Connection,
+    city: str | None = None,
     district: str | None = None,
     division: str | None = None,
-    category: str | None = Query(None, description="Source category, e.g. 'hotel', 'Beach'"),
-    place_kind: str | None = Query(None, description="attraction | accommodation"),
-    source: str | None = Query(None, description="google_maps | booking.com"),
-    min_rating: float | None = Query(None, ge=0, le=5),
-    q: str | None = Query(None, description="Substring match on place name"),
-    sort: str = Query("review_count", pattern="^(review_count|avg_rating|name|city)$"),
-    order: str = Query("desc", pattern="^(asc|desc)$"),
-    limit: int = Query(50, ge=1, le=500),
-    offset: int = Query(0, ge=0),
+    category: str | None = None,
+    place_kind: str | None = None,
+    source: str | None = None,
+    min_rating: float | None = None,
+    q: str | None = None,
+    sort: str = "review_count",
+    order: str = "desc",
+    limit: int = 50,
+    offset: int = 0,
 ) -> Page[Place]:
-    """Filterable place list with review counts and rating stats."""
     where: list[str] = []
     params: list = []
 
@@ -73,12 +76,30 @@ def list_places(
     )
 
 
-@router.get("/places/{place_ref}", response_model=PlaceDetail)
-def get_place(
-    place_ref: str,
+@router.get("/places", response_model=Page[Place])
+def list_places(
     conn: sqlite3.Connection = Depends(db.get_conn),
-    sample_reviews: int = Query(5, ge=0, le=50),
-) -> PlaceDetail:
+    city: str | None = Query(None, description="Exact city name (case-insensitive)"),
+    district: str | None = None,
+    division: str | None = None,
+    category: str | None = Query(None, description="Source category, e.g. 'hotel', 'Beach'"),
+    place_kind: str | None = Query(None, description="attraction | accommodation"),
+    source: str | None = Query(None, description="google_maps | booking.com"),
+    min_rating: float | None = Query(None, ge=0, le=5),
+    q: str | None = Query(None, description="Substring match on place name"),
+    sort: str = Query("review_count", pattern="^(review_count|avg_rating|name|city)$"),
+    order: str = Query("desc", pattern="^(asc|desc)$"),
+    limit: int = Query(50, ge=1, le=500),
+    offset: int = Query(0, ge=0),
+) -> Page[Place]:
+    """Filterable place list with review counts and rating stats."""
+    return _list_places_impl(
+        conn, city, district, division, category, place_kind, source,
+        min_rating, q, sort, order, limit, offset,
+    )
+
+
+def _get_place_impl(conn: sqlite3.Connection, place_ref: str, sample_reviews: int = 5) -> PlaceDetail:
     """A single place by numeric id or by (case-insensitive) name."""
     if place_ref.isdigit():
         place = db.one(conn, "SELECT * FROM v_place_stats WHERE place_id = ?", (int(place_ref),))
@@ -146,13 +167,19 @@ def get_place(
     )
 
 
-@router.get("/cities", response_model=list[City])
-def list_cities(
+@router.get("/places/{place_ref}", response_model=PlaceDetail)
+def get_place(
+    place_ref: str,
     conn: sqlite3.Connection = Depends(db.get_conn),
-    division: str | None = None,
-    min_reviews: int = Query(0, ge=0),
+    sample_reviews: int = Query(5, ge=0, le=50),
+) -> PlaceDetail:
+    """A single place by numeric id or by (case-insensitive) name."""
+    return _get_place_impl(conn, place_ref, sample_reviews)
+
+
+def _list_cities_impl(
+    conn: sqlite3.Connection, division: str | None = None, min_reviews: int = 0
 ) -> list[City]:
-    """Cities present in the corpus with place/review counts."""
     where = ["review_count >= ?"]
     params: list = [min_reviews]
     if division:
@@ -167,3 +194,13 @@ def list_cities(
             params,
         )
     ]
+
+
+@router.get("/cities", response_model=list[City])
+def list_cities(
+    conn: sqlite3.Connection = Depends(db.get_conn),
+    division: str | None = None,
+    min_reviews: int = Query(0, ge=0),
+) -> list[City]:
+    """Cities present in the corpus with place/review counts."""
+    return _list_cities_impl(conn, division, min_reviews)

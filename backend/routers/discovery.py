@@ -3,6 +3,13 @@
 These are the two API surfaces Phases 9 (chatbot retrieval) and 10 (itinerary /
 comparison on real data) will build on, so they live in the backend rather than
 being reimplemented in the frontend.
+
+Each endpoint is a thin FastAPI wrapper around a plain-Python `_*_impl`
+function with ordinary defaults (no `Query`/`Depends` sentinels). That split
+lets `backend/routers/chat.py` call the same logic in-process without going
+through HTTP or FastAPI's parameter resolution — calling a route function
+directly would otherwise bind any unpassed parameter to its raw `Query(...)`
+object instead of the default it resolves to at request time.
 """
 
 from __future__ import annotations
@@ -23,17 +30,12 @@ W_PREF_COVERAGE = 0.30
 W_RATING = 0.25
 
 
-@router.get("/search", response_model=list[SearchHit])
-def search(
-    q: str = Query(..., min_length=2, description="Free-text query"),
-    conn: sqlite3.Connection = Depends(db.get_conn),
-    kinds: str = Query(
-        "place,city,preference,topic,review",
-        description="Comma-separated entity kinds to search",
-    ),
-    limit_per_kind: int = Query(5, ge=1, le=50),
+def _search_impl(
+    conn: sqlite3.Connection,
+    q: str,
+    kinds: str = "place,city,preference,topic,review",
+    limit_per_kind: int = 5,
 ) -> list[SearchHit]:
-    """One query across places, cities, preferences, topics and review text."""
     wanted = {k.strip().lower() for k in kinds.split(",") if k.strip()}
     term = db.like_term(q)
     hits: list[SearchHit] = []
@@ -140,27 +142,30 @@ def search(
     return hits
 
 
-@router.get("/recommend", response_model=list[Recommendation])
-def recommend(
+@router.get("/search", response_model=list[SearchHit])
+def search(
+    q: str = Query(..., min_length=2, description="Free-text query"),
     conn: sqlite3.Connection = Depends(db.get_conn),
-    preferences: str | None = Query(
-        None, description="Comma-separated preference_ids, e.g. P02,P03"
+    kinds: str = Query(
+        "place,city,preference,topic,review",
+        description="Comma-separated entity kinds to search",
     ),
+    limit_per_kind: int = Query(5, ge=1, le=50),
+) -> list[SearchHit]:
+    """One query across places, cities, preferences, topics and review text."""
+    return _search_impl(conn, q, kinds, limit_per_kind)
+
+
+def _recommend_impl(
+    conn: sqlite3.Connection,
+    preferences: str | None = None,
     city: str | None = None,
     division: str | None = None,
-    place_kind: str | None = Query(None, description="attraction | accommodation"),
-    exclude_city: str | None = Query(None, description="Comma-separated cities to skip"),
-    min_reviews: int = Query(1, ge=0, description="Minimum reviews for a place to qualify"),
-    limit: int = Query(10, ge=1, le=100),
+    place_kind: str | None = None,
+    exclude_city: str | None = None,
+    min_reviews: int = 1,
+    limit: int = 10,
 ) -> list[Recommendation]:
-    """Rank places against a set of preferences, using review evidence.
-
-    `match_score` = 0.45 × evidence_share + 0.30 × preference_coverage +
-    0.25 × (avg_rating / 5), where *evidence_share* is the fraction of the
-    place's reviews that map to a requested preference and *preference_coverage*
-    is the fraction of the requested preferences the place has any evidence for.
-    With no `preferences` given it degrades to a rating-and-volume ranking.
-    """
     wanted: list[str] = []
     if preferences:
         wanted = [p.strip().upper() for p in preferences.split(",") if p.strip()]
@@ -258,12 +263,33 @@ def recommend(
     return results[:limit]
 
 
-@router.get("/compare", response_model=dict)
-def compare(
+@router.get("/recommend", response_model=list[Recommendation])
+def recommend(
     conn: sqlite3.Connection = Depends(db.get_conn),
-    places: str = Query(..., description="Comma-separated place_ids or place names (2-4)"),
-) -> dict:
-    """Side-by-side comparison of 2-4 places on real review evidence."""
+    preferences: str | None = Query(
+        None, description="Comma-separated preference_ids, e.g. P02,P03"
+    ),
+    city: str | None = None,
+    division: str | None = None,
+    place_kind: str | None = Query(None, description="attraction | accommodation"),
+    exclude_city: str | None = Query(None, description="Comma-separated cities to skip"),
+    min_reviews: int = Query(1, ge=0, description="Minimum reviews for a place to qualify"),
+    limit: int = Query(10, ge=1, le=100),
+) -> list[Recommendation]:
+    """Rank places against a set of preferences, using review evidence.
+
+    `match_score` = 0.45 × evidence_share + 0.30 × preference_coverage +
+    0.25 × (avg_rating / 5), where *evidence_share* is the fraction of the
+    place's reviews that map to a requested preference and *preference_coverage*
+    is the fraction of the requested preferences the place has any evidence for.
+    With no `preferences` given it degrades to a rating-and-volume ranking.
+    """
+    return _recommend_impl(
+        conn, preferences, city, division, place_kind, exclude_city, min_reviews, limit
+    )
+
+
+def _compare_impl(conn: sqlite3.Connection, places: str) -> dict:
     refs = [p.strip() for p in places.split(",") if p.strip()]
     if not 2 <= len(refs) <= 4:
         raise HTTPException(status_code=400, detail="pass between 2 and 4 places")
@@ -303,3 +329,12 @@ def compare(
             r["place_name"]: sorted(s - shared) for r, s in zip(resolved, pref_sets)
         },
     }
+
+
+@router.get("/compare", response_model=dict)
+def compare(
+    conn: sqlite3.Connection = Depends(db.get_conn),
+    places: str = Query(..., description="Comma-separated place_ids or place names (2-4)"),
+) -> dict:
+    """Side-by-side comparison of 2-4 places on real review evidence."""
+    return _compare_impl(conn, places)

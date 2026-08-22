@@ -1,6 +1,6 @@
 # TouristinBD — Progress Checklist
 
-Last updated: 2026-08-20
+Last updated: 2026-08-22
 
 > How to use this file: keep it up to date at the end of every session. Since Claude's
 > workspace resets between sessions, **download the project zip after each session and
@@ -209,7 +209,42 @@ Last updated: 2026-08-20
         tests and available for later deployment.
   - [x] Added `scipy`, `fastapi`, `uvicorn[standard]`, `httpx` to `requirements.txt`
         (scipy was already a runtime dependency of Phase 7 but had never been pinned).
-- [ ] **Phase 9 — Chatbot (real, retrieval-based)**: not started (demo has mock rule-based version only).
+- [x] **Phase 9 — Chatbot (real, retrieval-based)**: done.
+  - [x] `backend/routers/chat.py` — `POST /api/chat`. No LLM call and no API key
+        needed: the message is classified into an intent (greeting, thanks,
+        compare, reviews-about, preference-based recommend, place info, city
+        info, generic recommend, full-text-search fallback, unknown) by a
+        small set of English keyword regexes, then entities (place / city /
+        preference) are matched against whatever rows currently exist in the
+        database — nothing is hardcoded to a specific place, city, or
+        preference id, so a rebuild with new data is picked up automatically.
+  - [x] Reuses the tested Phase 8 logic in-process rather than duplicating
+        SQL: `discovery.py` and `places.py` were each split into a plain-Python
+        `_*_impl` function (ordinary defaults) called by both the FastAPI route
+        and `chat.py` directly — calling a route function straight from Python
+        would otherwise bind unpassed parameters to their raw `Query(...)`
+        sentinel instead of the value FastAPI resolves at request time, a bug
+        caught by the Phase 9 test run (recommend crashed on `exclude_city`
+        until the split was made).
+  - [x] Match-confidence guard: a place name found verbatim in the message
+        (or its part before a parenthetical qualifier, e.g. "Sundarbans" out
+        of "Sundarbans (Karamjal Wildlife Centre)") is a *strong* match; a
+        match from one overlapping word (e.g. "lake" matching both "Kaptai
+        Lake" and "Foy's Lake Resort") is not, and cannot by itself pull an
+        unrelated place into a comparison or override a direct place lookup
+        with an unrelated preference recommendation. Both failure modes were
+        caught live by the test run and fixed.
+  - [x] `scripts/test_phase9_chat.py` — 31 in-process smoke tests over every
+        intent branch, plus request-validation edge cases (empty/missing
+        message). All passing. Also re-ran `test_phase8_api.py` (68) and
+        `test_phase8_rebuild.py` (29) after the `discovery.py`/`places.py`
+        refactor — no regressions.
+  - [x] CORS `allow_methods` widened from `["GET"]` to `["GET", "POST"]` for
+        the new endpoint; API version bumped to 0.9.0.
+  - [ ] Not wired into `frontend/index.html` yet — API-only, matching the
+        Phase 8 "backend only" scope decision. Bilingual support is still a
+        stretch goal per the MVP scope, not implemented (English keyword
+        regexes only).
 - [ ] **Phase 10 — Itinerary builder + comparison tool (real data)**: not started (demo has mock version only).
 - [ ] **Phase 11 — Frontend polish / Next.js migration**: optional, current plain HTML/JS demo works fine for now.
 - [ ] **Phase 12 — Deployment**: not started.
@@ -232,9 +267,12 @@ Last updated: 2026-08-20
 - Rebuild the database after re-running any earlier phase (Phase 1-7 output changed):
   `.venv/bin/python scripts/build_phase8_database.py`
 - Run the API: `.venv/bin/python -m backend.main` (docs at http://127.0.0.1:8000/docs).
-- Verify the backend after any change: `.venv/bin/python scripts/test_phase8_api.py` and
-  `.venv/bin/python scripts/test_phase8_rebuild.py`.
-- Next natural step: **Phase 9 — real retrieval-based chatbot**, built on top of the
-  Phase 8 `/api/search` and `/api/reviews` endpoints. Then **Phase 10 — itinerary
-  builder + comparison tool**, built on `/api/recommend` and `/api/compare` (both
-  already implemented in Phase 8, unused by any frontend yet).
+- Verify the backend after any change: `.venv/bin/python scripts/test_phase8_api.py`,
+  `.venv/bin/python scripts/test_phase8_rebuild.py`, and
+  `.venv/bin/python scripts/test_phase9_chat.py`.
+- Try the chatbot: `POST /api/chat` with `{"message": "best beaches in Cox's Bazar"}`
+  (see `/docs` for the schema). No API key needed — it's retrieval-based, not an LLM call.
+- Next natural step: **Phase 10 — itinerary builder + comparison tool**, built on
+  `/api/recommend` and `/api/compare` (both already implemented in Phase 8, unused by
+  any frontend yet). Phase 11 could then wire `frontend/index.html` to `/api/chat`,
+  `/api/recommend`, and `/api/compare` to replace the current mock-data demo.
