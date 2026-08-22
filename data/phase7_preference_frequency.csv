@@ -1,0 +1,10 @@
+preference_id,preference_label,category,subcategory,preference_type,topic_count,review_count,review_share
+P01,Hotel room quality and staff service,Accommodation,Hotel Experience,mainstream,1,239,0.479
+P03,Historic landmarks and archaeological site visits,Attractions & Activities,Heritage Tourism,mainstream,2,80,0.1603
+P02,Beachfront and island exploration,Attractions & Activities,Coastal Tourism,mainstream,1,76,0.1523
+P04,Bandarban hill tracts mountain tourism,Attractions & Activities,Adventure & Nature,mainstream,1,32,0.0641
+P05,Historic Panam City heritage exploration,Attractions & Activities,Heritage Tourism,mainstream,1,17,0.0341
+P06,Sreemangal tea gardens and nature tours,Attractions & Activities,Nature & Ecotourism,mainstream,1,16,0.0321
+P07,Ratargul freshwater swamp forest exploration,Attractions & Activities,Nature & Ecotourism,mainstream,1,16,0.0321
+P08,Sundarbans Karamjal wildlife day trips,Attractions & Activities,Ecotourism,mainstream,1,12,0.024
+P09,Kaptai Lake and Rangamati scenic tours,Attractions & Activities,Nature & Scenic Tours,mainstream,1,11,0.022

@@ -1,0 +1,15 @@
+pandas
+numpy
+scikit-learn
+hdbscan
+umap-learn
+sentence-transformers
+bertopic
+matplotlib
+torch
+openai
+python-dotenv
+scipy
+fastapi
+uvicorn[standard]
+httpx

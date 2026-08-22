@@ -1,0 +1,28 @@
+{
+  "thresholds": {
+    "tau_sim": 0.4,
+    "ambiguity_margin": 0.08,
+    "min_topics_per_preference": 3,
+    "max_topics_per_preference": 20
+  },
+  "direction1_precision": {
+    "total_topics": 10,
+    "low_similarity_flags": 0,
+    "ambiguous_flags": 0,
+    "pass": 10
+  },
+  "direction2_coverage": {
+    "total_preferences": 10,
+    "under_coverage": 10,
+    "over_coverage": 0,
+    "adequate": 0
+  },
+  "manual_review_sample": {
+    "rows": 50,
+    "mapped_positive": 10,
+    "second_best_challenger": 10,
+    "hard_negative": 15,
+    "random_negative": 15
+  },
+  "recommendation_count": 12
+}

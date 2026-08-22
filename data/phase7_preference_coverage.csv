@@ -1,0 +1,10 @@
+preference_id,mapped_topic_count,covered_reviews,avg_similarity,coverage_status,coverage_action
+P03,2,80,0.914,under_coverage,merge_or_expand
+P01,1,239,0.7657,under_coverage,merge_or_expand
+P02,1,76,0.7775,under_coverage,merge_or_expand
+P04,1,32,0.9013,under_coverage,merge_or_expand
+P05,1,17,0.9376,under_coverage,merge_or_expand
+P06,1,16,0.8829,under_coverage,merge_or_expand
+P07,1,16,0.8875,under_coverage,merge_or_expand
+P08,1,12,0.9195,under_coverage,merge_or_expand
+P09,1,11,0.925,under_coverage,merge_or_expand

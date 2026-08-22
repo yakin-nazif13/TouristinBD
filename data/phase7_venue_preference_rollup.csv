@@ -1,0 +1,35 @@
+city,place_name,preference_id,preference_label,preference_type,review_count,avg_rating
+Bagerhat,Sixty Dome Mosque,P03,Historic landmarks and archaeological site visits,mainstream,20,4.4
+Bandarban,Nilachal Tourist Center,P04,Bandarban hill tracts mountain tourism,mainstream,18,4.611
+Bandarban,Nilachal Tourist Center,P02,Beachfront and island exploration,mainstream,1,4.0
+Chittagong,Foy's Lake Resort,P01,Hotel room quality and staff service,mainstream,20,3.2
+Chittagong,Heritage Hotel Chittagong,P01,Hotel room quality and staff service,mainstream,19,2.842
+Chittagong,Hoque Tower International,P01,Hotel room quality and staff service,mainstream,20,2.975
+Cox's Bazar,Kollol Hotel,P01,Hotel room quality and staff service,mainstream,19,3.763
+Cox's Bazar,Royal Pearl Suites,P01,Hotel room quality and staff service,mainstream,19,3.368
+Cox's Bazar,Sea Cox Hotel,P01,Hotel room quality and staff service,mainstream,19,2.947
+Dhaka,Ahsan Manzil Museum,P03,Historic landmarks and archaeological site visits,mainstream,18,4.556
+Dhaka,Civic Inn,P01,Hotel room quality and staff service,mainstream,19,3.579
+Dhaka,Green Edge Hotel,P01,Hotel room quality and staff service,mainstream,19,3.447
+Dhaka,Lalbagh Fort,P03,Historic landmarks and archaeological site visits,mainstream,12,4.667
+Dhaka,Lalbagh Fort,P04,Bandarban hill tracts mountain tourism,mainstream,1,5.0
+Dhaka,West Park Inn,P01,Hotel room quality and staff service,mainstream,20,3.075
+Gushainpur,Ratargul Swamp Forest,P07,Ratargul freshwater swamp forest exploration,mainstream,15,4.8
+Gushainpur,Ratargul Swamp Forest,P02,Beachfront and island exploration,mainstream,2,4.5
+Gushainpur,Ratargul Swamp Forest,P04,Bandarban hill tracts mountain tourism,mainstream,1,4.0
+Jaflong,Jaflong Zero Point,P03,Historic landmarks and archaeological site visits,mainstream,11,4.455
+Jaflong,Jaflong Zero Point,P04,Bandarban hill tracts mountain tourism,mainstream,5,4.8
+Jaflong,Jaflong Zero Point,P01,Hotel room quality and staff service,mainstream,1,5.0
+Jaflong,Jaflong Zero Point,P02,Beachfront and island exploration,mainstream,1,2.0
+Kuakata,Kuakata Beach,P02,Beachfront and island exploration,mainstream,14,4.714
+Kuakata,Kuakata Beach,P01,Hotel room quality and staff service,mainstream,5,4.4
+Kuakata,Kuakata Beach,P04,Bandarban hill tracts mountain tourism,mainstream,1,5.0
+Sonargaon,Panam City,P05,Historic Panam City heritage exploration,mainstream,17,4.588
+Sonargaon,Panam City,P03,Historic landmarks and archaeological site visits,mainstream,1,4.0
+Sreemangal,Srimangal Tea Garden,P06,Sreemangal tea gardens and nature tours,mainstream,16,4.688
+Sreemangal,Srimangal Tea Garden,P04,Bandarban hill tracts mountain tourism,mainstream,2,5.0
+Sreemangal,Srimangal Tea Garden,P01,Hotel room quality and staff service,mainstream,1,5.0
+Sylhet,Noorjahan Grand Hotel,P01,Hotel room quality and staff service,mainstream,18,3.278
+Sylhet,Noorjahan Grand Hotel,P02,Beachfront and island exploration,mainstream,1,4.5
+Sylhet,Sylhet Paradise Inn,P01,Hotel room quality and staff service,mainstream,20,3.95
+Sylhet,The Crystal Rose Hotel,P01,Hotel room quality and staff service,mainstream,20,3.575

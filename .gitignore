@@ -1,0 +1,14 @@
+.venv/
+.DS_Store
+*.pyc
+__pycache__/
+.env
+data/touristinbd.db
+data/bertopic_model_dir/
+data/bertopic_model_dir_previous/
+*.png
+*.npy
+.pytest_cache/
+*.egg-info/
+dist/
+build/

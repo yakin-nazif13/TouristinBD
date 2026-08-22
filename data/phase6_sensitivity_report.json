@@ -1,0 +1,145 @@
+{
+  "design": {
+    "mode": "hybrid",
+    "description": "BERTopic retrained per subsample; topics mapped to fixed Phase 4 preferences via embeddings. Phase 3–5 files were not modified.",
+    "paper_ladder": [
+      20000,
+      40000,
+      60000,
+      80000
+    ],
+    "mvp_ladder": [
+      151,
+      247,
+      398,
+      538
+    ],
+    "tau_sim": 0.4,
+    "stability_delta": 0.05,
+    "embedding_model": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2"
+  },
+  "corpus_size": 538,
+  "metrics": [
+    {
+      "sample_size": 151,
+      "sample_fraction": 0.2807,
+      "min_topic_size": 3,
+      "n_topics": 2,
+      "n_preferences_covered": 2,
+      "n_preferences_total": 10,
+      "coverage_rate": 0.2,
+      "avg_similarity": 0.4669,
+      "high_confidence_rate": 1.0,
+      "mapped_preference_ids": [
+        "P01",
+        "P03"
+      ],
+      "jaccard_vs_previous": 1.0,
+      "run_type": "bertopic_retrain_hybrid"
+    },
+    {
+      "sample_size": 247,
+      "sample_fraction": 0.4591,
+      "min_topic_size": 6,
+      "n_topics": 5,
+      "n_preferences_covered": 5,
+      "n_preferences_total": 10,
+      "coverage_rate": 0.5,
+      "avg_similarity": 0.5171,
+      "high_confidence_rate": 1.0,
+      "mapped_preference_ids": [
+        "P01",
+        "P02",
+        "P03",
+        "P05",
+        "P07"
+      ],
+      "jaccard_vs_previous": 0.4,
+      "run_type": "bertopic_retrain_hybrid"
+    },
+    {
+      "sample_size": 398,
+      "sample_fraction": 0.7398,
+      "min_topic_size": 6,
+      "n_topics": 10,
+      "n_preferences_covered": 9,
+      "n_preferences_total": 10,
+      "coverage_rate": 0.9,
+      "avg_similarity": 0.4639,
+      "high_confidence_rate": 0.7,
+      "mapped_preference_ids": [
+        "P01",
+        "P02",
+        "P03",
+        "P04",
+        "P05",
+        "P06",
+        "P07",
+        "P08",
+        "P09"
+      ],
+      "jaccard_vs_previous": 0.5556,
+      "run_type": "bertopic_retrain_hybrid"
+    },
+    {
+      "sample_size": 538,
+      "sample_fraction": 1.0,
+      "min_topic_size": 6,
+      "n_topics": 9,
+      "n_preferences_covered": 9,
+      "n_preferences_total": 10,
+      "coverage_rate": 0.9,
+      "avg_similarity": 0.5336,
+      "high_confidence_rate": 1.0,
+      "mapped_preference_ids": [
+        "P01",
+        "P02",
+        "P03",
+        "P04",
+        "P05",
+        "P06",
+        "P07",
+        "P08",
+        "P09"
+      ],
+      "jaccard_vs_previous": 1.0,
+      "run_type": "bertopic_retrain_hybrid"
+    },
+    {
+      "sample_size": 538,
+      "sample_fraction": 1.0,
+      "min_topic_size": "phase4_reference",
+      "n_topics": 10,
+      "n_preferences_covered": 9,
+      "n_preferences_total": 10,
+      "coverage_rate": 0.9,
+      "avg_similarity": 0.8825,
+      "high_confidence_rate": 1.0,
+      "mapped_preference_ids": [
+        "P01",
+        "P02",
+        "P03",
+        "P04",
+        "P05",
+        "P06",
+        "P07",
+        "P08",
+        "P09"
+      ],
+      "jaccard_vs_previous": 1.0,
+      "run_type": "phase4_locked_reference"
+    }
+  ],
+  "recommendation": {
+    "stability_delta": 0.05,
+    "recommended_min_corpus_size": 538,
+    "note": "Mapped preference set is stable at/above this size for the current taxonomy."
+  },
+  "outputs": [
+    "phase6_sensitivity_metrics.csv",
+    "phase6_sensitivity_mappings.csv",
+    "phase6_sensitivity_chart.png",
+    "phase6_sensitivity_report.json",
+    "phase6_sensitivity_report.md"
+  ]
+}

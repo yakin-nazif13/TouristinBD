@@ -1,0 +1,28 @@
+place_name,city,district,division,place_kind,notes
+Cox's Bazar Beach,Cox's Bazar,Cox's Bazar,Chattogram,attraction,city was blank in processed_reviews.csv
+Srimangal Tea Garden,Sreemangal,Moulvibazar,Sylhet,attraction,
+Nilachal Tourist Center,Bandarban,Bandarban,Chattogram,attraction,
+Jaflong Zero Point,Jaflong,Sylhet,Sylhet,attraction,
+Ratargul Swamp Forest,Gushainpur,Sylhet,Sylhet,attraction,city kept as scraped (Gushainpur union)
+Saint Martins Island,Teknaf,Cox's Bazar,Chattogram,attraction,city was blank; island is administered under Teknaf upazila
+Panam City,Sonargaon,Narayanganj,Dhaka,attraction,
+Sixty Dome Mosque,Bagerhat,Bagerhat,Khulna,attraction,
+Lalbagh Fort,Dhaka,Dhaka,Dhaka,attraction,
+Ahsan Manzil Museum,Dhaka,Dhaka,Dhaka,attraction,
+Kuakata Beach,Kuakata,Patuakhali,Barishal,attraction,
+Kaptai Lake,Rangamati,Rangamati,Chattogram,attraction,city was blank
+Sompur Mahavihar (Paharpur),Naogaon,Naogaon,Rajshahi,attraction,city was blank; Paharpur is in Badalgachhi upazila
+Guliakhali Sea Beach,Sitakunda,Chattogram,Chattogram,attraction,city was blank
+Sundarbans (Karamjal Wildlife Centre),Mongla,Bagerhat,Khulna,attraction,city was blank; Karamjal is reached from Mongla port
+Sea Cox Hotel,Cox's Bazar,Cox's Bazar,Chattogram,accommodation,
+Noorjahan Grand Hotel,Sylhet,Sylhet,Sylhet,accommodation,
+Hoque Tower International,Chittagong,Chattogram,Chattogram,accommodation,
+Foy's Lake Resort,Chittagong,Chattogram,Chattogram,accommodation,
+Royal Pearl Suites,Cox's Bazar,Cox's Bazar,Chattogram,accommodation,
+The Crystal Rose Hotel,Sylhet,Sylhet,Sylhet,accommodation,
+Heritage Hotel Chittagong,Chittagong,Chattogram,Chattogram,accommodation,
+Sylhet Paradise Inn,Sylhet,Sylhet,Sylhet,accommodation,
+Kollol Hotel,Cox's Bazar,Cox's Bazar,Chattogram,accommodation,
+West Park Inn,Dhaka,Dhaka,Dhaka,accommodation,
+Green Edge Hotel,Dhaka,Dhaka,Dhaka,accommodation,
+Civic Inn,Dhaka,Dhaka,Dhaka,accommodation,

@@ -1,0 +1,25 @@
+{
+  "tables": {
+    "dataset_overview": "phase7_dataset_overview.csv",
+    "temporal_review_volume": "phase7_temporal_review_volume.csv",
+    "rating_distribution": "phase7_rating_distribution.csv",
+    "preference_frequency": "phase7_preference_frequency.csv",
+    "preference_coverage": "phase7_preference_coverage.csv",
+    "mainstream_vs_longtail": "phase7_mainstream_vs_longtail.csv",
+    "mapping_quality": "phase7_mapping_quality.csv",
+    "city_preference_rollup": "phase7_city_preference_rollup.csv",
+    "venue_preference_rollup": "phase7_venue_preference_rollup.csv"
+  },
+  "charts": [
+    "phase7_chart_topic_counts.png",
+    "phase7_chart_rating_by_source.png",
+    "phase7_chart_preference_counts.png",
+    "phase7_chart_mainstream_vs_longtail.png",
+    "phase7_chart_sensitivity.png"
+  ],
+  "statistical_tests": "phase7_statistical_tests.json",
+  "notes": [
+    "All outputs are phase7_* files.",
+    "If long-tail group is empty, significance tests are skipped gracefully."
+  ]
+}

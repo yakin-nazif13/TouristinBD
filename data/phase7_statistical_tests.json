@@ -1,0 +1,8 @@
+{
+  "group_sizes": {
+    "mainstream_reviews": 499,
+    "longtail_reviews": 0
+  },
+  "tests": {},
+  "note": "Long-tail group has zero reviews in current MVP run; Wilcoxon rank-sum and Mann-Whitney U tests are skipped."
+}

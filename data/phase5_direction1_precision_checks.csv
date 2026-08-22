@@ -1,0 +1,11 @@
+topic_id,interpreted_label,preference_id,category,subcategory,preference,similarity,second_best_preference_id,second_best_similarity,confidence,needs_review,tau_sim,sim_gap,low_similarity_flag,ambiguous_flag,precision_status
+0,Hotel Room Quality and Staff Service,P01,Accommodation,Hotel Experience,Hotel room quality and staff service,0.7657,P10,0.3745,high,False,0.4,0.3912,False,False,pass
+1,Coastal Beaches and Island Exploration,P02,Attractions & Activities,Coastal Tourism,Beachfront and island exploration,0.7775,P03,0.5594,high,False,0.4,0.2181,False,False,pass
+2,Historic Landmarks And Archaeological Sites,P03,Attractions & Activities,Heritage Tourism,Historic landmarks and archaeological site visits,0.9292,P10,0.6935,high,False,0.4,0.2357,False,False,pass
+3,Bandarban Hill Tracts Mountain Tourism,P04,Attractions & Activities,Adventure & Nature,Bandarban hill tracts mountain tourism,0.9013,P06,0.5571,high,False,0.4,0.3442,False,False,pass
+4,Historic Panam City Heritage Exploration,P05,Attractions & Activities,Heritage Tourism,Historic Panam City heritage exploration,0.9376,P10,0.5462,high,False,0.4,0.3914,False,False,pass
+5,Sreemangal Tea Gardens and Nature,P06,Attractions & Activities,Nature & Ecotourism,Sreemangal tea gardens and nature tours,0.8829,P09,0.5224,high,False,0.4,0.3605,False,False,pass
+6,Ratargul Freshwater Swamp Forest Exploration,P07,Attractions & Activities,Nature & Ecotourism,Ratargul freshwater swamp forest exploration,0.8875,P08,0.4875,high,False,0.4,0.4,False,False,pass
+7,Sundarbans Karamjal Wildlife Centre Day Trips,P08,Attractions & Activities,Ecotourism,Sundarbans Karamjal wildlife day trips,0.9195,P06,0.5427,high,False,0.4,0.3768,False,False,pass
+8,Kaptai Lake and Rangamati Scenic Tours,P09,Attractions & Activities,Nature & Scenic Tours,Kaptai Lake and Rangamati scenic tours,0.925,P06,0.5301,high,False,0.4,0.3949,False,False,pass
+9,Historic Landmarks and Heritage Tourism,P03,Attractions & Activities,Heritage Tourism,Historic landmarks and archaeological site visits,0.8988,P10,0.8005,high,False,0.4,0.0983,False,False,pass

@@ -1,0 +1,9 @@
+metric,value
+direction1_total_topics,10.0
+direction1_low_similarity_flags,0.0
+direction1_ambiguous_flags,0.0
+direction1_pass_rate,1.0
+direction2_total_preferences,10.0
+direction2_under_coverage,10.0
+direction2_adequate,0.0
+direction2_adequate_rate,0.0

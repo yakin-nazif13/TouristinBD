@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "built_at_utc": "2026-08-22T11:47:20Z",
+  "database": "touristinbd.db",
+  "row_counts": {
+    "places": 27,
+    "topics": 11,
+    "reviews": 538,
+    "preferences": 10,
+    "topic_preference_map": 10,
+    "long_tail_flags": 10,
+    "validation_precision": 10,
+    "validation_coverage": 10,
+    "validation_recommendations": 12,
+    "validation_manual_sample": 50,
+    "sensitivity_metrics": 5,
+    "sensitivity_mappings": 26
+  },
+  "views": [
+    "v_city_preference_rollup",
+    "v_city_stats",
+    "v_dataset_overview",
+    "v_place_stats",
+    "v_preference_frequency",
+    "v_rating_distribution",
+    "v_review_preference",
+    "v_temporal_volume",
+    "v_venue_preference_rollup"
+  ],
+  "notes": [
+    "phase5 manual review sample: 0/50 pairs carry a human_label"
+  ]
+}

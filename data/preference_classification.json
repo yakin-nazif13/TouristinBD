@@ -1,0 +1,82 @@
+[
+  {
+    "preference_id": "P01",
+    "category": "Accommodation",
+    "subcategory": "Hotel Experience",
+    "preference": "Hotel room quality and staff service",
+    "description": "Travelers value clean rooms, good value, and helpful staff service during their hotel stays across Bangladesh.",
+    "preference_type": "mainstream"
+  },
+  {
+    "preference_id": "P02",
+    "category": "Attractions & Activities",
+    "subcategory": "Coastal Tourism",
+    "preference": "Beachfront and island exploration",
+    "description": "Travelers enjoy scenic sea views, marine biodiversity, and peaceful getaways at popular coastal destinations and islands.",
+    "preference_type": "mainstream"
+  },
+  {
+    "preference_id": "P03",
+    "category": "Attractions & Activities",
+    "subcategory": "Heritage Tourism",
+    "preference": "Historic landmarks and archaeological site visits",
+    "description": "Travelers explore Bangladesh's rich past by visiting iconic historical landmarks, ancient architectural wonders, and UNESCO World Heritage sites.",
+    "preference_type": "mainstream"
+  },
+  {
+    "preference_id": "P04",
+    "category": "Attractions & Activities",
+    "subcategory": "Adventure & Nature",
+    "preference": "Bandarban hill tracts mountain tourism",
+    "description": "Travelers experience panoramic mountain landscapes, cloud-touching elevations, and viewpoints like Nilachal in Bandarban.",
+    "preference_type": "mainstream"
+  },
+  {
+    "preference_id": "P05",
+    "category": "Attractions & Activities",
+    "subcategory": "Heritage Tourism",
+    "preference": "Historic Panam City heritage exploration",
+    "description": "Travelers discover the ancient architecture and ghost-town ambiance of 19th-century merchant mansions in Panam City, Sonargaon.",
+    "preference_type": "mainstream"
+  },
+  {
+    "preference_id": "P06",
+    "category": "Attractions & Activities",
+    "subcategory": "Nature & Ecotourism",
+    "preference": "Sreemangal tea gardens and nature tours",
+    "description": "Travelers visit lush green tea gardens and rolling hills to enjoy peaceful nature getaways and local tea tasting.",
+    "preference_type": "mainstream"
+  },
+  {
+    "preference_id": "P07",
+    "category": "Attractions & Activities",
+    "subcategory": "Nature & Ecotourism",
+    "preference": "Ratargul freshwater swamp forest exploration",
+    "description": "Travelers enjoy unique boat ride experiences and scenic flooded forest views at Ratargul Swamp Forest in Sylhet.",
+    "preference_type": "mainstream"
+  },
+  {
+    "preference_id": "P08",
+    "category": "Attractions & Activities",
+    "subcategory": "Ecotourism",
+    "preference": "Sundarbans Karamjal wildlife day trips",
+    "description": "Travelers experience accessible mangrove ecosystems and wildlife viewing via short-duration day trips to Karamjal.",
+    "preference_type": "mainstream"
+  },
+  {
+    "preference_id": "P09",
+    "category": "Attractions & Activities",
+    "subcategory": "Nature & Scenic Tours",
+    "preference": "Kaptai Lake and Rangamati scenic tours",
+    "description": "Travelers admire the breathtaking natural beauty, peaceful waters, and scenic landscapes of Kaptai Lake and Rangamati.",
+    "preference_type": "mainstream"
+  },
+  {
+    "preference_id": "P10",
+    "category": "Attractions & Activities",
+    "subcategory": "Heritage Tourism",
+    "preference": "General historical monuments and museum visits",
+    "description": "Travelers visit significant historical sites and ancient monuments to learn about local history and view historical architecture.",
+    "preference_type": "mainstream"
+  }
+]

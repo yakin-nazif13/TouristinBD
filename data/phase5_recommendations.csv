@@ -1,0 +1,13 @@
+type,target_id,severity,details,suggested_action
+preference_coverage_issue,P01,medium,mapped_topic_count=1,merge_or_expand
+preference_coverage_issue,P02,medium,mapped_topic_count=1,merge_or_expand
+preference_coverage_issue,P03,medium,mapped_topic_count=2,merge_or_expand
+preference_coverage_issue,P04,medium,mapped_topic_count=1,merge_or_expand
+preference_coverage_issue,P05,medium,mapped_topic_count=1,merge_or_expand
+preference_coverage_issue,P06,medium,mapped_topic_count=1,merge_or_expand
+preference_coverage_issue,P07,medium,mapped_topic_count=1,merge_or_expand
+preference_coverage_issue,P08,medium,mapped_topic_count=1,merge_or_expand
+preference_coverage_issue,P09,medium,mapped_topic_count=1,merge_or_expand
+preference_coverage_issue,P10,medium,mapped_topic_count=0,merge_or_expand
+taxonomy_merge_candidate,P05->P03,low,P05 (Panam heritage) is under-covered while P03 is broader Heritage.,consider_merge_after_human_review
+topic_spot_check,topic_2,low,Mixed heritage/Jaflong signal historically observed; spot-check manually.,manual_sample_review

@@ -1,0 +1,11 @@
+preference_id,category,subcategory,preference,description,preference_type
+P01,Accommodation,Hotel Experience,Hotel room quality and staff service,"Travelers value clean rooms, good value, and helpful staff service during their hotel stays across Bangladesh.",mainstream
+P02,Attractions & Activities,Coastal Tourism,Beachfront and island exploration,"Travelers enjoy scenic sea views, marine biodiversity, and peaceful getaways at popular coastal destinations and islands.",mainstream
+P03,Attractions & Activities,Heritage Tourism,Historic landmarks and archaeological site visits,"Travelers explore Bangladesh's rich past by visiting iconic historical landmarks, ancient architectural wonders, and UNESCO World Heritage sites.",mainstream
+P04,Attractions & Activities,Adventure & Nature,Bandarban hill tracts mountain tourism,"Travelers experience panoramic mountain landscapes, cloud-touching elevations, and viewpoints like Nilachal in Bandarban.",mainstream
+P05,Attractions & Activities,Heritage Tourism,Historic Panam City heritage exploration,"Travelers discover the ancient architecture and ghost-town ambiance of 19th-century merchant mansions in Panam City, Sonargaon.",mainstream
+P06,Attractions & Activities,Nature & Ecotourism,Sreemangal tea gardens and nature tours,Travelers visit lush green tea gardens and rolling hills to enjoy peaceful nature getaways and local tea tasting.,mainstream
+P07,Attractions & Activities,Nature & Ecotourism,Ratargul freshwater swamp forest exploration,Travelers enjoy unique boat ride experiences and scenic flooded forest views at Ratargul Swamp Forest in Sylhet.,mainstream
+P08,Attractions & Activities,Ecotourism,Sundarbans Karamjal wildlife day trips,Travelers experience accessible mangrove ecosystems and wildlife viewing via short-duration day trips to Karamjal.,mainstream
+P09,Attractions & Activities,Nature & Scenic Tours,Kaptai Lake and Rangamati scenic tours,"Travelers admire the breathtaking natural beauty, peaceful waters, and scenic landscapes of Kaptai Lake and Rangamati.",mainstream
+P10,Attractions & Activities,Heritage Tourism,General historical monuments and museum visits,Travelers visit significant historical sites and ancient monuments to learn about local history and view historical architecture.,mainstream

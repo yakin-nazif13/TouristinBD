@@ -1,0 +1,6 @@
+sample_size,sample_fraction,min_topic_size,n_topics,n_preferences_covered,n_preferences_total,coverage_rate,avg_similarity,high_confidence_rate,mapped_preference_ids,jaccard_vs_previous,run_type
+151,0.2807,3,2,2,10,0.2,0.4669,1.0,"[""P01"", ""P03""]",1.0,bertopic_retrain_hybrid
+247,0.4591,6,5,5,10,0.5,0.5171,1.0,"[""P01"", ""P02"", ""P03"", ""P05"", ""P07""]",0.4,bertopic_retrain_hybrid
+398,0.7398,6,10,9,10,0.9,0.4639,0.7,"[""P01"", ""P02"", ""P03"", ""P04"", ""P05"", ""P06"", ""P07"", ""P08"", ""P09""]",0.5556,bertopic_retrain_hybrid
+538,1.0,6,9,9,10,0.9,0.5336,1.0,"[""P01"", ""P02"", ""P03"", ""P04"", ""P05"", ""P06"", ""P07"", ""P08"", ""P09""]",1.0,bertopic_retrain_hybrid
+538,1.0,phase4_reference,10,9,10,0.9,0.8825,1.0,"[""P01"", ""P02"", ""P03"", ""P04"", ""P05"", ""P06"", ""P07"", ""P08"", ""P09""]",1.0,phase4_locked_reference

@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TouristinBD — Demo (Mock Data)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Work+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg-deep:#0E2A2E;
+    --bg-panel:#123A3D;
+    --bg-panel-2:#0B2224;
+    --paper:#FBF6EA;
+    --marigold:#F2A93B;
+    --pink:#E24E6B;
+    --leaf:#8FB93E;
+    --text-light:#F6F1E4;
+    --text-dim:#B9CFCC;
+    --text-dark:#14201F;
+    --radius:14px;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--bg-deep);
+    color:var(--text-light);
+    font-family:'Work Sans', sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,.display{
+    font-family:'Fraunces', serif;
+    font-weight:700;
+    letter-spacing:-0.01em;
+  }
+  .mono{font-family:'IBM Plex Mono', monospace;}
+  .wrap{max-width:1100px;margin:0 auto;padding:0 20px 60px;}
+
+  /* Header */
+  header.top{padding:28px 0 10px;}
+  .brand{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;}
+  .brand h1{font-size:2.1rem;margin:0;color:var(--marigold);}
+  .brand .tag{color:var(--text-dim);font-size:0.95rem;}
+  .demo-flag{
+    display:inline-block;margin-top:8px;
+    background:var(--pink);color:var(--text-light);
+    padding:4px 10px;border-radius:20px;font-size:0.75rem;
+    font-family:'IBM Plex Mono', monospace;letter-spacing:0.03em;
+  }
+
+  /* Ticker — signature element, styled like a rickshaw destination board */
+  .ticker-frame{
+    margin-top:20px;background:#08181A;border:2px solid #1E4A4D;
+    border-radius:10px;overflow:hidden;position:relative;
+  }
+  .ticker-label{
+    position:absolute;top:0;left:0;background:var(--marigold);color:var(--text-dark);
+    font-family:'IBM Plex Mono',monospace;font-size:0.65rem;padding:3px 8px;
+    border-bottom-right-radius:8px;letter-spacing:0.05em;z-index:2;
+  }
+  .ticker-track{
+    display:flex;white-space:nowrap;padding:14px 0 10px 90px;
+    animation:scroll-left 32s linear infinite;
+  }
+  @keyframes scroll-left{
+    from{transform:translateX(0);}
+    to{transform:translateX(-50%);}
+  }
+  .ticker-item{
+    font-family:'IBM Plex Mono',monospace;font-size:0.85rem;color:var(--leaf);
+    margin-right:36px;
+  }
+  .ticker-item.long-tail{color:var(--pink);}
+  .ticker-item::before{content:"◆ ";color:var(--text-dim);}
+
+  /* Tabs styled like route badges */
+  nav.tabs{display:flex;gap:10px;margin-top:30px;flex-wrap:wrap;}
+  nav.tabs button{
+    font-family:'Fraunces', serif;font-weight:600;font-size:1rem;
+    background:var(--bg-panel);color:var(--text-dim);
+    border:2px solid transparent;border-radius:10px;
+    padding:10px 18px;cursor:pointer;transition:all .15s ease;
+  }
+  nav.tabs button .num{
+    font-family:'IBM Plex Mono',monospace;font-size:0.7rem;
+    background:var(--bg-panel-2);padding:2px 6px;border-radius:20px;margin-right:8px;
+  }
+  nav.tabs button:hover{color:var(--text-light);border-color:#2A5C5F;}
+  nav.tabs button.active{
+    background:var(--marigold);color:var(--text-dark);border-color:var(--marigold);
+  }
+  nav.tabs button.active .num{background:rgba(0,0,0,0.15);color:var(--text-dark);}
+
+  section.panel{
+    background:var(--bg-panel);border-radius:var(--radius);padding:26px;margin-top:18px;
+    border:1px solid #1E4A4D;
+  }
+  section.panel h2{margin-top:0;color:var(--text-light);font-size:1.4rem;}
+  .muted{color:var(--text-dim);font-size:0.92rem;line-height:1.5;}
+
+  /* Chat */
+  .chat-window{
+    background:var(--bg-panel-2);border-radius:10px;padding:16px;height:340px;
+    overflow-y:auto;display:flex;flex-direction:column;gap:12px;
+  }
+  .msg{max-width:75%;padding:10px 14px;border-radius:12px;line-height:1.4;font-size:0.94rem;}
+  .msg.bot{background:#1E4A4D;color:var(--text-light);align-self:flex-start;border-bottom-left-radius:2px;}
+  .msg.user{background:var(--marigold);color:var(--text-dark);align-self:flex-end;border-bottom-right-radius:2px;}
+  .chat-input-row{display:flex;gap:10px;margin-top:14px;}
+  .chat-input-row input{
+    flex:1;padding:12px 14px;border-radius:10px;border:1px solid #2A5C5F;
+    background:var(--paper);color:var(--text-dark);font-family:'Work Sans';font-size:0.95rem;
+  }
+  .chat-input-row button, .primary-btn{
+    background:var(--pink);color:var(--text-light);border:none;border-radius:10px;
+    padding:12px 20px;font-weight:600;cursor:pointer;font-family:'Work Sans';font-size:0.95rem;
+  }
+  .chat-input-row button:hover, .primary-btn:hover{filter:brightness(1.08);}
+  .chip-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px;}
+  .chip{
+    background:var(--bg-panel-2);border:1px solid #2A5C5F;color:var(--text-dim);
+    padding:6px 12px;border-radius:20px;font-size:0.82rem;cursor:pointer;
+  }
+  .chip:hover{border-color:var(--leaf);color:var(--text-light);}
+
+  /* Itinerary */
+  .interest-grid{display:flex;flex-wrap:wrap;gap:10px;margin:14px 0;}
+  .interest-grid label{
+    background:var(--bg-panel-2);border:1px solid #2A5C5F;border-radius:20px;
+    padding:8px 14px;font-size:0.88rem;cursor:pointer;display:flex;align-items:center;gap:6px;
+  }
+  .interest-grid input{accent-color:var(--marigold);}
+  .form-row{display:flex;gap:16px;flex-wrap:wrap;margin:14px 0;align-items:center;}
+  .form-row label{font-size:0.88rem;color:var(--text-dim);display:flex;flex-direction:column;gap:4px;}
+  .form-row input[type=number]{
+    padding:8px 10px;border-radius:8px;border:1px solid #2A5C5F;background:var(--paper);
+    color:var(--text-dark);width:90px;
+  }
+  .itinerary-day{
+    background:var(--paper);color:var(--text-dark);border-radius:10px;padding:16px;margin-top:14px;
+  }
+  .itinerary-day h3{margin:0 0 6px;font-size:1.05rem;color:var(--pink);}
+  .itinerary-day .place{font-weight:600;}
+  .itinerary-day .tags{margin-top:6px;}
+  .tag-pill{
+    display:inline-block;background:var(--bg-deep);color:var(--marigold);font-family:'IBM Plex Mono',monospace;
+    font-size:0.7rem;padding:2px 8px;border-radius:20px;margin:2px 4px 0 0;
+  }
+
+  /* Compare */
+  .compare-select{display:flex;gap:10px;flex-wrap:wrap;margin:14px 0;}
+  select{
+    padding:10px 12px;border-radius:8px;border:1px solid #2A5C5F;background:var(--paper);
+    color:var(--text-dark);font-family:'Work Sans';font-size:0.9rem;
+  }
+  table.compare-table{width:100%;border-collapse:collapse;margin-top:16px;background:var(--paper);border-radius:10px;overflow:hidden;color:var(--text-dark);}
+  table.compare-table th, table.compare-table td{padding:12px 14px;text-align:left;font-size:0.9rem;border-bottom:1px solid #e5ddc8;}
+  table.compare-table th{background:#EFE6CE;font-family:'IBM Plex Mono',monospace;font-size:0.75rem;text-transform:uppercase;letter-spacing:0.03em;}
+  .bar-track{background:#e5ddc8;border-radius:6px;height:10px;width:140px;overflow:hidden;display:inline-block;vertical-align:middle;margin-right:8px;}
+  .bar-fill{background:var(--leaf);height:100%;}
+
+  footer{margin-top:40px;color:var(--text-dim);font-size:0.8rem;text-align:center;}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="top">
+    <div class="brand">
+      <h1>TouristinBD</h1>
+      <span class="tag">Bangladeshi travel preferences, mapped from real reviews</span>
+    </div>
+    <span class="demo-flag mono">PHASE 0 · DEMO MODE · ALL DATA BELOW IS MADE UP</span>
+
+    <div class="ticker-frame">
+      <span class="ticker-label">LONG-TAIL FEED</span>
+      <div class="ticker-track" id="tickerTrack"></div>
+    </div>
+  </header>
+
+  <nav class="tabs">
+    <button class="active" data-tab="chat"><span class="num">01</span>Chat</button>
+    <button data-tab="itinerary"><span class="num">02</span>Itinerary Builder</button>
+    <button data-tab="compare"><span class="num">03</span>Compare Destinations</button>
+  </nav>
+
+  <!-- CHAT TAB -->
+  <section class="panel" id="tab-chat">
+    <h2>Ask about Bangladeshi travel preferences</h2>
+    <p class="muted">This is a mock, rule-based responder — it looks for keywords and answers from the fake dataset below. In Phase 9 this becomes a real retrieval-based bot grounded in your actual scraped reviews.</p>
+    <div class="chat-window" id="chatWindow"></div>
+    <div class="chip-row" id="chatSuggestions"></div>
+    <div class="chat-input-row">
+      <input type="text" id="chatInput" placeholder="e.g. Where can I see sunsets without crowds?">
+      <button onclick="sendChat()">Send</button>
+    </div>
+  </section>
+
+  <!-- ITINERARY TAB -->
+  <section class="panel" id="tab-itinerary" style="display:none;">
+    <h2>Build a rough itinerary</h2>
+    <p class="muted">Pick what you care about, tell us how many days, and we'll stitch together mock destinations that match. Real version (Phase 10) will use validated preference data and real travel-time estimates.</p>
+
+    <div class="interest-grid" id="interestGrid"></div>
+    <div class="form-row">
+      <label>Days
+        <input type="number" id="tripDays" value="4" min="1" max="10">
+      </label>
+      <label>Budget style
+        <select id="tripBudget">
+          <option value="budget">Budget / backpacker</option>
+          <option value="mid">Mid-range</option>
+          <option value="comfort">Comfort / family</option>
+        </select>
+      </label>
+      <button class="primary-btn" onclick="buildItinerary()" style="align-self:flex-end;">Generate itinerary</button>
+    </div>
+    <div id="itineraryOutput"></div>
+  </section>
+
+  <!-- COMPARE TAB -->
+  <section class="panel" id="tab-compare" style="display:none;">
+    <h2>Compare destinations</h2>
+    <p class="muted">Pick two or three spots to see mock ratings, cost, best season, and their top discovered preferences side by side.</p>
+    <div class="compare-select">
+      <select id="cmp1"></select>
+      <select id="cmp2"></select>
+      <select id="cmp3"></select>
+      <button class="primary-btn" onclick="renderCompare()">Compare</button>
+    </div>
+    <div id="compareOutput"></div>
+  </section>
+
+  <footer>TouristinBD — capstone project. Working demo, fake data only. Real scraping + BERTopic + LLM pipeline comes in later phases.</footer>
+</div>
+
+<script>
+/* ---------------- MOCK DATA ---------------- */
+const destinations = [
+  {
+    id:"coxsbazar", name:"Cox's Bazar", region:"Chattogram Division",
+    rating:4.3, avgCostPerDay:{budget:1200,mid:3000,comfort:6500}, bestSeason:"Nov–Feb",
+    mainstream:["beach relaxation","seafood","family day trips"],
+    longTail:["off-season quiet beaches","sunrise photography","budget solo backpacking"],
+    reviewSnippet:"Peaceful at sunrise before the crowds arrive; loved the quiet stretch near Inani."
+  },
+  {
+    id:"sundarbans", name:"Sundarbans", region:"Khulna Division",
+    rating:4.6, avgCostPerDay:{budget:2500,mid:5000,comfort:9000}, bestSeason:"Nov–Mar",
+    mainstream:["wildlife tours","boat cruises"],
+    longTail:["mangrove birdwatching","tribal honey-collector stories","monsoon photography"],
+    reviewSnippet:"Our guide's stories about the honey collectors were more memorable than the tiger tracks."
+  },
+  {
+    id:"srimangal", name:"Srimangal", region:"Sylhet Division",
+    rating:4.5, avgCostPerDay:{budget:1000,mid:2500,comfort:5000}, bestSeason:"Oct–Mar",
+    mainstream:["tea gardens","nature walks"],
+    longTail:["tribal cuisine tasting","seven-layer tea culture","quiet homestays"],
+    reviewSnippet:"Tried khasi tribal food in a small village kitchen — better than any restaurant in Sylhet town."
+  },
+  {
+    id:"bandarban", name:"Bandarban", region:"Chattogram Hill Tracts",
+    rating:4.4, avgCostPerDay:{budget:1500,mid:3200,comfort:6000}, bestSeason:"Oct–Feb",
+    mainstream:["hiking","hill views"],
+    longTail:["indigenous village homestays","monsoon waterfall trekking","quiet meditation retreats"],
+    reviewSnippet:"Stayed with a Bawm family — very different pace of life, wish more tourists respected it."
+  },
+  {
+    id:"sylhet", name:"Sylhet City & Jaflong", region:"Sylhet Division",
+    rating:4.1, avgCostPerDay:{budget:1100,mid:2600,comfort:5200}, bestSeason:"Oct–Mar",
+    mainstream:["tea gardens","river stone collection"],
+    longTail:["shrine pilgrimage etiquette questions","cross-border viewpoint photography"],
+    reviewSnippet:"Beautiful, but wished someone had explained shrine etiquette before we went in."
+  },
+  {
+    id:"saintmartins", name:"Saint Martin's Island", region:"Chattogram Division",
+    rating:4.2, avgCostPerDay:{budget:1800,mid:4000,comfort:7500}, bestSeason:"Dec–Feb",
+    mainstream:["beach relaxation","seafood","snorkeling"],
+    longTail:["budget solo backpacking","coral reef conservation concerns","off-season quiet beaches"],
+    reviewSnippet:"Loved it but noticed a lot of plastic near the reef — hope conservation efforts increase."
+  },
+  {
+    id:"sonargaon", name:"Sonargaon", region:"Dhaka Division",
+    rating:4.0, avgCostPerDay:{budget:600,mid:1500,comfort:3000}, bestSeason:"Nov–Feb",
+    mainstream:["heritage architecture","day trips from Dhaka"],
+    longTail:["folk art market haggling tips","panam city photography"],
+    reviewSnippet:"Panam City is a photographer's dream in late afternoon light, almost no other tourists."
+  },
+  {
+    id:"bagerhat", name:"Bagerhat Mosque City", region:"Khulna Division",
+    rating:4.3, avgCostPerDay:{budget:700,mid:1600,comfort:3200}, bestSeason:"Nov–Feb",
+    mainstream:["heritage architecture","history tours"],
+    longTail:["Islamic architecture study trips","quiet off-season beaches nearby"],
+    reviewSnippet:"Sixty Dome Mosque is stunning and calm — brought a book and just sat there an hour."
+  }
+];
+
+const allInterests = [...new Set(destinations.flatMap(d => [...d.mainstream, ...d.longTail]))];
+
+const longTailTags = [...new Set(destinations.flatMap(d => d.longTail))];
+const mainstreamTags = [...new Set(destinations.flatMap(d => d.mainstream))];
+
+/* ---------------- TICKER ---------------- */
+function buildTicker(){
+  const track = document.getElementById('tickerTrack');
+  const items = [...longTailTags.map(t=>({t,type:'long-tail'})), ...mainstreamTags.map(t=>({t,type:''}))];
+  const doubled = [...items, ...items]; // seamless loop
+  track.innerHTML = doubled.map(i => `<span class="ticker-item ${i.type}">${i.t}</span>`).join('');
+}
+buildTicker();
+
+/* ---------------- TABS ---------------- */
+document.querySelectorAll('nav.tabs button').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    document.querySelectorAll('nav.tabs button').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    ['chat','itinerary','compare'].forEach(name=>{
+      document.getElementById('tab-'+name).style.display = (name===btn.dataset.tab) ? 'block' : 'none';
+    });
+  });
+});
+
+/* ---------------- CHAT ---------------- */
+const chatWindow = document.getElementById('chatWindow');
+const suggestions = ["Where can I see sunsets without crowds?","Best spot for tribal food?","Somewhere quiet for meditation?","Good for budget solo travel?"];
+
+function addMsg(text, who){
+  const div = document.createElement('div');
+  div.className = 'msg '+who;
+  div.textContent = text;
+  chatWindow.appendChild(div);
+  chatWindow.scrollTop = chatWindow.scrollHeight;
+}
+
+function botReply(query){
+  const q = query.toLowerCase();
+  const matches = destinations.filter(d=>
+    [...d.mainstream, ...d.longTail].some(tag=>q.includes(tag.split(' ')[0]) || tag.toLowerCase().split(' ').some(w=>q.includes(w)))
+  );
+  if(matches.length===0){
+    return "I don't have a mock match for that yet — try asking about beaches, tea gardens, hiking, tribal food, or quiet/off-season spots.";
+  }
+  const top = matches[0];
+  const matchedTag = [...top.mainstream, ...top.longTail].find(tag=>tag.toLowerCase().split(' ').some(w=>q.includes(w))) || top.longTail[0];
+  return `Based on mock reviews, ${top.name} (${top.region}) stands out for "${matchedTag}". One review even says: "${top.reviewSnippet}" Rated ${top.rating}/5, best visited ${top.bestSeason}.`;
+}
+
+function sendChat(customText){
+  const input = document.getElementById('chatInput');
+  const text = customText || input.value.trim();
+  if(!text) return;
+  addMsg(text, 'user');
+  input.value = '';
+  setTimeout(()=>addMsg(botReply(text), 'bot'), 350);
+}
+document.getElementById('chatInput').addEventListener('keydown', e=>{ if(e.key==='Enter') sendChat(); });
+
+function buildChatSuggestions(){
+  const row = document.getElementById('chatSuggestions');
+  row.innerHTML = suggestions.map(s=>`<span class="chip" onclick="sendChat('${s.replace(/'/g,"")}')">${s}</span>`).join('');
+}
+buildChatSuggestions();
+addMsg("Hi! I'm the TouristinBD demo assistant (mock mode). Ask me about places, food, or vibes — try one of the suggestions below.", 'bot');
+
+/* ---------------- ITINERARY ---------------- */
+function buildInterestGrid(){
+  const grid = document.getElementById('interestGrid');
+  grid.innerHTML = allInterests.map(tag=>`
+    <label><input type="checkbox" value="${tag}"> ${tag}</label>
+  `).join('');
+}
+buildInterestGrid();
+
+function buildItinerary(){
+  const checked = [...document.querySelectorAll('#interestGrid input:checked')].map(i=>i.value);
+  const days = parseInt(document.getElementById('tripDays').value) || 4;
+  const budget = document.getElementById('tripBudget').value;
+  const out = document.getElementById('itineraryOutput');
+
+  if(checked.length===0){
+    out.innerHTML = '<p class="muted" style="margin-top:14px;">Pick at least one interest above so we know what to match on.</p>';
+    return;
+  }
+
+  const scored = destinations.map(d=>{
+    const tags = [...d.mainstream, ...d.longTail];
+    const score = tags.filter(t=>checked.includes(t)).length;
+    return {...d, score};
+  }).filter(d=>d.score>0).sort((a,b)=>b.score-a.score);
+
+  if(scored.length===0){
+    out.innerHTML = '<p class="muted" style="margin-top:14px;">No mock destinations match that combination yet — try fewer or different interests.</p>';
+    return;
+  }
+
+  const picks = [];
+  for(let day=1; day<=days; day++){
+    picks.push(scored[(day-1) % scored.length]);
+  }
+
+  let totalCost = picks.reduce((sum,d)=>sum + d.avgCostPerDay[budget], 0);
+
+  out.innerHTML = `
+    <p class="muted" style="margin-top:16px;">Estimated cost for ${days} day(s), ${budget} style: <strong style="color:var(--marigold)">৳${totalCost.toLocaleString()}</strong> (very rough mock estimate)</p>
+    ${picks.map((d,i)=>`
+      <div class="itinerary-day">
+        <h3>Day ${i+1}</h3>
+        <div class="place">${d.name} <span class="muted">— ${d.region}</span></div>
+        <div class="muted">Best season: ${d.bestSeason} · Rating ${d.rating}/5 · Est. ৳${d.avgCostPerDay[budget].toLocaleString()}/day</div>
+        <div class="tags">
+          ${[...d.mainstream, ...d.longTail].filter(t=>checked.includes(t)).map(t=>`<span class="tag-pill">${t}</span>`).join('')}
+        </div>
+      </div>
+    `).join('')}
+  `;
+}
+
+/* ---------------- COMPARE ---------------- */
+function buildCompareSelects(){
+  ['cmp1','cmp2','cmp3'].forEach((id, idx)=>{
+    const sel = document.getElementById(id);
+    sel.innerHTML = `<option value="">— none —</option>` + destinations.map(d=>`<option value="${d.id}">${d.name}</option>`).join('');
+    if(destinations[idx]) sel.value = destinations[idx].id;
+  });
+}
+buildCompareSelects();
+
+function renderCompare(){
+  const ids = ['cmp1','cmp2','cmp3'].map(id=>document.getElementById(id).value).filter(Boolean);
+  const out = document.getElementById('compareOutput');
+  if(ids.length<2){
+    out.innerHTML = '<p class="muted" style="margin-top:14px;">Pick at least two destinations.</p>';
+    return;
+  }
+  const picked = ids.map(id=>destinations.find(d=>d.id===id));
+  const maxRating = 5;
+
+  out.innerHTML = `
+    <table class="compare-table">
+      <tr><th>Destination</th>${picked.map(d=>`<th>${d.name}</th>`).join('')}</tr>
+      <tr><td>Region</td>${picked.map(d=>`<td>${d.region}</td>`).join('')}</tr>
+      <tr><td>Rating</td>${picked.map(d=>`<td><span class="bar-track"><span class="bar-fill" style="width:${(d.rating/maxRating)*100}%"></span></span>${d.rating}/5</td>`).join('')}</tr>
+      <tr><td>Best season</td>${picked.map(d=>`<td>${d.bestSeason}</td>`).join('')}</tr>
+      <tr><td>Cost/day (mid-range)</td>${picked.map(d=>`<td>৳${d.avgCostPerDay.mid.toLocaleString()}</td>`).join('')}</tr>
+      <tr><td>Top mainstream prefs</td>${picked.map(d=>`<td>${d.mainstream.join(', ')}</td>`).join('')}</tr>
+      <tr><td>Top long-tail prefs</td>${picked.map(d=>`<td style="color:#a5453f;font-weight:600;">${d.longTail.join(', ')}</td>`).join('')}</tr>
+    </table>
+  `;
+}
+renderCompare();
+</script>
+</body>
+</html>

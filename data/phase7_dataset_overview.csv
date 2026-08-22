@@ -1,0 +1,11 @@
+metric,value
+total_reviews,538.0
+unique_places,27.0
+unique_cities,11.0
+avg_rating,4.064
+reviews_source_booking.com,238.0
+reviews_source_google_maps,300.0
+reviews_language_bn,2.0
+reviews_language_bn-en-mixed,5.0
+reviews_language_en,530.0
+reviews_language_nl,1.0

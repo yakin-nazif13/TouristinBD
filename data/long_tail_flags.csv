@@ -1,0 +1,11 @@
+topic_id,interpreted_label,preference_id,preference,review_count,corpus_share,scarce,max_sim_to_abundant,sdd,sdd_threshold,scarcity_threshold,preference_type,is_long_tail
+0,Hotel Room Quality and Staff Service,P01,Hotel room quality and staff service,239,0.4442,False,0.3056,0.6944,0.6,0.02,mainstream,False
+1,Coastal Beaches and Island Exploration,P02,Beachfront and island exploration,76,0.1413,False,0.5621,0.4379,0.6,0.02,mainstream,False
+2,Historic Landmarks And Archaeological Sites,P03,Historic landmarks and archaeological site visits,73,0.1357,False,0.5621,0.4379,0.6,0.02,mainstream,False
+3,Bandarban Hill Tracts Mountain Tourism,P04,Bandarban hill tracts mountain tourism,32,0.0595,False,0.5449,0.4551,0.6,0.02,mainstream,False
+4,Historic Panam City Heritage Exploration,P05,Historic Panam City heritage exploration,17,0.0316,False,0.5395,0.4605,0.6,0.02,mainstream,False
+5,Sreemangal Tea Gardens and Nature,P06,Sreemangal tea gardens and nature tours,16,0.0297,False,0.5043,0.4957,0.6,0.02,mainstream,False
+6,Ratargul Freshwater Swamp Forest Exploration,P07,Ratargul freshwater swamp forest exploration,16,0.0297,False,0.4788,0.5212,0.6,0.02,mainstream,False
+7,Sundarbans Karamjal Wildlife Centre Day Trips,P08,Sundarbans Karamjal wildlife day trips,12,0.0223,False,0.5449,0.4551,0.6,0.02,mainstream,False
+8,Kaptai Lake and Rangamati Scenic Tours,P09,Kaptai Lake and Rangamati scenic tours,11,0.0204,False,0.4816,0.5184,0.6,0.02,mainstream,False
+9,Historic Landmarks and Heritage Tourism,P03,Historic landmarks and archaeological site visits,7,0.013,True,0.8956,0.1044,0.6,0.02,mainstream,False

@@ -1,0 +1,26 @@
+city,preference_id,preference_label,preference_type,review_count,avg_rating
+Bagerhat,P03,Historic landmarks and archaeological site visits,mainstream,20,4.4
+Bandarban,P04,Bandarban hill tracts mountain tourism,mainstream,18,4.611
+Bandarban,P02,Beachfront and island exploration,mainstream,1,4.0
+Chittagong,P01,Hotel room quality and staff service,mainstream,59,3.008
+Cox's Bazar,P01,Hotel room quality and staff service,mainstream,57,3.36
+Dhaka,P01,Hotel room quality and staff service,mainstream,58,3.362
+Dhaka,P03,Historic landmarks and archaeological site visits,mainstream,30,4.6
+Dhaka,P04,Bandarban hill tracts mountain tourism,mainstream,1,5.0
+Gushainpur,P07,Ratargul freshwater swamp forest exploration,mainstream,15,4.8
+Gushainpur,P02,Beachfront and island exploration,mainstream,2,4.5
+Gushainpur,P04,Bandarban hill tracts mountain tourism,mainstream,1,4.0
+Jaflong,P03,Historic landmarks and archaeological site visits,mainstream,11,4.455
+Jaflong,P04,Bandarban hill tracts mountain tourism,mainstream,5,4.8
+Jaflong,P01,Hotel room quality and staff service,mainstream,1,5.0
+Jaflong,P02,Beachfront and island exploration,mainstream,1,2.0
+Kuakata,P02,Beachfront and island exploration,mainstream,14,4.714
+Kuakata,P01,Hotel room quality and staff service,mainstream,5,4.4
+Kuakata,P04,Bandarban hill tracts mountain tourism,mainstream,1,5.0
+Sonargaon,P05,Historic Panam City heritage exploration,mainstream,17,4.588
+Sonargaon,P03,Historic landmarks and archaeological site visits,mainstream,1,4.0
+Sreemangal,P06,Sreemangal tea gardens and nature tours,mainstream,16,4.688
+Sreemangal,P04,Bandarban hill tracts mountain tourism,mainstream,2,5.0
+Sreemangal,P01,Hotel room quality and staff service,mainstream,1,5.0
+Sylhet,P01,Hotel room quality and staff service,mainstream,58,3.612
+Sylhet,P02,Beachfront and island exploration,mainstream,1,4.5
