@@ -13,9 +13,4 @@ and compare destinations.
 - `docs/PROGRESS.md` — running checklist of what's done and what's next. Upload this (or the
   whole folder) at the start of future sessions so we pick up where we left off.
 
-## Current status: Phase 1 (real data collection), in progress
-
-## Next step
-
-Fix the Sundarbans search (first attempt matched the Indian side of the park), then collect
-a Booking.com batch, then scale toward the 300–800 review target.
+## Current status: Phase 9
