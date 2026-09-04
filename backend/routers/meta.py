@@ -20,6 +20,10 @@ PIPELINE_PHASES = {
     "phase6": "Sensitivity analysis",
     "phase7": "Statistics & visualization layer",
     "phase8": "Backend API + SQLite database (this service)",
+    "phase9": "Retrieval-based chatbot (POST /api/chat)",
+    "phase10": "Itinerary builder + comparison tool on real evidence",
+    "phase11": "Frontend wired to this API (served at /app/)",
+    "phase12": "Deployment (container + managed host)",
 }
 
 

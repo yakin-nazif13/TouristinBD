@@ -1,6 +1,7 @@
 # TouristinBD — Progress Checklist
 
-Last updated: 2026-08-22
+Last updated: 2026-09-04 — **all 12 phases complete** (Phase 12 is configured and
+tested but not yet pushed to a public host).
 
 > How to use this file: keep it up to date at the end of every session. Since Claude's
 > workspace resets between sessions, **download the project zip after each session and
@@ -64,6 +65,48 @@ Last updated: 2026-08-22
   - [x] Confirmed real (if small) Bengali/code-mixed presence — useful for the write-up's
         multilingual angle, even though the dataset skews heavily English (expected, since
         Google/Booking reviews from international-facing listings trend English).
+  - [x] **Phase 2 reconstructed as a script (2026-09-04).** The original preprocessing was
+        done in an earlier session's workspace and only its *output* was ever saved — so
+        `processed_reviews.csv` existed but nothing in the repo could produce it, which
+        meant new scrapes had no way into the project. `scripts/run_phase2_preprocessing.py`
+        now rebuilds it and **reproduces the committed file byte for byte**, which is what
+        made the reconstruction verifiable:
+        - merges every `data/real_reviews_*.csv` in filename order (so a new batch is
+          picked up by dropping the file in — nothing to edit);
+        - cleaning: HTML unescape → Booking's `| Liked:`/`| Disliked:` labels become
+          sentences (and a *leading* `Liked:` is stripped, which one row needs) →
+          whitespace collapse;
+        - drops reviews under 10 characters after cleaning ("Bad. No") and exact duplicates
+          of an earlier cleaned text — which is precisely the 1 + 1 rows the original run
+          removed (the duplicate was `Good. Good. Good`, shared by Foy's Lake Resort and
+          Civic Inn, so dedup is on text alone, not place+text);
+        - language: Bengali script matched directly (`bn` vs `bn-en-mixed` by whether Latin
+          letters are also present), otherwise `langdetect` with a length fallback.
+        - **The one judgement call**: the original run spot-checked short reviews by hand
+          after langdetect misfired on them. That is encoded as `SHORT_TEXT_MAX = 50` —
+          below 50 characters, Latin-script text is taken as English. 50 is the point where
+          the current corpus stops producing false hits (at 20 it labels
+          "Exceptional. Beautyful" Romanian and "Very poor. Dirty property" Afrikaans); the
+          Dutch review is 480 chars, so it is unaffected. For future batches,
+          `data/language_overrides.csv` (review_id, detected_language) lets a human correct
+          any row without touching code.
+        - `langdetect` is seeded (`DetectorFactory.seed = 0`) at module import, not in
+          `main()` — it is probabilistic, and an unseeded import made the same review come
+          out `it` on one run and `en` on the next. Caught by the test suite.
+        - Booking ratings were **already** normalized to 1-5 in
+          `real_reviews_booking_batch1.csv`, so Phase 2 does not re-scale; that conversion
+          now lives in `add_reviews.py --rating-scale 10` for future imports.
+  - [x] **`scripts/add_reviews.py`** — the front door for new data:
+        maps Apify/Booking column names to the project schema (with `--map OLD=NEW` for
+        anything unusual), generates content-derived `review_id`s when the export has none
+        (so re-importing the same file is a no-op rather than a doubling), converts rating
+        scales, refuses rows already in the corpus, writes
+        `data/real_reviews_<name>.csv`, re-runs Phase 2, then prints exactly which phases
+        still need re-running. `--dry-run` previews the whole thing.
+  - [x] `scripts/test_phase2_preprocessing.py` — 65 tests: byte-for-byte reproduction of
+        the committed corpus, cleaning/idempotency/language unit cases, the drop rules,
+        and the full ingestion path on throwaway copies of `data/` (including a check that
+        the real data directory is never touched).
 - [x] **Phase 3 — Multilingual BERTopic modeling**: done (MVP version).
   - [x] Installed BERTopic + clustering deps (scikit-learn, umap-learn, hdbscan) — all free,
         pip-installed, no accounts needed.
@@ -245,14 +288,120 @@ Last updated: 2026-08-22
         Phase 8 "backend only" scope decision. Bilingual support is still a
         stretch goal per the MVP scope, not implemented (English keyword
         regexes only).
-- [ ] **Phase 10 — Itinerary builder + comparison tool (real data)**: not started (demo has mock version only).
-- [ ] **Phase 11 — Frontend polish / Next.js migration**: optional, current plain HTML/JS demo works fine for now.
-- [ ] **Phase 12 — Deployment**: not started.
+- [x] **Phase 10 — Itinerary builder + comparison tool (real data)**: done.
+  - [x] `backend/routers/itinerary.py` — `GET /api/itinerary`, `POST /api/itinerary`
+        (same planner, JSON body) and `GET /api/itinerary/options` (everything a
+        form needs: preferences with review counts, cities, divisions, the pace
+        ladder — all read from the DB, so a rebuild with new data changes the
+        form with no code change).
+  - [x] How a plan is built, in four steps that are all defensible from the data:
+        1. **Candidates** come from the Phase 8 `/api/recommend` scorer
+           (`_recommend_impl`), so the itinerary inherits the documented ranking
+           — evidence share × preference coverage × rating — instead of
+           inventing a second one.
+        2. **Proximity** has to be derived, because the corpus has no
+           coordinates: a *region* is a division, and a day is kept inside one
+           district where possible. Moving between regions is reported as a
+           transfer with an honest travel note (`same_city` → `same_district` →
+           `same_division` → `cross_division`) rather than pretending travel is
+           free. This is the main MVP compromise in the phase — see limits below.
+        3. **Days** are allocated to regions best-first (or from the requested
+           city), each region holding consecutive days, so a trip doesn't bounce
+           between divisions.
+        4. **Evidence**: every stop carries the preferences it matched, how many
+           reviews back each one, a plain-English `why`, and a real review
+           snippet — preferring one attached to the matched preference.
+  - [x] Honest degradation instead of padding: if the corpus can't fill the
+        requested days, the unfillable days are kept but marked as free days
+        **at the end** of the trip (never in the middle, which would split the
+        plan in two), and a warning says how many days were filled. Asking for a
+        city with no reviewed attraction (e.g. Sylhet city) widens to that city's
+        division and says so. Impossible filters return an empty plan with a
+        reason, not a 500.
+  - [x] Hotels: each day suggests the best-rated reviewed accommodation in its
+        base city, falling back to the division with a note saying so; togglable
+        with `include_stays`.
+  - [x] Comparison tool upgraded from raw rows to an actual verdict:
+        `/api/compare` still returns everything Phase 8 returned (so nothing
+        broke) plus a `comparison` block — six metrics with a leader each
+        (`None` on a tie), a one-line summary, each place's strongest
+        preference — and supporting **positive and critical review quotes** per
+        place, because a 3.2★ hotel and a 3.2★ hotel are not the same hotel.
+        Comparing a place with itself is now a 400 instead of a meaningless row.
+  - [x] Chatbot gained an `itinerary` intent: "plan a 4 day trip in Sylhet",
+        "a relaxed week", "3 days in Dhaka". Reads the duration (clamped to 14),
+        the pace and the city; an explicit "compare A and B" still wins over a
+        mentioned duration.
+  - [x] `Recommendation` model gained `division` (needed for regional grouping).
+  - [x] `scripts/test_phase10_itinerary.py` — 96 tests: plan structure, travel
+        levels cross-checked against the geography, pace caps, evidence
+        cross-checked against `/api/places` and the venue rollup, filters,
+        degradation, POST/GET parity, the comparison block against the raw
+        stats it is derived from, and the chatbot intent.
+- [x] **Phase 11 — Frontend on real data**: done (kept as plain HTML/JS — no Next.js).
+  - [x] `frontend/index.html` rewritten against the live API. The mock
+        `destinations` array is gone; five tabs now read from the backend:
+        **Overview** (corpus stats, most-evidenced preferences, source/language
+        mix, mainstream vs long-tail), **Chat** (`POST /api/chat`, rendering
+        each intent's evidence — itinerary outlines, recommendation cards,
+        review quotes), **Itinerary Builder** (form built from
+        `/api/itinerary/options`, day timeline with travel notes, evidence
+        chips and review snippets), **Compare** (metric table with the leader
+        highlighted, plus quotes), **Explore** (`/api/search` across every
+        entity kind, click a place for its detail).
+  - [x] The rickshaw-board ticker now scrolls **real preferences** with their
+        review counts, long-tail ones in pink.
+  - [x] Same visual language as the Phase 0 demo (Fraunces/Work Sans/IBM Plex
+        Mono, deep teal + marigold + pink), now responsive.
+  - [x] API base resolution: same origin when served by the backend, else
+        `http://127.0.0.1:8000`, overridable with `?api=<url>` and remembered in
+        `localStorage`. If the API is unreachable the page says so and shows the
+        exact commands to start it — it never falls back to fake data.
+  - [x] All interpolated values pass through `escapeHtml`, so review text can't
+        inject markup.
+  - [x] The backend now serves the page at `/app/` (`StaticFiles`, html=True)
+        and `/` redirects there, so the whole project is one process and one URL.
+  - [x] `scripts/test_phase11_frontend.py` — 96 tests that stop the page and the
+        API drifting apart: every path the page passes to `api()` must exist in
+        the OpenAPI schema and answer 200, every `getElementById`/`querySelector`
+        id must exist in the markup, tab buttons must match panels and the
+        `TABS` list, no mock-data markers may return, and the payload fields each
+        renderer reads must actually be present in the live responses.
+- [x] **Phase 12 — Deployment**: done (configuration + CI; not yet pushed to a host).
+  - [x] `requirements-api.txt` — the service needs fastapi, uvicorn, pandas
+        (for the DB build) and httpx only. `requirements.txt` keeps torch,
+        BERTopic and sentence-transformers for re-running Phases 3-7; installing
+        those on a free tier would blow the build limit for no benefit.
+  - [x] `Dockerfile` — python:3.12-slim, builds the SQLite DB **and runs the
+        Phase 8-11 suites during the image build**, so a broken artifact fails
+        the build instead of shipping. No volume, no external DB, no runtime
+        network. `HEALTHCHECK` hits `/health`.
+  - [x] `render.yaml` — Render blueprint (free tier): build = install + build DB,
+        start = `python -m backend.main`, health check = `/health`.
+  - [x] `backend/main.py` reads `HOST`/`PORT` from the environment (managed hosts
+        assign the port and require 0.0.0.0); local default stays loopback:8000.
+  - [x] `.github/workflows/ci.yml` — builds the DB and runs all six suites on
+        every push, plus a second job that builds the container, boots it and
+        checks `/health` and `/app/`.
+  - [x] `docs/DEPLOYMENT.md` — local, Render, Docker, split hosting (static page
+        elsewhere + `?api=`), config reference and a troubleshooting table.
+  - [x] `scripts/test_phase12_deployment.py` — 55 tests for the failure modes
+        that only appear on a host: every runtime import is covered by
+        `requirements-api.txt` (parsed from the AST of `backend/` and the build
+        script), no pipeline-only package leaks into it, the container binds
+        0.0.0.0 and builds the DB, `HOST`/`PORT` really reach uvicorn (checked by
+        stubbing it), every data file the build needs is committed rather than
+        gitignored, no API key is committed, and CORS lets a browser POST.
+  - [x] API version bumped to **1.0.0**; `/api/meta` documents all 12 phases.
+  - [ ] Not yet actually deployed: needs a GitHub repo and a Render (or other
+        host) account — both listed as not-set-up at the top of this file. The
+        configuration is written and tested; deploying is a dashboard step.
 
 ## Notes for next session
-- Demo file: `frontend/index.html` — open directly in any browser, no install needed. Still
-  running on mock data; real data isn't wired into the website yet (that's a later step,
-  Phase 10-11).
+- The site: `.venv/bin/python -m backend.main`, then open <http://127.0.0.1:8000/app/>.
+  It runs entirely on the real corpus now — no mock data anywhere in the project.
+  `frontend/index.html` can still be opened straight from disk; it falls back to
+  `http://127.0.0.1:8000` and shows a banner if the API isn't running.
 - Real data files:
   - `data/real_reviews_batch1.csv` — 300 raw Google Maps reviews (15 places).
   - `data/real_reviews_booking_batch1.csv` — 240 raw Booking.com reviews (12 hotels).
@@ -266,13 +415,40 @@ Last updated: 2026-08-22
   (needs network + a working Gemini/OpenAI key; default model is `gemini-flash-lite-latest`).
 - Rebuild the database after re-running any earlier phase (Phase 1-7 output changed):
   `.venv/bin/python scripts/build_phase8_database.py`
-- Run the API: `.venv/bin/python -m backend.main` (docs at http://127.0.0.1:8000/docs).
-- Verify the backend after any change: `.venv/bin/python scripts/test_phase8_api.py`,
-  `.venv/bin/python scripts/test_phase8_rebuild.py`, and
-  `.venv/bin/python scripts/test_phase9_chat.py`.
-- Try the chatbot: `POST /api/chat` with `{"message": "best beaches in Cox's Bazar"}`
+- Run the API: `.venv/bin/python -m backend.main` (site at /app/, docs at /docs).
+- Verify everything after any change — seven suites, 449 tests, ~1 min total:
+  `test_phase2_preprocessing.py`, `test_phase8_api.py`, `test_phase8_rebuild.py`,
+  `test_phase9_chat.py`, `test_phase10_itinerary.py`, `test_phase11_frontend.py`,
+  `test_phase12_deployment.py` (all under `scripts/`, all in-process, no network).
+- **Adding a new scrape** (the loop to use from now on):
+  `.venv/bin/python scripts/add_reviews.py <export.csv> --source google_maps --name batch2`
+  (add `--rating-scale 10` for Booking.com exports, `--dry-run` to preview). That merges
+  and re-runs Phase 2; then re-run Phase 3 → Phase 4 → `build_phase8_database.py` to give
+  the new reviews topics and preference evidence. Until Phase 3/4 are re-run they appear
+  in listings, ratings and search but influence no recommendation or itinerary — the
+  scripts say so rather than leaving it silent.
+- Serving only needs `requirements-api.txt`. `requirements.txt` (torch, BERTopic,
+  sentence-transformers) is only for re-running Phases 3-7.
+- Try the chatbot: `POST /api/chat` with `{"message": "plan a 4 day trip in Sylhet"}`
   (see `/docs` for the schema). No API key needed — it's retrieval-based, not an LLM call.
-- Next natural step: **Phase 10 — itinerary builder + comparison tool**, built on
-  `/api/recommend` and `/api/compare` (both already implemented in Phase 8, unused by
-  any frontend yet). Phase 11 could then wire `frontend/index.html` to `/api/chat`,
-  `/api/recommend`, and `/api/compare` to replace the current mock-data demo.
+
+## Known limits worth naming in the write-up
+- **Itinerary proximity is hierarchical, not metric.** With no coordinates in the
+  corpus, "near" means same district, then same division. Real distances would order
+  days better — Sitakunda and Rangamati are the same division but ~120 km apart, so
+  they can land on one day (the plan does flag "this day spans two districts").
+  Adding a lat/lng column to `data/place_geography.csv` and switching
+  `_travel_level`/`_day_buckets` to haversine is the natural upgrade, and nothing
+  else in the planner would have to change.
+- **Coverage is corpus-bound.** 27 places over 6 divisions means a 14-day trip can
+  only be filled to ~7 days, and some cities (e.g. Sylhet city itself) have hotels but
+  no reviewed attraction. The planner reports this rather than inventing stops.
+- **No cost, season or opening-hours data**, so the old mock demo's "cost per day" and
+  "best season" columns are gone rather than faked. They'd need a new data source.
+- **Chatbot is English keyword regexes.** Bilingual support is still the stretch goal
+  it was at MVP scope; the Bengali/code-mixed reviews are in the corpus and searchable,
+  but a Bengali *question* won't route to the right intent.
+- **Phase 5's 50-pair sample still has no human labels**, so precision/recall for the
+  topic→preference mapping is unmeasured. Unchanged by Phases 10-12.
+- **Not yet deployed to a public URL** — the config is written and tested, but it needs
+  a GitHub repo and a host account (see the unchecked boxes at the top of this file).

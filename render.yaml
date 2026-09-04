@@ -1,0 +1,26 @@
+# Phase 12 — Render blueprint (free tier).
+#
+# Deploy: push this repo to GitHub, then in the Render dashboard choose
+# "New → Blueprint" and point it at the repo. Render reads this file, so there
+# is nothing to configure by hand.
+#
+# The service is stateless: the database is rebuilt from the committed pipeline
+# artifacts on every deploy, which is also what makes a data refresh a plain
+# `git push` of the new data/*.csv files.
+services:
+  - type: web
+    name: touristinbd
+    runtime: python
+    plan: free
+    region: singapore
+    buildCommand: >-
+      pip install -r requirements-api.txt &&
+      python scripts/build_phase8_database.py
+    startCommand: python -m backend.main
+    healthCheckPath: /health
+    envVars:
+      - key: PYTHON_VERSION
+        value: "3.12.7"
+      - key: HOST
+        value: 0.0.0.0
+      # PORT is injected by Render; backend/main.py reads it.

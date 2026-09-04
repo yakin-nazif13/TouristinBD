@@ -165,6 +165,7 @@ class Recommendation(BaseModel):
     place_name: str
     city: str | None = None
     district: str | None = None
+    division: str | None = None
     category: str | None = None
     place_kind: str | None = None
     review_count: int
@@ -181,3 +182,90 @@ class SearchHit(BaseModel):
     label: str
     detail: str | None = None
     score: float | None = None
+
+
+# --- Phase 10: itinerary builder -------------------------------------------
+
+
+class PreferenceEvidence(BaseModel):
+    """Why a place was picked: how many of its reviews back a preference."""
+
+    preference_id: str
+    preference_label: str | None = None
+    preference_type: str | None = None
+    review_count: int
+    avg_rating: float | None = None
+
+
+class ItineraryActivity(BaseModel):
+    place_id: int
+    place_name: str
+    city: str | None = None
+    district: str | None = None
+    division: str | None = None
+    category: str | None = None
+    review_count: int = 0
+    avg_rating: float | None = None
+    match_score: float = 0.0
+    matched_preferences: list[PreferenceEvidence] = []
+    evidence_review_count: int = 0
+    why: str = Field(description="Human-readable reason, derived from review evidence")
+    review_snippet: str | None = None
+
+
+class ItineraryStay(BaseModel):
+    place_id: int
+    place_name: str
+    city: str | None = None
+    review_count: int = 0
+    avg_rating: float | None = None
+    note: str | None = None
+
+
+class ItineraryDay(BaseModel):
+    day: int
+    base_city: str | None = None
+    district: str | None = None
+    division: str | None = None
+    travel_level: str = Field(
+        description="start | same_city | same_district | same_division | cross_division"
+    )
+    travel_note: str | None = None
+    activities: list[ItineraryActivity] = []
+    stay: ItineraryStay | None = None
+    notes: list[str] = []
+
+
+class ItinerarySummary(BaseModel):
+    days: int
+    planned_days: int = Field(description="Days that got at least one activity")
+    total_activities: int
+    unique_places: int
+    cities: list[str] = []
+    divisions: list[str] = []
+    avg_activity_rating: float | None = None
+    evidence_reviews: int = 0
+    requested_preferences: list[str] = []
+    covered_preferences: list[str] = []
+    uncovered_preferences: list[str] = []
+    preference_coverage: float | None = None
+    transfers: int = 0
+
+
+class ItineraryPlan(BaseModel):
+    request: dict[str, Any] = {}
+    summary: ItinerarySummary
+    days: list[ItineraryDay] = []
+    warnings: list[str] = []
+
+
+# --- Phase 10: comparison tool ---------------------------------------------
+
+
+class ComparisonMetric(BaseModel):
+    metric: str
+    label: str
+    higher_is_better: bool
+    unit: str | None = None
+    values: dict[str, float | None] = {}
+    leader: str | None = None

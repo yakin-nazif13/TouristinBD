@@ -9,6 +9,8 @@ matplotlib
 torch
 openai
 python-dotenv
+# Phase 2 language detection (seeded for reproducibility; see run_phase2_preprocessing.py)
+langdetect
 scipy
 fastapi
 uvicorn[standard]

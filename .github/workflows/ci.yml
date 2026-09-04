@@ -1,0 +1,75 @@
+# Phase 12 — build the database and run every test suite on each push.
+#
+# The pipeline phases themselves (3-7) are not run here: they need torch and a
+# Gemini/OpenAI key. CI covers everything downstream of their committed
+# artifacts, which is where regressions actually happen.
+name: tests
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Install runtime dependencies
+        run: pip install -r requirements-api.txt
+
+      # Phase 2 is the only pipeline step CI runs (it needs no model and no API
+      # key), so its one extra dependency is installed here rather than being
+      # pushed into the slim runtime requirements.
+      - name: Install the Phase 2 dependency
+        run: pip install langdetect
+
+      - name: Phase 2 — preprocessing & ingestion tests
+        run: python scripts/test_phase2_preprocessing.py
+
+      - name: Build the SQLite database from the pipeline artifacts
+        run: python scripts/build_phase8_database.py
+
+      - name: Phase 8 — API smoke tests
+        run: python scripts/test_phase8_api.py
+
+      - name: Phase 8 — rebuild / forward-compatibility tests
+        run: python scripts/test_phase8_rebuild.py
+
+      - name: Phase 9 — chatbot tests
+        run: python scripts/test_phase9_chat.py
+
+      - name: Phase 10 — itinerary & comparison tests
+        run: python scripts/test_phase10_itinerary.py
+
+      - name: Phase 11 — frontend contract tests
+        run: python scripts/test_phase11_frontend.py
+
+      - name: Phase 12 — deployment configuration tests
+        run: python scripts/test_phase12_deployment.py
+
+  docker:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      # The image build runs the test suites itself, so a green build here means
+      # the deployable artifact is good.
+      - name: Build the deployment image
+        run: docker build -t touristinbd:ci .
+      - name: Start the container and check it serves
+        run: |
+          docker run -d --name touristinbd -p 8000:8000 touristinbd:ci
+          for i in $(seq 1 30); do
+            if curl -fs http://127.0.0.1:8000/health > /dev/null; then break; fi
+            sleep 2
+          done
+          curl -fs http://127.0.0.1:8000/health | tee /dev/stderr | grep -q '"database":"ready"'
+          curl -fs http://127.0.0.1:8000/app/ > /dev/null
+          docker rm -f touristinbd

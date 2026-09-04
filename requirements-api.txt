@@ -1,0 +1,16 @@
+# Runtime dependencies for the deployed service (Phase 12).
+#
+# Deliberately a subset of requirements.txt: the research pipeline (Phases 3-7)
+# needs torch, sentence-transformers, BERTopic, scikit-learn and matplotlib —
+# roughly 2 GB of wheels — but the API only serves what those phases already
+# wrote to data/. Installing them on the host would blow the free-tier build
+# limits for no benefit.
+#
+# pandas is here because the deploy step rebuilds data/touristinbd.db from the
+# committed CSV/JSON artifacts (scripts/build_phase8_database.py), which is the
+# only pipeline script the deployment runs.
+fastapi
+uvicorn[standard]
+pandas
+# Used by fastapi.testclient, so the smoke tests can run against a deployment.
+httpx

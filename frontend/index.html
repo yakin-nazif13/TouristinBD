@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>TouristinBD — Demo (Mock Data)</title>
+<title>TouristinBD — Bangladeshi travel preferences from real reviews</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Work+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
@@ -18,67 +18,61 @@
     --text-light:#F6F1E4;
     --text-dim:#B9CFCC;
     --text-dark:#14201F;
+    --line:#1E4A4D;
     --radius:14px;
   }
   *{box-sizing:border-box;}
   body{
-    margin:0;
-    background:var(--bg-deep);
-    color:var(--text-light);
-    font-family:'Work Sans', sans-serif;
-    -webkit-font-smoothing:antialiased;
+    margin:0;background:var(--bg-deep);color:var(--text-light);
+    font-family:'Work Sans', sans-serif;-webkit-font-smoothing:antialiased;
   }
-  h1,h2,h3,.display{
-    font-family:'Fraunces', serif;
-    font-weight:700;
-    letter-spacing:-0.01em;
-  }
+  h1,h2,h3,.display{font-family:'Fraunces', serif;font-weight:700;letter-spacing:-0.01em;}
   .mono{font-family:'IBM Plex Mono', monospace;}
   .wrap{max-width:1100px;margin:0 auto;padding:0 20px 60px;}
+  a{color:var(--marigold);}
 
   /* Header */
   header.top{padding:28px 0 10px;}
   .brand{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;}
   .brand h1{font-size:2.1rem;margin:0;color:var(--marigold);}
   .brand .tag{color:var(--text-dim);font-size:0.95rem;}
-  .demo-flag{
-    display:inline-block;margin-top:8px;
-    background:var(--pink);color:var(--text-light);
+  .live-flag{
+    display:inline-block;margin-top:8px;background:var(--leaf);color:var(--text-dark);
     padding:4px 10px;border-radius:20px;font-size:0.75rem;
     font-family:'IBM Plex Mono', monospace;letter-spacing:0.03em;
   }
+  .live-flag.offline{background:var(--pink);color:var(--text-light);}
 
-  /* Ticker — signature element, styled like a rickshaw destination board */
-  .ticker-frame{
-    margin-top:20px;background:#08181A;border:2px solid #1E4A4D;
-    border-radius:10px;overflow:hidden;position:relative;
+  /* Connection banner */
+  .banner{
+    margin-top:16px;background:#3A1620;border:1px solid var(--pink);border-radius:10px;
+    padding:14px 16px;font-size:0.9rem;line-height:1.5;display:none;
   }
+  .banner code{background:rgba(0,0,0,0.35);padding:2px 6px;border-radius:4px;font-family:'IBM Plex Mono',monospace;}
+  .banner input{
+    padding:8px 10px;border-radius:8px;border:1px solid var(--line);background:var(--paper);
+    color:var(--text-dark);font-family:'IBM Plex Mono',monospace;font-size:0.85rem;min-width:230px;
+  }
+  .banner .row{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px;align-items:center;}
+
+  /* Ticker — rickshaw destination board, now fed by real preferences */
+  .ticker-frame{margin-top:20px;background:#08181A;border:2px solid var(--line);border-radius:10px;overflow:hidden;position:relative;}
   .ticker-label{
     position:absolute;top:0;left:0;background:var(--marigold);color:var(--text-dark);
     font-family:'IBM Plex Mono',monospace;font-size:0.65rem;padding:3px 8px;
     border-bottom-right-radius:8px;letter-spacing:0.05em;z-index:2;
   }
-  .ticker-track{
-    display:flex;white-space:nowrap;padding:14px 0 10px 90px;
-    animation:scroll-left 32s linear infinite;
-  }
-  @keyframes scroll-left{
-    from{transform:translateX(0);}
-    to{transform:translateX(-50%);}
-  }
-  .ticker-item{
-    font-family:'IBM Plex Mono',monospace;font-size:0.85rem;color:var(--leaf);
-    margin-right:36px;
-  }
+  .ticker-track{display:flex;white-space:nowrap;padding:14px 0 10px 96px;animation:scroll-left 38s linear infinite;}
+  @keyframes scroll-left{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+  .ticker-item{font-family:'IBM Plex Mono',monospace;font-size:0.85rem;color:var(--leaf);margin-right:36px;}
   .ticker-item.long-tail{color:var(--pink);}
   .ticker-item::before{content:"◆ ";color:var(--text-dim);}
 
-  /* Tabs styled like route badges */
+  /* Tabs */
   nav.tabs{display:flex;gap:10px;margin-top:30px;flex-wrap:wrap;}
   nav.tabs button{
     font-family:'Fraunces', serif;font-weight:600;font-size:1rem;
-    background:var(--bg-panel);color:var(--text-dim);
-    border:2px solid transparent;border-radius:10px;
+    background:var(--bg-panel);color:var(--text-dim);border:2px solid transparent;border-radius:10px;
     padding:10px 18px;cursor:pointer;transition:all .15s ease;
   }
   nav.tabs button .num{
@@ -86,26 +80,38 @@
     background:var(--bg-panel-2);padding:2px 6px;border-radius:20px;margin-right:8px;
   }
   nav.tabs button:hover{color:var(--text-light);border-color:#2A5C5F;}
-  nav.tabs button.active{
-    background:var(--marigold);color:var(--text-dark);border-color:var(--marigold);
-  }
+  nav.tabs button.active{background:var(--marigold);color:var(--text-dark);border-color:var(--marigold);}
   nav.tabs button.active .num{background:rgba(0,0,0,0.15);color:var(--text-dark);}
 
-  section.panel{
-    background:var(--bg-panel);border-radius:var(--radius);padding:26px;margin-top:18px;
-    border:1px solid #1E4A4D;
-  }
+  section.panel{background:var(--bg-panel);border-radius:var(--radius);padding:26px;margin-top:18px;border:1px solid var(--line);}
   section.panel h2{margin-top:0;color:var(--text-light);font-size:1.4rem;}
   .muted{color:var(--text-dim);font-size:0.92rem;line-height:1.5;}
+  .small{font-size:0.82rem;}
+
+  /* Stats */
+  .stat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-top:18px;}
+  .stat{background:var(--bg-panel-2);border:1px solid var(--line);border-radius:10px;padding:14px;}
+  .stat .value{font-family:'Fraunces',serif;font-size:1.7rem;color:var(--marigold);line-height:1.1;}
+  .stat .label{font-family:'IBM Plex Mono',monospace;font-size:0.68rem;color:var(--text-dim);text-transform:uppercase;letter-spacing:0.05em;margin-top:6px;}
+
+  .split{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:18px;margin-top:20px;}
+  .card{background:var(--bg-panel-2);border:1px solid var(--line);border-radius:10px;padding:16px;}
+  .card h3{margin:0 0 12px;font-size:1rem;color:var(--marigold);}
+  .bar-row{display:flex;align-items:center;gap:10px;margin-bottom:8px;font-size:0.86rem;}
+  .bar-row .name{flex:0 0 42%;color:var(--text-dim);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+  .bar-track{background:#08181A;border-radius:6px;height:10px;flex:1;overflow:hidden;}
+  .bar-fill{background:var(--leaf);height:100%;}
+  .bar-fill.alt{background:var(--marigold);}
+  .bar-row .num{flex:0 0 54px;text-align:right;font-family:'IBM Plex Mono',monospace;font-size:0.76rem;color:var(--text-light);}
 
   /* Chat */
-  .chat-window{
-    background:var(--bg-panel-2);border-radius:10px;padding:16px;height:340px;
-    overflow-y:auto;display:flex;flex-direction:column;gap:12px;
-  }
-  .msg{max-width:75%;padding:10px 14px;border-radius:12px;line-height:1.4;font-size:0.94rem;}
+  .chat-window{background:var(--bg-panel-2);border-radius:10px;padding:16px;height:400px;overflow-y:auto;display:flex;flex-direction:column;gap:12px;}
+  .msg{max-width:82%;padding:10px 14px;border-radius:12px;line-height:1.45;font-size:0.94rem;}
   .msg.bot{background:#1E4A4D;color:var(--text-light);align-self:flex-start;border-bottom-left-radius:2px;}
   .msg.user{background:var(--marigold);color:var(--text-dark);align-self:flex-end;border-bottom-right-radius:2px;}
+  .msg .intent{font-family:'IBM Plex Mono',monospace;font-size:0.64rem;text-transform:uppercase;letter-spacing:0.06em;color:var(--leaf);display:block;margin-bottom:5px;}
+  .msg .evidence{margin-top:10px;border-top:1px solid rgba(255,255,255,0.15);padding-top:8px;font-size:0.84rem;color:var(--text-dim);}
+  .msg .evidence div{margin-top:4px;}
   .chat-input-row{display:flex;gap:10px;margin-top:14px;}
   .chat-input-row input{
     flex:1;padding:12px 14px;border-radius:10px;border:1px solid #2A5C5F;
@@ -116,50 +122,76 @@
     padding:12px 20px;font-weight:600;cursor:pointer;font-family:'Work Sans';font-size:0.95rem;
   }
   .chat-input-row button:hover, .primary-btn:hover{filter:brightness(1.08);}
+  .primary-btn[disabled]{opacity:0.55;cursor:progress;}
   .chip-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px;}
-  .chip{
-    background:var(--bg-panel-2);border:1px solid #2A5C5F;color:var(--text-dim);
-    padding:6px 12px;border-radius:20px;font-size:0.82rem;cursor:pointer;
-  }
+  .chip{background:var(--bg-panel-2);border:1px solid #2A5C5F;color:var(--text-dim);padding:6px 12px;border-radius:20px;font-size:0.82rem;cursor:pointer;}
   .chip:hover{border-color:var(--leaf);color:var(--text-light);}
 
-  /* Itinerary */
+  /* Forms */
   .interest-grid{display:flex;flex-wrap:wrap;gap:10px;margin:14px 0;}
   .interest-grid label{
     background:var(--bg-panel-2);border:1px solid #2A5C5F;border-radius:20px;
-    padding:8px 14px;font-size:0.88rem;cursor:pointer;display:flex;align-items:center;gap:6px;
+    padding:8px 14px;font-size:0.86rem;cursor:pointer;display:flex;align-items:center;gap:7px;
   }
+  .interest-grid label:hover{border-color:var(--leaf);}
   .interest-grid input{accent-color:var(--marigold);}
-  .form-row{display:flex;gap:16px;flex-wrap:wrap;margin:14px 0;align-items:center;}
-  .form-row label{font-size:0.88rem;color:var(--text-dim);display:flex;flex-direction:column;gap:4px;}
-  .form-row input[type=number]{
-    padding:8px 10px;border-radius:8px;border:1px solid #2A5C5F;background:var(--paper);
-    color:var(--text-dark);width:90px;
-  }
-  .itinerary-day{
-    background:var(--paper);color:var(--text-dark);border-radius:10px;padding:16px;margin-top:14px;
-  }
-  .itinerary-day h3{margin:0 0 6px;font-size:1.05rem;color:var(--pink);}
-  .itinerary-day .place{font-weight:600;}
-  .itinerary-day .tags{margin-top:6px;}
-  .tag-pill{
-    display:inline-block;background:var(--bg-deep);color:var(--marigold);font-family:'IBM Plex Mono',monospace;
-    font-size:0.7rem;padding:2px 8px;border-radius:20px;margin:2px 4px 0 0;
-  }
-
-  /* Compare */
-  .compare-select{display:flex;gap:10px;flex-wrap:wrap;margin:14px 0;}
-  select{
-    padding:10px 12px;border-radius:8px;border:1px solid #2A5C5F;background:var(--paper);
+  .interest-grid .kind{font-family:'IBM Plex Mono',monospace;font-size:0.66rem;color:var(--text-dim);}
+  .form-row{display:flex;gap:16px;flex-wrap:wrap;margin:14px 0;align-items:flex-end;}
+  .form-row label{font-size:0.82rem;color:var(--text-dim);display:flex;flex-direction:column;gap:5px;}
+  .form-row input[type=number], .form-row input[type=text], select{
+    padding:9px 10px;border-radius:8px;border:1px solid #2A5C5F;background:var(--paper);
     color:var(--text-dark);font-family:'Work Sans';font-size:0.9rem;
   }
-  table.compare-table{width:100%;border-collapse:collapse;margin-top:16px;background:var(--paper);border-radius:10px;overflow:hidden;color:var(--text-dark);}
-  table.compare-table th, table.compare-table td{padding:12px 14px;text-align:left;font-size:0.9rem;border-bottom:1px solid #e5ddc8;}
-  table.compare-table th{background:#EFE6CE;font-family:'IBM Plex Mono',monospace;font-size:0.75rem;text-transform:uppercase;letter-spacing:0.03em;}
-  .bar-track{background:#e5ddc8;border-radius:6px;height:10px;width:140px;overflow:hidden;display:inline-block;vertical-align:middle;margin-right:8px;}
-  .bar-fill{background:var(--leaf);height:100%;}
+  .form-row input[type=number]{width:90px;}
+  .form-row .check{flex-direction:row;align-items:center;gap:7px;padding-bottom:9px;}
 
-  footer{margin-top:40px;color:var(--text-dim);font-size:0.8rem;text-align:center;}
+  /* Itinerary */
+  .summary-strip{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px;}
+  .pill{background:var(--bg-panel-2);border:1px solid var(--line);border-radius:20px;padding:6px 12px;font-size:0.8rem;color:var(--text-dim);}
+  .pill strong{color:var(--marigold);font-family:'IBM Plex Mono',monospace;}
+  .warn{background:#3A2A16;border:1px solid var(--marigold);border-radius:10px;padding:12px 14px;margin-top:14px;font-size:0.87rem;color:#F7E2BC;}
+  .itinerary-day{background:var(--paper);color:var(--text-dark);border-radius:10px;padding:16px;margin-top:14px;}
+  .itinerary-day h3{margin:0 0 4px;font-size:1.05rem;color:var(--pink);}
+  .itinerary-day .travel{font-size:0.83rem;color:#5B6B69;margin-bottom:10px;font-style:italic;}
+  .stop{border-top:1px solid #E5DDC8;padding-top:10px;margin-top:10px;}
+  .stop:first-of-type{border-top:none;padding-top:0;}
+  .stop .place{font-weight:600;font-size:1rem;}
+  .stop .meta{font-size:0.82rem;color:#5B6B69;margin-top:2px;}
+  .stop .why{font-size:0.87rem;margin-top:6px;}
+  .stop blockquote{margin:8px 0 0;padding:8px 12px;background:#F1E9D4;border-left:3px solid var(--leaf);font-size:0.85rem;font-style:italic;border-radius:0 6px 6px 0;}
+  .tag-pill{display:inline-block;background:var(--bg-deep);color:var(--marigold);font-family:'IBM Plex Mono',monospace;font-size:0.68rem;padding:3px 9px;border-radius:20px;margin:6px 5px 0 0;}
+  .stay-line{margin-top:12px;padding-top:10px;border-top:1px dashed #CFC5A8;font-size:0.86rem;}
+  .free-day{color:#5B6B69;font-size:0.88rem;}
+
+  /* Compare */
+  .compare-select{display:flex;gap:10px;flex-wrap:wrap;margin:14px 0;align-items:center;}
+  table.compare-table{width:100%;border-collapse:collapse;margin-top:16px;background:var(--paper);border-radius:10px;overflow:hidden;color:var(--text-dark);}
+  table.compare-table th, table.compare-table td{padding:11px 14px;text-align:left;font-size:0.88rem;border-bottom:1px solid #E5DDC8;}
+  table.compare-table th{background:#EFE6CE;font-family:'IBM Plex Mono',monospace;font-size:0.72rem;text-transform:uppercase;letter-spacing:0.03em;}
+  table.compare-table td.leader{background:#EAF2D6;font-weight:600;}
+  table.compare-table td.leader::after{content:" ★";color:var(--leaf);}
+  .table-scroll{overflow-x:auto;}
+  .quote-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;margin-top:16px;}
+  .quote-card{background:var(--bg-panel-2);border:1px solid var(--line);border-radius:10px;padding:14px;}
+  .quote-card h4{margin:0 0 8px;font-size:0.92rem;color:var(--marigold);font-family:'Fraunces',serif;}
+  .quote{font-size:0.84rem;line-height:1.45;color:var(--text-dim);margin-bottom:8px;padding-left:10px;border-left:2px solid var(--leaf);}
+  .quote.neg{border-left-color:var(--pink);}
+
+  /* Explore */
+  .result-list{margin-top:16px;display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px;}
+  .result{background:var(--bg-panel-2);border:1px solid var(--line);border-radius:10px;padding:14px;cursor:pointer;}
+  .result:hover{border-color:var(--leaf);}
+  .result .title{font-weight:600;font-size:0.96rem;}
+  .result .sub{font-size:0.8rem;color:var(--text-dim);margin-top:4px;}
+  .kind-badge{font-family:'IBM Plex Mono',monospace;font-size:0.62rem;background:var(--bg-deep);color:var(--leaf);padding:2px 7px;border-radius:20px;margin-right:6px;text-transform:uppercase;}
+  .loading{color:var(--text-dim);font-size:0.88rem;margin-top:14px;}
+  .error{color:#FFB4C1;font-size:0.88rem;margin-top:14px;}
+
+  footer{margin-top:40px;color:var(--text-dim);font-size:0.8rem;text-align:center;line-height:1.6;}
+  @media (max-width:640px){
+    .brand h1{font-size:1.7rem;}
+    .msg{max-width:95%;}
+  }
 </style>
 </head>
 <body>
@@ -170,284 +202,628 @@
       <h1>TouristinBD</h1>
       <span class="tag">Bangladeshi travel preferences, mapped from real reviews</span>
     </div>
-    <span class="demo-flag mono">PHASE 0 · DEMO MODE · ALL DATA BELOW IS MADE UP</span>
+    <span class="live-flag mono" id="statusFlag">CONNECTING TO API…</span>
+
+    <div class="banner" id="apiBanner">
+      <strong>Can't reach the API.</strong>
+      Every panel on this page reads live data from the TouristinBD backend, so start it first:
+      <div style="margin-top:8px;"><code>.venv/bin/python -m backend.main</code></div>
+      <div style="margin-top:6px;" class="small muted">
+        If the database has not been built yet, run
+        <code>.venv/bin/python scripts/build_phase8_database.py</code> first.
+      </div>
+      <div class="row">
+        <input type="text" id="apiInput" placeholder="http://127.0.0.1:8000">
+        <button class="primary-btn" onclick="saveApiBase()">Use this API URL</button>
+        <button class="primary-btn" onclick="boot()">Retry</button>
+      </div>
+    </div>
 
     <div class="ticker-frame">
-      <span class="ticker-label">LONG-TAIL FEED</span>
+      <span class="ticker-label">PREFERENCE FEED</span>
       <div class="ticker-track" id="tickerTrack"></div>
     </div>
   </header>
 
   <nav class="tabs">
-    <button class="active" data-tab="chat"><span class="num">01</span>Chat</button>
-    <button data-tab="itinerary"><span class="num">02</span>Itinerary Builder</button>
-    <button data-tab="compare"><span class="num">03</span>Compare Destinations</button>
+    <button class="active" data-tab="overview"><span class="num">01</span>Overview</button>
+    <button data-tab="chat"><span class="num">02</span>Chat</button>
+    <button data-tab="itinerary"><span class="num">03</span>Itinerary Builder</button>
+    <button data-tab="compare"><span class="num">04</span>Compare</button>
+    <button data-tab="explore"><span class="num">05</span>Explore</button>
   </nav>
 
-  <!-- CHAT TAB -->
-  <section class="panel" id="tab-chat">
-    <h2>Ask about Bangladeshi travel preferences</h2>
-    <p class="muted">This is a mock, rule-based responder — it looks for keywords and answers from the fake dataset below. In Phase 9 this becomes a real retrieval-based bot grounded in your actual scraped reviews.</p>
+  <!-- OVERVIEW -->
+  <section class="panel" id="tab-overview">
+    <h2>What's in the corpus</h2>
+    <p class="muted">
+      Live numbers from the pipeline: scraped reviews (Phase 1) → cleaned and language-tagged
+      (Phase 2) → BERTopic topics (Phase 3) → LLM preference taxonomy (Phase 4) → validated
+      (Phase 5) and sensitivity-tested (Phase 6). Nothing on this page is mock data.
+    </p>
+    <div class="stat-grid" id="statGrid"></div>
+    <div class="split" id="overviewCards"></div>
+    <p class="muted small" id="buildMeta" style="margin-top:18px;"></p>
+  </section>
+
+  <!-- CHAT -->
+  <section class="panel" id="tab-chat" style="display:none;">
+    <h2>Ask about Bangladeshi travel</h2>
+    <p class="muted">
+      Retrieval-based, not generative: your question is classified into an intent and answered
+      from the review database, so every reply can be traced back to rows you can inspect in the
+      other tabs.
+    </p>
     <div class="chat-window" id="chatWindow"></div>
     <div class="chip-row" id="chatSuggestions"></div>
     <div class="chat-input-row">
-      <input type="text" id="chatInput" placeholder="e.g. Where can I see sunsets without crowds?">
-      <button onclick="sendChat()">Send</button>
+      <input type="text" id="chatInput" placeholder="e.g. plan a 4 day trip in Sylhet">
+      <button onclick="sendChat()" id="chatSend">Send</button>
     </div>
   </section>
 
-  <!-- ITINERARY TAB -->
+  <!-- ITINERARY -->
   <section class="panel" id="tab-itinerary" style="display:none;">
-    <h2>Build a rough itinerary</h2>
-    <p class="muted">Pick what you care about, tell us how many days, and we'll stitch together mock destinations that match. Real version (Phase 10) will use validated preference data and real travel-time estimates.</p>
-
-    <div class="interest-grid" id="interestGrid"></div>
+    <h2>Build an itinerary from review evidence</h2>
+    <p class="muted">
+      Places are ranked by how much of their review evidence maps to the preferences you pick,
+      then grouped by district and division so consecutive days stay near each other. Every stop
+      shows what backs it.
+    </p>
+    <div class="interest-grid" id="interestGrid"><span class="muted">Loading preferences…</span></div>
     <div class="form-row">
-      <label>Days
-        <input type="number" id="tripDays" value="4" min="1" max="10">
-      </label>
-      <label>Budget style
-        <select id="tripBudget">
-          <option value="budget">Budget / backpacker</option>
-          <option value="mid">Mid-range</option>
-          <option value="comfort">Comfort / family</option>
+      <label>Days<input type="number" id="tripDays" value="4" min="1" max="14"></label>
+      <label>Pace
+        <select id="tripPace">
+          <option value="relaxed">Relaxed — 1 stop/day</option>
+          <option value="standard" selected>Standard — 2 stops/day</option>
+          <option value="packed">Packed — 3 stops/day</option>
         </select>
       </label>
-      <button class="primary-btn" onclick="buildItinerary()" style="align-self:flex-end;">Generate itinerary</button>
+      <label>Start city<select id="tripCity"></select></label>
+      <label>Division<select id="tripDivision"></select></label>
+      <label class="check"><input type="checkbox" id="tripStays" checked> Suggest hotels</label>
+      <button class="primary-btn" id="tripBtn" onclick="buildItinerary()">Generate itinerary</button>
     </div>
     <div id="itineraryOutput"></div>
   </section>
 
-  <!-- COMPARE TAB -->
+  <!-- COMPARE -->
   <section class="panel" id="tab-compare" style="display:none;">
     <h2>Compare destinations</h2>
-    <p class="muted">Pick two or three spots to see mock ratings, cost, best season, and their top discovered preferences side by side.</p>
+    <p class="muted">
+      Two to four places side by side on their real review evidence — ratings, sentiment split,
+      which preferences each one actually demonstrates, and what visitors wrote.
+    </p>
     <div class="compare-select">
       <select id="cmp1"></select>
       <select id="cmp2"></select>
       <select id="cmp3"></select>
-      <button class="primary-btn" onclick="renderCompare()">Compare</button>
+      <select id="cmp4"></select>
+      <button class="primary-btn" id="cmpBtn" onclick="renderCompare()">Compare</button>
     </div>
     <div id="compareOutput"></div>
   </section>
 
-  <footer>TouristinBD — capstone project. Working demo, fake data only. Real scraping + BERTopic + LLM pipeline comes in later phases.</footer>
+  <!-- EXPLORE -->
+  <section class="panel" id="tab-explore" style="display:none;">
+    <h2>Explore places, preferences and reviews</h2>
+    <p class="muted">
+      One search across places, cities, preferences, topics and review text — the same
+      <span class="mono">/api/search</span> endpoint the chatbot falls back to.
+    </p>
+    <div class="form-row">
+      <label style="flex:1;min-width:240px;">Search
+        <input type="text" id="exploreQuery" placeholder="e.g. swamp, heritage, sunset, Sylhet" style="width:100%;">
+      </label>
+      <button class="primary-btn" onclick="runSearch()">Search</button>
+    </div>
+    <div id="exploreOutput"></div>
+    <div id="placeDetail"></div>
+  </section>
+
+  <footer>
+    TouristinBD — capstone project. Live data from the FastAPI backend over
+    <span class="mono" id="footerApi"></span>.<br>
+    Pipeline: Apify scrapes → cleaning &amp; language detection → BERTopic → 4-stage LLM
+    preference classification → bidirectional validation → SQLite + API → this interface.
+  </footer>
 </div>
 
 <script>
-/* ---------------- MOCK DATA ---------------- */
-const destinations = [
-  {
-    id:"coxsbazar", name:"Cox's Bazar", region:"Chattogram Division",
-    rating:4.3, avgCostPerDay:{budget:1200,mid:3000,comfort:6500}, bestSeason:"Nov–Feb",
-    mainstream:["beach relaxation","seafood","family day trips"],
-    longTail:["off-season quiet beaches","sunrise photography","budget solo backpacking"],
-    reviewSnippet:"Peaceful at sunrise before the crowds arrive; loved the quiet stretch near Inani."
-  },
-  {
-    id:"sundarbans", name:"Sundarbans", region:"Khulna Division",
-    rating:4.6, avgCostPerDay:{budget:2500,mid:5000,comfort:9000}, bestSeason:"Nov–Mar",
-    mainstream:["wildlife tours","boat cruises"],
-    longTail:["mangrove birdwatching","tribal honey-collector stories","monsoon photography"],
-    reviewSnippet:"Our guide's stories about the honey collectors were more memorable than the tiger tracks."
-  },
-  {
-    id:"srimangal", name:"Srimangal", region:"Sylhet Division",
-    rating:4.5, avgCostPerDay:{budget:1000,mid:2500,comfort:5000}, bestSeason:"Oct–Mar",
-    mainstream:["tea gardens","nature walks"],
-    longTail:["tribal cuisine tasting","seven-layer tea culture","quiet homestays"],
-    reviewSnippet:"Tried khasi tribal food in a small village kitchen — better than any restaurant in Sylhet town."
-  },
-  {
-    id:"bandarban", name:"Bandarban", region:"Chattogram Hill Tracts",
-    rating:4.4, avgCostPerDay:{budget:1500,mid:3200,comfort:6000}, bestSeason:"Oct–Feb",
-    mainstream:["hiking","hill views"],
-    longTail:["indigenous village homestays","monsoon waterfall trekking","quiet meditation retreats"],
-    reviewSnippet:"Stayed with a Bawm family — very different pace of life, wish more tourists respected it."
-  },
-  {
-    id:"sylhet", name:"Sylhet City & Jaflong", region:"Sylhet Division",
-    rating:4.1, avgCostPerDay:{budget:1100,mid:2600,comfort:5200}, bestSeason:"Oct–Mar",
-    mainstream:["tea gardens","river stone collection"],
-    longTail:["shrine pilgrimage etiquette questions","cross-border viewpoint photography"],
-    reviewSnippet:"Beautiful, but wished someone had explained shrine etiquette before we went in."
-  },
-  {
-    id:"saintmartins", name:"Saint Martin's Island", region:"Chattogram Division",
-    rating:4.2, avgCostPerDay:{budget:1800,mid:4000,comfort:7500}, bestSeason:"Dec–Feb",
-    mainstream:["beach relaxation","seafood","snorkeling"],
-    longTail:["budget solo backpacking","coral reef conservation concerns","off-season quiet beaches"],
-    reviewSnippet:"Loved it but noticed a lot of plastic near the reef — hope conservation efforts increase."
-  },
-  {
-    id:"sonargaon", name:"Sonargaon", region:"Dhaka Division",
-    rating:4.0, avgCostPerDay:{budget:600,mid:1500,comfort:3000}, bestSeason:"Nov–Feb",
-    mainstream:["heritage architecture","day trips from Dhaka"],
-    longTail:["folk art market haggling tips","panam city photography"],
-    reviewSnippet:"Panam City is a photographer's dream in late afternoon light, almost no other tourists."
-  },
-  {
-    id:"bagerhat", name:"Bagerhat Mosque City", region:"Khulna Division",
-    rating:4.3, avgCostPerDay:{budget:700,mid:1600,comfort:3200}, bestSeason:"Nov–Feb",
-    mainstream:["heritage architecture","history tours"],
-    longTail:["Islamic architecture study trips","quiet off-season beaches nearby"],
-    reviewSnippet:"Sixty Dome Mosque is stunning and calm — brought a book and just sat there an hour."
+/* ------------------------------------------------------------------ *
+ * API wiring
+ * The page is served either from the backend itself (same origin) or
+ * opened straight from disk, in which case we fall back to the local
+ * dev server. `?api=<url>` overrides and is remembered.
+ * ------------------------------------------------------------------ */
+const DEFAULT_API = 'http://127.0.0.1:8000';
+
+function resolveApiBase(){
+  const fromQuery = new URLSearchParams(location.search).get('api');
+  if(fromQuery){
+    try{ localStorage.setItem('touristinbd_api', fromQuery); }catch(e){}
+    return fromQuery.replace(/\/$/, '');
   }
-];
-
-const allInterests = [...new Set(destinations.flatMap(d => [...d.mainstream, ...d.longTail]))];
-
-const longTailTags = [...new Set(destinations.flatMap(d => d.longTail))];
-const mainstreamTags = [...new Set(destinations.flatMap(d => d.mainstream))];
-
-/* ---------------- TICKER ---------------- */
-function buildTicker(){
-  const track = document.getElementById('tickerTrack');
-  const items = [...longTailTags.map(t=>({t,type:'long-tail'})), ...mainstreamTags.map(t=>({t,type:''}))];
-  const doubled = [...items, ...items]; // seamless loop
-  track.innerHTML = doubled.map(i => `<span class="ticker-item ${i.type}">${i.t}</span>`).join('');
+  let stored = null;
+  try{ stored = localStorage.getItem('touristinbd_api'); }catch(e){}
+  if(stored) return stored.replace(/\/$/, '');
+  if(location.protocol === 'http:' || location.protocol === 'https:') return location.origin;
+  return DEFAULT_API;
 }
-buildTicker();
 
-/* ---------------- TABS ---------------- */
-document.querySelectorAll('nav.tabs button').forEach(btn=>{
-  btn.addEventListener('click', ()=>{
-    document.querySelectorAll('nav.tabs button').forEach(b=>b.classList.remove('active'));
+let API_BASE = resolveApiBase();
+
+function saveApiBase(){
+  const value = document.getElementById('apiInput').value.trim();
+  if(!value) return;
+  API_BASE = value.replace(/\/$/, '');
+  try{ localStorage.setItem('touristinbd_api', API_BASE); }catch(e){}
+  boot();
+}
+
+async function api(path, options){
+  const response = await fetch(API_BASE + path, options);
+  const body = await response.json().catch(() => null);
+  if(!response.ok){
+    const detail = body && body.detail ? (typeof body.detail === 'string' ? body.detail : JSON.stringify(body.detail)) : response.statusText;
+    throw new Error(detail);
+  }
+  return body;
+}
+
+function qs(params){
+  const parts = Object.entries(params)
+    .filter(([, v]) => v !== null && v !== undefined && v !== '')
+    .map(([k, v]) => encodeURIComponent(k) + '=' + encodeURIComponent(v));
+  return parts.length ? '?' + parts.join('&') : '';
+}
+
+const escapeHtml = (value) => String(value ?? '').replace(/[&<>"']/g, (ch) => (
+  {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]
+));
+const num = (value, digits = 0) => value === null || value === undefined ? '—' : Number(value).toFixed(digits);
+const pct = (value) => value === null || value === undefined ? '—' : (Number(value) * 100).toFixed(0) + '%';
+
+/* ---------------------------- tabs ---------------------------- */
+const TABS = ['overview','chat','itinerary','compare','explore'];
+document.querySelectorAll('nav.tabs button').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('nav.tabs button').forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
-    ['chat','itinerary','compare'].forEach(name=>{
-      document.getElementById('tab-'+name).style.display = (name===btn.dataset.tab) ? 'block' : 'none';
+    TABS.forEach(name => {
+      document.getElementById('tab-' + name).style.display = (name === btn.dataset.tab) ? 'block' : 'none';
     });
   });
 });
 
-/* ---------------- CHAT ---------------- */
-const chatWindow = document.getElementById('chatWindow');
-const suggestions = ["Where can I see sunsets without crowds?","Best spot for tribal food?","Somewhere quiet for meditation?","Good for budget solo travel?"];
+function showTab(name){
+  const btn = document.querySelector(`nav.tabs button[data-tab="${name}"]`);
+  if(btn) btn.click();
+}
 
-function addMsg(text, who){
+/* ---------------------------- boot ---------------------------- */
+let PREFERENCES = [];
+let PLACES = [];
+
+async function boot(){
+  const flag = document.getElementById('statusFlag');
+  const banner = document.getElementById('apiBanner');
+  document.getElementById('footerApi').textContent = API_BASE;
+  document.getElementById('apiInput').value = API_BASE;
+  flag.textContent = 'CONNECTING TO API…';
+  flag.classList.remove('offline');
+  try{
+    const health = await api('/health');
+    if(health.database !== 'ready') throw new Error(health.detail || 'database not ready');
+    flag.textContent = `LIVE DATA · SCHEMA v${health.schema_version} · BUILT ${(health.built_at_utc || '').slice(0, 10)}`;
+    banner.style.display = 'none';
+  }catch(err){
+    flag.textContent = 'API OFFLINE — SHOWING NOTHING RATHER THAN FAKE DATA';
+    flag.classList.add('offline');
+    banner.style.display = 'block';
+    banner.querySelector('strong').textContent = `Can't reach the API at ${API_BASE} (${err.message}).`;
+    return;
+  }
+  await Promise.all([loadOverview(), loadItineraryOptions(), loadPlaces()]);
+  startChat();
+}
+
+/* -------------------------- overview -------------------------- */
+function barList(rows, {alt = false} = {}){
+  const max = Math.max(...rows.map(r => r.value), 1);
+  return rows.map(r => `
+    <div class="bar-row">
+      <span class="name" title="${escapeHtml(r.name)}">${escapeHtml(r.name)}</span>
+      <span class="bar-track"><span class="bar-fill ${alt ? 'alt' : ''}" style="width:${(r.value / max) * 100}%"></span></span>
+      <span class="num">${escapeHtml(r.display ?? r.value)}</span>
+    </div>`).join('');
+}
+
+async function loadOverview(){
+  const grid = document.getElementById('statGrid');
+  const cards = document.getElementById('overviewCards');
+  try{
+    const [overview, prefs, meta, longTail] = await Promise.all([
+      api('/api/overview'),
+      api('/api/preferences'),
+      api('/api/meta'),
+      api('/api/analytics/long-tail').catch(() => null),
+    ]);
+    PREFERENCES = prefs;
+    buildTicker(prefs);
+
+    const stats = [
+      ['Reviews analysed', overview.total_reviews],
+      ['Places', overview.total_places],
+      ['Cities', overview.total_cities],
+      ['Topics', overview.total_topics],
+      ['Preferences', overview.total_preferences],
+      ['Average rating', overview.avg_rating ? overview.avg_rating.toFixed(2) + ' / 5' : '—'],
+    ];
+    grid.innerHTML = stats.map(([label, value]) => `
+      <div class="stat"><div class="value">${escapeHtml(value)}</div><div class="label">${escapeHtml(label)}</div></div>
+    `).join('');
+
+    const topPrefs = [...prefs].sort((a, b) => b.review_count - a.review_count).slice(0, 8);
+    const sources = Object.entries(overview.reviews_by_source || {});
+    const languages = Object.entries(overview.reviews_by_language || {});
+
+    cards.innerHTML = `
+      <div class="card">
+        <h3>Most-evidenced preferences</h3>
+        ${barList(topPrefs.map(p => ({name: `${p.preference_id} · ${p.preference_label}`, value: p.review_count, display: p.review_count})))}
+      </div>
+      <div class="card">
+        <h3>Where the reviews came from</h3>
+        ${barList(sources.map(([name, value]) => ({name, value, display: value})), {alt: true})}
+        <h3 style="margin-top:16px;">Detected languages</h3>
+        ${barList(languages.map(([name, value]) => ({name, value, display: value})))}
+      </div>
+      <div class="card">
+        <h3>Mainstream vs long-tail</h3>
+        ${longTail ? `
+          <p class="muted small">
+            ${(longTail.topics || []).filter(t => t.is_long_tail).length} of ${(longTail.topics || []).length}
+            topics are flagged long-tail — corpus share below
+            ${pct(longTail.thresholds.scarcity_threshold)} <em>and</em> semantic distance above
+            ${num(longTail.thresholds.sdd_threshold, 2)}.
+          </p>
+          ${barList((longTail.split || []).map(s => ({name: s.preference_type, value: s.review_count || 0, display: s.review_count || 0})), {alt: true})}
+        ` : '<p class="muted small">Long-tail analysis not available in this build.</p>'}
+        <p class="muted small" style="margin-top:10px;">
+          A near-zero long-tail count is expected at MVP corpus size — the rule needs a much larger
+          topic count before niche preferences separate out.
+        </p>
+      </div>`;
+
+    document.getElementById('buildMeta').textContent =
+      `Database built ${meta.built_at_utc || 'unknown'} (schema v${meta.schema_version}) from ` +
+      `${Object.keys(meta.source_files || {}).length} pipeline artifact(s).`;
+  }catch(err){
+    grid.innerHTML = `<p class="error">Could not load the overview: ${escapeHtml(err.message)}</p>`;
+  }
+}
+
+function buildTicker(prefs){
+  const track = document.getElementById('tickerTrack');
+  if(!prefs.length){ track.innerHTML = ''; return; }
+  const items = prefs.map(p => ({
+    text: `${p.preference_label} (${p.review_count} reviews)`,
+    type: p.preference_type === 'long_tail' ? 'long-tail' : '',
+  }));
+  track.innerHTML = [...items, ...items]
+    .map(i => `<span class="ticker-item ${i.type}">${escapeHtml(i.text)}</span>`).join('');
+}
+
+/* ---------------------------- chat ---------------------------- */
+const chatWindow = document.getElementById('chatWindow');
+
+function addMsg(html, who){
   const div = document.createElement('div');
-  div.className = 'msg '+who;
-  div.textContent = text;
+  div.className = 'msg ' + who;
+  div.innerHTML = html;
   chatWindow.appendChild(div);
+  chatWindow.scrollTop = chatWindow.scrollHeight;
+  return div;
+}
+
+function evidenceHtml(body){
+  const results = body.results || [];
+  if(!results.length) return '';
+  if(body.intent === 'itinerary'){
+    const plan = results[0];
+    const lines = (plan.days || []).filter(d => d.activities.length).map(d =>
+      `<div>Day ${d.day} · ${escapeHtml(d.base_city || '')}: ${d.activities.map(a => escapeHtml(a.place_name)).join(', ')}</div>`);
+    return `<div class="evidence">${lines.join('')}
+      <div style="margin-top:6px;"><span class="chip" onclick="showTab('itinerary')">Open in the itinerary builder</span></div></div>`;
+  }
+  if(body.intent === 'compare'){
+    const cmp = results[0];
+    return `<div class="evidence">${escapeHtml(cmp.comparison ? cmp.comparison.summary : '')}
+      <div style="margin-top:6px;"><span class="chip" onclick="showTab('compare')">Open the comparison tab</span></div></div>`;
+  }
+  const lines = results.slice(0, 5).map(r => {
+    if(r.place_name && r.match_score !== undefined){
+      return `<div>${escapeHtml(r.place_name)} — ${num(r.avg_rating, 2)}★ · ${r.review_count} reviews · match ${num(r.match_score, 2)}</div>`;
+    }
+    if(r.place && r.place.place_name){
+      return `<div>${escapeHtml(r.place.place_name)} — ${num(r.place.avg_review_rating, 2)}★ · ${r.place.review_count} reviews</div>`;
+    }
+    if(r.review_text_clean){
+      return `<div>“${escapeHtml(r.review_text_clean.slice(0, 140))}…” — ${num(r.review_rating, 1)}★</div>`;
+    }
+    if(r.place_name) return `<div>${escapeHtml(r.place_name)} — ${escapeHtml(r.city || '')}</div>`;
+    if(r.label) return `<div>${escapeHtml(r.label)} <span class="mono small">(${escapeHtml(r.kind)})</span></div>`;
+    return '';
+  });
+  return `<div class="evidence">${lines.join('')}</div>`;
+}
+
+async function sendChat(customText){
+  const input = document.getElementById('chatInput');
+  const text = (customText || input.value).trim();
+  if(!text) return;
+  addMsg(escapeHtml(text), 'user');
+  input.value = '';
+  const pending = addMsg('<span class="muted">thinking…</span>', 'bot');
+  try{
+    const body = await api('/api/chat', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({message: text, limit: 5}),
+    });
+    pending.innerHTML = `<span class="intent">${escapeHtml(body.intent)}</span>${escapeHtml(body.reply)}${evidenceHtml(body)}`;
+    if(body.suggestions && body.suggestions.length) renderSuggestions(body.suggestions);
+  }catch(err){
+    pending.innerHTML = `<span class="intent">error</span>Could not reach the API: ${escapeHtml(err.message)}`;
+  }
   chatWindow.scrollTop = chatWindow.scrollHeight;
 }
 
-function botReply(query){
-  const q = query.toLowerCase();
-  const matches = destinations.filter(d=>
-    [...d.mainstream, ...d.longTail].some(tag=>q.includes(tag.split(' ')[0]) || tag.toLowerCase().split(' ').some(w=>q.includes(w)))
-  );
-  if(matches.length===0){
-    return "I don't have a mock match for that yet — try asking about beaches, tea gardens, hiking, tribal food, or quiet/off-season spots.";
+function renderSuggestions(list){
+  document.getElementById('chatSuggestions').innerHTML = list
+    .map(s => `<span class="chip" onclick="sendChat(${JSON.stringify(s).replace(/"/g, '&quot;')})">${escapeHtml(s)}</span>`)
+    .join('');
+}
+
+async function startChat(){
+  chatWindow.innerHTML = '';
+  try{
+    const body = await api('/api/chat', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({message: 'hello'}),
+    });
+    addMsg(escapeHtml(body.reply), 'bot');
+    renderSuggestions(body.suggestions || []);
+  }catch(err){
+    addMsg('Chat is unavailable: ' + escapeHtml(err.message), 'bot');
   }
-  const top = matches[0];
-  const matchedTag = [...top.mainstream, ...top.longTail].find(tag=>tag.toLowerCase().split(' ').some(w=>q.includes(w))) || top.longTail[0];
-  return `Based on mock reviews, ${top.name} (${top.region}) stands out for "${matchedTag}". One review even says: "${top.reviewSnippet}" Rated ${top.rating}/5, best visited ${top.bestSeason}.`;
 }
+document.getElementById('chatInput').addEventListener('keydown', e => { if(e.key === 'Enter') sendChat(); });
 
-function sendChat(customText){
-  const input = document.getElementById('chatInput');
-  const text = customText || input.value.trim();
-  if(!text) return;
-  addMsg(text, 'user');
-  input.value = '';
-  setTimeout(()=>addMsg(botReply(text), 'bot'), 350);
-}
-document.getElementById('chatInput').addEventListener('keydown', e=>{ if(e.key==='Enter') sendChat(); });
-
-function buildChatSuggestions(){
-  const row = document.getElementById('chatSuggestions');
-  row.innerHTML = suggestions.map(s=>`<span class="chip" onclick="sendChat('${s.replace(/'/g,"")}')">${s}</span>`).join('');
-}
-buildChatSuggestions();
-addMsg("Hi! I'm the TouristinBD demo assistant (mock mode). Ask me about places, food, or vibes — try one of the suggestions below.", 'bot');
-
-/* ---------------- ITINERARY ---------------- */
-function buildInterestGrid(){
+/* -------------------------- itinerary ------------------------- */
+async function loadItineraryOptions(){
   const grid = document.getElementById('interestGrid');
-  grid.innerHTML = allInterests.map(tag=>`
-    <label><input type="checkbox" value="${tag}"> ${tag}</label>
-  `).join('');
+  try{
+    const options = await api('/api/itinerary/options');
+    grid.innerHTML = options.preferences.map(p => `
+      <label title="${escapeHtml(p.category || '')} › ${escapeHtml(p.subcategory || '')}">
+        <input type="checkbox" value="${escapeHtml(p.preference_id)}">
+        ${escapeHtml(p.preference_label)}
+        <span class="kind">${p.review_count ?? 0}rv</span>
+      </label>`).join('');
+    document.getElementById('tripCity').innerHTML =
+      '<option value="">Anywhere</option>' + options.cities.map(c => `<option value="${escapeHtml(c)}">${escapeHtml(c)}</option>`).join('');
+    document.getElementById('tripDivision').innerHTML =
+      '<option value="">All divisions</option>' + options.divisions.map(d => `<option value="${escapeHtml(d)}">${escapeHtml(d)}</option>`).join('');
+    document.getElementById('tripDays').max = options.max_days;
+  }catch(err){
+    grid.innerHTML = `<p class="error">Could not load preferences: ${escapeHtml(err.message)}</p>`;
+  }
 }
-buildInterestGrid();
 
-function buildItinerary(){
-  const checked = [...document.querySelectorAll('#interestGrid input:checked')].map(i=>i.value);
-  const days = parseInt(document.getElementById('tripDays').value) || 4;
-  const budget = document.getElementById('tripBudget').value;
+async function buildItinerary(){
   const out = document.getElementById('itineraryOutput');
-
-  if(checked.length===0){
-    out.innerHTML = '<p class="muted" style="margin-top:14px;">Pick at least one interest above so we know what to match on.</p>';
-    return;
+  const btn = document.getElementById('tripBtn');
+  const preferences = [...document.querySelectorAll('#interestGrid input:checked')].map(i => i.value);
+  const params = {
+    days: document.getElementById('tripDays').value || 3,
+    pace: document.getElementById('tripPace').value,
+    city: document.getElementById('tripCity').value,
+    division: document.getElementById('tripDivision').value,
+    include_stays: document.getElementById('tripStays').checked,
+    preferences: preferences.join(','),
+  };
+  out.innerHTML = '<p class="loading">Planning from the review corpus…</p>';
+  btn.disabled = true;
+  try{
+    const plan = await api('/api/itinerary' + qs(params));
+    out.innerHTML = renderPlan(plan);
+  }catch(err){
+    out.innerHTML = `<p class="error">${escapeHtml(err.message)}</p>`;
+  }finally{
+    btn.disabled = false;
   }
-
-  const scored = destinations.map(d=>{
-    const tags = [...d.mainstream, ...d.longTail];
-    const score = tags.filter(t=>checked.includes(t)).length;
-    return {...d, score};
-  }).filter(d=>d.score>0).sort((a,b)=>b.score-a.score);
-
-  if(scored.length===0){
-    out.innerHTML = '<p class="muted" style="margin-top:14px;">No mock destinations match that combination yet — try fewer or different interests.</p>';
-    return;
-  }
-
-  const picks = [];
-  for(let day=1; day<=days; day++){
-    picks.push(scored[(day-1) % scored.length]);
-  }
-
-  let totalCost = picks.reduce((sum,d)=>sum + d.avgCostPerDay[budget], 0);
-
-  out.innerHTML = `
-    <p class="muted" style="margin-top:16px;">Estimated cost for ${days} day(s), ${budget} style: <strong style="color:var(--marigold)">৳${totalCost.toLocaleString()}</strong> (very rough mock estimate)</p>
-    ${picks.map((d,i)=>`
-      <div class="itinerary-day">
-        <h3>Day ${i+1}</h3>
-        <div class="place">${d.name} <span class="muted">— ${d.region}</span></div>
-        <div class="muted">Best season: ${d.bestSeason} · Rating ${d.rating}/5 · Est. ৳${d.avgCostPerDay[budget].toLocaleString()}/day</div>
-        <div class="tags">
-          ${[...d.mainstream, ...d.longTail].filter(t=>checked.includes(t)).map(t=>`<span class="tag-pill">${t}</span>`).join('')}
-        </div>
-      </div>
-    `).join('')}
-  `;
 }
 
-/* ---------------- COMPARE ---------------- */
-function buildCompareSelects(){
-  ['cmp1','cmp2','cmp3'].forEach((id, idx)=>{
-    const sel = document.getElementById(id);
-    sel.innerHTML = `<option value="">— none —</option>` + destinations.map(d=>`<option value="${d.id}">${d.name}</option>`).join('');
-    if(destinations[idx]) sel.value = destinations[idx].id;
-  });
+function renderPlan(plan){
+  const s = plan.summary;
+  const pills = [
+    `<span class="pill"><strong>${s.planned_days}/${s.days}</strong> days planned</span>`,
+    `<span class="pill"><strong>${s.total_activities}</strong> stops</span>`,
+    `<span class="pill"><strong>${s.cities.length}</strong> cities · ${s.divisions.length} divisions</span>`,
+    `<span class="pill"><strong>${s.transfers}</strong> transfers</span>`,
+    `<span class="pill">avg <strong>${num(s.avg_activity_rating, 2)}</strong>★</span>`,
+    `<span class="pill"><strong>${s.evidence_reviews}</strong> reviews backing this plan</span>`,
+  ];
+  if(s.requested_preferences.length){
+    pills.push(`<span class="pill">preference coverage <strong>${pct(s.preference_coverage)}</strong></span>`);
+  }
+  const warnings = (plan.warnings || []).map(w => `<div class="warn">${escapeHtml(w)}</div>`).join('');
+  if(!s.total_activities){
+    return `<div class="summary-strip">${pills.join('')}</div>${warnings}`;
+  }
+  const days = plan.days.map(d => {
+    if(!d.activities.length){
+      return `<div class="itinerary-day">
+        <h3>Day ${d.day} — free day</h3>
+        <div class="travel">${escapeHtml(d.travel_note || '')}</div>
+        <div class="free-day">${escapeHtml((d.notes || []).join(' '))}</div>
+      </div>`;
+    }
+    const stops = d.activities.map(a => `
+      <div class="stop">
+        <div class="place">${escapeHtml(a.place_name)}</div>
+        <div class="meta">${escapeHtml(a.city || '')}${a.district ? ' · ' + escapeHtml(a.district) + ' district' : ''} · ${escapeHtml(a.category || '')} · ${num(a.avg_rating, 2)}★ from ${a.review_count} reviews</div>
+        <div class="why">${escapeHtml(a.why)}</div>
+        ${a.matched_preferences.map(p => `<span class="tag-pill">${escapeHtml(p.preference_label || p.preference_id)} · ${p.review_count}rv</span>`).join('')}
+        ${a.review_snippet ? `<blockquote>“${escapeHtml(a.review_snippet)}”</blockquote>` : ''}
+      </div>`).join('');
+    const stay = d.stay ? `<div class="stay-line"><strong>Stay:</strong> ${escapeHtml(d.stay.place_name)} — ${num(d.stay.avg_rating, 2)}★ from ${d.stay.review_count} reviews${d.stay.note ? ' · ' + escapeHtml(d.stay.note) : ''}</div>` : '';
+    const notes = (d.notes || []).length ? `<div class="stay-line">${escapeHtml(d.notes.join(' '))}</div>` : '';
+    return `<div class="itinerary-day">
+      <h3>Day ${d.day} — ${escapeHtml(d.base_city || '')}</h3>
+      <div class="travel">${escapeHtml(d.travel_note || '')}</div>
+      ${stops}${stay}${notes}
+    </div>`;
+  }).join('');
+  return `<div class="summary-strip">${pills.join('')}</div>${warnings}${days}`;
 }
-buildCompareSelects();
 
-function renderCompare(){
-  const ids = ['cmp1','cmp2','cmp3'].map(id=>document.getElementById(id).value).filter(Boolean);
+/* --------------------------- compare -------------------------- */
+async function loadPlaces(){
+  try{
+    const page = await api('/api/places' + qs({limit: 500, sort: 'name', order: 'asc'}));
+    PLACES = page.items;
+    const attractions = PLACES.filter(p => p.place_kind === 'attraction');
+    ['cmp1','cmp2','cmp3','cmp4'].forEach((id, idx) => {
+      const select = document.getElementById(id);
+      select.innerHTML = '<option value="">— none —</option>' +
+        PLACES.map(p => `<option value="${p.place_id}">${escapeHtml(p.place_name)}${p.city ? ' — ' + escapeHtml(p.city) : ''}</option>`).join('');
+      if(attractions[idx] && idx < 2) select.value = attractions[idx].place_id;
+    });
+  }catch(err){
+    document.getElementById('compareOutput').innerHTML = `<p class="error">${escapeHtml(err.message)}</p>`;
+  }
+}
+
+async function renderCompare(){
   const out = document.getElementById('compareOutput');
-  if(ids.length<2){
-    out.innerHTML = '<p class="muted" style="margin-top:14px;">Pick at least two destinations.</p>';
+  const btn = document.getElementById('cmpBtn');
+  const ids = ['cmp1','cmp2','cmp3','cmp4'].map(id => document.getElementById(id).value).filter(Boolean);
+  const unique = [...new Set(ids)];
+  if(unique.length < 2){
+    out.innerHTML = '<p class="muted" style="margin-top:14px;">Pick at least two different places.</p>';
     return;
   }
-  const picked = ids.map(id=>destinations.find(d=>d.id===id));
-  const maxRating = 5;
-
-  out.innerHTML = `
-    <table class="compare-table">
-      <tr><th>Destination</th>${picked.map(d=>`<th>${d.name}</th>`).join('')}</tr>
-      <tr><td>Region</td>${picked.map(d=>`<td>${d.region}</td>`).join('')}</tr>
-      <tr><td>Rating</td>${picked.map(d=>`<td><span class="bar-track"><span class="bar-fill" style="width:${(d.rating/maxRating)*100}%"></span></span>${d.rating}/5</td>`).join('')}</tr>
-      <tr><td>Best season</td>${picked.map(d=>`<td>${d.bestSeason}</td>`).join('')}</tr>
-      <tr><td>Cost/day (mid-range)</td>${picked.map(d=>`<td>৳${d.avgCostPerDay.mid.toLocaleString()}</td>`).join('')}</tr>
-      <tr><td>Top mainstream prefs</td>${picked.map(d=>`<td>${d.mainstream.join(', ')}</td>`).join('')}</tr>
-      <tr><td>Top long-tail prefs</td>${picked.map(d=>`<td style="color:#a5453f;font-weight:600;">${d.longTail.join(', ')}</td>`).join('')}</tr>
-    </table>
-  `;
+  out.innerHTML = '<p class="loading">Comparing review evidence…</p>';
+  btn.disabled = true;
+  try{
+    const body = await api('/api/compare' + qs({places: unique.join(','), sample_reviews: 2}));
+    out.innerHTML = renderComparison(body);
+  }catch(err){
+    out.innerHTML = `<p class="error">${escapeHtml(err.message)}</p>`;
+  }finally{
+    btn.disabled = false;
+  }
 }
-renderCompare();
+
+function formatMetric(metric, value){
+  if(value === null || value === undefined) return '—';
+  if(metric.unit === '%') return pct(value);
+  if(metric.unit === '/5') return num(value, 2) + ' / 5';
+  return num(value, 0);
+}
+
+function renderComparison(body){
+  const names = body.places.map(p => p.place_name);
+  const header = `<tr><th>Metric</th>${names.map(n => `<th>${escapeHtml(n)}</th>`).join('')}</tr>`;
+  const context = `<tr><td>Location</td>${body.places.map(p =>
+    `<td>${escapeHtml(p.city || '—')}${p.division ? ' · ' + escapeHtml(p.division) : ''}</td>`).join('')}</tr>`;
+  const rows = body.comparison.metrics.map(m => `
+    <tr><td>${escapeHtml(m.label)}</td>${names.map(n =>
+      `<td class="${m.leader === n ? 'leader' : ''}">${formatMetric(m, m.values[n])}</td>`).join('')}</tr>`).join('');
+  const prefRow = `<tr><td>Strongest preference</td>${names.map(n =>
+    `<td>${escapeHtml(body.comparison.top_preference[n] || '—')}</td>`).join('')}</tr>`;
+  const distinct = `<tr><td>Only this one has</td>${names.map(n =>
+    `<td>${(body.distinct_preferences[n] || []).map(id => `<span class="tag-pill">${escapeHtml(id)}</span>`).join('') || '—'}</td>`).join('')}</tr>`;
+
+  const quotes = body.places.map(p => {
+    const samples = p.sample_reviews || {positive: [], critical: []};
+    const render = (list, cls) => list.map(r =>
+      `<div class="quote ${cls}">“${escapeHtml((r.review_text_clean || '').slice(0, 220))}” — ${num(r.review_rating, 1)}★</div>`).join('');
+    return `<div class="quote-card">
+      <h4>${escapeHtml(p.place_name)}</h4>
+      ${render(samples.positive, '') || '<div class="muted small">No positive review long enough to quote.</div>'}
+      ${render(samples.critical, 'neg')}
+    </div>`;
+  }).join('');
+
+  return `
+    <p class="muted" style="margin-top:16px;"><strong>Verdict:</strong> ${escapeHtml(body.comparison.summary)}</p>
+    <p class="muted small">Shared preferences: ${body.shared_preference_labels.length ? body.shared_preference_labels.map(escapeHtml).join(', ') : 'none — these suit different trips.'}</p>
+    <div class="table-scroll">
+      <table class="compare-table">${header}${context}${rows}${prefRow}${distinct}</table>
+    </div>
+    <div class="quote-grid">${quotes}</div>`;
+}
+
+/* --------------------------- explore -------------------------- */
+async function runSearch(){
+  const query = document.getElementById('exploreQuery').value.trim();
+  const out = document.getElementById('exploreOutput');
+  document.getElementById('placeDetail').innerHTML = '';
+  if(query.length < 2){
+    out.innerHTML = '<p class="muted" style="margin-top:14px;">Type at least two characters.</p>';
+    return;
+  }
+  out.innerHTML = '<p class="loading">Searching…</p>';
+  try{
+    const hits = await api('/api/search' + qs({q: query, limit_per_kind: 4}));
+    if(!hits.length){
+      out.innerHTML = '<p class="muted" style="margin-top:14px;">Nothing in the corpus matches that yet.</p>';
+      return;
+    }
+    out.innerHTML = `<div class="result-list">${hits.map(h => `
+      <div class="result" ${h.kind === 'place' ? `onclick="openPlace('${h.id}')"` : ''}>
+        <div class="title"><span class="kind-badge">${escapeHtml(h.kind)}</span>${escapeHtml(h.label)}</div>
+        <div class="sub">${escapeHtml(h.detail || '')}</div>
+      </div>`).join('')}</div>`;
+  }catch(err){
+    out.innerHTML = `<p class="error">${escapeHtml(err.message)}</p>`;
+  }
+}
+
+async function openPlace(placeId){
+  const out = document.getElementById('placeDetail');
+  out.innerHTML = '<p class="loading">Loading place…</p>';
+  try{
+    const detail = await api(`/api/places/${encodeURIComponent(placeId)}` + qs({sample_reviews: 4}));
+    const p = detail.place;
+    out.innerHTML = `
+      <div class="card" style="margin-top:18px;">
+        <h3>${escapeHtml(p.place_name)}</h3>
+        <p class="muted small">
+          ${escapeHtml(p.city || '—')}${p.district ? ' · ' + escapeHtml(p.district) + ' district' : ''}
+          ${p.division ? ' · ' + escapeHtml(p.division) + ' division' : ''} · ${escapeHtml(p.category || '')}
+          · ${num(p.avg_review_rating, 2)}★ from ${p.review_count} reviews
+          (${p.positive_reviews} positive, ${p.negative_reviews} negative)
+        </p>
+        <div style="margin:10px 0;">${detail.preferences.map(pref =>
+          `<span class="tag-pill">${escapeHtml(pref.preference_label || pref.preference_id)} · ${pref.review_count}rv</span>`).join('') || '<span class="muted small">No mapped preference yet.</span>'}</div>
+        ${detail.sample_reviews.map(r =>
+          `<div class="quote">“${escapeHtml((r.review_text_clean || '').slice(0, 260))}” — ${num(r.review_rating, 1)}★${r.preference_label ? ' · ' + escapeHtml(r.preference_label) : ''}</div>`).join('')}
+      </div>`;
+    out.scrollIntoView({behavior: 'smooth', block: 'nearest'});
+  }catch(err){
+    out.innerHTML = `<p class="error">${escapeHtml(err.message)}</p>`;
+  }
+}
+document.getElementById('exploreQuery').addEventListener('keydown', e => { if(e.key === 'Enter') runSearch(); });
+
+boot();
 </script>
 </body>
 </html>

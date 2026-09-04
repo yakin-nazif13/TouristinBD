@@ -20,6 +20,7 @@ from fastapi import APIRouter, Depends, HTTPException, Query
 
 from backend import db
 from backend.models import Recommendation, SearchHit
+from backend.queries import review_summary_sql
 
 router = APIRouter(prefix="/api", tags=["discovery"])
 
@@ -201,8 +202,8 @@ def _recommend_impl(
 
     places = db.rows(
         conn,
-        f"SELECT place_id, place_name, city, district, category, place_kind, review_count, "
-        f"avg_review_rating FROM v_place_stats WHERE {' AND '.join(where)}",
+        f"SELECT place_id, place_name, city, district, division, category, place_kind, "
+        f"review_count, avg_review_rating FROM v_place_stats WHERE {' AND '.join(where)}",
         params,
     )
     if not places:
@@ -248,6 +249,7 @@ def _recommend_impl(
                 place_name=p["place_name"],
                 city=p["city"],
                 district=p["district"],
+                division=p["division"],
                 category=p["category"],
                 place_kind=p["place_kind"],
                 review_count=total_reviews,
@@ -289,10 +291,111 @@ def recommend(
     )
 
 
-def _compare_impl(conn: sqlite3.Connection, places: str) -> dict:
+def _sample_reviews_for_place(
+    conn: sqlite3.Connection, place_id: int, limit: int = 2
+) -> dict[str, list[dict]]:
+    """The most substantial positive and critical reviews backing a place.
+
+    Phase 10's comparison view needs the *words* behind the numbers, not just
+    the aggregate — a 3.2★ hotel and a 3.2★ hotel are not the same hotel.
+    """
+
+    def fetch(order: str, having: str) -> list[dict]:
+        return db.rows(
+            conn,
+            review_summary_sql(
+                f"WHERE v.place_id = ? AND {having} AND r.review_text_clean IS NOT NULL "
+                "AND LENGTH(r.review_text_clean) > 40",
+                f"ORDER BY {order}",
+            )
+            + " LIMIT ?",
+            (place_id, limit),
+        )
+
+    return {
+        "positive": fetch("v.review_rating DESC, v.text_length DESC", "v.review_rating >= 4"),
+        "critical": fetch("v.review_rating ASC, v.text_length DESC", "v.review_rating <= 3"),
+    }
+
+
+def _comparison_metrics(resolved: list[dict]) -> list[dict]:
+    """Side-by-side metric rows with a leader per row (None when tied)."""
+    specs = [
+        ("avg_rating", "Average rating", True, "/5"),
+        ("review_count", "Reviews analysed", True, None),
+        ("positive_share", "Share of 4-5★ reviews", True, "%"),
+        ("negative_share", "Share of 1-2★ reviews", False, "%"),
+        ("preference_breadth", "Distinct preferences evidenced", True, None),
+        ("evidence_share", "Reviews mapped to a preference", True, "%"),
+    ]
+
+    def value_of(row: dict, metric: str) -> float | None:
+        total = row.get("review_count") or 0
+        if metric == "avg_rating":
+            return row.get("avg_review_rating")
+        if metric == "review_count":
+            return float(total)
+        if metric == "positive_share":
+            return round((row.get("positive_reviews") or 0) / total, 4) if total else None
+        if metric == "negative_share":
+            return round((row.get("negative_reviews") or 0) / total, 4) if total else None
+        if metric == "preference_breadth":
+            return float(len(row.get("preferences") or []))
+        if metric == "evidence_share":
+            mapped = sum(p["review_count"] for p in row.get("preferences") or [])
+            return round(mapped / total, 4) if total else None
+        return None
+
+    metrics: list[dict] = []
+    for metric, label, higher_is_better, unit in specs:
+        values = {r["place_name"]: value_of(r, metric) for r in resolved}
+        present = {k: v for k, v in values.items() if v is not None}
+        leader = None
+        if present:
+            best = (max if higher_is_better else min)(present.values())
+            winners = [k for k, v in present.items() if v == best]
+            leader = winners[0] if len(winners) == 1 else None
+        metrics.append(
+            {
+                "metric": metric,
+                "label": label,
+                "higher_is_better": higher_is_better,
+                "unit": unit,
+                "values": values,
+                "leader": leader,
+            }
+        )
+    return metrics
+
+
+def _comparison_summary(resolved: list[dict], metrics: list[dict], shared: list[str]) -> str:
+    by_metric = {m["metric"]: m for m in metrics}
+    parts: list[str] = []
+    rating = by_metric["avg_rating"]
+    if rating["leader"]:
+        parts.append(
+            f"{rating['leader']} rates highest at {rating['values'][rating['leader']]}/5"
+        )
+    breadth = by_metric["preference_breadth"]
+    if breadth["leader"]:
+        parts.append(
+            f"{breadth['leader']} covers the most preferences "
+            f"({int(breadth['values'][breadth['leader']])})"
+        )
+    parts.append(
+        f"they share {len(shared)} preference(s)"
+        if shared
+        else "they share no preference evidence, so they suit different trips"
+    )
+    return "; ".join(parts) + "."
+
+
+def _compare_impl(conn: sqlite3.Connection, places: str, sample_reviews: int = 2) -> dict:
     refs = [p.strip() for p in places.split(",") if p.strip()]
     if not 2 <= len(refs) <= 4:
         raise HTTPException(status_code=400, detail="pass between 2 and 4 places")
+    if len({r.lower() for r in refs}) != len(refs):
+        raise HTTPException(status_code=400, detail="pass distinct places")
 
     resolved: list[dict] = []
     for ref in refs:
@@ -318,15 +421,36 @@ def _compare_impl(conn: sqlite3.Connection, places: str) -> dict:
             "WHERE place_id = ? GROUP BY review_rating ORDER BY review_rating",
             (row["place_id"],),
         )
+        if sample_reviews:
+            row["sample_reviews"] = _sample_reviews_for_place(
+                conn, row["place_id"], sample_reviews
+            )
         resolved.append(row)
 
     pref_sets = [{p["preference_id"] for p in r["preferences"]} for r in resolved]
-    shared = set.intersection(*pref_sets) if pref_sets else set()
+    shared = sorted(set.intersection(*pref_sets)) if pref_sets else []
+    labels = {
+        p["preference_id"]: p["preference_label"] for r in resolved for p in r["preferences"]
+    }
+    metrics = _comparison_metrics(resolved)
     return {
         "places": resolved,
-        "shared_preferences": sorted(shared),
+        "shared_preferences": shared,
+        "shared_preference_labels": [labels.get(pid, pid) for pid in shared],
         "distinct_preferences": {
-            r["place_name"]: sorted(s - shared) for r, s in zip(resolved, pref_sets)
+            r["place_name"]: sorted(s - set(shared)) for r, s in zip(resolved, pref_sets)
+        },
+        # Phase 10: the interpretation layer on top of the raw rows, so the
+        # frontend renders a verdict instead of re-deriving one in JavaScript.
+        "comparison": {
+            "metrics": metrics,
+            "summary": _comparison_summary(resolved, metrics, shared),
+            "top_preference": {
+                r["place_name"]: (
+                    r["preferences"][0]["preference_label"] if r["preferences"] else None
+                )
+                for r in resolved
+            },
         },
     }
 
@@ -335,6 +459,12 @@ def _compare_impl(conn: sqlite3.Connection, places: str) -> dict:
 def compare(
     conn: sqlite3.Connection = Depends(db.get_conn),
     places: str = Query(..., description="Comma-separated place_ids or place names (2-4)"),
+    sample_reviews: int = Query(2, ge=0, le=10, description="Supporting reviews per place"),
 ) -> dict:
-    """Side-by-side comparison of 2-4 places on real review evidence."""
-    return _compare_impl(conn, places)
+    """Side-by-side comparison of 2-4 places on real review evidence.
+
+    Returns the raw per-place rows (stats, preference rollup, rating breakdown,
+    supporting positive/critical reviews) plus a `comparison` block holding the
+    metric table, a leader per metric, and a one-line verdict.
+    """
+    return _compare_impl(conn, places, sample_reviews)

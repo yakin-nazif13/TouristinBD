@@ -1,14 +1,49 @@
 # Copilot instructions for TouristinBD
 
-- This repository is a capstone demo plus dataset project, not a packaged app. The main experience lives in `frontend/index.html`: a single self-contained HTML/CSS/JS page with three tabs (`chat`, `itinerary`, `compare`). Keep changes compatible with that structure.
-- The current frontend is intentionally mock-driven. The UI uses inline data arrays (for example the `destinations` array in `frontend/index.html`) and renders everything client-side; do not assume a backend or API exists yet.
-- The project’s real value is in the data pipeline, not in a framework. Raw review exports live in `data/real_reviews_batch1.csv` and `data/real_reviews_booking_batch1.csv`; the cleaned/merged analysis dataset is `data/processed_reviews.csv`.
-- The data flow is: raw reviews -> cleaned/merged review table -> topic modeling outputs (`data/reviews_with_topics.csv`, `data/topics_summary.csv`) and the saved BERTopic model under `data/bertopic_model_dir/`. Preserve these paths and filenames unless a task explicitly requires regenerating artifacts.
-- `docs/PROGRESS.md` is the source of truth for phase status, milestones, and known constraints. Update it when scope changes, when a phase is completed, or when you discover a limitation that affects future work.
-- The README and progress notes explain a key project-specific constraint: BERTopic was implemented with an offline TF-IDF/SVD fallback because the sandbox could not download Hugging Face models. If you touch modeling-related work, keep that limitation in mind and document it clearly.
-- The CSV schema is meaningful. `data/processed_reviews.csv` uses columns such as `review_id`, `review_text_clean`, `detected_language`, `platform_language_tag`, `place_name`, `review_rating`, and `source`; preserve those names when adding or transforming data.
-- There is no build/test pipeline in this repo. The expected workflow is to edit `frontend/index.html` and open it directly in a browser for manual verification. If you add new UI behavior, verify it visually and keep it working in the mock-data mode unless real backend wiring is explicitly requested.
-- Keep the existing visual language when editing the frontend: the page uses CSS custom properties (for example `--bg-deep`, `--marigold`, `--pink`, `--leaf`) and a strong editorial/ travel-themed design. Preserve that style unless the task is specifically about redesigning the demo.
-- The frontend depends on Google Fonts via CDN; do not assume offline font availability. Avoid introducing new external assets unless needed.
-- Do not introduce a framework (React/Vue/Next/etc.) or package manager workflow unless the task explicitly asks for a full product rebuild. The repo’s current convention is single-file demo + data artifacts.
-- When changing data or UI behavior, prefer minimal, local edits that fit the existing pattern instead of introducing new abstractions. This project is still in an exploratory stage and values clarity over complexity.
+- This is a capstone project: a review-mining pipeline plus a working site over
+  its output. Phases 0–12 are complete. `docs/PROGRESS.md` is the source of truth
+  for status, decisions and known limits — read it first, and update it whenever a
+  phase changes or you discover a limitation that affects future work.
+- **There is no mock data left.** `frontend/index.html` reads the live API; the old
+  inline `destinations` array is gone. Don't reintroduce hardcoded sample data — if
+  something can't be answered from the corpus, say so in the UI (the page already
+  does this for unfillable itinerary days and an unreachable API).
+- New data enters through `scripts/add_reviews.py` → `scripts/run_phase2_preprocessing.py`.
+  Phase 2 must keep reproducing the committed `data/processed_reviews.csv` byte for byte —
+  every later phase is keyed on the `review_id`s in it, so drifting cleaning silently
+  detaches topics and preferences from their reviews. `test_phase2_preprocessing.py`
+  asserts this; if you change a cleaning rule you must justify the diff, not re-baseline it.
+- Architecture: `scripts/run_phase*.py` (research pipeline, writes `data/*.csv|json`)
+  → `scripts/build_phase8_database.py` (rebuilds `data/touristinbd.db` from whichever
+  artifacts exist) → `backend/` (read-only FastAPI over that DB) → `frontend/index.html`
+  (plain HTML/CSS/JS, served by the backend at `/app/`).
+- **Aggregates are SQL views, never copied tables.** Adding reviews and rebuilding must
+  refresh every endpoint with no code change. Nothing may be hardcoded to a specific
+  place, city, topic or preference id — that forward-compatibility is the point of the
+  design and `scripts/test_phase8_rebuild.py` enforces it.
+- Router endpoints that other Python code also calls are split into a plain
+  `_*_impl` function plus a thin FastAPI wrapper (see `discovery.py`, `places.py`,
+  `itinerary.py`). Call the `_impl`, never the route function — calling a route
+  directly binds unpassed parameters to their raw `Query(...)` sentinels.
+- Every change must keep the seven suites green:
+  `scripts/test_phase{2_preprocessing,8_api,8_rebuild,9_chat,10_itinerary,11_frontend,12_deployment}.py`
+  (449 tests, in-process, no server/network/LLM). They follow a shared style —
+  a `check(name, condition, detail)` helper and a pass/fail count — so extend them
+  in that style rather than adding pytest.
+- Serving needs `requirements-api.txt` only. `requirements.txt` (torch, BERTopic,
+  sentence-transformers) is for re-running Phases 3–7. Don't add a runtime import that
+  isn't in the slim file — `test_phase12_deployment.py` checks this from the AST.
+- The CSV schema is meaningful. `data/processed_reviews.csv` uses `review_id`,
+  `review_text_clean`, `detected_language`, `platform_language_tag`, `place_name`,
+  `review_rating`, `source`; `data/place_geography.csv` supplies city/district/division
+  for places whose city was blank. Preserve these names and paths.
+- Keep the frontend a single dependency-free file: no React/Vue/Next, no package
+  manager, no bundler. Preserve the visual language (CSS custom properties
+  `--bg-deep`, `--marigold`, `--pink`, `--leaf`; Fraunces/Work Sans/IBM Plex Mono via
+  Google Fonts). Escape every interpolated value with `escapeHtml` — review text is
+  user content.
+- The chatbot is retrieval-based on purpose: keyword intents plus database lookups, no
+  LLM call and no API key at runtime. Keep it that way unless the task explicitly asks
+  for a generative bot.
+- Prefer minimal, local edits that fit the existing pattern over new abstractions, and
+  document any real limitation in `docs/PROGRESS.md` rather than papering over it.

@@ -21,6 +21,7 @@ from pydantic import BaseModel, Field
 
 from backend import db
 from backend.routers.discovery import _compare_impl, _recommend_impl, _search_impl
+from backend.routers.itinerary import ItineraryRequest, _build_itinerary_impl
 from backend.routers.places import _get_place_impl, _list_places_impl
 
 router = APIRouter(prefix="/api", tags=["chat"])
@@ -45,6 +46,24 @@ RECOMMEND_RE = re.compile(
 )
 ACCOMMODATION_RE = re.compile(r"\b(hotel|hotels|resort|stay|accommodation|room)\b")
 ATTRACTION_RE = re.compile(r"\b(attraction|sightseeing|beach|tour|monument)\b")
+# Phase 10: trip planning. "itinerary"/"plan a trip" on its own is enough; a
+# bare duration ("4 days in Sylhet") also reads as a planning request.
+ITINERARY_RE = re.compile(
+    # An explicit planning word…
+    r"\b(itinerary|trip plan|road ?trip)\b"
+    # …or "plan" with a trip-shaped object somewhere after it ("plan a trip",
+    # "plan a relaxed week around Cox's Bazar", "plan my 4 day tour")…
+    r"|\bplan\b[^.?!]{0,40}?\b(trip|tour|holiday|vacation|week|weekend|days?|nights?)\b"
+    # …or a bare duration, which reads as a planning request on its own.
+    r"|\b\d+\s*[- ]?\s*(day|days|night|nights)\b"
+)
+DAYS_RE = re.compile(r"(\d+)\s*[- ]?\s*(day|days|night|nights)\b")
+WEEK_RE = re.compile(r"\b(a |one )?week\b")
+WEEKEND_RE = re.compile(r"\bweekend\b")
+RELAXED_RE = re.compile(r"\b(relaxed|slow|chill|easy|lazy)\b")
+PACKED_RE = re.compile(r"\b(packed|busy|as much as possible|fast|intense)\b")
+
+MAX_TRIP_DAYS = 14
 
 
 class ChatRequest(BaseModel):
@@ -122,6 +141,7 @@ def _match_preferences(conn: sqlite3.Connection, tokens: set[str]) -> list[dict]
 
 SUGGESTIONS = [
     "best beaches in Cox's Bazar",
+    "plan a 4 day trip in Sylhet",
     "tell me about Sundarbans",
     "compare Kaptai Lake and Ratargul Swamp Forest",
     "hotels in Sylhet",
@@ -160,7 +180,56 @@ def chat(payload: ChatRequest, conn: sqlite3.Connection = Depends(db.get_conn)) 
     elif ATTRACTION_RE.search(lower):
         place_kind = "attraction"
 
-    if COMPARE_RE.search(lower) and len(strong_places) >= 2:
+    # An explicit "compare A and B" still wins even if it mentions a duration.
+    explicit_compare = COMPARE_RE.search(lower) and len(strong_places) >= 2
+    if ITINERARY_RE.search(lower) and not explicit_compare:
+        match = DAYS_RE.search(lower)
+        if match:
+            days = max(1, min(int(match.group(1)), MAX_TRIP_DAYS))
+        elif WEEKEND_RE.search(lower):
+            days = 2
+        elif WEEK_RE.search(lower):
+            days = 7
+        else:
+            days = 3
+        pace = "relaxed" if RELAXED_RE.search(lower) else (
+            "packed" if PACKED_RE.search(lower) else "standard"
+        )
+        pref_ids = [p["preference_id"] for p in matched_prefs[:3]]
+        city = matched_cities[0]["city"] if matched_cities else None
+        plan = _build_itinerary_impl(
+            conn,
+            ItineraryRequest(
+                days=days,
+                preferences=",".join(pref_ids) or None,
+                city=city,
+                pace=pace,
+            ),
+        )
+        if plan.summary.total_activities:
+            outline = "; ".join(
+                f"Day {d.day}: " + ", ".join(a.place_name for a in d.activities)
+                for d in plan.days
+                if d.activities
+            )
+            where = f" around {city}" if city else ""
+            reply = (
+                f"Here's a {days}-day plan{where} built from "
+                f"{plan.summary.evidence_reviews} matching review(s) — {outline}."
+            )
+        else:
+            reply = (
+                "I couldn't build a plan from the reviews for that combination — "
+                "try a different city or fewer interests."
+            )
+        return ChatResponse(
+            intent="itinerary",
+            reply=reply,
+            entities={"days": days, "city": city, "preferences": pref_ids, "pace": pace},
+            results=[plan.model_dump()],
+        )
+
+    if explicit_compare:
         ids = [str(p["place_id"]) for p in strong_places[:4]]
         result = _compare_impl(conn, ",".join(ids))
         names = [p["place_name"] for p in result["places"]]

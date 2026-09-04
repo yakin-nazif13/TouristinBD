@@ -1,0 +1,33 @@
+{
+  "generated_at_utc": "2026-09-04T02:11:03Z",
+  "inputs": [
+    "real_reviews_batch1.csv",
+    "real_reviews_booking_batch1.csv"
+  ],
+  "output": "processed_reviews.csv",
+  "min_clean_length": 10,
+  "short_text_max": 50,
+  "rows_in": 540,
+  "rows_out": 538,
+  "dropped_duplicate_id": 0,
+  "dropped_too_short": 1,
+  "dropped_duplicate_text": 1,
+  "by_source": {
+    "google_maps": 300,
+    "booking.com": 238
+  },
+  "by_language": {
+    "en": 530,
+    "bn-en-mixed": 5,
+    "bn": 2,
+    "nl": 1
+  },
+  "places": 27,
+  "notes": [
+    "loaded 300 row(s) from real_reviews_batch1.csv",
+    "loaded 240 row(s) from real_reviews_booking_batch1.csv",
+    "dropped as too short (< 10 chars): 'Bad. No'",
+    "dropped as an exact duplicate of an earlier review: 'Good. Good. Good'"
+  ],
+  "warnings": []
+}

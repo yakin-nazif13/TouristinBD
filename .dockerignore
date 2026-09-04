@@ -1,0 +1,20 @@
+.git/
+.github/
+.venv/
+.claude/
+__pycache__/
+*.pyc
+.DS_Store
+.env
+docs/
+README.md
+
+# Rebuilt inside the image from the CSV/JSON artifacts.
+data/touristinbd.db
+
+# Research-only outputs the API never reads.
+data/bertopic_model_dir/
+data/bertopic_model_dir_previous/
+data/.mplconfig/
+*.png
+*.npy

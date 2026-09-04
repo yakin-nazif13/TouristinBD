@@ -56,8 +56,8 @@ def main() -> None:
     code, meta = get("/api/meta")
     check("GET /api/meta has row counts", code == 200 and bool(meta["row_counts"]), str(code))
     check(
-        "meta lists all 8 pipeline phases",
-        len(meta.get("pipeline_phases", {})) == 8,
+        "meta lists every pipeline phase",
+        set(meta.get("pipeline_phases", {})) == {f"phase{n}" for n in range(1, 13)},
         str(meta.get("pipeline_phases")),
     )
 
@@ -356,7 +356,17 @@ def main() -> None:
     route_count = len(r.json().get("paths", {}))
     check("OpenAPI documents every route", route_count >= 25, f"{route_count} paths")
     r = client.get("/", follow_redirects=False)
-    check("/ redirects to /docs", r.status_code in (302, 307), str(r.status_code))
+    check(
+        "/ redirects to the frontend (or /docs without one)",
+        r.status_code in (302, 307) and r.headers["location"] in ("/app/", "/docs"),
+        f"{r.status_code} {r.headers.get('location')}",
+    )
+    r = client.get("/app/")
+    check(
+        "the frontend is served by the API",
+        r.status_code == 200 and "TouristinBD" in r.text,
+        str(r.status_code),
+    )
 
     # ---- summary ---------------------------------------------------------
     print(f"\n{len(PASSED)} passed, {len(FAILED)} failed")
