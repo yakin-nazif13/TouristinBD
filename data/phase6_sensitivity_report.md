@@ -17,14 +17,14 @@
 ## Results
 | sample_size | topics | prefs covered | avg sim | high-conf | Jaccard vs prev |
 |------------:|-------:|--------------:|--------:|----------:|----------------:|
-| 151 | 2 | 2/10 | 0.467 | 1.000 | 1.000 |
-| 247 | 5 | 5/10 | 0.517 | 1.000 | 0.400 |
-| 398 | 10 | 9/10 | 0.464 | 0.700 | 0.556 |
-| 538 | 9 | 9/10 | 0.534 | 1.000 | 1.000 |
+| 151 | 2 | 2/5 | 0.503 | 1.000 | 1.000 |
+| 247 | 12 | 5/5 | 0.434 | 0.750 | 0.400 |
+| 398 | 9 | 5/5 | 0.455 | 0.778 | 1.000 |
+| 538 | 10 | 5/5 | 0.476 | 0.800 | 1.000 |
 
 ## Recommendation
 - Stability rule: consecutive Jaccard ≥ `0.95` (<5% change).
-- Recommended minimum corpus size (MVP): **538**
+- Recommended minimum corpus size (MVP): **398**
 - Mapped preference set is stable at/above this size for the current taxonomy.
 
 ## Later-phase safety

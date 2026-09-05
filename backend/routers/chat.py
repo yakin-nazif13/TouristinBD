@@ -83,6 +83,24 @@ def _tokenize(text: str) -> set[str]:
     return {w for w in WORD_RE.findall(text.lower()) if len(w) > 2 and w not in STOPWORDS}
 
 
+def _singular(word: str) -> str:
+    """Crude plural stripper so "hotels" matches a preference about "hotel"."""
+    if len(word) > 5 and word.endswith(("ches", "shes", "sses")):
+        return word[:-2]
+    if len(word) > 3 and word.endswith("s") and not word.endswith(("ss", "us", "is")):
+        return word[:-1]
+    return word
+
+
+def _name_tokens(*names: str | None) -> set[str]:
+    """The words that make up an entity's name."""
+    words: set[str] = set()
+    for name in names:
+        if name:
+            words |= {w for w in WORD_RE.findall(name.lower()) if len(w) > 2}
+    return words
+
+
 STRONG_MATCH_SCORE = 100
 
 
@@ -122,6 +140,15 @@ def _match_cities(conn: sqlite3.Connection, message_lower: str) -> list[dict]:
 
 
 def _match_preferences(conn: sqlite3.Connection, tokens: set[str]) -> list[dict]:
+    """Preferences whose wording overlaps the *interest* words in the message.
+
+    Matching is on singular forms so "hotels" reaches a preference about
+    "hotel". The caller is expected to have removed words that merely name an
+    entity already matched — preference descriptions cite example places
+    ("...destinations like Cox's Bazar"), so without that a bare place name
+    would match a preference and turn a lookup into a recommendation.
+    """
+    wanted = {_singular(t) for t in tokens}
     ranked: list[tuple[int, dict]] = []
     for p in db.rows(
         conn,
@@ -131,8 +158,12 @@ def _match_preferences(conn: sqlite3.Connection, tokens: set[str]) -> list[dict]
         text = " ".join(
             filter(None, [p["preference_label"], p["category"], p["subcategory"], p["preference_description"]])
         )
-        pref_tokens = {w for w in WORD_RE.findall(text.lower()) if len(w) > 3 and w not in STOPWORDS}
-        overlap = pref_tokens & tokens
+        pref_tokens = {
+            _singular(w)
+            for w in WORD_RE.findall(text.lower())
+            if len(w) > 3 and w not in STOPWORDS
+        }
+        overlap = pref_tokens & wanted
         if overlap:
             ranked.append((len(overlap), p))
     ranked.sort(key=lambda x: x[0], reverse=True)
@@ -167,7 +198,19 @@ def chat(payload: ChatRequest, conn: sqlite3.Connection = Depends(db.get_conn)) 
 
     matched_places = _match_places(conn, lower, tokens)
     matched_cities = _match_cities(conn, lower)
-    matched_prefs = _match_preferences(conn, tokens)
+    # Words that spell out a place or city the message already names identify
+    # *which* entity is being asked about; they are not statements of interest.
+    # Without this, "Cox's Bazar" matches the coastal preference through its
+    # description ("...destinations like Cox's Bazar") and a plain lookup turns
+    # into a recommendation — and the routing would shift again the next time
+    # the taxonomy is regenerated with different example places in its wording.
+    identifier_tokens: set[str] = set()
+    for city in matched_cities:
+        identifier_tokens |= _name_tokens(city["city"], city["district"])
+    for place in matched_places:
+        if place["_match_score"] >= STRONG_MATCH_SCORE:
+            identifier_tokens |= _name_tokens(place["place_name"])
+    matched_prefs = _match_preferences(conn, tokens - identifier_tokens)
     # A full place name found verbatim in the message is a confident match;
     # a match from a single overlapping word (e.g. "lake") is not — it should
     # not be enough to drag an unrelated place into a comparison, or to

@@ -5,10 +5,10 @@
     "top_keywords": "good, room, staff, hotel",
     "review_count": 239,
     "corpus_share": 0.4442,
-    "interpreted_label": "Hotel Room Quality and Staff Service",
-    "interpretation": "Travelers discuss their stay experiences in various hotels, focusing on room cleanliness, value, and staff helpfulness or service quality.",
+    "interpreted_label": "Hotel Accommodation and Staff Service",
+    "interpretation": "Travelers share their experiences regarding hotel stays, focusing on room cleanliness, value for money, and the quality of staff service. Reviews reflect a mix of appreciation for helpful hospitality and complaints about poor maintenance or unexpected charges.",
     "dimension_hint": "Accommodation",
-    "llm_raw": "{\n  \"topic_id\": 0,\n  \"interpreted_label\": \"Hotel Room Quality and Staff Service\",\n  \"interpretation\": \"Travelers discuss their stay experiences in various hotels, focusing on room cleanliness, value, and staff helpfulness or service quality.\",\n  \"dimension_hint\": \"Accommodation\"\n}"
+    "llm_raw": "{\"topic_id\": 0, \"interpreted_label\": \"Hotel Accommodation and Staff Service\", \"interpretation\": \"Travelers share their experiences regarding hotel stays, focusing on room cleanliness, value for money, and the quality of staff service. Reviews reflect a mix of appreciation for helpful hospitality and complaints about poor maintenance or unexpected charges.\", \"dimension_hint\": \"Accommodation\"}"
   },
   {
     "topic_id": 1,
@@ -16,10 +16,10 @@
     "top_keywords": "beach, sea, island, sea beach",
     "review_count": 76,
     "corpus_share": 0.1413,
-    "interpreted_label": "Coastal Beaches and Island Exploration",
-    "interpretation": "Travelers share experiences visiting popular coastal destinations across Bangladesh, focusing on scenic sea views, marine biodiversity, and peaceful beach getaways.",
+    "interpreted_label": "Coastal and Island Beach Destinations",
+    "interpretation": "Travelers share their experiences visiting Bangladesh's scenic beaches and coral islands, focusing on natural beauty, sunsets, and relaxing coastal atmospheres. The discussions highlight popular spots like Cox's Bazar and Saint Martin's Island for leisure and sightseeing.",
     "dimension_hint": "Attractions & Activities",
-    "llm_raw": "{\n  \"topic_id\": 1,\n  \"interpreted_label\": \"Coastal Beaches and Island Exploration\",\n  \"interpretation\": \"Travelers share experiences visiting popular coastal destinations across Bangladesh, focusing on scenic sea views, marine biodiversity, and peaceful beach getaways.\",\n  \"dimension_hint\": \"Attractions & Activities\"\n}"
+    "llm_raw": "{\n  \"topic_id\": 1,\n  \"interpreted_label\": \"Coastal and Island Beach Destinations\",\n  \"interpretation\": \"Travelers share their experiences visiting Bangladesh's scenic beaches and coral islands, focusing on natural beauty, sunsets, and relaxing coastal atmospheres. The discussions highlight popular spots like Cox's Bazar and Saint Martin's Island for leisure and sightseeing.\",\n  \"dimension_hint\": \"Attractions & Activities\"\n}"
   },
   {
     "topic_id": 2,
@@ -27,10 +27,10 @@
     "top_keywords": "dhaka, history, historical, visit",
     "review_count": 73,
     "corpus_share": 0.1357,
-    "interpreted_label": "Historic Landmarks And Archaeological Sites",
-    "interpretation": "Travelers explore Bangladesh's rich past by visiting iconic historical landmarks, ancient architectural wonders, and UNESCO World Heritage sites across different regions.",
+    "interpreted_label": "Exploring Bangladesh's Historical Landmarks",
+    "interpretation": "Travelers share their experiences visiting prominent historical and heritage sites across Bangladesh, focusing on their architectural beauty, cultural significance, and rich history. The discussions heavily feature iconic landmarks like Ahsan Manzil, Sixty Dome Mosque, and Lalbagh Fort.",
     "dimension_hint": "Attractions & Activities",
-    "llm_raw": "{\n  \"topic_id\": 2,\n  \"interpreted_label\": \"Historic Landmarks And Archaeological Sites\",\n  \"interpretation\": \"Travelers explore Bangladesh's rich past by visiting iconic historical landmarks, ancient architectural wonders, and UNESCO World Heritage sites across different regions.\",\n  \"dimension_hint\": \"Attractions & Activities\"\n}"
+    "llm_raw": "{\"topic_id\": 2, \"interpreted_label\": \"Exploring Bangladesh's Historical Landmarks\", \"interpretation\": \"Travelers share their experiences visiting prominent historical and heritage sites across Bangladesh, focusing on their architectural beauty, cultural significance, and rich history. The discussions heavily feature iconic landmarks like Ahsan Manzil, Sixty Dome Mosque, and Lalbagh Fort.\", \"dimension_hint\": \"Attractions & Activities\"}"
   },
   {
     "topic_id": 3,
@@ -38,10 +38,10 @@
     "top_keywords": "bandarban, nilachal, place, tourist",
     "review_count": 32,
     "corpus_share": 0.0595,
-    "interpreted_label": "Bandarban Hill Tracts Mountain Tourism",
-    "interpretation": "Travelers discuss scenic hill tracts and viewpoints like Nilachal in Bandarban, highlighting panoramic mountain landscapes, cloud-touching elevations, and peaceful nature getaways.",
+    "interpreted_label": "Scenic Hilltop Nature Destinations",
+    "interpretation": "Travelers highlight the breathtaking panoramic views, peaceful environment, and cloud-touching experiences at hilltop destinations like Nilachal in Bandarban and other natural attractions.",
     "dimension_hint": "Attractions & Activities",
-    "llm_raw": "{\n  \"topic_id\": 3,\n  \"interpreted_label\": \"Bandarban Hill Tracts Mountain Tourism\",\n  \"interpretation\": \"Travelers discuss scenic hill tracts and viewpoints like Nilachal in Bandarban, highlighting panoramic mountain landscapes, cloud-touching elevations, and peaceful nature getaways.\",\n  \"dimension_hint\": \"Attractions & Activities\"\n}"
+    "llm_raw": "{\n  \"topic_id\": 3,\n  \"interpreted_label\": \"Scenic Hilltop Nature Destinations\",\n  \"interpretation\": \"Travelers highlight the breathtaking panoramic views, peaceful environment, and cloud-touching experiences at hilltop destinations like Nilachal in Bandarban and other natural attractions.\",\n  \"dimension_hint\": \"Attractions & Activities\"\n}"
   },
   {
     "topic_id": 4,
@@ -49,10 +49,10 @@
     "top_keywords": "panam, city, panam city, sonargaon",
     "review_count": 17,
     "corpus_share": 0.0316,
-    "interpreted_label": "Historic Panam City Heritage Exploration",
-    "interpretation": "Travelers explore the rich history, ancient architecture, and ghost-town ambiance of the 19th-century merchant mansions in Panam City, Sonargaon.",
+    "interpreted_label": "Historic Panam City and Sonargaon",
+    "interpretation": "Travelers share their experiences visiting the historic, abandoned 19th-century merchant town of Panam City in Sonargaon. They highlight its unique colonial-era architecture, rich heritage, and hauntingly beautiful atmosphere.",
     "dimension_hint": "Attractions & Activities",
-    "llm_raw": "{\n  \"topic_id\": 4,\n  \"interpreted_label\": \"Historic Panam City Heritage Exploration\",\n  \"interpretation\": \"Travelers explore the rich history, ancient architecture, and ghost-town ambiance of the 19th-century merchant mansions in Panam City, Sonargaon.\",\n  \"dimension_hint\": \"Attractions & Activities\"\n}"
+    "llm_raw": "{\"topic_id\": 4, \"interpreted_label\": \"Historic Panam City and Sonargaon\", \"interpretation\": \"Travelers share their experiences visiting the historic, abandoned 19th-century merchant town of Panam City in Sonargaon. They highlight its unique colonial-era architecture, rich heritage, and hauntingly beautiful atmosphere.\", \"dimension_hint\": \"Attractions & Activities\"}"
   },
   {
     "topic_id": 5,
@@ -60,10 +60,10 @@
     "top_keywords": "tea, garden, tea garden, sreemangal",
     "review_count": 16,
     "corpus_share": 0.0297,
-    "interpreted_label": "Sreemangal Tea Gardens and Nature",
-    "interpretation": "Travelers discuss visiting the lush green tea gardens and rolling hills of Sreemangal, highlighting peaceful nature getaways, tea cultivation, and local tea tasting.",
+    "interpreted_label": "Scenic Sreemangal Tea Garden Tours",
+    "interpretation": "Travelers highlight the serene, lush green landscapes of Sreemangal's tea gardens, emphasizing the peaceful atmosphere and local tea tasting experiences.",
     "dimension_hint": "Attractions & Activities",
-    "llm_raw": "{\n  \"topic_id\": 5,\n  \"interpreted_label\": \"Sreemangal Tea Gardens and Nature\",\n  \"interpretation\": \"Travelers discuss visiting the lush green tea gardens and rolling hills of Sreemangal, highlighting peaceful nature getaways, tea cultivation, and local tea tasting.\",\n  \"dimension_hint\": \"Attractions & Activities\"\n}"
+    "llm_raw": "{\"topic_id\": 5, \"interpreted_label\": \"Scenic Sreemangal Tea Garden Tours\", \"interpretation\": \"Travelers highlight the serene, lush green landscapes of Sreemangal's tea gardens, emphasizing the peaceful atmosphere and local tea tasting experiences.\", \"dimension_hint\": \"Attractions & Activities\"}"
   },
   {
     "topic_id": 6,
@@ -71,10 +71,10 @@
     "top_keywords": "forest, swamp, ratargul, swamp forest",
     "review_count": 16,
     "corpus_share": 0.0297,
-    "interpreted_label": "Ratargul Freshwater Swamp Forest Exploration",
-    "interpretation": "Travelers discuss the unique natural beauty, seasonal flooding, and boat ride experiences at Ratargul Swamp Forest in Sylhet, noting that the rainy season offers the most picturesque views despite challenging road conditions.",
+    "interpreted_label": "Exploring Ratargul Freshwater Swamp Forest",
+    "interpretation": "Travelers share their experiences visiting Ratargul Swamp Forest, highlighting its unique freshwater ecosystem and scenic boat rides. They particularly emphasize the breathtaking beauty of the lush greenery and flooded channels during the rainy season.",
     "dimension_hint": "Attractions & Activities",
-    "llm_raw": "{\n  \"topic_id\": 6,\n  \"interpreted_label\": \"Ratargul Freshwater Swamp Forest Exploration\",\n  \"interpretation\": \"Travelers discuss the unique natural beauty, seasonal flooding, and boat ride experiences at Ratargul Swamp Forest in Sylhet, noting that the rainy season offers the most picturesque views despite challenging road conditions.\",\n  \"dimension_hint\": \"Attractions & Activities\"\n}"
+    "llm_raw": "{\n  \"topic_id\": 6,\n  \"interpreted_label\": \"Exploring Ratargul Freshwater Swamp Forest\",\n  \"interpretation\": \"Travelers share their experiences visiting Ratargul Swamp Forest, highlighting its unique freshwater ecosystem and scenic boat rides. They particularly emphasize the breathtaking beauty of the lush greenery and flooded channels during the rainy season.\",\n  \"dimension_hint\": \"Attractions & Activities\"\n}"
   },
   {
     "topic_id": 7,
@@ -82,10 +82,10 @@
     "top_keywords": "karamjal, sundarbans, forest, center",
     "review_count": 12,
     "corpus_share": 0.0223,
-    "interpreted_label": "Sundarbans Karamjal Wildlife Centre Day Trips",
-    "interpretation": "Travelers discuss visiting Karamjal as an accessible, short-duration eco-tourism gateway to experience the Sundarbans mangroves and wildlife via day trips from Mongla.",
+    "interpreted_label": "Karamjal Sundarbans Eco-Tourism Gateway",
+    "interpretation": "Travelers highlight Karamjal as an accessible, family-friendly gateway for short day trips to the Sundarbans, offering glimpses of mangrove wildlife like crocodiles and deer.",
     "dimension_hint": "Attractions & Activities",
-    "llm_raw": "{\n  \"topic_id\": 7,\n  \"interpreted_label\": \"Sundarbans Karamjal Wildlife Centre Day Trips\",\n  \"interpretation\": \"Travelers discuss visiting Karamjal as an accessible, short-duration eco-tourism gateway to experience the Sundarbans mangroves and wildlife via day trips from Mongla.\",\n  \"dimension_hint\": \"Attractions & Activities\"\n}"
+    "llm_raw": "{\n  \"topic_id\": 7,\n  \"interpreted_label\": \"Karamjal Sundarbans Eco-Tourism Gateway\",\n  \"interpretation\": \"Travelers highlight Karamjal as an accessible, family-friendly gateway for short day trips to the Sundarbans, offering glimpses of mangrove wildlife like crocodiles and deer.\",\n  \"dimension_hint\": \"Attractions & Activities\"\n}"
   },
   {
     "topic_id": 8,
@@ -93,10 +93,10 @@
     "top_keywords": "lake, kaptai, kaptai lake, rangamati",
     "review_count": 11,
     "corpus_share": 0.0204,
-    "interpreted_label": "Kaptai Lake and Rangamati Scenic Tours",
-    "interpretation": "Travelers express admiration for the breathtaking natural beauty, peaceful waters, and scenic landscapes of Kaptai Lake and the Rangamati district.",
+    "interpreted_label": "Scenic Kaptai Lake in Rangamati",
+    "interpretation": "Travelers praise the breathtaking natural beauty, serene atmosphere, and scenic landscapes of Kaptai Lake in Rangamati. They highlight it as a premier destination for recreation, boat rides, and experiencing the unique hill tracts environment.",
     "dimension_hint": "Attractions & Activities",
-    "llm_raw": "{\n  \"topic_id\": 8,\n  \"interpreted_label\": \"Kaptai Lake and Rangamati Scenic Tours\",\n  \"interpretation\": \"Travelers express admiration for the breathtaking natural beauty, peaceful waters, and scenic landscapes of Kaptai Lake and the Rangamati district.\",\n  \"dimension_hint\": \"Attractions & Activities\"\n}"
+    "llm_raw": "{\n  \"topic_id\": 8,\n  \"interpreted_label\": \"Scenic Kaptai Lake in Rangamati\",\n  \"interpretation\": \"Travelers praise the breathtaking natural beauty, serene atmosphere, and scenic landscapes of Kaptai Lake in Rangamati. They highlight it as a premier destination for recreation, boat rides, and experiencing the unique hill tracts environment.\",\n  \"dimension_hint\": \"Attractions & Activities\"\n}"
   },
   {
     "topic_id": 9,
@@ -104,9 +104,9 @@
     "top_keywords": "place, historical place, historical, visit",
     "review_count": 7,
     "corpus_share": 0.013,
-    "interpreted_label": "Historic Landmarks and Heritage Tourism",
-    "interpretation": "Travelers discuss visiting significant historical sites and ancient monuments across Bangladesh, highlighting the architecture, museums, and opportunities to learn about local history.",
+    "interpreted_label": "Exploring Historical and Archaeological Sites",
+    "interpretation": "Travelers discuss visiting prominent historical and archaeological landmarks in Bangladesh, emphasizing their architectural beauty, rich history, and the educational value of onsite museums.",
     "dimension_hint": "Attractions & Activities",
-    "llm_raw": "{\n  \"topic_id\": 9,\n  \"interpreted_label\": \"Historic Landmarks and Heritage Tourism\",\n  \"interpretation\": \"Travelers discuss visiting significant historical sites and ancient monuments across Bangladesh, highlighting the architecture, museums, and opportunities to learn about local history.\",\n  \"dimension_hint\": \"Attractions & Activities\"\n}"
+    "llm_raw": "{\"topic_id\": 9, \"interpreted_label\": \"Exploring Historical and Archaeological Sites\", \"interpretation\": \"Travelers discuss visiting prominent historical and archaeological landmarks in Bangladesh, emphasizing their architectural beauty, rich history, and the educational value of onsite museums.\", \"dimension_hint\": \"Attractions & Activities\"}"
   }
 ]

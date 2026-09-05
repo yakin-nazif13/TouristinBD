@@ -16,8 +16,10 @@ Outputs under data/:
 
 from __future__ import annotations
 
+import argparse
 import json
 import os
+import random
 import re
 import time
 from pathlib import Path
@@ -226,6 +228,10 @@ def get_client_and_model():
     return client, model, "gemini"
 
 
+class TruncatedResponse(ValueError):
+    """The model ran out of output budget mid-answer."""
+
+
 def call_llm(
     client: OpenAI,
     model: str,
@@ -255,7 +261,17 @@ def call_llm(
         kwargs["response_format"] = {"type": "json_object"}
 
     response = client.chat.completions.create(**kwargs)
-    content = response.choices[0].message.content
+    choice = response.choices[0]
+    content = choice.message.content
+    # Newer Gemini/OpenAI models spend part of their budget on internal
+    # reasoning before emitting anything, so a budget sized for a plain
+    # completion runs out mid-JSON. That surfaces here as a truncated object
+    # (finish_reason="length"), which the caller answers by retrying with a
+    # bigger budget rather than by blaming the model's JSON.
+    if getattr(choice, "finish_reason", None) == "length":
+        raise TruncatedResponse(
+            f"response hit the {max_tokens}-token limit before finishing"
+        )
     if content is None:
         raise ValueError("LLM returned empty content")
     return content.strip()
@@ -272,6 +288,32 @@ def parse_json_object(text: str) -> dict:
         raise ValueError(f"Failed to parse JSON response from LLM:\n{text}") from exc
 
 
+# Transient server-side conditions: the request was fine, the model was busy or
+# rate-limited. Worth waiting out. Anything else (bad key, unknown model,
+# malformed request) will fail identically on every retry, so it fails fast.
+RETRYABLE_STATUS = {408, 409, 425, 429, 500, 502, 503, 504}
+
+# Ceiling for the automatic budget growth on a truncated response.
+MAX_OUTPUT_TOKENS = 32000
+
+# Starting budgets. Sized for a reasoning model's thinking tokens plus the
+# answer; call_llm_json grows them automatically if a response still truncates.
+STAGE1_MAX_TOKENS = 1500   # one topic interpretation
+STAGE2_MAX_TOKENS = 8000   # the whole preference hierarchy in one response
+
+
+def is_retryable(exc: Exception) -> bool:
+    status = getattr(exc, "status_code", None)
+    if status is None:
+        response = getattr(exc, "response", None)
+        status = getattr(response, "status_code", None)
+    if status is not None:
+        return int(status) in RETRYABLE_STATUS
+    # Parse failures and truncated responses are worth another sample; so are
+    # raw connection errors, which carry no status code.
+    return isinstance(exc, (ValueError, ConnectionError, TimeoutError))
+
+
 def call_llm_json(
     client: OpenAI,
     model: str,
@@ -279,19 +321,38 @@ def call_llm_json(
     max_tokens: int = 800,
     *,
     provider: str = "openai",
-    retries: int = 3,
+    retries: int = 6,
 ) -> tuple[dict, str]:
+    """One JSON-returning LLM call, retried with exponential backoff.
+
+    Gemini answers a busy model with 503 "high demand", which clears on its own
+    within seconds — but the whole phase dies if a single topic gives up too
+    early, losing the calls already paid for. Backoff runs 2s, 4s, 8s, 16s, 32s
+    (capped, with jitter so parallel runs don't retry in lockstep).
+    """
     last_err: Exception | None = None
+    budget = max_tokens
     for attempt in range(1, retries + 1):
         try:
-            raw = call_llm(
-                client, model, prompt, max_tokens=max_tokens, provider=provider
-            )
+            raw = call_llm(client, model, prompt, max_tokens=budget, provider=provider)
             return parse_json_object(raw), raw
         except Exception as exc:  # noqa: BLE001 — retry LLM/network/parse failures
             last_err = exc
-            print(f"    retry {attempt}/{retries}: {exc}")
-            time.sleep(1.5 * attempt)
+            if not is_retryable(exc):
+                raise RuntimeError(
+                    f"LLM call failed and will not succeed on retry: {exc}"
+                ) from exc
+            if attempt == retries:
+                break
+            if isinstance(exc, TruncatedResponse):
+                # Retrying at the same budget would truncate again; grow it
+                # instead, and don't wait — nothing is rate-limiting us.
+                budget = min(budget * 3, MAX_OUTPUT_TOKENS)
+                print(f"    retry {attempt}/{retries} with a {budget}-token budget")
+                continue
+            delay = min(2.0 * 2 ** (attempt - 1), 32.0) + random.uniform(0, 1.0)
+            print(f"    retry {attempt}/{retries} in {delay:.1f}s: {str(exc)[:140]}")
+            time.sleep(delay)
     raise RuntimeError(f"LLM JSON call failed after {retries} attempts") from last_err
 
 
@@ -338,7 +399,7 @@ def stage1_interpret(
         )
         print(f"  interpreting topic {topic_id}: {topic_name} ({len(topic_reviews)} reviews)")
         parsed, raw = call_llm_json(
-            client, model, prompt, max_tokens=500, provider=provider
+            client, model, prompt, max_tokens=STAGE1_MAX_TOKENS, provider=provider
         )
         results.append(
             {
@@ -377,7 +438,7 @@ def stage2_build_hierarchy(
     )
     prompt = STAGE2_PROMPT.format(topic_block=topic_block)
     parsed, raw = call_llm_json(
-        client, model, prompt, max_tokens=2500, provider=provider
+        client, model, prompt, max_tokens=STAGE2_MAX_TOKENS, provider=provider
     )
     prefs = parsed.get("preferences", [])
     if not isinstance(prefs, list) or not prefs:
@@ -588,6 +649,20 @@ def build_summary(
 
 
 def main() -> None:
+    parser = argparse.ArgumentParser(description="Phase 4 — LLM preference classification")
+    parser.add_argument(
+        "--model",
+        help="override GEMINI_MODEL/OPENAI_MODEL for this run, e.g. gemini-3.5-flash. "
+        "Pin a concrete version rather than a -latest alias when a run is being "
+        "written up, so the result stays reproducible.",
+    )
+    args = parser.parse_args()
+    if args.model:
+        # get_client_and_model() reads these, so setting them here keeps the
+        # single source of truth for provider selection.
+        os.environ["GEMINI_MODEL"] = args.model
+        os.environ["OPENAI_MODEL"] = args.model
+
     print("Loading Phase 3 topic artifacts")
     reviews = pd.read_csv(REVIEWS_PATH)
     topics = enrich_topic_keywords(pd.read_csv(TOPICS_PATH))

@@ -9,7 +9,7 @@
 ## Key Counts
 - Total processed reviews: 538
 - Topic-preference rows: 10
-- Preferences covered: 9
+- Preferences covered: 5
 - Mainstream/long-tail topics: {'mainstream': 10}
 
 ## Statistical Tests

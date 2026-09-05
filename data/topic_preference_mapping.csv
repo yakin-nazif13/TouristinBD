@@ -1,11 +1,11 @@
 topic_id,interpreted_label,preference_id,category,subcategory,preference,similarity,second_best_preference_id,second_best_similarity,confidence,needs_review,tau_sim
-0,Hotel Room Quality and Staff Service,P01,Accommodation,Hotel Experience,Hotel room quality and staff service,0.7657,P10,0.3745,high,False,0.4
-1,Coastal Beaches and Island Exploration,P02,Attractions & Activities,Coastal Tourism,Beachfront and island exploration,0.7775,P03,0.5594,high,False,0.4
-2,Historic Landmarks And Archaeological Sites,P03,Attractions & Activities,Heritage Tourism,Historic landmarks and archaeological site visits,0.9292,P10,0.6935,high,False,0.4
-3,Bandarban Hill Tracts Mountain Tourism,P04,Attractions & Activities,Adventure & Nature,Bandarban hill tracts mountain tourism,0.9013,P06,0.5571,high,False,0.4
-4,Historic Panam City Heritage Exploration,P05,Attractions & Activities,Heritage Tourism,Historic Panam City heritage exploration,0.9376,P10,0.5462,high,False,0.4
-5,Sreemangal Tea Gardens and Nature,P06,Attractions & Activities,Nature & Ecotourism,Sreemangal tea gardens and nature tours,0.8829,P09,0.5224,high,False,0.4
-6,Ratargul Freshwater Swamp Forest Exploration,P07,Attractions & Activities,Nature & Ecotourism,Ratargul freshwater swamp forest exploration,0.8875,P08,0.4875,high,False,0.4
-7,Sundarbans Karamjal Wildlife Centre Day Trips,P08,Attractions & Activities,Ecotourism,Sundarbans Karamjal wildlife day trips,0.9195,P06,0.5427,high,False,0.4
-8,Kaptai Lake and Rangamati Scenic Tours,P09,Attractions & Activities,Nature & Scenic Tours,Kaptai Lake and Rangamati scenic tours,0.925,P06,0.5301,high,False,0.4
-9,Historic Landmarks and Heritage Tourism,P03,Attractions & Activities,Heritage Tourism,Historic landmarks and archaeological site visits,0.8988,P10,0.8005,high,False,0.4
+0,Hotel Accommodation and Staff Service,P01,Accommodation,Hotel & Resort Services,Quality hotel accommodation and staff service,0.8111,P03,0.3518,high,False,0.4
+1,Coastal and Island Beach Destinations,P02,Attractions & Activities,Coastal & Beach Tourism,Coastal beach and coral island excursions,0.8134,P04,0.4938,high,False,0.4
+2,Exploring Bangladesh's Historical Landmarks,P03,Attractions & Activities,Heritage & Archaeological Tourism,Historical landmark and ancient city tours,0.6678,P05,0.4401,high,False,0.4
+3,Scenic Hilltop Nature Destinations,P04,Attractions & Activities,Nature & Adventure Tourism,Hill tracts and scenic lake exploration,0.7344,P03,0.5953,high,False,0.4
+4,Historic Panam City and Sonargaon,P03,Attractions & Activities,Heritage & Archaeological Tourism,Historical landmark and ancient city tours,0.6226,P04,0.4275,high,False,0.4
+5,Scenic Sreemangal Tea Garden Tours,P05,Attractions & Activities,Ecotourism & Wildlife,Ecotourism and forest boat safaris,0.6421,P04,0.5276,high,False,0.4
+6,Exploring Ratargul Freshwater Swamp Forest,P05,Attractions & Activities,Ecotourism & Wildlife,Ecotourism and forest boat safaris,0.632,P03,0.5037,high,False,0.4
+7,Karamjal Sundarbans Eco-Tourism Gateway,P05,Attractions & Activities,Ecotourism & Wildlife,Ecotourism and forest boat safaris,0.6039,P04,0.5187,high,False,0.4
+8,Scenic Kaptai Lake in Rangamati,P04,Attractions & Activities,Nature & Adventure Tourism,Hill tracts and scenic lake exploration,0.7341,P05,0.4939,high,False,0.4
+9,Exploring Historical and Archaeological Sites,P03,Attractions & Activities,Heritage & Archaeological Tourism,Historical landmark and ancient city tours,0.71,P05,0.4833,high,False,0.4

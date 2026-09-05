@@ -7,7 +7,8 @@ destination comparison tool.
 
 Everything the site shows is derived from **538 real reviews** (Google Maps +
 Booking.com) across 27 places, run through topic modelling and a 4-stage LLM
-preference pipeline. No mock data anywhere.
+preference pipeline that distils them into **5 validated travel preferences**.
+No mock data anywhere.
 
 ## Quick start
 
@@ -37,7 +38,7 @@ To re-run the research pipeline itself (Phases 3–7) you need the full stack �
 | `scripts/add_reviews.py` | Import a new scrape into the corpus (see below). |
 | `scripts/run_phase*.py` | The research pipeline: preprocessing → topic modelling → preference classification → validation → sensitivity → analytics. |
 | `scripts/build_phase8_database.py` | Rebuilds `data/touristinbd.db` from whichever pipeline artifacts exist. Idempotent and schema-drift tolerant. |
-| `scripts/test_phase*.py` | 449 in-process tests across preprocessing, ingestion, the API, chatbot, planner, frontend contract and deployment config. |
+| `scripts/test_phase*.py` | 450 in-process tests across preprocessing, ingestion, the API, chatbot, planner, frontend contract and deployment config. |
 | `data/` | Every artifact the pipeline produced, including the raw and cleaned review sets. |
 | `docs/PROGRESS.md` | Phase-by-phase status, decisions and known limits. |
 | `docs/DEPLOYMENT.md` | Local, Render, Docker and split-hosting instructions. |
@@ -95,7 +96,7 @@ done
 ```
 
 They run the app in-process (no server, no network, no LLM) against the real
-built database. CI runs all six plus a container build on every push.
+built database. CI runs all seven plus a container build on every push.
 
 ## Deploying
 

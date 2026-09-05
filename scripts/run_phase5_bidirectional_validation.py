@@ -97,16 +97,31 @@ def run_direction2_coverage(
 
 
 def build_manual_review_sample(
-    mapping: pd.DataFrame, sim_matrix: np.ndarray, target_size: int
+    mapping: pd.DataFrame,
+    preferences: pd.DataFrame,
+    sim_matrix: np.ndarray,
+    target_size: int,
 ) -> pd.DataFrame:
     """
     Build a practical review set with balance:
       - all mapped positives (topic, mapped_pref)
       - all second-best alternatives
       - random negatives to reach target size
+
+    Indexing note: Phase 4 builds the similarity matrix with one row per topic
+    *in mapping order* and one column per preference *in preference-file order*.
+    Both indices must therefore come from those two files — deriving the column
+    index from the mapping's preference column instead looks right only while
+    the mapping is a 1:1 pairing in the same order. As soon as two topics share
+    a preference, that column list has duplicates and every lookup after the
+    first repeat is silently wrong (and, once the taxonomy is smaller than the
+    topic count, out of range).
     """
     topic_ids = mapping["topic_id"].astype(int).tolist()
-    pref_ids = mapping["preference_id"].astype(str).tolist()
+    topic_row = {int(t): i for i, t in enumerate(topic_ids)}
+    # Every preference, not just the mapped ones — an unmapped preference is
+    # exactly the kind of pair a coverage review should look at.
+    pref_ids = preferences["preference_id"].astype(str).tolist()
     pref_index = {pid: idx for idx, pid in enumerate(pref_ids)}
     mapped_pref_by_topic = {
         int(row.topic_id): str(row.preference_id) for row in mapping.itertuples(index=False)
@@ -155,7 +170,7 @@ def build_manual_review_sample(
         for pid in pref_ids:
             if (topic_id, pid) in used:
                 continue
-            sim = float(sim_matrix[topic_id, pref_index[pid]])
+            sim = float(sim_matrix[topic_row[topic_id], pref_index[pid]])
             all_pairs.append((topic_id, pid, sim))
 
     # Prefer harder negatives (higher similarity), then random fill
@@ -384,7 +399,9 @@ def main() -> None:
     coverage.to_csv(COVERAGE_PATH, index=False)
 
     print(f"Building manual review sample (target {TARGET_REVIEW_SAMPLE_SIZE})")
-    sample = build_manual_review_sample(mapping, sim_matrix, TARGET_REVIEW_SAMPLE_SIZE)
+    sample = build_manual_review_sample(
+        mapping, preferences, sim_matrix, TARGET_REVIEW_SAMPLE_SIZE
+    )
     sample.to_csv(REVIEW_SAMPLE_PATH, index=False)
 
     print("Building recommendations")

@@ -1,7 +1,8 @@
 # TouristinBD — Progress Checklist
 
-Last updated: 2026-09-04 — **all 12 phases complete** (Phase 12 is configured and
-tested but not yet pushed to a public host).
+Last updated: 2026-09-05 — all 12 phases complete; Phase 4 taxonomy regenerated with
+`gemini-3.5-flash` and Phases 5-8 refreshed on it. Phase 12 is configured and tested
+but not yet pushed to a public host.
 
 > How to use this file: keep it up to date at the end of every session. Since Claude's
 > workspace resets between sessions, **download the project zip after each session and
@@ -19,8 +20,8 @@ tested but not yet pushed to a public host).
 ## Accounts/tools set up so far
 - [x] Apify account (free tier) — used for Google Maps review scraping via the Apify Console
       website UI (no API/network setup needed on Claude's side — CSV export/upload workflow).
-- [x] Gemini API key — used for Phase 4 (`gemini-flash-lite-latest`); OpenAI key present but
-      currently out of credits.
+- [x] Gemini API key — working as of 2026-09-05, stored in `.env` (gitignored, mode 600).
+      Phase 4 now pinned to `gemini-3.5-flash`. OpenAI key present but out of credits.
 - [ ] GitHub account — code storage (not set up yet)
 - [ ] Free database host (Supabase or Neon) — for real data, later
 - [ ] Free deploy host (Vercel + Render/Railway) — for public URL, later
@@ -160,21 +161,77 @@ tested but not yet pushed to a public host).
         because it is nearly identical to abundant heritage topic 2 — correctly stays mainstream.
         Topics 2 and 9 both map to P03 (Historic landmarks / archaeological sites).
   - [ ] Known MVP limits to revisit later: no Culinary dimension yet (dataset is hotels +
-        attractions only); preference hierarchy is still ~1 preference per place-topic; with
-        only 10 topics, long-tail recall is naturally near-zero until the corpus grows.
-  - [ ] Phase 5 should spot-check topic 2 (mixed heritage/Jaflong cluster) and whether
-        Panam (topic 4) should merge into P03 rather than stay as its own preference.
+        attractions only); with only 10 topics, long-tail recall is naturally near-zero
+        until the corpus grows.
+  - [x] **Phase 4 re-run on a working key (2026-09-05) — taxonomy replaced.** The
+        "~1 preference per place-topic" weakness above turned out to be a *model* limit,
+        not a data limit. Three runs on the same Phase 3 topics, compared on Phase 5's own
+        metrics:
+
+        | Run | Model | Prefs | D1 precision | D2 adequate | Orphans | Mean sim |
+        |---|---|---|---|---|---|---|
+        | committed (earlier session) | `gemini-flash-lite-latest` | 10 | 10/10 | 0/10 | 1 (P10) | 0.88 |
+        | re-run | `gemini-flash-lite-latest` | 9 | 10/10 | 0/9 | 0 | 0.87 |
+        | **adopted** | **`gemini-3.5-flash`** | **5** | **10/10** | **2/5** | **0** | **0.70** |
+
+        flash-lite names *venues* ("Historic Panam City heritage exploration", "Ratargul
+        freshwater swamp forest exploration") — that is a renamed place list, not a
+        preference taxonomy, and it is why every preference failed Phase 5's coverage
+        threshold: a preference that means one venue can only ever inherit one topic.
+        `gemini-3.5-flash` generalises instead (P03 "Historical landmark and ancient city
+        tours" absorbs topics 2, 4 and 9; P05 "Ecotourism and forest boat safaris" absorbs
+        5, 6 and 7), which is what the Stage 2 prompt asked for all along.
+        Mean similarity drops (0.88 → 0.70) — expected and not a regression: a general
+        preference sits further from any single topic than a venue-specific one does. All
+        10 mappings stay far above τ_sim=0.4 and the precision check still passes 10/10.
+  - [x] Adopted taxonomy: **P01** hotel quality/service · **P02** coastal beach and coral
+        island · **P03** historical landmark and ancient city · **P04** hill tracts and
+        scenic lake · **P05** ecotourism and forest boat safaris.
+  - [x] `GEMINI_MODEL=gemini-3.5-flash` pinned in `.env`. Pin a concrete version rather
+        than a `-latest` alias for anything being written up — aliases move.
+  - [x] **Two Phase 4 robustness fixes**, both from failures hit during these runs:
+        - *Truncation.* The "newer models truncate" note above was wrong about the cause:
+          `max_tokens=500` was being consumed by reasoning tokens before the JSON was
+          emitted, so the answer arrived cut off mid-object and surfaced as a JSON parse
+          error. `call_llm` now detects `finish_reason == "length"` and raises
+          `TruncatedResponse`; `call_llm_json` retries with a tripled budget instead of
+          resampling at the same doomed size. Starting budgets raised to 1500 (Stage 1)
+          and 8000 (Stage 2).
+        - *Transient 503s.* `gemini-3.8-flash` answered "high demand" and the run died
+          after 3 retries in ~4s, losing every call already paid for. Retries now run
+          6 attempts with exponential backoff and jitter (2→32s), and only for genuinely
+          transient statuses — a bad key or unknown model still fails immediately with a
+          clear message rather than being retried six times.
+        - `--model` flag added, so comparing models needs no file edits.
+  - [x] Resolved: the two spot-checks Phase 5 asked for. Panam (topic 4) **did** merge into
+        P03 rather than staying its own preference, and topic 2's mixed heritage/Jaflong
+        cluster maps to P03 at sim=0.668 with no ambiguity flag.
 - [x] **Phase 5 — Bidirectional validation (sampled)**: done (automated pass; awaiting human labels).
   - [x] `scripts/run_phase5_bidirectional_validation.py` written and run.
   - [x] Direction 1 (topic → preference precision): **10/10 topics pass** — all similarity
         scores ≥ τ_sim=0.4 and all gaps ≥ ambiguity_margin=0.08. Zero remaps needed.
-  - [x] Direction 2 (preference → topic coverage): **all 10 preferences under-coverage**
-        (mapped_topic_count < 3). This is a structural MVP artefact — with only 10 topics
-        the 1:1 topic-preference ratio means every preference inherits one topic, which is
-        below the paper's threshold of 3 (calibrated for 1,071 topics). Not an error;
-        coverage will improve as the corpus and topic count grow.
-  - [x] P10 (General historical monuments) has 0 mapped topics — no corpus evidence at
-        this scale. Recommend folding into P03 after human review.
+  - [x] Direction 2 (preference → topic coverage): originally **all 10 preferences
+        under-coverage** (mapped_topic_count < 3), which was read as a structural MVP
+        artefact of having only 10 topics. The Phase 4 re-run above shows that was only
+        half the story: with a taxonomy that generalises, **2 of 5 preferences now reach
+        adequate coverage** (P03 and P05, 3 topics each) on the very same 10 topics. The
+        remaining 3 are genuinely thin — P01 (hotels), P02 (coastal) and P04 (hills/lakes)
+        each hold 1-2 topics, and those will need more reviews, not a better prompt.
+  - [x] P10 (General historical monuments) had 0 mapped topics and was slated to be folded
+        into P03 after human review. **Resolved by the re-run** — the regenerated taxonomy
+        has no orphan preference at all.
+  - [x] **Indexing bug found and fixed (2026-09-05).** `build_manual_review_sample` built
+        its preference→column index from the *mapping* table (one row per topic) instead of
+        the preference file that defines the similarity matrix's columns. With a 1:1
+        mapping in matching order the two happen to agree, so it went unnoticed; but the
+        committed run already had topics 2 and 9 both mapping to P03, so that duplicate
+        made `pref_index["P03"]` point at column 9 instead of column 2 — every hard-negative
+        similarity read from that column in the committed `phase5_manual_review_sample.csv`
+        was wrong. Once the taxonomy shrank to 5 preferences the same bug went out of range
+        and crashed, which is how it surfaced. Both indices now come from the files that
+        define the matrix axes, and negatives are drawn from *all* preferences rather than
+        only the mapped ones — so an unmapped preference can actually appear in the sample,
+        which is exactly the pair a coverage review should be looking at.
   - [x] 50-pair manual review sample built: 10 mapped positives, 10 second-best challengers,
         15 hard negatives, 15 random negatives → `data/phase5_manual_review_sample.csv`.
         Fill `human_label` column (1=correct, 0=incorrect) to compute precision/recall.
@@ -189,10 +246,16 @@ tested but not yet pushed to a public host).
         BERTopic, then map topics to the **fixed Phase 4 preference list** via embeddings
         (no LLM re-run). Outputs only under `data/phase6_*` — Phase 3–5 files untouched.
   - [x] MVP ladder (paper uses 20k/40k/60k/80k): **151 / 247 / 398 / 538** reviews.
-  - [x] Results: preference coverage rises from **2/10 → 9/10** as sample size grows;
-        mapped preference set stabilizes at full corpus (Jaccard vs prev = 1.0 at 538).
-        Recommended minimum corpus size for stable mappings on current taxonomy: **538**
-        (i.e. you need the full MVP corpus; more data will help further).
+  - [x] Original results (10-preference taxonomy): coverage rose **2/10 → 9/10** with
+        sample size, stabilizing only at the full corpus; recommended minimum: **538**.
+  - [x] **Re-run on the 5-preference taxonomy (2026-09-05): a strictly better result.**
+        All **5/5 preferences are covered from 247 reviews onward**, and the mapped set
+        stops changing at 398 (Jaccard vs previous = 1.000 at 398 and 538). Recommended
+        minimum corpus size therefore drops **538 → 398**. That is the sensitivity story
+        worth writing up: a taxonomy of general preferences is not just more useful, it is
+        *more stable under subsampling* — it needs ~26% less data to settle, because a
+        preference that spans several venues keeps its evidence when any one venue is
+        sampled out.
   - [x] Phase 4 locked reference row included for comparison (avg sim 0.88 vs ~0.53 on
         retrained subsamples — expected because Phase 4 used LLM interpretations, not just keywords).
   - [x] Outputs: `phase6_sensitivity_metrics.csv`, `phase6_sensitivity_mappings.csv`,
@@ -411,8 +474,15 @@ tested but not yet pushed to a public host).
   - Phase 6 sensitivity: `phase6_sensitivity_*` (does not replace Phase 3–5 files).
   - Phase 7 analytics layer: `phase7_*` tables/charts + `phase7_dashboard_payload.json`.
 - Re-run Phase 4 with:
-  `source /tmp/touristinbd-venv/bin/activate && python scripts/run_phase4_preference_classification.py`
-  (needs network + a working Gemini/OpenAI key; default model is `gemini-flash-lite-latest`).
+  `.venv/bin/python scripts/run_phase4_preference_classification.py`
+  (needs network + a working Gemini/OpenAI key in `.env`; model pinned there, override per
+  run with `--model <name>`). Re-running it regenerates the taxonomy, so follow it with
+  Phase 5 → 6 → 7 → `build_phase8_database.py` and the full test suite; the tests are
+  written against the artifacts rather than against frozen preference ids, so a new
+  taxonomy does not break them.
+- The full pipeline stack (`pip install -r requirements.txt` — torch, BERTopic,
+  sentence-transformers, langdetect) is needed for Phases 2-7. Serving needs only
+  `requirements-api.txt`.
 - Rebuild the database after re-running any earlier phase (Phase 1-7 output changed):
   `.venv/bin/python scripts/build_phase8_database.py`
 - Run the API: `.venv/bin/python -m backend.main` (site at /app/, docs at /docs).
@@ -449,6 +519,13 @@ tested but not yet pushed to a public host).
   it was at MVP scope; the Bengali/code-mixed reviews are in the corpus and searchable,
   but a Bengali *question* won't route to the right intent.
 - **Phase 5's 50-pair sample still has no human labels**, so precision/recall for the
-  topic→preference mapping is unmeasured. Unchanged by Phases 10-12.
+  topic→preference mapping is unmeasured. This is now the single biggest open item: it is
+  the one number in the project that needs a person, and the sample was regenerated for
+  the new taxonomy, so fill `human_label` in `data/phase5_manual_review_sample.csv`
+  (1 = the topic really does belong to that preference, 0 = it does not). Do **not** have
+  an LLM fill that column — the whole point of the check is that it is independent of the
+  model that produced the mapping.
+- **Only 3 preferences hold hotel/coastal/hill evidence at 1-2 topics each.** More reviews,
+  not a better prompt, is what closes that gap now.
 - **Not yet deployed to a public URL** — the config is written and tested, but it needs
   a GitHub repo and a host account (see the unchecked boxes at the top of this file).

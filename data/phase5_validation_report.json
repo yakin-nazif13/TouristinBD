@@ -12,10 +12,10 @@
     "pass": 10
   },
   "direction2_coverage": {
-    "total_preferences": 10,
-    "under_coverage": 10,
+    "total_preferences": 5,
+    "under_coverage": 3,
     "over_coverage": 0,
-    "adequate": 0
+    "adequate": 2
   },
   "manual_review_sample": {
     "rows": 50,
@@ -24,5 +24,5 @@
     "hard_negative": 15,
     "random_negative": 15
   },
-  "recommendation_count": 12
+  "recommendation_count": 4
 }

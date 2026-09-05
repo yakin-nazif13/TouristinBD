@@ -1,27 +1,34 @@
 sample_size,topic_id,topic_name,review_count,preference_id,preference,category,similarity,high_confidence
-151,0,0_place_bangladesh_city_visit,85,P03,Historic landmarks and archaeological site visits,Attractions & Activities,0.5083,True
-151,1,1_good_room_staff_breakfast,66,P01,Hotel room quality and staff service,Accommodation,0.4256,True
-247,0,0_good_room_staff_location,110,P01,Hotel room quality and staff service,Accommodation,0.4354,True
-247,1,1_place_boat_jaflong_forest,62,P07,Ratargul freshwater swamp forest exploration,Attractions & Activities,0.5121,True
-247,2,2_beach_sea_island_bangladesh,37,P02,Beachfront and island exploration,Attractions & Activities,0.5489,True
-247,3,3_history_place_heritage_fort,26,P03,Historic landmarks and archaeological site visits,Attractions & Activities,0.5062,True
-247,4,4_panam_city_panam city_panam nagar,7,P05,Historic Panam City heritage exploration,Attractions & Activities,0.5831,True
-398,0,0_good_room_staff_location,180,P01,Hotel room quality and staff service,Accommodation,0.4542,True
-398,1,1_beach_sea_sea beach_island,49,P02,Beachfront and island exploration,Attractions & Activities,0.5738,True
-398,2,2_dhaka_history_fort_heritage,46,P03,Historic landmarks and archaeological site visits,Attractions & Activities,0.5199,True
-398,3,3_jaflong_hills_point_zero,19,P04,Bandarban hill tracts mountain tourism,Attractions & Activities,0.2538,False
-398,4,4_panam_city_panam city_sonargaon,12,P05,Historic Panam City heritage exploration,Attractions & Activities,0.5503,True
-398,5,5_karamjal_sundarbans_center_forest,12,P08,Sundarbans Karamjal wildlife day trips,Attractions & Activities,0.3776,False
-398,6,6_nice_place_nice place_nature spot,10,P06,Sreemangal tea gardens and nature tours,Attractions & Activities,0.3747,False
-398,7,7_forest_swamp_ratargul_swamp forest,9,P07,Ratargul freshwater swamp forest exploration,Attractions & Activities,0.5378,True
-398,8,8_tea_gardens_tea gardens_garden,9,P06,Sreemangal tea gardens and nature tours,Attractions & Activities,0.5464,True
-398,9,9_lake_kaptai_kaptai lake_dam,8,P09,Kaptai Lake and Rangamati scenic tours,Attractions & Activities,0.4505,True
-538,0,0_good_room_staff_hotel,239,P01,Hotel room quality and staff service,Accommodation,0.5529,True
-538,1,1_beach_sea_island_sea beach,79,P02,Beachfront and island exploration,Attractions & Activities,0.5774,True
-538,2,2_dhaka_history_visit_place,78,P03,Historic landmarks and archaeological site visits,Attractions & Activities,0.5486,True
-538,3,3_bandarban_nilachal_place_tourist,36,P04,Bandarban hill tracts mountain tourism,Attractions & Activities,0.5256,True
-538,4,4_panam_city_panam city_sonargaon,17,P05,Historic Panam City heritage exploration,Attractions & Activities,0.5435,True
-538,5,5_tea_garden_tea garden_sreemangal,16,P06,Sreemangal tea gardens and nature tours,Attractions & Activities,0.5529,True
-538,6,6_forest_swamp_swamp forest_ratargul,15,P07,Ratargul freshwater swamp forest exploration,Attractions & Activities,0.5639,True
-538,7,7_karamjal_sundarbans_forest_mongla,13,P08,Sundarbans Karamjal wildlife day trips,Attractions & Activities,0.4556,True
-538,8,8_lake_kaptai_kaptai lake_rangamati,11,P09,Kaptai Lake and Rangamati scenic tours,Attractions & Activities,0.482,True
+151,0,0_place_beach_visit_bangladesh,83,P05,Ecotourism and forest boat safaris,Attractions & Activities,0.4544,True
+151,1,1_good_room_location_staff,68,P01,Quality hotel accommodation and staff service,Accommodation,0.5525,True
+247,0,0_good_hotel_staff_stay,42,P01,Quality hotel accommodation and staff service,Accommodation,0.7052,True
+247,1,1_room_bad_good_staff,38,P01,Quality hotel accommodation and staff service,Accommodation,0.4316,True
+247,2,2_beach_sea_sea beach_island,29,P02,Coastal beach and coral island excursions,Attractions & Activities,0.5768,True
+247,3,3_history_place_historical_dhaka,27,P03,Historical landmark and ancient city tours,Attractions & Activities,0.4854,True
+247,4,4_exceptional_good_good good_good exceptional,19,P01,Quality hotel accommodation and staff service,Accommodation,0.2685,False
+247,5,5_jaflong_jaflong zero_zero point_zero,12,P04,Hill tracts and scenic lake exploration,Attractions & Activities,0.2662,False
+247,6,6_place_ticket_trail_great place,11,P05,Ecotourism and forest boat safaris,Attractions & Activities,0.4377,True
+247,7,7_forest_swamp_water_swamp forest,10,P05,Ecotourism and forest boat safaris,Attractions & Activities,0.4559,True
+247,8,8_sunset_drive_area_weather,10,P02,Coastal beach and coral island excursions,Attractions & Activities,0.4092,True
+247,9,9_panam_city_panam nagar_nagar,9,P03,Historical landmark and ancient city tours,Attractions & Activities,0.4397,True
+247,10,10_karamjal_sundarbans_forest_center,9,P05,Ecotourism and forest boat safaris,Attractions & Activities,0.4568,True
+247,11,11_booking_price_com_booking com,8,P01,Quality hotel accommodation and staff service,Accommodation,0.2753,False
+398,0,0_good_room_staff_location,173,P01,Quality hotel accommodation and staff service,Accommodation,0.5513,True
+398,1,1_dhaka_history_fort_visit,50,P03,Historical landmark and ancient city tours,Attractions & Activities,0.4912,True
+398,2,2_beach_sea_island_sea beach,45,P02,Coastal beach and coral island excursions,Attractions & Activities,0.5879,True
+398,3,3_sundarbans_karamjal_forest_center,25,P05,Ecotourism and forest boat safaris,Attractions & Activities,0.4897,True
+398,4,4_jaflong_hills_zero point_zero,24,P04,Hill tracts and scenic lake exploration,Attractions & Activities,0.332,False
+398,5,5_tea_garden_tea garden_quality,14,P05,Ecotourism and forest boat safaris,Attractions & Activities,0.3644,False
+398,6,6_forest_swamp_ratargul_swamp forest,13,P05,Ecotourism and forest boat safaris,Attractions & Activities,0.4201,True
+398,7,7_panam_city_panam city_sonargaon,12,P03,Historical landmark and ancient city tours,Attractions & Activities,0.4061,True
+398,8,8_place_sunset_return_boat,8,P02,Coastal beach and coral island excursions,Attractions & Activities,0.4548,True
+538,0,0_good_room_staff_hotel,240,P01,Quality hotel accommodation and staff service,Accommodation,0.6694,True
+538,1,1_dhaka_history_visit_place,78,P03,Historical landmark and ancient city tours,Attractions & Activities,0.4866,True
+538,2,2_beach_sea_island_sea beach,77,P02,Coastal beach and coral island excursions,Attractions & Activities,0.588,True
+538,3,3_nilachal_bandarban_place_hills,34,P04,Hill tracts and scenic lake exploration,Attractions & Activities,0.4345,True
+538,4,4_forest_swamp_swamp forest_ratargul,17,P05,Ecotourism and forest boat safaris,Attractions & Activities,0.4323,True
+538,5,5_panam_city_panam city_sonargaon,17,P03,Historical landmark and ancient city tours,Attractions & Activities,0.3921,False
+538,6,6_tea_garden_tea garden_sreemangal,16,P05,Ecotourism and forest boat safaris,Attractions & Activities,0.3892,False
+538,7,7_karamjal_sundarbans_forest_mongla,13,P05,Ecotourism and forest boat safaris,Attractions & Activities,0.4351,True
+538,8,8_lake_kaptai_kaptai lake_rangamati,11,P04,Hill tracts and scenic lake exploration,Attractions & Activities,0.4541,True
+538,9,9_place_historical place_history_historical,8,P03,Historical landmark and ancient city tours,Attractions & Activities,0.4825,True

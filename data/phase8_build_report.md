@@ -1,6 +1,6 @@
 # Phase 8 — Database Build Report
 
-- Built (UTC): 2026-09-04T01:53:53Z
+- Built (UTC): 2026-09-05T01:06:10Z
 - Database: `data/touristinbd.db` (schema version 1)
 
 ## Row counts
@@ -10,15 +10,15 @@
 | places | 27 |
 | topics | 11 |
 | reviews | 538 |
-| preferences | 10 |
+| preferences | 5 |
 | topic_preference_map | 10 |
 | long_tail_flags | 10 |
 | validation_precision | 10 |
-| validation_coverage | 10 |
-| validation_recommendations | 12 |
+| validation_coverage | 5 |
+| validation_recommendations | 4 |
 | validation_manual_sample | 50 |
 | sensitivity_metrics | 5 |
-| sensitivity_mappings | 26 |
+| sensitivity_mappings | 33 |
 
 ## Views
 
