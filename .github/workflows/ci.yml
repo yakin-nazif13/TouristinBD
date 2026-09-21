@@ -34,6 +34,12 @@ jobs:
       - name: Phase 2 — preprocessing & ingestion tests
         run: python scripts/test_phase2_preprocessing.py
 
+      - name: Phase 5 — human-validation tooling tests
+        run: python scripts/test_phase5_human_validation.py
+
+      - name: Phase 6 — sampling reproducibility tests
+        run: python scripts/test_phase6_reproducibility.py
+
       - name: Build the SQLite database from the pipeline artifacts
         run: python scripts/build_phase8_database.py
 

@@ -21,6 +21,7 @@ Tracks:
 from __future__ import annotations
 
 import json
+import zlib
 from pathlib import Path
 
 import matplotlib.pyplot as plt
@@ -62,8 +63,19 @@ def jaccard(a: set[str], b: set[str]) -> float:
     return len(a & b) / len(union)
 
 
+def stable_offset(name: object) -> int:
+    """A per-stratum seed offset that is identical on every run and machine.
+
+    This used to use Python's built-in hash() of the stratum name. Python salts string
+    hashes per process (PYTHONHASHSEED), so every run drew a different
+    stratified sample despite RANDOM_SEED — the sensitivity results could not
+    be reproduced. CRC32 is fixed by definition.
+    """
+    return zlib.crc32(str(name).encode("utf-8")) % 10_000
+
+
 def stratified_sample(df: pd.DataFrame, n: int, seed: int) -> pd.DataFrame:
-    """Prefer stratification by source, then place_name when available."""
+    """Stratify by source (proportional allocation), deterministically."""
     if n >= len(df):
         return df.copy()
     rng = np.random.default_rng(seed)
@@ -94,7 +106,7 @@ def stratified_sample(df: pd.DataFrame, n: int, seed: int) -> pd.DataFrame:
 
     for (name, g), k in zip(groups, sizes):
         k = min(k, len(g))
-        take = g.sample(n=k, random_state=seed + abs(hash(str(name))) % 10_000)
+        take = g.sample(n=k, random_state=seed + stable_offset(name))
         parts.append(take)
     out = pd.concat(parts, ignore_index=True)
     if len(out) > n:

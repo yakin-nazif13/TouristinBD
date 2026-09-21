@@ -325,8 +325,14 @@ def main() -> None:
         str(val["manual_review_sample"]),
     )
 
+    # Holds before and after the team's human labels are written back.
     code, unlabelled = get("/api/research/validation/sample", labelled=False)
-    check("unlabelled sample filter returns 50", code == 200 and len(unlabelled) == 50, str(len(unlabelled)))
+    code2, labelled = get("/api/research/validation/sample", labelled=True)
+    check(
+        "labelled + unlabelled sample filters partition the 50 pairs",
+        code == 200 and code2 == 200 and len(unlabelled) + len(labelled) == 50,
+        f"{len(unlabelled)} unlabelled + {len(labelled)} labelled",
+    )
 
     sens_csv = pd.read_csv(REPO_ROOT / "data" / "phase6_sensitivity_metrics.csv")
     ladder = set(sens_csv["sample_size"].dropna().astype(int))

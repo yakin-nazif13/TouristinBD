@@ -19,7 +19,14 @@ What it does, in order:
    cleaning) and exact duplicates of an earlier review's cleaned text.
 4. **Detect the language** for real, rather than trusting the platform tag —
    which is unreliable: many Booking rows tagged `en` are Bengali script, and
-   81 rows carry Booking's placeholder tag `xu`.
+   81 rows carry Booking's placeholder tag `xu`. When a batch carries the
+   reviewer's own words (`review_text_original`, written by add_reviews.py),
+   the language is detected on *those*, not on Google's translation — so
+   `detected_language` means "the language the reviewer wrote in".
+5. **Carry the original text through** as `review_text_original` (cleaned the
+   same way) plus `original_language`. These two columns are only written when
+   at least one batch has them, so corpora collected before the fix reproduce
+   byte for byte.
 
 Re-running this on the current batches reproduces the committed
 `data/processed_reviews.csv` byte for byte, which is what
@@ -95,6 +102,9 @@ OUTPUT_COLUMNS = [
     "review_likes",
     "source_url",
 ]
+
+# Written after OUTPUT_COLUMNS, and only when some batch provides them.
+OPTIONAL_OUTPUT_COLUMNS = ["review_text_original", "original_language"]
 
 # Raw column -> output column, for the two that get renamed.
 RENAMES = {"review_text": "review_text_clean", "review_language": "platform_language_tag"}
@@ -233,16 +243,23 @@ def preprocess(
             notes.append(f"dropped as an exact duplicate of an earlier review: {text!r}")
         df = df[~duplicate_text]
 
-    df["detected_language"] = df["review_text_clean"].map(
-        lambda t: detect_language(t, short_text_max)
-    )
+    has_original = "review_text_original" in df.columns
+    if has_original:
+        original = df["review_text_original"].map(clean_text)
+        df["review_text_original"] = original.where(original != "", pd.NA)
+        language_basis = df["review_text_original"].fillna(df["review_text_clean"])
+    else:
+        language_basis = df["review_text_clean"]
+
+    df["detected_language"] = language_basis.map(lambda t: detect_language(t, short_text_max))
     df = _apply_overrides(df, notes)
 
     for column in OUTPUT_COLUMNS:
         if column not in df.columns:
             df[column] = pd.NA
             notes.append(f"column {column} absent from every batch; written empty")
-    out = df[OUTPUT_COLUMNS].reset_index(drop=True)
+    extra = [c for c in OPTIONAL_OUTPUT_COLUMNS if c in df.columns]
+    out = df[OUTPUT_COLUMNS + extra].reset_index(drop=True)
 
     stats = {
         "rows_in": total_in,
@@ -254,6 +271,12 @@ def preprocess(
         "by_language": {str(k): int(v) for k, v in out["detected_language"].value_counts().items()},
         "places": int(out["place_name"].nunique()),
     }
+    if has_original:
+        with_original = out["review_text_original"].notna()
+        stats["with_original_text"] = int(with_original.sum())
+        stats["translated_by_platform"] = int(
+            (with_original & (out["review_text_original"] != out["review_text_clean"])).sum()
+        )
     return out, stats
 
 
@@ -322,8 +345,13 @@ def write_report(paths: list[Path], stats: dict, notes: list[str], warnings: lis
         f"{stats['dropped_duplicate_id']} duplicate id",
         f"- By source: {stats['by_source']}",
         f"- By detected language: {stats['by_language']}",
-        "",
     ]
+    if "with_original_text" in stats:
+        lines.append(
+            f"- Original-language text kept for {stats['with_original_text']} reviews; "
+            f"{stats['translated_by_platform']} of them were machine-translated by the platform"
+        )
+    lines.append("")
     if warnings:
         lines += ["## Warnings", ""] + [f"- {w}" for w in warnings] + [""]
     lines += ["## Notes", ""] + [f"- {n}" for n in notes] + [""]

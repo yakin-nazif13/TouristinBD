@@ -1,0 +1,596 @@
+================================================================================
+TOURISTINBD — BUILD PLAN (v2)
+From capstone MVP to a government-grade, publishable hidden-gem platform
+Group 2, CSE499 — North South University
+Plan written: 22 September 2026
+================================================================================
+
+CONTENTS
+  0. The product and the research claim
+  1. Weak points in the current project, and where each is fixed
+  2. Phase 1  — Fix the foundations                   (weeks 1-2)
+  3. Phase 2  — Data collection at national scale     (weeks 2-8)
+  4. Phase 3  — The language pipeline                 (weeks 3-6)
+  5. Phase 4  — The hidden-gem engine                 (weeks 3-10)
+  6. Phase 5  — Research rigour                       (weeks 8-12)
+  7. Phase 6  — Government-grade product              (weeks 6-13)
+  8. Phase 7  — Papers and innovation challenges      (weeks 12-14)
+  9. Timeline and team split
+ 10. Ethics, legal and data management
+ 11. Risks
+ 12. Definition of done (capstone demo day)
+
+
+--------------------------------------------------------------------------------
+0. THE PRODUCT AND THE RESEARCH CLAIM
+--------------------------------------------------------------------------------
+
+Real-life problem
+  Much of what makes Bangladeshi destinations worth visiting travels by word of
+  mouth: the kotkoti shops by the Mahasthangarh gate, the local name for a
+  quieter stretch of beach, the ghat where you catch the boat, the season when
+  a haor is worth the trip. None of it is organised anywhere. Official lists
+  cover the famous sites; maps miss informal places; tourists crowd the same
+  few spots; tourism money stays in a few hotels.
+
+The product
+  A platform that mines tourist reviews, vlogs and blogs (Bangla, Banglish and
+  English) for mentions of lesser-known places, foods, activities, routes and
+  tips. It resolves each mention to a real location, scores how "hidden" it
+  is, and routes it through human verification before anything is published.
+  Every claim links back to the texts that support it.
+
+  Two faces, one evidence base:
+    * Government / district officers: a district-by-district register of
+      undocumented attractions, visitor complaints, trends, PDF briefs, and a
+      verification workflow.
+    * Tourists: the existing chat, itinerary and comparison tools, now surfacing
+      verified gems next to famous places.
+
+The research claim (one sentence)
+  "Topic-level long-tail detection fails on small, translated corpora.
+  Entity-level extraction from the original-language text recovers the
+  lesser-known places and local knowledge it misses, and does so traceably."
+
+  This builds directly on the current work. The existing long-tail detector
+  found 0 long-tail preferences, and this plan turns that negative result into
+  the motivation for the new contribution.
+
+Evidence we already have (probe run on the 538 current reviews)
+  Even a crude pattern match finds about 50 secondary places mentioned inside
+  reviews of other places:
+    - Fatrar Chor, Chor Bijoy, Gangamati Reserved Forest (Kuakata reviews)
+    - Chandranath Temple, "Muradpur Beach, as it is locally known" (Guliakhali)
+    - Madhabpur Lake (Srimangal); Boga Lake (Nilachal); Sardar Bari (Panam City)
+  It also finds access knowledge: "get off at Fokirhat Bazar and take a CNG",
+  "engine boat from Mongla Ferry Ghat along the Pashur River".
+  Spelling variants of one place already appear: Guliakhali / Guliyakhali /
+  Gulyakhali.
+
+
+--------------------------------------------------------------------------------
+1. WEAK POINTS, AND WHERE EACH IS FIXED
+--------------------------------------------------------------------------------
+
+  #   Weak point                                           Fixed in
+  --  ---------------------------------------------------  -----------------
+  W1  50-pair human validation never labelled              Phase 1 (tooling DONE)
+  W2  add_reviews.py kept Google's translation and          Phase 1 (DONE)
+      discarded the reviewer's original text
+  W3  Phase 6 sampling used salted hash(): the stability    Phase 1 (DONE, rerun
+      result was not reproducible                           needed)
+  W4  Proposal says "Yelp"; the data is Booking.com         Phase 1
+  W5  Not publicly deployed; Render free tier sleeps        Phase 1 / Phase 6
+  W6  Corpus 98.5% English                                  Phases 2-3
+  W7  Rangpur and Mymensingh: zero places; Rajshahi and     Phase 2
+      Barishal: one each
+  W8  No Banglish (romanised Bangla) handling at all        Phase 3
+  W9  Embedding model never benchmarked on Bangla           Phase 3
+  W10 Long-tail detection returns 0                         Phase 4 (entity level)
+  W11 Direction-2 coverage: 3 of 5 preferences weak         Phase 5 (bigger corpus)
+  W12 No baselines (LDA, BERTopic-only, LLM-only)           Phase 5
+  W13 Single-seed sensitivity analysis                      Phase 5
+  W14 New reviews get no topic until a manual re-run        Phase 6
+  W15 SQLite, no auth, no roles, no audit trail             Phase 6
+  W16 No coordinates: itinerary uses administrative         Phase 6
+      geography
+  W17 Chatbot is English keyword regex only                 Phase 6
+  W18 Tourist-facing only; nothing a government user needs  Phase 6
+  W19 Data rights unclear for a commercial/government use   Phases 2, 10
+
+
+--------------------------------------------------------------------------------
+2. PHASE 1 — FIX THE FOUNDATIONS (weeks 1-2)
+--------------------------------------------------------------------------------
+
+Code delivered with this plan (commit together):
+  [DONE] scripts/add_reviews.py
+         Keeps review_text (analysis text, usually English) AND
+         review_text_original + original_language. It recognises both Apify
+         layouts (text + textTranslated, or text + originalText). When an
+         export cannot distinguish original from translation, it warns and
+         does not guess.
+  [DONE] scripts/run_phase2_preprocessing.py
+         Carries the original text through. detected_language now means "the
+         language the reviewer wrote in". The new columns appear only when a
+         batch has them, so the current corpus still reproduces byte for byte.
+  [DONE] scripts/run_phase6_sensitivity_analysis.py
+         hash() replaced with CRC32 (stable_offset).
+  [DONE] scripts/label_validation_sample.py
+         Blinded, resumable labelling (terminal or spreadsheet). Order is
+         shuffled per annotator.
+  [DONE] scripts/compute_human_agreement.py
+         Pairwise Cohen's kappa, Fleiss' kappa, consensus with explicit ties,
+         pipeline precision/recall/F1, per-pair-type breakdown, --write-back.
+  [DONE] Tests: test_phase5_human_validation.py, test_phase6_reproducibility.py,
+         new multilingual checks in test_phase2_preprocessing.py; the
+         label-agnostic check in test_phase8_api.py; CI updated.
+  [DONE] docs/HUMAN_VALIDATION.md (annotator protocol)
+
+Team tasks:
+  1.1 Commit and push; confirm the GitHub Actions run is green.
+  1.2 Each of the four annotators labels independently
+      (docs/HUMAN_VALIDATION.md). About 1 hour each.
+  1.3 Run compute_human_agreement.py --write-back, then rebuild the database.
+      Put Fleiss' kappa and precision/recall in the report.
+  1.4 Re-run Phase 6 locally (needs the research stack):
+        python scripts/run_phase6_sensitivity_analysis.py
+      Check whether Jaccard = 1.0 at ~400 reviews survives the fixed sampling.
+      Report the result honestly either way; commit the new artifacts.
+  1.5 Fix the proposal: Section 5.2 says "281 Google Maps + 235 Yelp". Table 6
+      and the data say Google Maps 300, Booking.com 238. Also fix the
+      duplicated citation text in Sections 1.6 and 2.4 ("Zhang et al. (2026);
+      Najafi and Costa (2026), 2024"). Section 2.5 cites two different studies
+      as "Chang et al. (2024)" (eWOM and machine learning) but the reference
+      list has only one; add the missing reference or correct the citation.
+      Sections 5.4 and 11.1 number their lists 8-11 and 12-18 instead of 1-4
+      and 1-7.
+  1.6 Deploy on Render from the repo (render.yaml exists). For any demo or
+      judging, switch the service off the free plan so it does not sleep.
+
+Done when: CI green; four label files committed; kappa reported; Phase 6
+re-run; live URL works.
+
+
+--------------------------------------------------------------------------------
+3. PHASE 2 — DATA COLLECTION AT NATIONAL SCALE (weeks 2-8)
+--------------------------------------------------------------------------------
+
+Principle: hidden gems are mentioned inside reviews of famous places. Collect
+where the mentions are, then follow them (snowball).
+
+3.1 Anchor places: about 50 total, 5-8 per division, all 8 divisions.
+    Starting list (verify each on Google Maps; replace any with few reviews):
+      Dhaka:      Lalbagh Fort, Ahsan Manzil, Panam City/Sonargaon,
+                  National Botanical Garden, Bhawal National Park
+      Chattogram: Cox's Bazar, Saint Martin's, Bandarban (Nilgiri, Nilachal),
+                  Rangamati/Kaptai, Sitakunda, Khagrachari (Alutila)
+      Sylhet:     Jaflong, Ratargul, Bisnakandi, Lalakhal, Srimangal/Lawachara,
+                  Tanguar Haor, Madhabkunda
+      Khulna:     Sundarbans (Karamjal, Kotka), Sixty Dome Mosque/Bagerhat,
+                  Mongla, Kuakata access points
+      Barishal:   Kuakata, Durga Sagar, floating guava market (Bhimruli)
+      Rajshahi:   Paharpur, Mahasthangarh, Puthia Temple Complex,
+                  Varendra Museum, Padma riverside
+      Rangpur:    Tajhat Palace, Kantaji Temple, Ramsagar,
+                  Tetulia (Kanchenjunga view)
+      Mymensingh: Birisiri/Durgapur, Shoshi Lodge, Gazni (Sherpur),
+                  Muktagachha
+    Per anchor: several hundred reviews, sorted by newest AND by most relevant,
+    merged and de-duplicated. Prefer long reviews; do not filter to "top" only.
+
+3.2 Snowball rounds
+    Every entity found by the Phase 4 extractor with at least 2 independent
+    mentions becomes a scrape target in the next round. Log round number,
+    parent anchor and date for every place. "Discovery rounds until
+    saturation" is part of the method section.
+
+3.3 Bangla sources (where local knowledge actually lives)
+    a) YouTube: comments (and auto-captions where available) on Bangla travel
+       vlogs, collected through the official YouTube Data API v3. It is legal
+       and free within quota, and rich in Banglish.
+    b) Public Bangla travel blogs: fetch pages politely, extract article text
+       with trafilatura, and respect robots.txt.
+    c) TripAdvisor forum threads ("what else is near X?"), within its terms.
+    NOT Facebook groups: scraping violates Meta's terms and involves private
+    individuals' posts. This would damage the ethics review and a government
+    sale.
+
+3.4 Google Maps: how to scrape
+    * Use an Apify reviews actor that returns BOTH original and translated
+      text (field names like text/textTranslated or text/originalText; both
+      are handled by add_reviews.py).
+    * Run a Bangla pass (language "bn") as well as English. Google shows a
+      review's original text reliably only when browsing in that language.
+      Some actors sweep several languages and merge by review id; prefer
+      those.
+    * Use residential proxies. Zero returned reviews usually means a blocked
+      datacenter IP.
+    * Keep personal-data output OFF (no reviewer names or profile URLs).
+    * Import:
+        python scripts/add_reviews.py export.csv --source google_maps \
+            --name gm_rajshahi_r1
+      Check that the output says "kept original-language text for N rows".
+      If it prints the "cannot be separated" warning, fix the actor settings
+      and re-scrape. Do not import that batch.
+    * Cost is roughly USD 0.5 per 1,000 reviews on pay-per-result actors, so
+      10,000 reviews is a few dollars.
+
+3.5 Schema additions (add in add_reviews.py / Phase 2 when first used)
+      source_type   google_maps | booking | youtube | blog | tripadvisor
+      collected_at  ISO timestamp of the scrape
+      anchor_place  the famous place whose page the text came from
+      discovery_round  0 for anchors, 1.. for snowball
+      lat, lng      place coordinates (from the actor's place fields)
+    Already added: review_text_original, original_language.
+
+3.6 Place geography
+    Extend data/place_geography.csv for every new place (district, division,
+    lat, lng). Add a test that every place in processed_reviews.csv has a
+    division.
+
+Target: about 10,000 texts across all 8 divisions, at least 20% of them
+Bangla or Banglish. The final size is decided by the saturation curve
+(Phase 5), not by this number.
+
+Done when: every division has 5+ anchors; 2+ snowball rounds; YouTube/blog
+ingestion scripts committed with tests; corpus language mix reported.
+
+
+--------------------------------------------------------------------------------
+4. PHASE 3 — THE LANGUAGE PIPELINE (weeks 3-6)
+--------------------------------------------------------------------------------
+
+4.1 Four-way language label, on review_text_original
+      bn        Bangla script
+      bn-latn   Banglish (romanised Bangla)       <- currently invisible
+      en        English
+      mixed     code-mixed (Bangla script + English, or Banglish + English)
+    * Keep the existing Bengali-script regex.
+    * Replace langdetect with fastText lid.176 for Latin-script text.
+    * Banglish classifier: hand-label about 500 Latin-script texts (mostly
+      from YouTube) as Banglish/English/mixed. Train a character 1-4-gram
+      TF-IDF + logistic regression. Report its F1. The labelled set becomes
+      part of the released dataset.
+    * Keep data/language_overrides.csv for manual corrections.
+
+4.2 Normalisation
+    * Bangla Unicode normalisation with csebuetnlp/normalizer. It fixes
+      inconsistent vowel signs and zero-width characters that silently break
+      matching.
+    * Banglish: phonetic back-transliteration (Avro-style rules) as an extra
+      matching key only. Never replace the original text.
+
+4.3 Embedding benchmark (a table for the paper)
+    Candidates: paraphrase-multilingual-MiniLM-L12-v2 (current), LaBSE,
+    intfloat/multilingual-e5-base, BAAI/bge-m3.
+    Test set: about 200 triples of (Bangla original, English translation,
+    Banglish version), built from real reviews with Google's translations as
+    the English side, plus hand-written Banglish.
+    Metrics: cross-lingual retrieval accuracy@1 and @5 in both directions;
+    encoding speed on CPU.
+    Choose the model for Phases 3-4 and the product from this table, and
+    re-run BERTopic with it.
+
+4.4 Which text feeds which step
+    Topic modelling: run on original text with the chosen multilingual model,
+    and ALSO on the English analysis text. That comparison is an ablation
+    (Phase 5).
+    Entity extraction: always on the original text.
+
+Done when: 4-way labels on the whole corpus; classifier F1 reported;
+embedding table produced; the chosen model is used everywhere.
+
+
+--------------------------------------------------------------------------------
+5. PHASE 4 — THE HIDDEN-GEM ENGINE (weeks 3-10)
+--------------------------------------------------------------------------------
+
+5.1 Annotation guidelines + gold set (start in week 3; it drives everything)
+    Entity types:
+      PLACE    a visitable location (beach stretch, temple, ghat, viewpoint)
+      FOOD     a dish, sweet or eatery tied to the area (e.g. kotkoti)
+      ACTIVITY a thing to do (boat ride, trek, market visit)
+      ACCESS   a route or transport instruction
+      TIP      practical advice (season, price, safety, bargaining)
+    Write guidelines with examples and edge cases (generic "the beach" vs a
+    named stretch; a hotel's own restaurant; nicknames).
+    Double-annotate about 800 texts (current 538 + about 300 Bangla/Banglish).
+    Report agreement (Cohen's kappa on tokens or span-level F1 between
+    annotators). A small web tool or Label Studio (self-hosted, free) is fine.
+
+5.2 Extraction
+    Baseline: multilingual/Bangla NER (e.g. a BanglaBERT or XLM-R NER model).
+    Main method: constrained LLM extraction (Gemini, as in Phase 4 today) with
+      a JSON schema, and a HARD grounding rule: every entity must be an exact
+      substring of the source text, or it is dropped. This keeps the
+      project's no-hallucination guarantee and is measurable.
+    Evaluate both against the gold set: span-level precision/recall/F1 per
+    entity type and per language.
+
+5.3 Entity resolution
+    Cluster mentions that are the same real thing, using:
+      * normalised string similarity (rapidfuzz) on original and
+        back-transliterated forms
+      * embedding similarity of the mention plus its sentence
+      * geographic context (co-mentioned anchor, district)
+    Evaluate on a hand-made set of variant groups (Guliakhali / Guliyakhali /
+    Gulyakhali, Chor Bijoy / Char Bijoy, local vs official names). Report
+    cluster purity and B-cubed F1.
+
+5.4 Gazetteer and official visibility
+    Sources: OpenStreetMap Bangladesh extract (Geofabrik, free), Wikidata,
+    the BTB/district official attraction lists where published, and each
+    candidate's Google Maps presence and review count.
+    Visibility levels:
+      V0 not on any map or list
+      V1 on the map, few reviews
+      V2 on the map, moderately reviewed
+      V3 well known / official
+    Locate V0 items via their anchor place and textual cues ("2 km south of
+    the gate").
+
+5.5 Gem score (transparent and ablatable, not a black box)
+      mentions   independent mentions (distinct authors, sources, years)
+      sentiment  mean sentiment of mention sentences
+      hidden     inverse official visibility (V0 highest)
+      distinct   semantic distinctiveness vs its anchor (reuse SDD)
+      recency    share of mentions in the last 2-3 years
+    Minimum 2-3 independent mentions before anything becomes a candidate.
+    Weights are fixed in advance and reported, and every term is ablated in
+    Phase 5.
+
+5.6 Locals vs visitors
+    Use reviewer_is_local_guide, user_location and language as proxies.
+    Question: what do locals mention that visitors do not? Report
+    distributions by entity type and division.
+
+5.7 Verification queue (nothing auto-publishes)
+    States: candidate -> verified | rejected | sensitive
+    "sensitive" covers fragile ecology, restricted areas (e.g. parts of the
+    Chittagong Hill Tracts needing permits) and private or home businesses.
+    Sensitive items stay in the government register but never appear on the
+    tourist side. Every decision records who, when and why.
+
+Done when: gold set with agreement; extraction F1 table; resolution
+evaluation; ranked candidate list with evidence sentences per division; the
+queue works end to end.
+
+
+--------------------------------------------------------------------------------
+6. PHASE 5 — RESEARCH RIGOUR (weeks 8-12)
+--------------------------------------------------------------------------------
+
+6.1 Baselines for gem discovery
+      Popularity: rank places by review count (what maps do)
+      LDA topics + keyword long tail
+      BERTopic-only long tail (the current method)
+      LLM-only: "List hidden gems in <district>" with no data. Measure how
+        many named places cannot be found in any source or gazetteer
+        (hallucination rate).
+    Metric: precision@k (k = 10, 20) against human-verified gems, per
+    division, plus coverage of V0/V1 items.
+
+6.2 Ablations
+      Original vs translated text: run extraction on review_text_original and
+        on review_text, then count gems lost or mangled by translation (local
+        names such as "Muradpur" are the typical casualties). Possible only
+        because of the Phase 1 fix, and likely the most-cited table.
+      Each gem-score term removed in turn.
+      Embedding model choice (from 4.3).
+
+6.3 Multiple seeds
+    BERTopic and sensitivity analysis over 5-10 seeds; report mean and spread.
+    The Phase 1 CRC32 fix makes each seed exactly reproducible.
+
+6.4 Saturation curves
+    New verified gems per additional 1,000 texts, per division. This answers
+    "how much data is enough to map a region's hidden attractions?".
+    Re-run the preference-taxonomy stability (Jaccard) on the large corpus
+    too.
+
+6.5 Re-run the original pipeline on the large corpus
+    Phases 3-8 with the chosen embedding model. Report what happens to
+    Direction-2 coverage (currently 3/5 weak) and topic-level long tail
+    (currently 0), whichever way it goes.
+
+6.6 Statistics
+    Bootstrap confidence intervals on precision@k and F1. Significance tests
+    between methods (paired bootstrap or McNemar).
+
+Done when: every table in the paper outline (8.1) has numbers with intervals.
+
+
+--------------------------------------------------------------------------------
+7. PHASE 6 — GOVERNMENT-GRADE PRODUCT (weeks 6-13)
+--------------------------------------------------------------------------------
+
+7.1 Data layer
+    PostgreSQL + PostGIS (replaces SQLite). Keep build_phase8_database.py's
+    rebuild-from-artifacts principle; add migrations (Alembic). Real
+    coordinates allow real distances in the itinerary builder.
+
+7.2 Incremental pipeline
+    Fast path: a new batch gets topics via the saved BERTopic model's
+      transform(), then gem extraction and resolution, then a DB upsert.
+      (data/bertopic_model_dir/ is git-ignored, so store the model as a
+      release artifact or on the server.)
+    Scheduled full refit (e.g. monthly): produces a taxonomy DIFF (new,
+      merged or dropped preferences) that an analyst approves before it goes
+      live.
+    Monitoring: counts per source, language mix and extraction volume per
+      run, with alerts on sudden drops (a sign of a broken scraper).
+
+7.3 Accounts, roles, audit
+    Roles: public tourist; district officer (verifies gems in their district
+    only); analyst (dashboards, exports); admin. Auth with hashed passwords or
+    OAuth, and an audit log of every verification and taxonomy approval.
+
+7.4 Government dashboard (the centre of the capstone demo)
+    * Division/district map: gems by status, review volume, sentiment
+    * District hidden-attraction register: candidates, verified, sensitive,
+      with evidence
+    * Visitor issues: aspect-based complaints (cleanliness, toilets, roads,
+      safety, pricing, signage, harassment) per destination
+    * Trends over time; demand vs supply by preference
+    * One-click bilingual PDF brief per district
+    * Data quality panel: coverage, language mix, last update
+
+7.5 Tourist side
+    Existing chat, itinerary and compare, now with verified gems ("Visiting
+    Mahasthangarh? Locals also recommend..."). Every suggestion shows its
+    evidence. Sensitive items never appear.
+
+7.6 Bangla everywhere
+    Bilingual UI (Bangla/English toggle). The chatbot gets Bangla and Banglish
+    keyword lexicons plus an embedding-similarity intent fallback, so "Bogura
+    te ki ki ache?" and "বগুড়ায় কী দেখার আছে?" both work. Keep it
+    retrieval-only.
+
+7.7 Hosting
+    Paid Render instance (or a similar provider) for demo and judging; managed
+    Postgres; nightly backups. Note for later: government buyers may require
+    in-country hosting.
+
+Done when: officer login -> verify a gem -> it appears for tourists; PDF brief
+exports; Bangla queries work; all tests green.
+
+
+--------------------------------------------------------------------------------
+8. PHASE 7 — PAPERS AND INNOVATION CHALLENGES (weeks 12-14)
+--------------------------------------------------------------------------------
+
+8.1 Paper 1 (method)
+    Working title: "Finding Hidden Gems: Entity-Level Long-Tail Discovery from
+    Multilingual Tourist Reviews in a Low-Resource Destination"
+    Outline:
+      1. Introduction
+      2. Related work
+      3. Data (sources, language mix, ethics)
+      4. Method (extraction, resolution, gazetteer, gem score, verification)
+      5. Experiments: baselines, extraction F1, resolution, precision@k,
+         original-vs-translated ablation, score ablations, saturation curves,
+         locals vs visitors
+      6. Discussion (government use, sensitivity, limitations)
+      7. Conclusion
+    Candidate venues: tourism analytics journals (Tourism Management
+    Perspectives, Current Issues in Tourism, Journal of Destination Marketing
+    & Management), or ACL-family workshops on South Asian or low-resource
+    languages.
+
+8.2 Paper 2 (resource)
+    Annotated Bangla/Banglish/English tourism mention corpus with guidelines,
+    agreement figures and baseline results. Release annotations and derived
+    data, not raw platform text (IDs/URLs so others can re-collect).
+    Candidate venues: LREC-COLING, or language-resources and data-paper
+    tracks.
+
+8.3 The original capstone study
+    The 5-preference localisation study with the human kappa and the fixed,
+    re-run stability analysis remains the capstone report's backbone.
+
+8.4 Innovation challenge pitch (5 minutes, one story)
+    A district officer in Bogura logs in, sees 12 verified attractions missing
+    from the official list, opens one, reads the Bangla reviews behind it, and
+    exports a PDF brief. A tourist planning Mahasthangarh then gets that place
+    in their itinerary, with evidence.
+    Slides: problem (with sourced national tourism figures), evidence (precision@k
+    vs baselines), demo, impact metric (places surfaced per district, share
+    outside the top-10 sites), scalability (cost per 1,000 reviews), ethics
+    (verification and sensitivity).
+    Verify every statistic against a primary source before it goes on a slide.
+
+
+--------------------------------------------------------------------------------
+9. TIMELINE AND TEAM SPLIT
+--------------------------------------------------------------------------------
+
+Roles (assign by strength; rotate for the paper)
+  Data lead      scrapers, ingestion, geography, YouTube/blog collectors
+  NLP lead       language pipeline, extraction, resolution, experiments
+  Backend lead   Postgres/PostGIS, incremental pipeline, auth, APIs, PDFs
+  Frontend lead  government dashboard, tourist UI, bilingual UI
+  Everyone       human labelling (week 1), gold-set annotation (weeks 3-6),
+                 paper writing (weeks 13-14)
+
+  Week   Data              NLP                   Backend              Frontend
+  -----  ----------------  --------------------  -------------------  ------------------
+  1-2    ingestion fix     seed fix, Phase 6     CI green, deploy     annotation
+         merged; actor     re-run; labelling     labelling            guidelines;
+         trials; labelling                                            labelling
+  3-4    anchors: 4 divs   language labels,      Postgres + PostGIS   gold-set tool
+                           fastText, normalizer  migration            gold annotation*
+  5-6    anchors: 8 divs   Banglish classifier,  schema for gems,     gold annotation*
+                           embedding benchmark   verification API
+  7-8    snowball r1;      extraction + eval     incremental          government
+         YouTube/blogs                           pipeline             dashboard v1
+  9-10   snowball r2       resolution, gazetteer,  roles, audit,      register + issues
+                           gem score             officer workflow     views
+  11-12  saturation data   baselines, ablations, Bangla chat, PDFs    tourist gems,
+                           seeds, statistics                          bilingual UI
+  13-14  dataset release   paper 1 draft         hardening, paid      demo polish,
+         prep                                    hosting              pitch deck
+  (* everyone, part-time)
+
+
+--------------------------------------------------------------------------------
+10. ETHICS, LEGAL AND DATA MANAGEMENT
+--------------------------------------------------------------------------------
+
+  * Collect only public content, and prefer official APIs (YouTube Data API).
+    Respect robots.txt and rate limits. Record every source URL and scrape
+    date.
+  * No reviewer names, profile URLs or photos stored (personal-data output
+    off).
+  * Publish derived data and annotations, not raw platform text.
+  * No Facebook group scraping.
+  * The product sells insight, not review text. For a government deployment,
+    propose first-party feedback collection (QR codes at sites, BTB forms)
+    that the same pipeline can ingest legally.
+  * Sensitive gems (fragile, restricted, private) are never shown publicly.
+  * Update the ethics memo (Phase 0) with all of the above. The paper's
+    ethics section summarises it.
+
+
+--------------------------------------------------------------------------------
+11. RISKS
+--------------------------------------------------------------------------------
+
+  Risk                                    Mitigation
+  --------------------------------------  -----------------------------------------
+  Scraper blocked or actor changes         residential proxies; two actors tested;
+  fields                                   add_reviews.py refuses ambiguous
+                                           layouts
+  Too little Bangla text                   YouTube + blogs early (week 5), not last
+  LLM extraction hallucinates              exact-substring grounding rule;
+                                           measured against the gold set
+  Gold annotation slips                    start week 3; 800 texts split 4 ways
+                                           is about 2 hours a week each
+  Gems unverifiable remotely               multi-source corroboration threshold;
+                                           mark "unverified" honestly; a
+                                           field-check sample of 10-20 gems if
+                                           feasible (e.g. during a trip)
+  Scope creep                              Phase 4 + dashboard are the demo;
+                                           everything else is secondary
+  Human kappa comes out low                report it; analyse disagreements;
+                                           refine the preference definitions —
+                                           that is a finding, not a failure
+
+
+--------------------------------------------------------------------------------
+12. DEFINITION OF DONE (CAPSTONE DEMO DAY)
+--------------------------------------------------------------------------------
+
+  [ ] Live URL on a non-sleeping instance, CI green
+  [ ] Human kappa and precision/recall in the report
+  [ ] Reproducible stability result (fixed seed code, 5+ seeds)
+  [ ] 10k-text corpus, all 8 divisions, 20%+ Bangla/Banglish, originals kept
+  [ ] Gold set with agreement; extraction and resolution F1
+  [ ] Gem discovery beats popularity and LLM-only baselines on precision@k
+      (or an honest report of where it does not)
+  [ ] Original-vs-translated ablation table
+  [ ] Government dashboard: register, verification, issues, PDF brief
+  [ ] Tourist side shows verified gems with evidence; Bangla queries work
+  [ ] Paper 1 draft complete; dataset card for paper 2
+  [ ] 5-minute demo story rehearsed
+================================================================================

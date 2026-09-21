@@ -373,6 +373,88 @@ def test_add_reviews(tmp: Path) -> None:
     )
 
 
+def test_add_reviews_keeps_original_language(tmp: Path) -> None:
+    """The reviewer's own words must survive import, never be replaced by a translation."""
+    print("\nadd_reviews — original-language text is kept")
+    data = tmp / "ingest_multilingual"
+    data.mkdir()
+    for name in ("real_reviews_batch1.csv", "real_reviews_booking_batch1.csv",
+                 "reviews_with_topics.csv", "place_geography.csv"):
+        shutil.copy2(DATA_DIR / name, data / name)
+
+    bangla = "মহাস্থানগড়ের গেটের পাশে কটকটির দোকানগুলো অবশ্যই ট্রাই করবেন।"
+    english = "Be sure to try the kotkoti shops next to the gate of Mahasthangarh."
+
+    # Layout A: `text` is the original, `textTranslated` the translation.
+    layout_a = tmp / "layout_a.csv"
+    pd.DataFrame([
+        {"title": "Mahasthangarh", "city": "Bogura", "stars": 5, "text": bangla,
+         "textTranslated": english, "originalLanguage": "bn", "publishedAtDate": "2026-08-01"},
+        {"title": "Mahasthangarh", "city": "Bogura", "stars": 4,
+         "text": "Great archaeological site, the museum is small but worth it.",
+         "textTranslated": None, "originalLanguage": "en", "publishedAtDate": "2026-08-02"},
+    ]).to_csv(layout_a, index=False)
+    result = run_script("add_reviews.py", str(layout_a), "--source", "google_maps",
+                        "--name", "layout_a", "--no-preprocess", data_dir=data)
+    check("layout A imports cleanly", result.returncode == 0, result.stderr[-300:])
+    a = pd.read_csv(data / "real_reviews_layout_a.csv")
+    check("layout A: analysis text is the translation", a["review_text"].iloc[0] == english,
+          str(a["review_text"].iloc[0]))
+    check("layout A: the Bangla original is kept", a["review_text_original"].iloc[0] == bangla,
+          str(a.get("review_text_original")))
+    check("layout A: an untranslated review is its own original",
+          a["review_text_original"].iloc[1] == a["review_text"].iloc[1], "mismatch")
+    check("layout A: original_language is recorded", a["original_language"].tolist() == ["bn", "en"],
+          str(a.get("original_language")))
+
+    # Layout B: `text` is the translation, `originalText` the original.
+    layout_b = tmp / "layout_b.csv"
+    pd.DataFrame([
+        {"title": "Mahasthangarh", "city": "Bogura", "stars": 5,
+         "text": "The Behula Lakhindar mound is 2 km south, few people go there.",
+         "originalText": "বেহুলা লখিন্দরের বাসর ঘর ২ কিমি দক্ষিণে, খুব কম মানুষ যায়।",
+         "originalLanguage": "bn", "publishedAtDate": "2026-08-03"},
+    ]).to_csv(layout_b, index=False)
+    result = run_script("add_reviews.py", str(layout_b), "--source", "google_maps",
+                        "--name", "layout_b", "--no-preprocess", data_dir=data)
+    check("layout B imports cleanly", result.returncode == 0, result.stderr[-300:])
+    b = pd.read_csv(data / "real_reviews_layout_b.csv")
+    check("layout B: the original comes from originalText",
+          str(b["review_text_original"].iloc[0]).startswith("বেহুলা"), str(b.get("review_text_original")))
+
+    # Layout C: nothing distinguishes original from translation -> warn, don't guess.
+    layout_c = tmp / "layout_c.csv"
+    pd.DataFrame([
+        {"title": "Mahasthangarh", "city": "Bogura", "stars": 4,
+         "text": "Ancient city ruins with a small but good museum nearby.", "publishedAtDate": "2026-08-05"},
+    ]).to_csv(layout_c, index=False)
+    result = run_script("add_reviews.py", str(layout_c), "--source", "google_maps",
+                        "--name", "layout_c", "--no-preprocess", data_dir=data)
+    check("layout C imports cleanly", result.returncode == 0, result.stderr[-300:])
+    check("layout C: the user is warned the original cannot be recovered",
+          "cannot be separated" in result.stdout, result.stdout[-300:])
+    c = pd.read_csv(data / "real_reviews_layout_c.csv")
+    check("layout C: no fake original column is written", "review_text_original" not in c.columns,
+          str(list(c.columns)))
+
+    # Phase 2 carries the originals through and detects language on them.
+    result = run_script("run_phase2_preprocessing.py", data_dir=data)
+    check("Phase 2 runs over mixed old and new batches", result.returncode == 0, result.stderr[-300:])
+    processed = pd.read_csv(data / "processed_reviews.csv")
+    check("processed_reviews.csv gains review_text_original / original_language",
+          {"review_text_original", "original_language"} <= set(processed.columns), str(list(processed.columns)))
+    row = processed[processed["review_text_clean"] == english]
+    check("the translated review is tagged with the language it was written in",
+          len(row) == 1 and row["detected_language"].iloc[0] == "bn",
+          str(row[["detected_language"]].to_dict()) if len(row) else "row missing")
+    old = processed[processed["review_id"].isin(pd.read_csv(DATA_DIR / "processed_reviews.csv")["review_id"])]
+    check("pre-fix reviews keep an empty original (it was never collected)",
+          old["review_text_original"].isna().all(), "old rows gained an original")
+    report = json.loads((data / "phase2_report.json").read_text())
+    check("the report counts platform-translated reviews",
+          report.get("translated_by_platform") == 2, str(report.get("translated_by_platform")))
+
+
 def main() -> None:
     print("Phase 2 — preprocessing & ingestion tests")
     try:
@@ -390,6 +472,7 @@ def main() -> None:
         tmp = Path(raw_tmp)
         test_script_run(tmp)
         test_add_reviews(tmp)
+        test_add_reviews_keeps_original_language(tmp)
 
     print(f"\n{len(PASSED)} passed, {len(FAILED)} failed")
     if FAILED:

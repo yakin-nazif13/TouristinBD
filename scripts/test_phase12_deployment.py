@@ -188,6 +188,8 @@ def test_host_config() -> None:
     ci = read(".github/workflows/ci.yml")
     for script in (
         "test_phase2_preprocessing.py",
+        "test_phase5_human_validation.py",
+        "test_phase6_reproducibility.py",
         "test_phase8_api.py",
         "test_phase8_rebuild.py",
         "test_phase9_chat.py",

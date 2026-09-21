@@ -18,6 +18,15 @@ stays on one scale:
 Nothing is overwritten: the batch file is new, the raw export is left alone,
 and `--dry-run` shows exactly what would happen first.
 
+**Original-language text is kept.** Google Maps actors return a review twice:
+what the reviewer wrote, and Google's translation into the scrape language.
+Earlier versions of this script mapped the translation onto `review_text` and
+threw the original away, which is why the first corpus reads as 98.5% English.
+Now `review_text` stays the (usually English) analysis text and the reviewer's
+own words land in `review_text_original`, with `original_language` beside it.
+When an export gives no way to tell original from translation, the script says
+so instead of guessing.
+
 **Adding reviews is only half the job.** New rows have no topic and therefore no
 preference evidence until Phase 3 and Phase 4 are re-run — they will show up in
 place listings, ratings and search, but will not influence recommendations or
@@ -56,7 +65,19 @@ OPTIONAL = [
     "review_likes",
     "source_url",
     "address",
+    # Multilingual provenance (see resolve_text_columns).
+    "review_text_original",
+    "original_language",
 ]
+
+# Review-body fields, by what they are known to contain. Actors disagree on
+# naming: some emit `text` (original) + `textTranslated`, others emit `text`
+# (translated) + `originalText`. Naming the unambiguous fields explicitly is
+# what lets resolve_text_columns tell the two layouts apart.
+ORIGINAL_TEXT_FIELDS = ["review_text_original", "originalText", "textOriginal", "text_original"]
+TRANSLATED_TEXT_FIELDS = ["textTranslated", "translatedText", "text_translated"]
+PLAIN_TEXT_FIELDS = ["review_text", "text", "reviewText", "comment"]
+ORIGINAL_LANGUAGE_FIELDS = ["original_language", "originalLanguage", "languageOriginal"]
 
 # Best-effort aliases for the field names Apify's Google Maps and Booking.com
 # actors emit. Anything not covered here can be mapped with --map old=new.
@@ -68,11 +89,8 @@ ALIASES = {
     "placeName": "place_name",
     "categoryName": "category",
     "type": "category",
-    # review body
-    "text": "review_text",
-    "textTranslated": "review_text",
-    "reviewText": "review_text",
-    "comment": "review_text",
+    # review body: handled by resolve_text_columns, not by renaming, so that
+    # an original and its translation can never collapse into one column.
     # ratings
     "stars": "review_rating",
     "rating": "review_rating",
@@ -114,6 +132,85 @@ def make_review_id(row: pd.Series) -> str:
         str(row.get(field, "")) for field in ("source", "place_name", "review_text", "review_date")
     )
     return hashlib.md5(seed.encode("utf-8")).hexdigest()[:16]
+
+
+def _first_present(df: pd.DataFrame, fields: list[str]) -> str | None:
+    return next((f for f in fields if f in df.columns), None)
+
+
+def _blank_to_na(series: pd.Series) -> pd.Series:
+    as_text = series.astype("string")
+    return as_text.where(as_text.str.strip().fillna("") != "", pd.NA)
+
+
+def resolve_text_columns(df: pd.DataFrame) -> tuple[pd.DataFrame, list[str]]:
+    """Split the review body into `review_text` (analysis) and `review_text_original`.
+
+    Three export layouts are recognised:
+
+    1. An explicit original field (`originalText`, ...). The plain `text`
+       field is then the translation; analysis text = translation if given,
+       else the original.
+    2. An explicit translated field (`textTranslated`, ...) and no original
+       field. The plain `text` field is then what the reviewer wrote.
+    3. Neither. The export cannot say whether `text` was translated, so the
+       original is left empty and a note tells the user to enable the actor's
+       original-text output. Guessing here would silently label machine
+       translations as reviewer language.
+    """
+    notes: list[str] = []
+    orig_col = _first_present(df, ORIGINAL_TEXT_FIELDS)
+    trans_col = _first_present(df, TRANSLATED_TEXT_FIELDS)
+    plain_col = _first_present(df, PLAIN_TEXT_FIELDS)
+    if plain_col is None and orig_col is None and trans_col is None:
+        return df, notes  # nothing to resolve; the REQUIRED check reports it
+
+    plain = _blank_to_na(df[plain_col]) if plain_col else pd.Series(pd.NA, index=df.index, dtype="string")
+    trans = _blank_to_na(df[trans_col]) if trans_col else pd.Series(pd.NA, index=df.index, dtype="string")
+
+    if orig_col is not None:
+        original = _blank_to_na(df[orig_col])
+        # Rows already in the scrape language often carry no separate original.
+        original = original.fillna(plain) if trans_col is None else original.fillna(plain.where(trans.isna()))
+        analysis = trans.fillna(plain).fillna(original)
+        layout = f"original from `{orig_col}`"
+    elif trans_col is not None:
+        original = plain
+        analysis = trans.fillna(plain)
+        layout = f"original from `{plain_col}`, translation from `{trans_col}`"
+    else:
+        original = None
+        analysis = plain
+        layout = None
+
+    consumed = {c for c in (orig_col, trans_col, plain_col) if c}
+    df = df.drop(columns=sorted(consumed))
+    df["review_text"] = analysis
+    if layout is not None:
+        df["review_text_original"] = original
+
+    lang_col = _first_present(df, ORIGINAL_LANGUAGE_FIELDS)
+    if lang_col is not None:
+        df["original_language"] = _blank_to_na(df[lang_col])
+        if lang_col != "original_language":
+            # Keep the platform tag too, as review_language always was.
+            df = df.rename(columns={lang_col: "review_language"}) if "review_language" not in df.columns else df.drop(columns=[lang_col])
+
+    if layout is None:
+        notes.append(
+            "WARNING: the export has no original-text or translation field, so the reviewer's "
+            "own words cannot be separated from a Google translation. review_text_original "
+            "is left empty. Re-scrape with the actor's original-text output enabled "
+            "(see docs/BUILD_PLAN.txt, Phase 2)."
+        )
+    else:
+        kept = int(original.notna().sum())
+        differs = int((original.notna() & analysis.notna() & (original != analysis)).sum())
+        notes.append(
+            f"kept original-language text for {kept} row(s) ({layout}); "
+            f"{differs} differ from the analysis text, i.e. were translated"
+        )
+    return df, notes
 
 
 def normalize_columns(df: pd.DataFrame, extra_map: dict[str, str]) -> tuple[pd.DataFrame, list[str]]:
@@ -185,7 +282,12 @@ def main() -> int:
     df = pd.read_csv(source_path)
     print(f"  {len(df)} row(s), {len(df.columns)} column(s)")
 
+    # --map renames first, so a user can point an odd field at a known name.
+    if extra_map:
+        df = df.rename(columns={k: v for k, v in extra_map.items() if k in df.columns})
+    df, text_notes = resolve_text_columns(df)
     df, notes = normalize_columns(df, extra_map)
+    notes = text_notes + notes
 
     if "source" not in df.columns:
         if not args.source:
