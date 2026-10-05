@@ -1,0 +1,30 @@
+{
+  "n_surfaces": 96,
+  "n_entities": 78,
+  "n_merged_entities": 11,
+  "n_substantive_merges": 9,
+  "n_case_only_merges": 2,
+  "weights": {
+    "phonetic": 0.4,
+    "string": 0.25,
+    "containment": 0.2,
+    "geography": 0.15
+  },
+  "merge_threshold": 0.72,
+  "n_pairs_merged": 26,
+  "evaluation": {
+    "gold_surfaces": 34,
+    "gold_surfaces_present_in_corpus": 32,
+    "missing_from_corpus": [
+      "Char Bijoy",
+      "Gulyakhali"
+    ],
+    "bcubed_precision": 0.9688,
+    "bcubed_recall": 0.9688,
+    "bcubed_f1": 0.9688,
+    "purity": 0.9688
+  },
+  "notes": [
+    "embedding signal unavailable (needs torch); phonetic + string + geography only"
+  ]
+}

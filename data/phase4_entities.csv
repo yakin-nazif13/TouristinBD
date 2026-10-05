@@ -1,0 +1,79 @@
+entity_id,canonical_name,entity_type,n_variants,n_mentions,n_reviews,districts,divisions,languages
+E0023,Jaflong,PLACE,3,39,13,Sylhet,Sylhet,en
+E0027,Kuakata,PLACE,2,32,11,Patuakhali,Barishal,en
+E0024,Kaptai,PLACE,3,30,11,Rangamati,Chattogram,en
+E0001,Ahsan Manzil,PLACE,2,28,15,Dhaka,Dhaka,en
+E0012,Cox's Bazar,PLACE,5,27,18,Chattogram|Cox's Bazar|Patuakhali,Barishal|Chattogram,en
+E0041,Saint Martin,PLACE,1,25,14,Cox's Bazar,Chattogram,en
+E0020,Guliakhali,PLACE,3,24,15,Chattogram,Chattogram,en
+E0049,Sreemangal,PLACE,3,23,7,Moulvibazar,Sylhet,en
+E0048,Sonargaon,PLACE,1,22,13,Narayanganj,Dhaka,en
+E0032,Nilachal,PLACE,2,21,10,Bandarban,Chattogram,en
+E0003,Bandarban,PLACE,1,21,12,Bandarban,Chattogram,en
+E0025,Karamjal,PLACE,1,20,10,Bagerhat,Khulna,en
+E0039,Ratargul,PLACE,2,20,12,Sylhet,Sylhet,en
+E0035,Paharpur,PLACE,1,14,8,Naogaon,Rajshahi,en
+E0045,Sitakunda,PLACE,1,12,7,Chattogram,Chattogram,en
+E0031,Mongla,PLACE,1,10,6,Bagerhat,Khulna,en
+E0002,Bagerhat,PLACE,1,10,6,Bagerhat,Khulna,en
+E0038,Rangamati,PLACE,2,9,5,Rangamati,Chattogram,en
+E0037,Pashur,PLACE,1,5,4,Bagerhat,Khulna,en
+E0073,Muradpur,PLACE,2,4,4,Chattogram,Chattogram,en
+E0050,Sundarbans,PLACE,1,3,3,Bagerhat|Chattogram|Sylhet,Chattogram|Khulna|Sylhet,en
+E0016,Gangamati,PLACE,1,3,2,Patuakhali,Barishal,en
+E0004,Best Time to Visit,TIP,1,1,1,Chattogram,Chattogram,en
+E0005,Best time to visit,TIP,1,1,1,Patuakhali,Barishal,en
+E0013,Fatrar Chor,PLACE,1,1,1,Patuakhali,Barishal,en
+E0010,Chor Bijoy,PLACE,1,1,1,Patuakhali,Barishal,en
+E0008,Carry water but don't litter,TIP,1,1,1,Bagerhat,Khulna,en
+E0009,Chandranath,PLACE,1,1,1,Chattogram,Chattogram,en
+E0007,Carry water,TIP,1,1,1,Chattogram,Chattogram,en
+E0006,Boga Lake,PLACE,1,1,1,Bandarban,Chattogram,en
+E0070,get off at Fokirhat Bazar and take a CNG,ACCESS,1,1,1,Chattogram,Chattogram,en
+E0014,Fokirhat,PLACE,1,1,1,Chattogram,Chattogram,en
+E0029,Lawachara,PLACE,1,1,1,Moulvibazar,Sylhet,en
+E0030,Madhabpur Lake,PLACE,1,1,1,Moulvibazar,Sylhet,en
+E0033,Nilgiri,PLACE,1,1,1,Bandarban,Chattogram,en
+E0043,Sardar Bari,PLACE,1,1,1,Narayanganj,Dhaka,en
+E0060,best time to visit is between November and March,TIP,1,1,1,Cox's Bazar,Chattogram,en
+E0061,best time to visit is definitely during the,TIP,1,1,1,Sylhet,Sylhet,en
+E0059,best time to visit Kuakata is during the cooler,TIP,1,1,1,Patuakhali,Barishal,en
+E0056,bargain for the boat price,TIP,1,1,1,Sylhet,Sylhet,en
+E0057,bargaining skills mostly,TIP,1,1,1,Rangamati,Chattogram,en
+E0058,best time to visit,TIP,1,1,1,Dhaka,Dhaka,en
+E0067,engine boat from Mongla,ACCESS,1,1,1,Bagerhat,Khulna,en
+E0062,best time to visit this place,TIP,1,1,1,Naogaon,Rajshahi,en
+E0018,Go in the morning to beat the crowd,TIP,1,1,1,Sylhet,Sylhet,en
+E0017,Go early,TIP,1,1,1,Cox's Bazar,Chattogram,en
+E0077,take a boat to reach the main beach,ACCESS,1,1,1,Chattogram,Chattogram,en
+E0071,get off at Sitakunda Bazar,ACCESS,1,1,1,Chattogram,Chattogram,en
+E0072,go early morning or evening,TIP,1,1,1,Cox's Bazar,Chattogram,en
+E0074,take a CNG or auto from there,ACCESS,1,1,1,Chattogram,Chattogram,en
+E0075,take a boat,ACCESS,1,1,1,Chattogram,Chattogram,en
+E0068,engine boat from kaptai boat station,ACCESS,1,1,1,Rangamati,Chattogram,en
+E0069,engine boat from the Mongla Ferry Ghat through,ACCESS,1,1,1,Bagerhat,Khulna,en
+E0066,carry your essentials,TIP,1,1,1,Sylhet,Sylhet,en
+E0064,bus from Dhaka or Chittagong,ACCESS,1,1,1,Chattogram,Chattogram,en
+E0076,take a boat ride to the precise Zero,ACCESS,1,1,1,Sylhet,Sylhet,en
+E0078,visit early in the morning for,TIP,1,1,1,Sylhet,Sylhet,en
+E0055,bargain at all the nearby shops,TIP,1,1,1,Sylhet,Sylhet,en
+E0063,boat from kaptai station,ACCESS,1,1,1,Rangamati,Chattogram,en
+E0065,carry with me,TIP,1,1,1,Cox's Bazar,Chattogram,en
+E0011,Civic Inn,PLACE,1,0,0,Dhaka,Dhaka,
+E0015,Foy's Lake Resort,PLACE,1,0,0,Chattogram,Chattogram,
+E0046,Sixty Dome Mosque,PLACE,1,0,0,Bagerhat,Khulna,
+E0044,Sea Cox Hotel,PLACE,1,0,0,Cox's Bazar,Chattogram,
+E0040,Royal Pearl Suites,PLACE,1,0,0,Cox's Bazar,Chattogram,
+E0042,Saint Martins Island,PLACE,1,0,0,Cox's Bazar,Chattogram,
+E0034,Noorjahan Grand Hotel,PLACE,1,0,0,Sylhet,Sylhet,
+E0036,Panam City,PLACE,1,0,0,Narayanganj,Dhaka,
+E0026,Kollol Hotel,PLACE,1,0,0,Cox's Bazar,Chattogram,
+E0028,Lalbagh Fort,PLACE,1,0,0,Dhaka,Dhaka,
+E0022,Hoque Tower International,PLACE,1,0,0,Chattogram,Chattogram,
+E0021,Heritage Hotel Chittagong,PLACE,1,0,0,Chattogram,Chattogram,
+E0019,Green Edge Hotel,PLACE,1,0,0,Dhaka,Dhaka,
+E0051,Sundarbans (Karamjal Wildlife Centre),PLACE,1,0,0,Bagerhat,Khulna,
+E0054,West Park Inn,PLACE,1,0,0,Dhaka,Dhaka,
+E0052,Sylhet Paradise Inn,PLACE,1,0,0,Sylhet,Sylhet,
+E0053,The Crystal Rose Hotel,PLACE,1,0,0,Sylhet,Sylhet,
+E0047,Sompur Mahavihar (Paharpur),PLACE,1,0,0,Naogaon,Rajshahi,

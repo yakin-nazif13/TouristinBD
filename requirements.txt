@@ -11,6 +11,9 @@ openai
 python-dotenv
 # Phase 2 language detection (seeded for reproducibility; see run_phase2_preprocessing.py)
 langdetect
+# Phase 4 entity resolution (BUILD_PLAN 5.3): string similarity over place-name
+# variants. Pure wheel, no compiler, and no torch — resolution runs locally.
+rapidfuzz
 scipy
 fastapi
 uvicorn[standard]

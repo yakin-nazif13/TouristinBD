@@ -1,0 +1,35 @@
+surface,group_id,group_label,basis,notes
+Guliakhali,1,Guliakhali Sea Beach,BUILD_PLAN line 67,"plan: ""Spelling variants of one place already appear: Guliakhali / Guliyakhali / Gulyakhali"""
+Guliyakhali,1,Guliakhali Sea Beach,BUILD_PLAN line 67,
+Gulyakhali,1,Guliakhali Sea Beach,BUILD_PLAN line 67,
+Guliakhali Sea Beach,1,Guliakhali Sea Beach,corpus place_name,the official form the corpus uses
+Chor Bijoy,2,Char Bijoy,BUILD_PLAN lines 63 and 318,plan names this pair as a resolution test case
+Char Bijoy,2,Char Bijoy,BUILD_PLAN lines 63 and 318,
+Srimangal,3,Sreemangal,corpus surfaces,two romanisations of one town; both appear in the corpus
+Sreemangal,3,Sreemangal,corpus surfaces,
+Srimangal Tea Garden,3,Sreemangal,corpus place_name,the corpus's own place name for the same town
+Kaptai,4,Kaptai Lake,corpus surfaces,case variant observed in extraction
+kaptai,4,Kaptai Lake,corpus surfaces,
+Kaptai Lake,4,Kaptai Lake,corpus place_name,
+Saint Martin,5,Saint Martin's Island,corpus surfaces,qualifier-stripped form
+Saint Martins Island,5,Saint Martin's Island,corpus place_name,corpus spells it without the apostrophe
+Jaflong,6,Jaflong Zero Point,corpus surfaces,singleton: must not merge with any other group
+Jaflong Zero Point,6,Jaflong Zero Point,corpus place_name,
+Kuakata,7,Kuakata Beach,corpus surfaces,singleton
+Kuakata Beach,7,Kuakata Beach,corpus place_name,
+Bandarban,8,Bandarban,corpus surfaces,singleton
+Ratargul,9,Ratargul Swamp Forest,corpus surfaces,singleton
+Ratargul Swamp Forest,9,Ratargul Swamp Forest,corpus place_name,
+Nilachal,10,Nilachal,corpus surfaces,singleton
+Mongla,11,Mongla,corpus surfaces,"singleton; deliberately included because it fuzzy-matches ""Mangal"" and must not merge"
+Paharpur,12,Paharpur,corpus surfaces,singleton
+Bagerhat,13,Bagerhat,corpus surfaces,singleton
+Sitakunda,14,Sitakunda,corpus surfaces,singleton
+Rangamati,15,Rangamati,corpus surfaces,singleton
+Ahsan Manzil,16,Ahsan Manzil,corpus surfaces,singleton
+Pashur,17,Pashur River,corpus surfaces,singleton
+Sundarbans,18,Sundarbans,corpus surfaces,"singleton; Karamjal is a centre INSIDE it, not a variant name, so they are separate groups"
+Karamjal,19,Karamjal Wildlife Centre,corpus surfaces,"separate from Sundarbans on purpose: containment is not equivalence"
+Sonargaon,20,Sonargaon,corpus surfaces,"singleton; Panam City sits within it but is a distinct site"
+Cox's Bazar,21,Cox's Bazar,corpus surfaces,"singleton; kept apart from ""Cox's Bazar Beach"" because the town and the beach are not the same entity"
+Cox's Bazar Beach,22,Cox's Bazar Beach,corpus place_name,"separate from the town above; merge them only if a human decides the register should"

@@ -58,6 +58,12 @@ jobs:
       - name: Phase 4 — entity layer and grounding rule (BUILD_PLAN 5)
         run: python scripts/test_gem_schema.py
 
+      - name: Install the Phase 4 resolution dependency
+        run: pip install rapidfuzz
+
+      - name: Phase 4 — entity resolution (BUILD_PLAN 5.3)
+        run: python scripts/test_resolve_entities.py
+
       - name: Phase 5 — human-validation tooling tests
         run: python scripts/test_phase5_human_validation.py
 
