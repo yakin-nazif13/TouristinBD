@@ -1,0 +1,95 @@
+# Phase 6 — sensitivity analysis, run on a Linux runner.
+#
+# This phase needs torch + sentence-transformers, which the `tests` workflow
+# deliberately skips. It cannot run on every machine either: Windows Smart App
+# Control blocks torch's unsigned DLLs, so a run here is the portable way to
+# get the result. No API key is needed — Phase 6 maps topics to the fixed
+# Phase 4 preference list by embedding similarity, with no LLM call.
+#
+# Manual trigger only: the install is large and the phase retrains BERTopic
+# once per subsample size.
+#
+# The job does not commit anything. It uploads the regenerated artifacts and
+# prints a baseline-vs-new comparison to the run summary, so the result can be
+# read and then committed deliberately rather than by a bot.
+name: phase6
+
+on:
+  workflow_dispatch:
+
+jobs:
+  sensitivity:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Install the research stack
+        run: pip install -r requirements.txt
+
+      # Kept so the run can report whether the committed numbers changed. The
+      # committed artifacts were produced before the CRC32 sampling fix, so a
+      # difference here is the expected outcome, not a failure.
+      - name: Keep the committed artifacts as a baseline
+        run: |
+          mkdir -p baseline
+          cp data/phase6_sensitivity_metrics.csv baseline/ 2>/dev/null || true
+          cp data/phase6_sensitivity_mappings.csv baseline/ 2>/dev/null || true
+          cp data/phase6_sensitivity_report.json baseline/ 2>/dev/null || true
+          cp data/phase6_sensitivity_report.md baseline/ 2>/dev/null || true
+
+      - name: Run Phase 6
+        run: python scripts/run_phase6_sensitivity_analysis.py
+
+      - name: Confirm the sampling is reproducible
+        run: python scripts/test_phase6_reproducibility.py
+
+      - name: Compare with the committed baseline
+        if: always()
+        run: |
+          {
+            echo "## Phase 6 — new run"
+            echo
+            echo "### Metrics"
+            echo '```'
+            cat data/phase6_sensitivity_metrics.csv
+            echo '```'
+            echo
+            echo "### Report"
+            cat data/phase6_sensitivity_report.md
+            echo
+            echo "### Diff vs the committed artifacts"
+            echo
+            if diff -u baseline/phase6_sensitivity_metrics.csv data/phase6_sensitivity_metrics.csv > /tmp/metrics.diff; then
+              echo "Metrics are unchanged — the committed numbers survive the fixed sampling."
+            else
+              echo "Metrics changed:"
+              echo '```diff'
+              cat /tmp/metrics.diff
+              echo '```'
+            fi
+            echo
+            if diff -q baseline/phase6_sensitivity_mappings.csv data/phase6_sensitivity_mappings.csv > /dev/null 2>&1; then
+              echo "Topic-preference mappings are unchanged."
+            else
+              echo "Topic-preference mappings changed — the Jaccard column above is the thing to read."
+            fi
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Upload the regenerated artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: phase6-artifacts
+          path: |
+            data/phase6_sensitivity_metrics.csv
+            data/phase6_sensitivity_mappings.csv
+            data/phase6_sensitivity_report.json
+            data/phase6_sensitivity_report.md
+            data/phase6_sensitivity_chart.png
+          if-no-files-found: error
