@@ -48,6 +48,11 @@ jobs:
       - name: Phase 3 — Banglish classifier tests
         run: python scripts/test_banglish_classifier.py
 
+      # The benchmark's model loading needs torch and runs in
+      # phase3-embeddings.yml; these cover the metrics and the test-set builder.
+      - name: Phase 3 — embedding benchmark tests
+        run: python scripts/test_embedding_benchmark.py
+
       - name: Phase 5 — human-validation tooling tests
         run: python scripts/test_phase5_human_validation.py
 

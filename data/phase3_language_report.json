@@ -1,0 +1,24 @@
+{
+  "n_reviews": 538,
+  "by_label": {
+    "bn": 4,
+    "en": 532,
+    "mixed": 1,
+    "other": 1
+  },
+  "by_method": {
+    "lid": 452,
+    "script": 4,
+    "script-mix": 1,
+    "short-text": 81
+  },
+  "by_text_basis": {
+    "clean": 538
+  },
+  "original_text_share": 0.0,
+  "bangla_or_banglish_share": 0.0093,
+  "notes": [
+    "no trained Banglish classifier; using the lexicon heuristic (train it with scripts/banglish_classifier.py --train)",
+    "fastText lid.176 not present; using langdetect for Latin-script languages"
+  ]
+}

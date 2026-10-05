@@ -1,0 +1,96 @@
+# Phase 3 — the embedding model benchmark (BUILD_PLAN 4.3).
+#
+# Needs sentence-transformers, so it cannot run on a machine where Windows
+# Smart App Control blocks torch's unsigned DLLs. A Linux runner is the
+# portable way to get the table.
+#
+# Manual trigger only. The four candidate models are a few GB of downloads, and
+# the benchmark is something you run when the test set changes, not on a push.
+#
+# No secrets and no cost: the models come from the Hugging Face hub, which is
+# free and needs no token for public models.
+#
+# The job commits nothing. It prints the table to the run summary and uploads
+# the artifacts, so the choice of model stays a decision someone makes.
+name: phase3-embeddings
+
+on:
+  workflow_dispatch:
+    inputs:
+      models:
+        description: "Comma-separated subset: minilm, labse, e5-base, bge-m3"
+        required: false
+        default: "minilm,labse,e5-base,bge-m3"
+
+jobs:
+  benchmark:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Install the research stack
+        run: pip install -r requirements.txt
+
+      # Cached across runs so re-running with a changed test set does not
+      # re-download several GB of weights.
+      - name: Cache the Hugging Face hub
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/huggingface
+          key: hf-${{ hashFiles('requirements.txt') }}
+          restore-keys: hf-
+
+      - name: Build the test set from the corpus
+        id: triples
+        continue-on-error: true
+        run: python scripts/run_phase3_embedding_benchmark.py --build-triples
+
+      # The benchmark refuses a test set under 30 triples, which is the
+      # expected outcome until the re-scrape keeps original-language text. Run
+      # it anyway so the run summary carries the reason rather than being blank.
+      - name: Run the benchmark
+        id: bench
+        continue-on-error: true
+        run: |
+          python scripts/run_phase3_embedding_benchmark.py \
+            --models "${{ inputs.models }}" | tee /tmp/bench.log
+
+      - name: Summarise
+        if: always()
+        run: |
+          {
+            echo "## Phase 3 — embedding benchmark"
+            echo
+            if [ -f data/embedding_triples.csv ]; then
+              echo "Test-set rows: $(( $(wc -l < data/embedding_triples.csv) - 1 ))"
+              echo
+            fi
+            if [ -f data/phase3_embedding_benchmark.md ]; then
+              cat data/phase3_embedding_benchmark.md
+            else
+              echo "### No table produced"
+              echo
+              echo "The benchmark refused to run. Its reason:"
+              echo '```'
+              cat /tmp/bench.log 2>/dev/null || echo "(no output captured)"
+              echo '```'
+            fi
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Upload the artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: phase3-embedding-benchmark
+          path: |
+            data/embedding_triples.csv
+            data/phase3_embedding_benchmark.csv
+            data/phase3_embedding_benchmark.md
+            data/phase3_embedding_benchmark.json
+          if-no-files-found: warn
