@@ -250,6 +250,9 @@ pushed to a public host (the GitHub repo exists; no Render service yet).
   - [x] MVP ladder (paper uses 20k/40k/60k/80k): **151 / 247 / 398 / 538** reviews.
   - [x] Original results (10-preference taxonomy): coverage rose **2/10 → 9/10** with
         sample size, stabilizing only at the full corpus; recommended minimum: **538**.
+  - [!] **SUPERSEDED (2026-10-06) — see "Phase 6 seeding fix" below.** The result in the
+        next bullet came from unseeded sampling/UMAP and is not reproducible. The committed
+        `phase6_*` artifacts still hold that old run until Phase 6 is re-run and committed.
   - [x] **Re-run on the 5-preference taxonomy (2026-09-05): a strictly better result.**
         All **5/5 preferences are covered from 247 reviews onward**, and the mapped set
         stops changing at 398 (Jaccard vs previous = 1.000 at 398 and 538). Recommended
@@ -509,6 +512,31 @@ the API do not; several fixed numbers did. What changed:
 - [ ] Not addressed: BERTopic leaves a large outlier share on diverse text (38% on the
       synthetic 10k); `reduce_outliers` is an option if real data behaves the same.
 
+## Phase 6 seeding fix (2026-10-06)
+The CRC32 fix (2026-09-22) made the *review samples* reproducible, but Phase 6's BERTopic
+fits still used an unseeded UMAP, so the topic model differed on every run. Now seeded
+(`--seed`, default 42, used for both samples and UMAP); above 1,500 reviews the minimum
+topic size and topic cap follow the same scaling as Phase 3. Verified: three unseeded fits
+of the same sample gave 8, 6 and 6 topics; two seeded fits are identical, and two full
+Phase 6 runs produced byte-identical metrics (`test_phase6_reproducibility.py`, 14 tests).
+
+**First reproducible result (run in a scratch copy; committed artifacts NOT yet replaced):**
+
+| Sample | Topics | Preferences covered | Jaccard vs previous |
+|---|---|---|---|
+| 151 | 5 | 5/5 | 1.0 |
+| 247 | 2 | 2/5 | 0.4 |
+| 398 | 5 | 4/5 | 0.5 |
+| 538 | 10 | 5/5 | 0.8 |
+
+No size reaches Jaccard >= 0.95, so the recommended minimum is "not reached". The earlier
+"all 5/5 covered from 247, stable at 398" claim is **not supported** and should not be
+quoted. This is one seed on a very small corpus (247 reviews gives only 2 topics), so treat
+it as "unstable at this size", not as a measured curve; run several seeds on the larger
+corpus (build plan 6.3) before drawing a conclusion.
+- [ ] Re-run Phase 6 for real (`.venv/bin/python scripts/run_phase6_sensitivity_analysis.py`),
+      then Phase 7, `build_phase8_database.py` and the test suites, and commit the artifacts.
+
 ## Notes for next session
 - The site: `.venv/bin/python -m backend.main`, then open <http://127.0.0.1:8000/app/>.
   It runs entirely on the real corpus now — no mock data anywhere in the project.
@@ -535,7 +563,7 @@ the API do not; several fixed numbers did. What changed:
 - Rebuild the database after re-running any earlier phase (Phase 1-7 output changed):
   `.venv/bin/python scripts/build_phase8_database.py`
 - Run the API: `.venv/bin/python -m backend.main` (site at /app/, docs at /docs).
-- Verify everything after any change — ten suites, 548 tests, ~1.5 min total:
+- Verify everything after any change — ten suites, 551 tests, ~1.5 min total:
   `test_phase2_preprocessing.py`, `test_phase5_human_validation.py`,
   `test_phase6_reproducibility.py`, `test_phase8_api.py`, `test_phase8_rebuild.py`,
   `test_phase9_chat.py`, `test_phase10_itinerary.py`, `test_phase11_frontend.py`,

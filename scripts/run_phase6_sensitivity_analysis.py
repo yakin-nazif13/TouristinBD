@@ -20,7 +20,10 @@ Tracks:
 
 from __future__ import annotations
 
+import argparse
 import json
+import os
+import sys
 import zlib
 from pathlib import Path
 
@@ -31,9 +34,13 @@ from bertopic import BERTopic
 from sentence_transformers import SentenceTransformer
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
+from umap import UMAP
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+import corpus_scaling as scaling  # noqa: E402
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
-DATA_DIR = REPO_ROOT / "data"
+DATA_DIR = Path(os.environ.get("TOURISTINBD_DATA_DIR") or (REPO_ROOT / "data"))
 
 REVIEWS_PATH = DATA_DIR / "processed_reviews.csv"
 PREFERENCES_PATH = DATA_DIR / "preference_classification.csv"
@@ -116,6 +123,10 @@ def stratified_sample(df: pd.DataFrame, n: int, seed: int) -> pd.DataFrame:
 
 def adaptive_min_topic_size(n: int) -> int:
     # Keep clusters formable on small subsamples without inventing tiny noise topics.
+    # Up to 1,500 reviews this is the original rule; beyond that it follows the same
+    # corpus-size scaling as Phase 3 so a 10k ladder does not shatter into tiny topics.
+    if n > 1500:
+        return scaling.choose_min_topic_size(n)
     return max(3, min(6, n // 40))
 
 
@@ -134,11 +145,17 @@ def fit_topics(
     texts: list[str],
     embedder: SentenceTransformer,
     min_topic_size: int,
+    seed: int = RANDOM_SEED,
 ) -> pd.DataFrame:
+    # BERTopic's own UMAP defaults plus a fixed seed. Without it the topic model
+    # differs on every run even when the review sample is identical (the sample
+    # was made reproducible separately, in stratified_sample).
+    umap_model = UMAP(n_neighbors=15, n_components=5, min_dist=0.0, metric="cosine", random_state=seed)
     model = BERTopic(
         embedding_model=embedder,
+        umap_model=umap_model,
         min_topic_size=min_topic_size,
-        nr_topics="auto",
+        nr_topics=scaling.choose_nr_topics(len(texts)),
         vectorizer_model=CountVectorizer(ngram_range=(1, 2), stop_words="english"),
         top_n_words=10,
         verbose=False,
@@ -224,11 +241,12 @@ def run_size(
     pref_texts: list[str],
     pref_ids: list[str],
     preferences: pd.DataFrame,
+    seed: int = RANDOM_SEED,
 ) -> tuple[dict, pd.DataFrame]:
     texts = build_texts(sample)
     min_size = adaptive_min_topic_size(sample_size)
     print(f"  fitting BERTopic (n={sample_size}, min_topic_size={min_size})")
-    topics = fit_topics(texts, embedder, min_size)
+    topics = fit_topics(texts, embedder, min_size, seed)
     mappings = map_topics_to_preferences(
         topics, pref_texts, pref_ids, preferences, embedder
     )
@@ -307,7 +325,13 @@ def recommend_min_size(metrics_df: pd.DataFrame) -> dict:
 
 
 def main() -> None:
-    print("Phase 6 — sensitivity analysis (hybrid, non-destructive)")
+    parser = argparse.ArgumentParser(description="Phase 6: sensitivity analysis")
+    parser.add_argument("--seed", type=int, default=RANDOM_SEED,
+                        help="seed for both the stratified samples and UMAP (default %(default)s)")
+    args = parser.parse_args()
+    seed = args.seed
+
+    print(f"Phase 6 — sensitivity analysis (hybrid, non-destructive), seed={seed}")
     reviews = pd.read_csv(REVIEWS_PATH)
     preferences = pd.read_csv(PREFERENCES_PATH)
     if "review_text_clean" not in reviews.columns:
@@ -340,9 +364,9 @@ def main() -> None:
 
     for size in sample_sizes:
         print(f"\n=== sample_size={size} ===")
-        sample = stratified_sample(reviews, size, seed=RANDOM_SEED + size)
+        sample = stratified_sample(reviews, size, seed=seed + size)
         metrics, mappings = run_size(
-            sample, size, embedder, pref_texts, pref_ids, preferences
+            sample, size, embedder, pref_texts, pref_ids, preferences, seed
         )
         metrics["sample_fraction"] = round(size / corpus_n, 4)
         mapped = set(metrics["mapped_preference_ids"])
@@ -415,6 +439,7 @@ def main() -> None:
             ),
             "paper_ladder": [20000, 40000, 60000, 80000],
             "mvp_ladder": sample_sizes,
+            "seed": seed,
             "tau_sim": TAU_SIM,
             "stability_delta": STABILITY_DELTA,
             "embedding_model": EMBEDDING_MODEL_NAME,

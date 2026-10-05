@@ -29,14 +29,14 @@ FAILED: list[str] = []
 PROBE = r"""
 import sys, types, importlib
 sys.path.insert(0, {scripts!r})
-for name in ("bertopic", "sentence_transformers", "matplotlib", "matplotlib.pyplot",
+for name in ("bertopic", "sentence_transformers", "umap", "matplotlib", "matplotlib.pyplot",
              "sklearn", "sklearn.feature_extraction", "sklearn.feature_extraction.text",
              "sklearn.metrics", "sklearn.metrics.pairwise"):
     try:
         importlib.import_module(name)
     except Exception:
         mod = types.ModuleType(name)
-        for attr in ("BERTopic", "SentenceTransformer", "CountVectorizer", "cosine_similarity"):
+        for attr in ("BERTopic", "SentenceTransformer", "CountVectorizer", "cosine_similarity", "UMAP"):
             setattr(mod, attr, object)
         sys.modules[name] = mod
 if "matplotlib" in sys.modules and not hasattr(sys.modules["matplotlib"], "pyplot"):
@@ -49,6 +49,32 @@ for frac in p6.SAMPLE_FRACTIONS:
     ids = p6.stratified_sample(df, n, p6.RANDOM_SEED)["review_id"].astype(str).tolist()
     print(n, ",".join(ids))
 """
+
+
+# The topic MODEL must be reproducible too, not just the sample. This runs the real
+# BERTopic fit twice on one fixed sample and prints a fingerprint of the topics.
+# It needs the research stack and the cached embedding model, so it is skipped
+# (not failed) where those are missing, e.g. in CI.
+FIT_PROBE = r"""
+import sys, hashlib
+sys.path.insert(0, {scripts!r})
+import pandas as pd
+from sentence_transformers import SentenceTransformer
+import run_phase6_sensitivity_analysis as p6
+df = pd.read_csv(p6.REVIEWS_PATH)
+sample = p6.stratified_sample(df, 300, p6.RANDOM_SEED)
+texts = p6.build_texts(sample)
+embedder = SentenceTransformer(p6.EMBEDDING_MODEL_NAME, device="cpu")
+topics = p6.fit_topics(texts, embedder, p6.adaptive_min_topic_size(300), seed={seed})
+print(hashlib.md5(topics.to_csv(index=False).encode()).hexdigest(), len(topics))
+"""
+
+
+def fit_fingerprint(seed: int) -> subprocess.CompletedProcess:
+    env = {**os.environ, "HF_HUB_OFFLINE": "1", "TOKENIZERS_PARALLELISM": "false"}
+    code = FIT_PROBE.format(scripts=str(REPO_ROOT / "scripts"), seed=seed)
+    return subprocess.run([sys.executable, "-c", code], cwd=REPO_ROOT, env=env,
+                          capture_output=True, text=True)
 
 
 def check(name: str, condition: bool, detail: str = "") -> None:
@@ -92,8 +118,20 @@ def main() -> None:
               len(id_list) == int(n) == len(set(id_list)), f"{len(id_list)} ids")
     check("sizes increase", sizes == sorted(sizes), str(sizes))
 
+    print("\ntopic model (needs the research stack; skipped if unavailable)")
+    a, b = fit_fingerprint(42), fit_fingerprint(42)
+    if a.returncode != 0 or b.returncode != 0:
+        print("  SKIP  BERTopic/embedding model not available here: "
+              + (a.stderr.strip().splitlines() or ["unknown error"])[-1][:120])
+    else:
+        check("two BERTopic fits with the same seed give identical topics",
+              a.stdout.strip() == b.stdout.strip(), f"{a.stdout.strip()} vs {b.stdout.strip()}")
+        c = fit_fingerprint(7)
+        check("a different seed is accepted", c.returncode == 0, c.stderr[-300:])
+
     source = (REPO_ROOT / "scripts" / "run_phase6_sensitivity_analysis.py").read_text()
     check("no built-in hash() in the Phase 6 script", "hash(str(" not in source, "found hash(str(")
+    check("the Phase 6 topic model is seeded", "random_state=seed" in source, "UMAP is unseeded")
     finish()
 
 
