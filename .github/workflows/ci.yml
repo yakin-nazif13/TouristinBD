@@ -37,6 +37,17 @@ jobs:
       - name: Provenance schema tests (BUILD_PLAN 3.5)
         run: python scripts/test_corpus_schema.py
 
+      # The language pipeline and the Banglish classifier need scikit-learn but
+      # not torch, so CI can run them without the heavy install.
+      - name: Install the Phase 3 language dependencies
+        run: pip install scikit-learn
+
+      - name: Phase 3 — language pipeline tests (BUILD_PLAN 4.1, 4.2)
+        run: python scripts/test_language_id.py
+
+      - name: Phase 3 — Banglish classifier tests
+        run: python scripts/test_banglish_classifier.py
+
       - name: Phase 5 — human-validation tooling tests
         run: python scripts/test_phase5_human_validation.py
 

@@ -160,10 +160,14 @@ def phonetic_key(text: str) -> str:
     for char in text:
         if char in _BENGALI_TO_LATIN:
             pieces.append(_BENGALI_TO_LATIN[char])
-        elif char.isalnum():
+        elif ("a" <= char <= "z") or char.isdigit():
             pieces.append(char)
         elif char.isspace():
             pieces.append(" ")
+        # Any other script is dropped rather than passed through. `isalnum()`
+        # is true for Arabic, Devanagari and CJK, and letting those into the
+        # key produced mojibake fragments from a corpus review that quoted
+        # Arabic. The key only claims to cover Bengali and Latin.
     key = "".join(pieces)
 
     for source, target in _LATIN_FOLD:
