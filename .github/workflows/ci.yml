@@ -53,6 +53,11 @@ jobs:
       - name: Phase 3 — embedding benchmark tests
         run: python scripts/test_embedding_benchmark.py
 
+      # The grounding rule is the project's no-hallucination guarantee, so it
+      # is checked on every push. No model or key involved.
+      - name: Phase 4 — entity layer and grounding rule (BUILD_PLAN 5)
+        run: python scripts/test_gem_schema.py
+
       - name: Phase 5 — human-validation tooling tests
         run: python scripts/test_phase5_human_validation.py
 

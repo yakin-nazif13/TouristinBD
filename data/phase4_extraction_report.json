@@ -1,0 +1,26 @@
+{
+  "extractor": "gazetteer",
+  "n_reviews": 538,
+  "n_mentions": 440,
+  "reviews_with_a_mention": 169,
+  "by_entity_type": {
+    "ACCESS": 11,
+    "PLACE": 411,
+    "TIP": 18
+  },
+  "distinct_surfaces": 69,
+  "grounding": {
+    "candidates": 440,
+    "kept": 440,
+    "dropped": 0,
+    "drop_rate": 0.0,
+    "by_match_kind": {
+      "exact": 440
+    },
+    "dropped_reasons": {},
+    "dropped_examples": []
+  },
+  "notes": [
+    "gazetteer of 87 known names (corpus + geography + 3.1 anchors)"
+  ]
+}
