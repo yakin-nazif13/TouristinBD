@@ -50,6 +50,9 @@ from pathlib import Path
 
 import pandas as pd
 
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from corpus_schema import PROVENANCE_COLUMNS  # noqa: E402
+
 REPO_ROOT = Path(__file__).resolve().parents[1]
 DATA_DIR = Path(os.environ.get("TOURISTINBD_DATA_DIR") or (REPO_ROOT / "data"))
 
@@ -103,8 +106,14 @@ OUTPUT_COLUMNS = [
     "source_url",
 ]
 
-# Written after OUTPUT_COLUMNS, and only when some batch provides them.
-OPTIONAL_OUTPUT_COLUMNS = ["review_text_original", "original_language"]
+# Written after OUTPUT_COLUMNS, and only when some batch provides them. Keeping
+# them optional is what lets the committed 538-review corpus — collected before
+# any of these columns existed — still reproduce byte for byte.
+OPTIONAL_OUTPUT_COLUMNS = [
+    "review_text_original",
+    "original_language",
+    *PROVENANCE_COLUMNS,
+]
 
 # Raw column -> output column, for the two that get renamed.
 RENAMES = {"review_text": "review_text_clean", "review_language": "platform_language_tag"}

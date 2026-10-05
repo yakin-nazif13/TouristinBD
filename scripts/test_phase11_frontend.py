@@ -62,7 +62,13 @@ def test_served() -> None:
     print("\nfrontend — served by the API")
     r = client.get("/app/")
     check("GET /app/ serves the page", r.status_code == 200, str(r.status_code))
-    check("served page is the file on disk", r.text.strip() == HTML.strip(), "content differs")
+    # Newlines are normalised on both sides: git checks the page out with CRLF
+    # on Windows (core.autocrlf), StaticFiles serves those bytes untouched, and
+    # read_text() has already collapsed them to LF. The check is that the served
+    # page is the same document, not that it has the same line endings.
+    served = r.text.replace("\r\n", "\n").strip()
+    check("served page is the file on disk", served == HTML.replace("\r\n", "\n").strip(),
+          "content differs")
     r = client.get("/", follow_redirects=False)
     check(
         "/ redirects to the interface",

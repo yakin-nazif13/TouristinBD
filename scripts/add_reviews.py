@@ -44,6 +44,9 @@ from pathlib import Path
 
 import pandas as pd
 
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from corpus_schema import PROVENANCE_COLUMNS, SOURCE_TYPES, source_type_of, utc_now_iso  # noqa: E402
+
 REPO_ROOT = Path(__file__).resolve().parents[1]
 DATA_DIR = Path(os.environ.get("TOURISTINBD_DATA_DIR") or (REPO_ROOT / "data"))
 PHASE2 = REPO_ROOT / "scripts" / "run_phase2_preprocessing.py"
@@ -68,6 +71,9 @@ OPTIONAL = [
     # Multilingual provenance (see resolve_text_columns).
     "review_text_original",
     "original_language",
+    # Collection provenance (BUILD_PLAN 3.5), stamped below when the export
+    # does not carry them.
+    *PROVENANCE_COLUMNS,
 ]
 
 # Review-body fields, by what they are known to contain. Actors disagree on
@@ -118,6 +124,14 @@ ALIASES = {
     "userLocation": "user_location",
     "numberOfNights": "nights_stayed",
     "checkInDate": "review_date",
+    # place coordinates (BUILD_PLAN 3.5). Apify's CSV export flattens nested
+    # objects with a slash, so `location/lat` is the usual Google Maps shape.
+    "location/lat": "lat",
+    "location/lng": "lng",
+    "latitude": "lat",
+    "longitude": "lng",
+    "placeLat": "lat",
+    "placeLng": "lng",
 }
 
 
@@ -227,6 +241,59 @@ def normalize_columns(df: pd.DataFrame, extra_map: dict[str, str]) -> tuple[pd.D
     return df[keep].copy(), notes
 
 
+def stamp_provenance(df: pd.DataFrame, args: argparse.Namespace) -> tuple[pd.DataFrame, list[str]]:
+    """Fill the BUILD_PLAN 3.5 provenance columns for this batch.
+
+    An explicit flag always wins. Otherwise a value already in the export is
+    kept, so an actor that reports coordinates or its own collection date is
+    not overwritten. `collected_at` falls back to now and `discovery_round` to
+    0, but `anchor_place` is left empty when unknown: claiming a review came
+    from an anchor page it did not come from would corrupt the snowball record
+    that section 3.2 asks to be part of the method.
+    """
+    notes: list[str] = []
+
+    def fill(column: str, value: object, label: str) -> None:
+        if value is None:
+            return
+        df[column] = value
+        notes.append(f"set {column}={label} for every row")
+
+    if args.source_type:
+        fill("source_type", args.source_type, args.source_type)
+    elif "source_type" not in df.columns or df["source_type"].isna().all():
+        derived = df["source"].map(source_type_of) if "source" in df.columns else None
+        if derived is not None and derived.notna().any():
+            df["source_type"] = derived
+            notes.append(f"derived source_type from source: {sorted(set(derived.dropna()))}")
+
+    fill("anchor_place", args.anchor_place, repr(args.anchor_place))
+
+    if args.discovery_round is not None:
+        if args.discovery_round < 0:
+            raise ValueError("--discovery-round cannot be negative")
+        fill("discovery_round", args.discovery_round, str(args.discovery_round))
+    elif "discovery_round" not in df.columns:
+        df["discovery_round"] = 0
+        notes.append("set discovery_round=0 (anchor) for every row")
+
+    if args.collected_at:
+        fill("collected_at", args.collected_at, args.collected_at)
+    elif "collected_at" not in df.columns or df["collected_at"].isna().all():
+        stamp = utc_now_iso()
+        df["collected_at"] = stamp
+        notes.append(f"set collected_at={stamp} for every row")
+
+    for axis in ("lat", "lng"):
+        if axis in df.columns:
+            df[axis] = pd.to_numeric(df[axis], errors="coerce")
+    if {"lat", "lng"} <= set(df.columns):
+        usable = df["lat"].notna() & df["lng"].notna()
+        notes.append(f"coordinates present for {int(usable.sum())}/{len(df)} row(s)")
+
+    return df, notes
+
+
 def existing_review_ids(data_dir: Path, skip: Path | None = None) -> set[str]:
     ids: set[str] = set()
     for path in sorted(data_dir.glob("real_reviews_*.csv")):
@@ -258,6 +325,26 @@ def main() -> int:
         default=[],
         metavar="OLD=NEW",
         help="extra column rename, repeatable",
+    )
+    parser.add_argument(
+        "--source-type",
+        choices=SOURCE_TYPES,
+        help="collection provenance (BUILD_PLAN 3.5); defaults to whatever --source maps to",
+    )
+    parser.add_argument(
+        "--anchor-place",
+        help="the famous place whose page this batch was scraped from "
+        "(leave unset for a batch that is itself an anchor)",
+    )
+    parser.add_argument(
+        "--discovery-round",
+        type=int,
+        help="0 for anchor places, 1.. for snowball rounds (default 0)",
+    )
+    parser.add_argument(
+        "--collected-at",
+        help="ISO timestamp of the scrape (default: now, UTC). Pass the actual "
+        "scrape date when importing an export that has been sitting around.",
     )
     parser.add_argument("--dry-run", action="store_true", help="report without writing anything")
     parser.add_argument(
@@ -301,6 +388,13 @@ def main() -> int:
     elif args.source:
         df["source"] = args.source
         notes.append(f"overrode source={args.source} for every row")
+
+    try:
+        df, provenance_notes = stamp_provenance(df, args)
+    except ValueError as exc:
+        print(f"error: {exc}")
+        return 1
+    notes += provenance_notes
 
     missing = [c for c in REQUIRED if c not in df.columns and c != "review_id"]
     if missing:

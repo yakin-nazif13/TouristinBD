@@ -34,6 +34,9 @@ jobs:
       - name: Phase 2 — preprocessing & ingestion tests
         run: python scripts/test_phase2_preprocessing.py
 
+      - name: Provenance schema tests (BUILD_PLAN 3.5)
+        run: python scripts/test_corpus_schema.py
+
       - name: Phase 5 — human-validation tooling tests
         run: python scripts/test_phase5_human_validation.py
 
