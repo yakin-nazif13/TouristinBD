@@ -133,8 +133,19 @@ def build_manual_review_sample(
 
     rows: list[dict] = []
 
+    # Positives and second-best challengers cover the same topics. When there are
+    # more topics than the quota (a larger corpus), a seeded subset of topics is
+    # used so the sample keeps its negatives and a person can still label it in
+    # about an hour: the design is 20% positives / 20% challengers / 60% negatives.
+    # At or below the quota every topic is used, exactly as before.
+    quota = max(1, round(target_size * 0.2))
+    chosen = list(mapping.itertuples(index=False))
+    if len(chosen) > quota:
+        pick = np.random.default_rng(RANDOM_SEED + 1).choice(len(chosen), size=quota, replace=False)
+        chosen = [chosen[i] for i in sorted(pick)]
+
     # Positives
-    for row in mapping.itertuples(index=False):
+    for row in chosen:
         t = int(row.topic_id)
         p = str(row.preference_id)
         rows.append(
@@ -148,7 +159,7 @@ def build_manual_review_sample(
         )
 
     # Second-best challengers
-    for row in mapping.itertuples(index=False):
+    for row in chosen:
         t = int(row.topic_id)
         p2 = str(row.second_best_preference_id)
         rows.append(
@@ -168,8 +179,8 @@ def build_manual_review_sample(
     all_pairs = []
     for topic_id in topic_ids:
         for pid in pref_ids:
-            if (topic_id, pid) in used:
-                continue
+            if (topic_id, pid) in used or pid == mapped_pref_by_topic.get(topic_id):
+                continue  # a skipped topic's true mapping must never be offered as a negative
             sim = float(sim_matrix[topic_row[topic_id], pref_index[pid]])
             all_pairs.append((topic_id, pid, sim))
 

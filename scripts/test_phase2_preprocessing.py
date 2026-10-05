@@ -228,7 +228,7 @@ def test_script_run(tmp: Path) -> None:
     check("it writes a report", (data / "phase2_report.md").exists(), "missing")
     report = json.loads((data / "phase2_report.json").read_text())
     check("the report records both inputs", len(report["inputs"]) == 2, str(report["inputs"]))
-    check("the report records the row counts", report["rows_out"] == 538, str(report["rows_out"]))
+    check("the report records the row counts", report["rows_out"] == len(pd.read_csv(DATA_DIR / "processed_reviews.csv")), str(report["rows_out"]))
     check(
         "no warning fires when every review is already clustered",
         not report["warnings"],

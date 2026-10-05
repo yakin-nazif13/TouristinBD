@@ -40,6 +40,9 @@ jobs:
       - name: Phase 6 — sampling reproducibility tests
         run: python scripts/test_phase6_reproducibility.py
 
+      - name: Scaling tests (10k synthetic import, Phase 4/5 limits)
+        run: python scripts/test_scaling.py
+
       - name: Build the SQLite database from the pipeline artifacts
         run: python scripts/build_phase8_database.py
 

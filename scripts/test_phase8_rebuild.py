@@ -36,6 +36,11 @@ import pandas as pd  # noqa: E402
 DATA_DIR = REPO_ROOT / "data"
 BUILD_SCRIPT = REPO_ROOT / "scripts" / "build_phase8_database.py"
 
+# Expected sizes come from the committed corpus, so these tests keep passing as it grows.
+_corpus = pd.read_csv(DATA_DIR / "processed_reviews.csv")
+N_REVIEWS = len(_corpus)
+N_PLACES = _corpus["place_name"].nunique()
+
 PASSED: list[str] = []
 FAILED: list[str] = []
 
@@ -206,7 +211,7 @@ def scenario_phase2_only(tmp: Path) -> None:
     overview = client.get("/api/overview").json()
     check(
         "phase2-only: reviews still load",
-        overview["total_reviews"] == 538 and overview["total_preferences"] == 0,
+        overview["total_reviews"] == N_REVIEWS and overview["total_preferences"] == 0,
         str(overview),
     )
     for path in ("/api/topics", "/api/preferences", "/api/analytics/city-preferences"):
@@ -229,7 +234,7 @@ def scenario_phase2_only(tmp: Path) -> None:
         str(r),
     )
     r = client.get("/api/places", params={"limit": 5})
-    check("phase2-only: places still work", r.status_code == 200 and r.json()["total"] == 27, str(r.status_code))
+    check("phase2-only: places still work", r.status_code == 200 and r.json()["total"] == N_PLACES, str(r.status_code))
 
 
 def scenario_schema_drift(tmp: Path) -> None:
@@ -261,14 +266,14 @@ def scenario_schema_drift(tmp: Path) -> None:
     )
 
     client = api_client(data)
-    r = client.get("/api/places", params={"limit": 100}).json()
+    r = client.get("/api/places", params={"limit": 500}).json()
     check(
         "schema drift: unknown extra column does not create a phantom place",
-        r["total"] == 27,
+        r["total"] == N_PLACES,
         str(r["total"]),
     )
     r = client.get("/api/overview").json()
-    check("schema drift: overview intact", r["total_reviews"] == 538, str(r["total_reviews"]))
+    check("schema drift: overview intact", r["total_reviews"] == N_REVIEWS, str(r["total_reviews"]))
 
 
 def scenario_missing_db(tmp: Path) -> None:

@@ -1,8 +1,10 @@
 # TouristinBD — Progress Checklist
 
-Last updated: 2026-09-05 — all 12 phases complete; Phase 4 taxonomy regenerated with
-`gemini-3.5-flash` and Phases 5-8 refreshed on it. Phase 12 is configured and tested
-but not yet pushed to a public host.
+Last updated: 2026-10-06 — all 12 MVP phases complete; Phase 4 taxonomy regenerated with
+`gemini-3.5-flash` and Phases 5-8 refreshed on it. Since then: the v2 build plan's
+"Phase 1" tooling landed (2026-09-22, see below) and the pipeline was made safe to grow to
+10,000+ reviews (2026-10-06, see below). Phase 12 is configured and tested but not yet
+pushed to a public host (the GitHub repo exists; no Render service yet).
 
 > How to use this file: keep it up to date at the end of every session. Since Claude's
 > workspace resets between sessions, **download the project zip after each session and
@@ -460,6 +462,53 @@ but not yet pushed to a public host.
         host) account — both listed as not-set-up at the top of this file. The
         configuration is written and tested; deploying is a dashboard step.
 
+## Build plan v2 — Phase 1 tooling (commit 69f8d1f, 2026-09-22)
+Full plan: `docs/BUILD_PLAN.txt`. What is done from its "fix the foundations" phase:
+- [x] `add_reviews.py` / `run_phase2_preprocessing.py` keep the reviewer's **original-language
+      text** (`review_text_original`, `original_language`) next to the translation, and warn
+      instead of guessing when an export cannot separate the two.
+- [x] Phase 6 sampling no longer uses Python's salted `hash()` (CRC32 instead), so the
+      stability result is reproducible — `test_phase6_reproducibility.py`.
+- [x] Human-validation tooling: `label_validation_sample.py` (blinded, resumable),
+      `compute_human_agreement.py` (Cohen/Fleiss kappa, consensus, precision/recall,
+      `--write-back`), protocol in `docs/HUMAN_VALIDATION.md`, tests in
+      `test_phase5_human_validation.py`.
+- [ ] **Still open from that phase:** the four annotators have not labelled the 50 pairs;
+      the Phase 6 re-run with the fixed sampling has not been done, so the "stable at ~400
+      reviews" figure above is from the old sampling; the proposal still says "Yelp" and
+      "281 + 235" where the data is Booking.com 300 + 238.
+
+## Scaling to 10,000+ reviews (2026-10-06)
+Question asked: will adding much more data break the project? Answer, tested: ingestion and
+the API do not; several fixed numbers did. What changed:
+- [x] `scripts/corpus_scaling.py` — size-dependent settings in one dependency-free module.
+      At 538 reviews every value equals the old one, so committed artifacts still reproduce.
+- [x] Phase 3: `min_topic_size` scales (6 → 42 at 10k), topic count capped at 40 above 2,000
+      reviews, UMAP **seeded** (`--seed`, default 42) — two runs now give identical topics.
+      Flags: `--min-topic-size`, `--max-topics`, `--seed`. 10k reviews ≈ 2.5 min on CPU.
+- [x] Phase 4: Stage 2 refuses more than 60 topics with a clear message (it puts every topic
+      in one LLM prompt); the long-tail "scarce" cut falls from 2% towards 0.5/N with many
+      topics (`--scarcity-threshold` overrides).
+- [x] Phase 5: the 50-pair manual-review sample kept one positive + one challenger per topic,
+      which at 40 topics is 80 rows and **zero negatives**. Now a seeded subset keeps the
+      10/10/15/15 mix; a skipped topic's true mapping can no longer be drawn as a negative.
+- [x] Tests that hard-coded today's corpus (538 reviews, 27 places, 12 hotels) now read the
+      expected values from the data. New check: every place must have a division.
+- [x] `scripts/report_corpus_health.py` (also run at the end of `add_reviews.py`): reviews
+      and places per division, language mix, originals kept, places missing from
+      `place_geography.csv` (exit code 2 — they have no division), thin places.
+- [x] `scripts/test_scaling.py` (40 tests, in CI): settings, Phase 4/5 limits, and a
+      synthetic 10,000-review import → Phase 2 → health report → DB build → API
+      (overview, places, pagination, reviews, chat, itinerary, search) on a throwaway data dir.
+- [x] `docs/DATA_COLLECTION.md` — how to collect (Apify actor settings, place list,
+      `data/scrape_targets.csv` template, import loop). Key advice: go wide across all 8
+      divisions and keep the Bangla originals; more reviews of the same 27 famous places
+      will not produce a long tail.
+- [ ] Not changed on purpose: the topic-level long-tail test itself. It still measures
+      topics, not places; the entity-level extractor (build plan section 5) is the real fix.
+- [ ] Not addressed: BERTopic leaves a large outlier share on diverse text (38% on the
+      synthetic 10k); `reduce_outliers` is an option if real data behaves the same.
+
 ## Notes for next session
 - The site: `.venv/bin/python -m backend.main`, then open <http://127.0.0.1:8000/app/>.
   It runs entirely on the real corpus now — no mock data anywhere in the project.
@@ -486,10 +535,14 @@ but not yet pushed to a public host.
 - Rebuild the database after re-running any earlier phase (Phase 1-7 output changed):
   `.venv/bin/python scripts/build_phase8_database.py`
 - Run the API: `.venv/bin/python -m backend.main` (site at /app/, docs at /docs).
-- Verify everything after any change — seven suites, 449 tests, ~1 min total:
-  `test_phase2_preprocessing.py`, `test_phase8_api.py`, `test_phase8_rebuild.py`,
+- Verify everything after any change — ten suites, 548 tests, ~1.5 min total:
+  `test_phase2_preprocessing.py`, `test_phase5_human_validation.py`,
+  `test_phase6_reproducibility.py`, `test_phase8_api.py`, `test_phase8_rebuild.py`,
   `test_phase9_chat.py`, `test_phase10_itinerary.py`, `test_phase11_frontend.py`,
-  `test_phase12_deployment.py` (all under `scripts/`, all in-process, no network).
+  `test_phase12_deployment.py`, `test_scaling.py` (all under `scripts/`, all in-process,
+  no network). `data/touristinbd.db` is gitignored — rebuild it
+  (`build_phase8_database.py`) after pulling or changing any artifact, or the Phase 8 tests
+  fail against a stale taxonomy.
 - **Adding a new scrape** (the loop to use from now on):
   `.venv/bin/python scripts/add_reviews.py <export.csv> --source google_maps --name batch2`
   (add `--rating-scale 10` for Booking.com exports, `--dry-run` to preview). That merges

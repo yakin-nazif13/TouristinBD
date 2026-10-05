@@ -81,8 +81,18 @@ def main() -> None:
 
     # ---- places ----------------------------------------------------------
     print("\nplaces")
-    code, page = get("/api/places", limit=100)
-    check("GET /api/places lists every place", code == 200 and page["total"] == 27, str(page.get("total")))
+    processed_places = processed["place_name"].nunique()
+    code, page = get("/api/places", limit=500)
+    check(
+        "GET /api/places lists every place",
+        code == 200 and page["total"] == processed_places,
+        f"{page.get('total')} vs {processed_places} places in processed_reviews.csv",
+    )
+    check(
+        "every place has a division (place_geography.csv covers it)",
+        all(p["division"] for p in page["items"]),
+        str([p["place_name"] for p in page["items"] if not p["division"]]),
+    )
     check(
         "every place has a city (geography enrichment worked)",
         all(p["city"] for p in page["items"]),
@@ -94,8 +104,13 @@ def main() -> None:
         str(sum(p["review_count"] for p in page["items"])),
     )
 
-    code, hotels = get("/api/places", place_kind="accommodation", limit=100)
-    check("place_kind filter works", code == 200 and hotels["total"] == 12, str(hotels.get("total")))
+    expected_hotels = sum(1 for p in page["items"] if p["place_kind"] == "accommodation")
+    code, hotels = get("/api/places", place_kind="accommodation", limit=500)
+    check(
+        "place_kind filter works",
+        code == 200 and hotels["total"] == expected_hotels and expected_hotels > 0,
+        f"{hotels.get('total')} vs {expected_hotels}",
+    )
 
     code, dhaka = get("/api/places", city="dhaka")
     check(

@@ -1,12 +1,19 @@
+import argparse
+import os
+import sys
 from pathlib import Path
 import pandas as pd
 from sentence_transformers import SentenceTransformer
 from bertopic import BERTopic
 from sklearn.feature_extraction.text import CountVectorizer
+from umap import UMAP
 import matplotlib.pyplot as plt
 
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+import corpus_scaling as scaling  # noqa: E402
+
 REPO_ROOT = Path(__file__).resolve().parents[1]
-DATA_DIR = REPO_ROOT / "data"
+DATA_DIR = Path(os.environ.get("TOURISTINBD_DATA_DIR") or (REPO_ROOT / "data"))
 INPUT_PATH = DATA_DIR / "processed_reviews.csv"
 OUTPUT_REVIEWS_PATH = DATA_DIR / "reviews_with_topics.csv"
 OUTPUT_TOPICS_PATH = DATA_DIR / "topics_summary.csv"
@@ -39,6 +46,16 @@ def extract_keywords(rep):
 
 
 def main() -> None:
+    parser = argparse.ArgumentParser(description="Phase 3: multilingual BERTopic over processed_reviews.csv")
+    parser.add_argument("--seed", type=int, default=scaling.SEED,
+                        help="UMAP random seed, so a re-run gives the same topics (default %(default)s)")
+    parser.add_argument("--min-topic-size", type=int, default=0,
+                        help="smallest cluster; default scales with corpus size (6 at ~540 reviews, ~40 at 10k)")
+    parser.add_argument("--max-topics", type=int, default=0,
+                        help="reduce to at most this many topics; default 'auto' up to 2000 reviews, "
+                             f"{scaling.LARGE_CORPUS_MAX_TOPICS} above that")
+    args = parser.parse_args()
+
     print(f"Loading reviews from {INPUT_PATH}")
     reviews_df = pd.read_csv(INPUT_PATH)
 
@@ -50,11 +67,20 @@ def main() -> None:
     print(f"Initializing Hugging Face embedding model: {EMBEDDING_MODEL_NAME}")
     embedding_model = SentenceTransformer(EMBEDDING_MODEL_NAME, device="cpu")
 
-    print("Training BERTopic with multilingual sentence embeddings")
+    min_topic_size = args.min_topic_size or scaling.choose_min_topic_size(len(texts))
+    nr_topics = scaling.choose_nr_topics(len(texts), args.max_topics)
+    print(
+        f"Training BERTopic with multilingual sentence embeddings "
+        f"(n={len(texts)}, min_topic_size={min_topic_size}, nr_topics={nr_topics}, seed={args.seed})"
+    )
+    # BERTopic's own UMAP defaults, plus a fixed seed: unseeded UMAP gave a different
+    # clustering on every run, so Phase 4-8 results could not be reproduced.
+    umap_model = UMAP(n_neighbors=15, n_components=5, min_dist=0.0, metric="cosine", random_state=args.seed)
     topic_model = BERTopic(
         embedding_model=embedding_model,
-        min_topic_size=6,
-        nr_topics="auto",
+        umap_model=umap_model,
+        min_topic_size=min_topic_size,
+        nr_topics=nr_topics,
         vectorizer_model=CountVectorizer(ngram_range=(1, 2), stop_words="english"),
         top_n_words=10,
         verbose=False,

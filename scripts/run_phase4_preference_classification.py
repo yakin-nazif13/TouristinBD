@@ -21,6 +21,7 @@ import json
 import os
 import random
 import re
+import sys
 import time
 from pathlib import Path
 
@@ -32,7 +33,11 @@ from sentence_transformers import SentenceTransformer
 from sklearn.metrics.pairwise import cosine_similarity
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
-DATA_DIR = REPO_ROOT / "data"
+DATA_DIR = Path(os.environ.get("TOURISTINBD_DATA_DIR") or (REPO_ROOT / "data"))
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+import corpus_scaling as scaling  # noqa: E402
+
 load_dotenv(REPO_ROOT / ".env")
 REVIEWS_PATH = DATA_DIR / "reviews_with_topics.csv"
 TOPICS_PATH = DATA_DIR / "topics_summary.csv"
@@ -50,7 +55,8 @@ SUMMARY_JSON = DATA_DIR / "topic_preferences.json"
 
 EMBEDDING_MODEL_NAME = "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2"
 TAU_SIM = 0.4
-SCARCITY_THRESHOLD = 0.02  # topic size < 2% of corpus
+SCARCITY_THRESHOLD = 0.02  # topic size < 2% of corpus (default; see scaling.scarcity_threshold)
+MAX_STAGE2_TOPICS = 60  # Stage 2 sends every topic in ONE prompt; beyond this, reduce topics in Phase 3
 SDD_THRESHOLD = 0.6
 
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
@@ -418,14 +424,13 @@ def stage1_interpret(
     return results
 
 
-def stage2_build_hierarchy(
-    client: OpenAI,
-    model: str,
-    stage1: list[dict],
-    *,
-    provider: str,
-) -> list[dict]:
-    print("\n=== Stage 2: Preference hierarchy construction ===")
+def build_stage2_prompt(stage1: list[dict]) -> str:
+    """The single Stage-2 prompt covering every topic. Refuses to build an oversized one."""
+    if len(stage1) > MAX_STAGE2_TOPICS:
+        raise RuntimeError(
+            f"Stage 2 would put {len(stage1)} topics in one prompt (limit {MAX_STAGE2_TOPICS}). "
+            "Re-run Phase 3 with a lower --max-topics (e.g. 40) before Phase 4."
+        )
     topic_block = "\n\n".join(
         (
             f"Topic {t['topic_id']}: {t['interpreted_label']}\n"
@@ -436,7 +441,18 @@ def stage2_build_hierarchy(
         )
         for t in stage1
     )
-    prompt = STAGE2_PROMPT.format(topic_block=topic_block)
+    return STAGE2_PROMPT.format(topic_block=topic_block)
+
+
+def stage2_build_hierarchy(
+    client: OpenAI,
+    model: str,
+    stage1: list[dict],
+    *,
+    provider: str,
+) -> list[dict]:
+    print("\n=== Stage 2: Preference hierarchy construction ===")
+    prompt = build_stage2_prompt(stage1)
     parsed, raw = call_llm_json(
         client, model, prompt, max_tokens=STAGE2_MAX_TOKENS, provider=provider
     )
@@ -529,9 +545,11 @@ def stage4_long_tail(
     preferences: list[dict],
     embedder: SentenceTransformer,
     corpus_size: int,
+    scarcity_cut: float = SCARCITY_THRESHOLD,
 ) -> list[dict]:
     """
     Long-tail rule from the paper/roadmap: size < 2% AND SDD > 0.6.
+    (The 2% is `scarcity_cut`; with many topics it is lowered, see scaling.scarcity_threshold.)
 
     SDD (Semantic Difference Degree) for topic i =
       1 - max cosine similarity to any abundant topic (share >= 2%).
@@ -545,14 +563,14 @@ def stage4_long_tail(
     sim = cosine_similarity(topic_emb)
 
     abundant_idxs = [
-        i for i, t in enumerate(stage1) if t["review_count"] / corpus_size >= SCARCITY_THRESHOLD
+        i for i, t in enumerate(stage1) if t["review_count"] / corpus_size >= scarcity_cut
     ]
 
     by_topic = {m["topic_id"]: m for m in mappings}
     rows = []
     for i, topic in enumerate(stage1):
         share = topic["review_count"] / corpus_size
-        scarce = share < SCARCITY_THRESHOLD
+        scarce = share < scarcity_cut
 
         if abundant_idxs:
             # max sim to an abundant topic that is not itself
@@ -579,7 +597,7 @@ def stage4_long_tail(
                 "max_sim_to_abundant": round(max_sim_abundant, 4),
                 "sdd": round(sdd, 4),
                 "sdd_threshold": SDD_THRESHOLD,
-                "scarcity_threshold": SCARCITY_THRESHOLD,
+                "scarcity_threshold": scarcity_cut,
                 "preference_type": preference_type,
                 "is_long_tail": is_long_tail,
             }
@@ -656,6 +674,13 @@ def main() -> None:
         "Pin a concrete version rather than a -latest alias when a run is being "
         "written up, so the result stays reproducible.",
     )
+    parser.add_argument(
+        "--scarcity-threshold",
+        type=float,
+        default=None,
+        help="topic corpus-share below which a topic is 'scarce' in the long-tail rule. "
+        "Default: 2%%, lowered automatically when there are many topics.",
+    )
     args = parser.parse_args()
     if args.model:
         # get_client_and_model() reads these, so setting them here keeps the
@@ -673,7 +698,9 @@ def main() -> None:
     corpus_size = len(reviews)
     client, model, provider = get_client_and_model()
     print(f"Using LLM: {provider}/{model}")
-    print(f"Corpus size: {corpus_size} reviews; scarcity cut = {SCARCITY_THRESHOLD:.0%}")
+    n_topics = int((topics["Topic"] != -1).sum())
+    scarcity_cut = args.scarcity_threshold or scaling.scarcity_threshold(n_topics, SCARCITY_THRESHOLD)
+    print(f"Corpus size: {corpus_size} reviews, {n_topics} topics; scarcity cut = {scarcity_cut:.2%}")
 
     stage1 = stage1_interpret(
         client, model, reviews, topics, corpus_size, provider=provider
@@ -690,7 +717,7 @@ def main() -> None:
 
     mappings = stage3_map_topics(stage1, preferences, embedder)
     long_tail = stage4_long_tail(
-        stage1, mappings, preferences, embedder, corpus_size
+        stage1, mappings, preferences, embedder, corpus_size, scarcity_cut
     )
     build_summary(stage1, mappings, long_tail, preferences)
 

@@ -377,6 +377,10 @@ def main() -> int:
         print("\n  Phase 2 failed — the batch file was written, fix the error and re-run it")
         return result.returncode
 
+    health = REPO_ROOT / "scripts" / "report_corpus_health.py"
+    print("\nCorpus health after this import")
+    subprocess.run([sys.executable, str(health)], cwd=REPO_ROOT)
+
     print(
         "\nStill to do, in order:\n"
         "  1. .venv/bin/python scripts/run_phase3_huggingface_bertopic.py     # cluster the new reviews\n"

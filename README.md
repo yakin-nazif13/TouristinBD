@@ -35,10 +35,11 @@ To re-run the research pipeline itself (Phases 3–7) you need the full stack �
 | --- | --- |
 | `frontend/index.html` | The site: overview, chat, itinerary builder, compare, explore. Plain HTML/CSS/JS, no build step. |
 | `backend/` | FastAPI service (read-only over SQLite), one router per surface. |
-| `scripts/add_reviews.py` | Import a new scrape into the corpus (see below). |
+| `scripts/add_reviews.py` | Import a new scrape into the corpus (see below). Collection guide: `docs/DATA_COLLECTION.md`. |
+| `scripts/report_corpus_health.py` | Read-only check of the corpus: coverage per division, language mix, places missing geography. |
 | `scripts/run_phase*.py` | The research pipeline: preprocessing → topic modelling → preference classification → validation → sensitivity → analytics. |
 | `scripts/build_phase8_database.py` | Rebuilds `data/touristinbd.db` from whichever pipeline artifacts exist. Idempotent and schema-drift tolerant. |
-| `scripts/test_phase*.py` | 450 in-process tests across preprocessing, ingestion, the API, chatbot, planner, frontend contract and deployment config. |
+| `scripts/test_*.py` | ~550 in-process tests across preprocessing, ingestion, the API, chatbot, planner, frontend contract, deployment config and scaling to 10k reviews. |
 | `data/` | Every artifact the pipeline produced, including the raw and cleaned review sets. |
 | `docs/PROGRESS.md` | Phase-by-phase status, decisions and known limits. |
 | `docs/DEPLOYMENT.md` | Local, Render, Docker and split-hosting instructions. |
