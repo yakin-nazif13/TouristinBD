@@ -54,6 +54,7 @@ INPUTS = {
     "phase5_coverage": DATA_DIR / "phase5_direction2_coverage_checks.csv",
     "phase5_recommendations": DATA_DIR / "phase5_recommendations.csv",
     "phase5_manual_sample": DATA_DIR / "phase5_manual_review_sample.csv",
+    "phase3_language_labels": DATA_DIR / "phase3_language_labels.csv",
     "phase6_metrics": DATA_DIR / "phase6_sensitivity_metrics.csv",
     "phase6_mappings": DATA_DIR / "phase6_sensitivity_mappings.csv",
     "phase7_statistical_tests": DATA_DIR / "phase7_statistical_tests.json",
@@ -303,6 +304,20 @@ CREATE TABLE sensitivity_mappings (
     high_confidence  INTEGER
 );
 
+-- Phase 3's four-way language label (BUILD_PLAN 4.1). Kept beside reviews
+-- rather than inside them because it is a separate artifact that can be
+-- re-run on its own, and because `reviews.detected_language` is Phase 2's
+-- coarser label which earlier phases and the committed corpus still depend on.
+CREATE TABLE review_language (
+    review_id            TEXT PRIMARY KEY,
+    language_label       TEXT,
+    language_confidence  REAL,
+    language_method      TEXT,
+    detected_iso         TEXT,
+    text_basis           TEXT,
+    place_phonetic_key   TEXT
+);
+
 CREATE TABLE metadata (
     key              TEXT PRIMARY KEY,
     value            TEXT
@@ -458,6 +473,22 @@ SELECT
 FROM v_review_preference
 WHERE preference_id IS NOT NULL
 GROUP BY place_id, preference_id;
+
+-- Phase 3's language mix, with how each label was reached. `language_method`
+-- is carried deliberately: a `heuristic` row is not a trained decision, and a
+-- mix table that hides the difference would overstate what the classifier has
+-- actually established.
+CREATE VIEW v_language_mix AS
+SELECT
+    l.language_label,
+    l.language_method,
+    l.text_basis,
+    COUNT(*)                        AS review_count,
+    ROUND(AVG(l.language_confidence), 3) AS avg_confidence,
+    ROUND(AVG(r.review_rating), 3)  AS avg_rating
+FROM review_language l
+JOIN reviews r ON r.review_id = l.review_id
+GROUP BY l.language_label, l.language_method, l.text_basis;
 """
 
 
@@ -866,6 +897,7 @@ def main() -> None:
     p5_coverage = load_csv("phase5_coverage", notes)
     p5_recs = load_csv("phase5_recommendations", notes)
     p5_sample = load_csv("phase5_manual_sample", notes)
+    p3_language = load_csv("phase3_language_labels", notes)
     p6_metrics = load_csv("phase6_metrics", notes)
     p6_mappings = load_csv("phase6_mappings", notes)
     p7_tests = load_json("phase7_statistical_tests", notes)
@@ -925,6 +957,35 @@ def main() -> None:
     if not sens_mappings.empty:
         sens_mappings["high_confidence"] = to_bool(sens_mappings["high_confidence"])
 
+    # text_normalized is deliberately not stored: it is a near-copy of the
+    # review body, so keeping it would roughly double the database for a value
+    # any consumer can recompute with language_id.normalize_bangla.
+    review_language = build_simple(
+        p3_language,
+        [
+            "review_id", "language_label", "language_confidence", "language_method",
+            "detected_iso", "text_basis", "place_phonetic_key",
+        ],
+        "phase3_language_labels.csv", notes,
+    )
+    if not review_language.empty:
+        known_ids = set(reviews["review_id"].astype(str)) if not reviews.empty else set()
+        review_language["review_id"] = review_language["review_id"].astype(str)
+        unknown = ~review_language["review_id"].isin(known_ids)
+        if unknown.any():
+            notes.append(
+                f"phase3_language_labels.csv: {int(unknown.sum())} row(s) name a review_id "
+                "not in the corpus; dropped (re-run Phase 3 after Phase 2)"
+            )
+            review_language = review_language[~unknown]
+        duplicated = review_language["review_id"].duplicated()
+        if duplicated.any():
+            notes.append(
+                f"phase3_language_labels.csv: {int(duplicated.sum())} duplicate review_id(s); "
+                "kept the first of each"
+            )
+            review_language = review_language[~duplicated]
+
     built_at = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
 
     DB_PATH.unlink(missing_ok=True)
@@ -944,6 +1005,7 @@ def main() -> None:
             "validation_manual_sample": write_table(conn, "validation_manual_sample", val_sample),
             "sensitivity_metrics": write_table(conn, "sensitivity_metrics", sens_metrics),
             "sensitivity_mappings": write_table(conn, "sensitivity_mappings", sens_mappings),
+            "review_language": write_table(conn, "review_language", review_language),
         }
 
         meta_rows = [

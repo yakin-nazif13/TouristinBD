@@ -191,17 +191,24 @@ def phonetic_key(text: str) -> str:
 
 @dataclass(frozen=True)
 class LanguageGuess:
-    """One label plus how it was reached, so a row can be audited later."""
+    """One label plus how it was reached, so a row can be audited later.
+
+    `confidence` is None when the label came from a rule rather than from
+    anything that produces a probability — script detection, the short-text
+    guard, or a detector that returns no score. It is left empty instead of
+    being filled with a stand-in, because these values end up in the paper's
+    language-mix table and a fabricated 1.0 would read as certainty.
+    """
 
     label: str
-    confidence: float
+    confidence: float | None
     method: str
     iso: str = ""
 
     def as_row(self) -> dict[str, object]:
         return {
             "language_label": self.label,
-            "language_confidence": round(self.confidence, 4),
+            "language_confidence": None if self.confidence is None else round(self.confidence, 4),
             "language_method": self.method,
             "detected_iso": self.iso,
         }
@@ -284,7 +291,7 @@ def classify(
 
     bengali_share, latin_share = script_shares(text)
     if bengali_share == 0.0 and latin_share == 0.0:
-        return LanguageGuess("", 0.0, "no-letters")
+        return LanguageGuess("", None, "no-letters")
 
     # Both scripts present in meaningful quantity: code-mixed, and no further
     # question needs answering.
@@ -299,7 +306,8 @@ def classify(
         return LanguageGuess("mixed", minority / total_words * 2, "script-mix")
 
     if bengali_share > latin_share:
-        return LanguageGuess("bn", bengali_share, "script", "bn")
+        # A rule, not a probability: the text is in Bangla script or it is not.
+        return LanguageGuess("bn", None, "script", "bn")
 
     # Latin-dominant. Banglish or a real Latin-script language?
     if banglish is not None:
@@ -313,14 +321,18 @@ def classify(
         label = "mixed" if _has_english_clause(text) else "bn-latn"
         return LanguageGuess(label, confidence, method, "bn-latn")
 
-    # Too short for any detector to be trusted (see SHORT_TEXT_MAX).
+    # Too short for any detector to be trusted (see SHORT_TEXT_MAX). Also a
+    # rule, so it carries no confidence.
     if len(text) < SHORT_TEXT_MAX:
-        return LanguageGuess("en", latin_share, "short-text", "en")
+        return LanguageGuess("en", None, "short-text", "en")
 
     iso, iso_confidence = _detect_latin_language(text, fasttext_model, langdetect_fn)
     if iso and iso != "en":
         return LanguageGuess("other", iso_confidence, "lid", iso)
-    return LanguageGuess("en", iso_confidence or latin_share, "lid" if iso else "script", iso or "en")
+    if iso:
+        return LanguageGuess("en", iso_confidence, "lid", iso)
+    # No detector was available at all.
+    return LanguageGuess("en", None, "script", "en")
 
 
 # A handful of unambiguous English function words. Their presence alongside
@@ -335,8 +347,13 @@ def _has_english_clause(text: str) -> bool:
     return len(_ENGLISH_CLAUSE_RE.findall(text.lower())) >= 2
 
 
-def _detect_latin_language(text, fasttext_model, langdetect_fn) -> tuple[str, float]:
-    """Best available guess at a Latin-script language, or ("", 0.0)."""
+def _detect_latin_language(text, fasttext_model, langdetect_fn) -> tuple[str, float | None]:
+    """Best available guess at a Latin-script language, as (iso, confidence).
+
+    `langdetect_fn` may return either a bare ISO code or an (iso, probability)
+    pair; the pair form is preferred because it carries a real confidence
+    rather than forcing one to be invented downstream.
+    """
     if fasttext_model is not None:
         try:
             labels, scores = fasttext_model.predict(text.replace("\n", " "), k=1)
@@ -345,10 +362,14 @@ def _detect_latin_language(text, fasttext_model, langdetect_fn) -> tuple[str, fl
             pass
     if langdetect_fn is not None:
         try:
-            return langdetect_fn(text), 0.0
+            result = langdetect_fn(text)
+            if isinstance(result, tuple):
+                iso, probability = result
+                return str(iso), None if probability is None else float(probability)
+            return str(result), None
         except Exception:
             pass
-    return "", 0.0
+    return "", None
 
 
 def load_fasttext(path):

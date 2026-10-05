@@ -73,17 +73,28 @@ OUTPUT_COLUMNS = [
 
 
 def _langdetect_fn():
-    """Seeded langdetect, or None when it is not installed.
+    """Seeded langdetect returning (iso, probability), or None if unavailable.
 
-    Seeded at import for the same reason Phase 2 does it: langdetect is
-    probabilistic and an unseeded run gives one review two different languages
-    on two runs.
+    Seeded for the same reason Phase 2 does it: langdetect is probabilistic and
+    an unseeded run gives one review two different languages on two runs.
+
+    `detect_langs` rather than `detect` so the row carries a real probability.
+    With `detect` the artifact had no confidence to record, and filling the gap
+    with the Latin-script share reported 1.0 for every English review — a
+    fabricated certainty in a column the paper's language-mix table reads.
     """
     try:
-        from langdetect import DetectorFactory, detect
+        from langdetect import DetectorFactory, detect_langs
     except ImportError:
         return None
     DetectorFactory.seed = 0
+
+    def detect(text: str):
+        ranked = detect_langs(text)
+        if not ranked:
+            return "", None
+        return ranked[0].lang, float(ranked[0].prob)
+
     return detect
 
 

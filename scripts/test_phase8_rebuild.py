@@ -276,6 +276,77 @@ def scenario_schema_drift(tmp: Path) -> None:
     check("schema drift: overview intact", r["total_reviews"] == N_REVIEWS, str(r["total_reviews"]))
 
 
+def scenario_phase3_language(tmp: Path) -> None:
+    """Phase 3's language artifact: present, absent, and carrying junk ids.
+
+    It arrived after the database schema existed, so the question is whether
+    the build treats it as optional in the same way as every other Phase 3-7
+    artifact, and whether a stale copy (ids from a corpus that has since been
+    re-run) is dropped rather than written as orphan rows.
+    """
+    import sqlite3
+
+    data = fresh_data_dir(tmp / "p3_language")
+    labels = data / "phase3_language_labels.csv"
+    if not labels.exists():
+        check("phase3 language: artifact exists to test", False, f"{labels} not copied")
+        return
+
+    result = run_build(data)
+    check("phase3 language: build succeeds", result.returncode == 0, result.stderr[-400:])
+    conn = sqlite3.connect(data / "touristinbd.db")
+    try:
+        rows = conn.execute("SELECT COUNT(*) FROM review_language").fetchone()[0]
+        check("phase3 language: every review is labelled", rows == N_REVIEWS, str(rows))
+        mix = conn.execute("SELECT COUNT(*) FROM v_language_mix").fetchall()
+        check("phase3 language: v_language_mix answers", len(mix) > 0, str(mix))
+        # A rule-based label must keep a NULL confidence rather than a stand-in.
+        nulls = conn.execute(
+            "SELECT COUNT(*) FROM review_language "
+            "WHERE language_method IN ('script','short-text') AND language_confidence IS NOT NULL"
+        ).fetchone()[0]
+        check("phase3 language: rule-based rows carry no fabricated confidence",
+              nulls == 0, str(nulls))
+        orphans = conn.execute(
+            "SELECT COUNT(*) FROM review_language l "
+            "LEFT JOIN reviews r ON r.review_id = l.review_id WHERE r.review_id IS NULL"
+        ).fetchone()[0]
+        check("phase3 language: no orphan rows", orphans == 0, str(orphans))
+    finally:
+        conn.close()
+
+    # A stale artifact naming ids that no longer exist must be dropped, with a note.
+    stale = pd.read_csv(labels)
+    stale["review_id"] = ["gone_" + str(i) for i in range(len(stale))]
+    stale.to_csv(labels, index=False)
+    result = run_build(data)
+    check("phase3 language: a stale artifact does not fail the build",
+          result.returncode == 0, result.stderr[-400:])
+    check("phase3 language: dropped rows are reported",
+          "not in the corpus" in result.stdout, result.stdout[-500:])
+    conn = sqlite3.connect(data / "touristinbd.db")
+    try:
+        rows = conn.execute("SELECT COUNT(*) FROM review_language").fetchone()[0]
+        check("phase3 language: stale rows are not written", rows == 0, str(rows))
+    finally:
+        conn.close()
+
+    # Absent entirely: the table must exist and be empty, and the API must work.
+    labels.unlink()
+    result = run_build(data)
+    check("phase3 language: build succeeds without the artifact",
+          result.returncode == 0, result.stderr[-400:])
+    conn = sqlite3.connect(data / "touristinbd.db")
+    try:
+        rows = conn.execute("SELECT COUNT(*) FROM review_language").fetchone()[0]
+        check("phase3 language: the table is empty, not missing", rows == 0, str(rows))
+    finally:
+        conn.close()
+    client = api_client(data)
+    r = client.get("/api/overview")
+    check("phase3 language: the API still answers without it", r.status_code == 200, str(r.status_code))
+
+
 def scenario_missing_db(tmp: Path) -> None:
     """The API must degrade honestly when the database has not been built."""
     data = tmp / "no_db" / "data"
@@ -305,6 +376,8 @@ def main() -> None:
             scenario_phase2_only(tmp)
             print("\nscenario: upstream schema drift + stale geography row")
             scenario_schema_drift(tmp)
+            print("\nscenario: Phase 3 language artifact present, stale and absent")
+            scenario_phase3_language(tmp)
             print("\nscenario: database not built yet")
             scenario_missing_db(tmp)
     finally:
