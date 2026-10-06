@@ -1,0 +1,627 @@
+{
+  "n_reviews": 538,
+  "by_audience": {
+    "unknown": 300,
+    "domestic": 176,
+    "foreign": 62
+  },
+  "labelled_share": 0.4424,
+  "min_cell": 5,
+  "excluded_proxy": "reviewer_is_local_guide",
+  "any_comparable_group": false,
+  "comparisons": {
+    "entity_type": [
+      {
+        "group": "ACCESS",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 11,
+        "domestic_share": null,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "PLACE",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 153,
+        "domestic_share": null,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "TIP",
+        "domestic_mentions": 0,
+        "foreign_mentions": 1,
+        "unknown_mentions": 17,
+        "domestic_share": null,
+        "foreign_share": 1.0,
+        "comparable": false
+      }
+    ],
+    "division": [
+      {
+        "group": "Barishal",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 8,
+        "domestic_share": null,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "Chattogram",
+        "domestic_mentions": 0,
+        "foreign_mentions": 1,
+        "unknown_mentions": 96,
+        "domestic_share": null,
+        "foreign_share": 1.0,
+        "comparable": false
+      },
+      {
+        "group": "Dhaka",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 24,
+        "domestic_share": null,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "Khulna",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 29,
+        "domestic_share": null,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "Rajshahi",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": null,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "Sylhet",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 23,
+        "domestic_share": null,
+        "foreign_share": 0.0,
+        "comparable": false
+      }
+    ],
+    "visibility": [
+      {
+        "group": "V0",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 7,
+        "domestic_share": null,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "V1",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 10,
+        "domestic_share": null,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "V2",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 28,
+        "domestic_share": null,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "V3",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 108,
+        "domestic_share": null,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "unknown",
+        "domestic_mentions": 0,
+        "foreign_mentions": 1,
+        "unknown_mentions": 28,
+        "domestic_share": null,
+        "foreign_share": 1.0,
+        "comparable": false
+      }
+    ],
+    "entity": [
+      {
+        "group": "Bagerhat",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 10,
+        "domestic_share": null,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "Bandarban",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 21,
+        "domestic_share": null,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "Best Time to Visit",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": null,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "Best time to visit",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": null,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "Boga Lake",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": null,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "Carry water",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": null,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "Carry water but don't litter",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": null,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "Chandranath",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": null,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "Chor Bijoy",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": null,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "Cox's Bazar",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 5,
+        "domestic_share": null,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "Fatrar Chor",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": null,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "Fokirhat",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": null,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "Gangamati",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 3,
+        "domestic_share": null,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "Go early",
+        "domestic_mentions": 0,
+        "foreign_mentions": 1,
+        "unknown_mentions": 0,
+        "domestic_share": null,
+        "foreign_share": 1.0,
+        "comparable": false
+      },
+      {
+        "group": "Go in the morning to beat the crowd",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": null,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "Guliyakhali",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 2,
+        "domestic_share": null,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "Lawachara",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": null,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "Madhabpur Lake",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": null,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "Mongla",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 10,
+        "domestic_share": null,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "Muradpur",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 4,
+        "domestic_share": null,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "Nilgiri",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": null,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "Pashur",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 5,
+        "domestic_share": null,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "Rangamati",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 9,
+        "domestic_share": null,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "Saint Martin",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 25,
+        "domestic_share": null,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "Sardar Bari",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": null,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "Sitakunda",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 12,
+        "domestic_share": null,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "Sonargaon",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 22,
+        "domestic_share": null,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "Sreemangal",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 13,
+        "domestic_share": null,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "Sundarbans",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 3,
+        "domestic_share": null,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "bargain at all the nearby shops",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": null,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "bargain for the boat price",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": null,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "bargaining skills mostly",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": null,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "best time to visit",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": null,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "best time to visit Kuakata is during the cooler",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": null,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "best time to visit is between November and March",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": null,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "best time to visit is definitely during the",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": null,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "best time to visit this place",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": null,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "boat from kaptai station",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": null,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "bus from Dhaka or Chittagong",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": null,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "carry with me",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": null,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "carry your essentials",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": null,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "engine boat from Mongla",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": null,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "engine boat from kaptai boat station",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": null,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "engine boat from the Mongla Ferry Ghat through",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": null,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "get off at Fokirhat Bazar and take a CNG",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": null,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "get off at Sitakunda Bazar",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": null,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "go early morning or evening",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": null,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "take a CNG or auto from there",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": null,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "take a boat",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": null,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "take a boat ride to the precise Zero",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": null,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "take a boat to reach the main beach",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": null,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "visit early in the morning for",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": null,
+        "foreign_share": 0.0,
+        "comparable": false
+      }
+    ]
+  },
+  "notes": [
+    "reviewer_is_local_guide is deliberately not used: it is Google's contribution-volume badge, not a residency signal, and 274 of the 300 reviews that carry it are True \u2014 a proxy that says yes to nine in ten reviewers cannot separate two audiences",
+    "238/538 reviews could be labelled (44.2%); user_location is supplied by Booking.com but not by Google Maps",
+    "no entity_type group has at least 5 mentions from both audiences, so no comparison is reported for it",
+    "no division group has at least 5 mentions from both audiences, so no comparison is reported for it",
+    "no visibility group has at least 5 mentions from both audiences, so no comparison is reported for it",
+    "no entity group has at least 5 mentions from both audiences, so no comparison is reported for it",
+    "181 of 182 mentions sit in reviews that cannot be labelled. user_location comes from Booking.com, whose reviews are about hotels and rarely name another place, while almost every mention comes from a Google Maps review, which supplies no location. The source that identifies the reviewer is not the source that carries the evidence.",
+    "On this corpus the locals-versus-visitors question cannot be answered: every cell is too small on at least one side. This is a coverage limit, not a null result.",
+    "Worth flagging: section 5.6 cannot be answered via reviewer location without conflicting with section 10, which keeps personal-data output off when scraping. Google Maps reviewer location is exactly the field that ethics stance excludes. The route that does not conflict is language \u2014 Bangla or Banglish text implies a domestic reviewer and needs no personal data at all \u2014 which becomes usable once the YouTube pass (section 3.3a) brings real Banglish into the corpus. Today the corpus has 5 such reviews."
+  ]
+}

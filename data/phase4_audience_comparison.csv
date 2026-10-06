@@ -1,0 +1,67 @@
+dimension,group,domestic_mentions,foreign_mentions,unknown_mentions,domestic_share,foreign_share,comparable
+entity_type,ACCESS,0,0,11,,0.0,False
+entity_type,PLACE,0,0,153,,0.0,False
+entity_type,TIP,0,1,17,,1.0,False
+division,Barishal,0,0,8,,0.0,False
+division,Chattogram,0,1,96,,1.0,False
+division,Dhaka,0,0,24,,0.0,False
+division,Khulna,0,0,29,,0.0,False
+division,Rajshahi,0,0,1,,0.0,False
+division,Sylhet,0,0,23,,0.0,False
+visibility,V0,0,0,7,,0.0,False
+visibility,V1,0,0,10,,0.0,False
+visibility,V2,0,0,28,,0.0,False
+visibility,V3,0,0,108,,0.0,False
+visibility,unknown,0,1,28,,1.0,False
+entity,Bagerhat,0,0,10,,0.0,False
+entity,Bandarban,0,0,21,,0.0,False
+entity,Best Time to Visit,0,0,1,,0.0,False
+entity,Best time to visit,0,0,1,,0.0,False
+entity,Boga Lake,0,0,1,,0.0,False
+entity,Carry water,0,0,1,,0.0,False
+entity,Carry water but don't litter,0,0,1,,0.0,False
+entity,Chandranath,0,0,1,,0.0,False
+entity,Chor Bijoy,0,0,1,,0.0,False
+entity,Cox's Bazar,0,0,5,,0.0,False
+entity,Fatrar Chor,0,0,1,,0.0,False
+entity,Fokirhat,0,0,1,,0.0,False
+entity,Gangamati,0,0,3,,0.0,False
+entity,Go early,0,1,0,,1.0,False
+entity,Go in the morning to beat the crowd,0,0,1,,0.0,False
+entity,Guliyakhali,0,0,2,,0.0,False
+entity,Lawachara,0,0,1,,0.0,False
+entity,Madhabpur Lake,0,0,1,,0.0,False
+entity,Mongla,0,0,10,,0.0,False
+entity,Muradpur,0,0,4,,0.0,False
+entity,Nilgiri,0,0,1,,0.0,False
+entity,Pashur,0,0,5,,0.0,False
+entity,Rangamati,0,0,9,,0.0,False
+entity,Saint Martin,0,0,25,,0.0,False
+entity,Sardar Bari,0,0,1,,0.0,False
+entity,Sitakunda,0,0,12,,0.0,False
+entity,Sonargaon,0,0,22,,0.0,False
+entity,Sreemangal,0,0,13,,0.0,False
+entity,Sundarbans,0,0,3,,0.0,False
+entity,bargain at all the nearby shops,0,0,1,,0.0,False
+entity,bargain for the boat price,0,0,1,,0.0,False
+entity,bargaining skills mostly,0,0,1,,0.0,False
+entity,best time to visit,0,0,1,,0.0,False
+entity,best time to visit Kuakata is during the cooler,0,0,1,,0.0,False
+entity,best time to visit is between November and March,0,0,1,,0.0,False
+entity,best time to visit is definitely during the,0,0,1,,0.0,False
+entity,best time to visit this place,0,0,1,,0.0,False
+entity,boat from kaptai station,0,0,1,,0.0,False
+entity,bus from Dhaka or Chittagong,0,0,1,,0.0,False
+entity,carry with me,0,0,1,,0.0,False
+entity,carry your essentials,0,0,1,,0.0,False
+entity,engine boat from Mongla,0,0,1,,0.0,False
+entity,engine boat from kaptai boat station,0,0,1,,0.0,False
+entity,engine boat from the Mongla Ferry Ghat through,0,0,1,,0.0,False
+entity,get off at Fokirhat Bazar and take a CNG,0,0,1,,0.0,False
+entity,get off at Sitakunda Bazar,0,0,1,,0.0,False
+entity,go early morning or evening,0,0,1,,0.0,False
+entity,take a CNG or auto from there,0,0,1,,0.0,False
+entity,take a boat,0,0,1,,0.0,False
+entity,take a boat ride to the precise Zero,0,0,1,,0.0,False
+entity,take a boat to reach the main beach,0,0,1,,0.0,False
+entity,visit early in the morning for,0,0,1,,0.0,False
