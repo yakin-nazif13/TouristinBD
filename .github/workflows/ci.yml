@@ -64,6 +64,11 @@ jobs:
       - name: Phase 4 — entity resolution (BUILD_PLAN 5.3)
         run: python scripts/test_resolve_entities.py
 
+      # Network-free: every gazetteer test either calls a pure function or
+      # stubs the HTTP layer, so CI never hits Nominatim or Wikidata.
+      - name: Phase 4 — gazetteer and visibility (BUILD_PLAN 5.4)
+        run: python scripts/test_gazetteer.py
+
       - name: Phase 5 — human-validation tooling tests
         run: python scripts/test_phase5_human_validation.py
 

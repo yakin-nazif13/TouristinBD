@@ -1,0 +1,21 @@
+{
+  "n_entities": 23,
+  "by_visibility": {
+    "V3": 8,
+    "V1": 6,
+    "V2": 5,
+    "V0": 4
+  },
+  "with_coordinates": 16,
+  "thresholds": {
+    "V3_sitelinks": 20,
+    "V3_importance": 0.35,
+    "V2_sitelinks": 5,
+    "V2_importance": 0.1
+  },
+  "sources": [
+    "nominatim.openstreetmap.org",
+    "wikidata.org"
+  ],
+  "offline": false
+}
