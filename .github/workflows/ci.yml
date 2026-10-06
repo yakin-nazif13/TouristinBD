@@ -69,6 +69,12 @@ jobs:
       - name: Phase 4 — gazetteer and visibility (BUILD_PLAN 5.4)
         run: python scripts/test_gazetteer.py
 
+      - name: Install the gem-score dependency
+        run: pip install vaderSentiment
+
+      - name: Phase 4 — gem score (BUILD_PLAN 5.5)
+        run: python scripts/test_score_gems.py
+
       - name: Phase 5 — human-validation tooling tests
         run: python scripts/test_phase5_human_validation.py
 

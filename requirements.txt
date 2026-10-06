@@ -14,6 +14,10 @@ langdetect
 # Phase 4 entity resolution (BUILD_PLAN 5.3): string similarity over place-name
 # variants. Pure wheel, no compiler, and no torch — resolution runs locally.
 rapidfuzz
+# Phase 4 gem score (BUILD_PLAN 5.5): sentiment of mention sentences.
+# Lexicon-based and English-only, which is why a non-Latin sentence is
+# excluded from the term rather than scored neutral.
+vaderSentiment
 scipy
 fastapi
 uvicorn[standard]

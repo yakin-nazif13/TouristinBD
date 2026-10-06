@@ -1,0 +1,38 @@
+{
+  "n_entities_considered": 78,
+  "n_candidates": 13,
+  "candidate_gate_min_reviews": 2,
+  "weights_declared": {
+    "mentions": 0.3,
+    "hidden": 0.3,
+    "distinct": 0.15,
+    "sentiment": 0.15,
+    "recency": 0.1
+  },
+  "weights_used": {
+    "mentions": 0.3,
+    "hidden": 0.3,
+    "distinct": 0.15,
+    "sentiment": 0.15,
+    "recency": 0.1
+  },
+  "ablated": [],
+  "mentions_saturation": 10,
+  "recency_window_years": 3,
+  "hidden_by_visibility": {
+    "V0": 1.0,
+    "V1": 0.65,
+    "V2": 0.3,
+    "V3": 0.0
+  },
+  "by_visibility": {
+    "V3": 8,
+    "V2": 3,
+    "V0": 1,
+    "V1": 1
+  },
+  "notes": [
+    "`distinct` computed lexically (TF-IDF) for 182 mention(s)",
+    "8 candidate(s) are already official (V3), and the highest of them (Bandarban, 0.61) outranks 3 candidate(s) that are not \u2014 `mentions` saturates for a much-reviewed famous place. Use already_official to filter the register; the weights were not retuned after seeing this."
+  ]
+}
