@@ -1,5 +1,10 @@
 # TouristinBD — Progress Checklist
 
+> **This file tracks the original twelve-phase MVP.** Work against the v2 plan
+> (`docs/BUILD_PLAN.txt`, whose Phases 1–7 are a different numbering) is tracked in
+> **`docs/PROGRESS_BUILD_PLAN.md`** — currently: Plan Phases 3 and 4 complete,
+> Plan Phase 5 deliberately not started. Keep both files current.
+
 Last updated: 2026-10-06 — all 12 MVP phases complete; Phase 4 taxonomy regenerated with
 `gemini-3.5-flash` and Phases 5-8 refreshed on it. Since then: the v2 build plan's
 "Phase 1" tooling landed (2026-09-22, see below) and the pipeline was made safe to grow to
