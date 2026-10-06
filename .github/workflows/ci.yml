@@ -78,6 +78,9 @@ jobs:
       - name: Phase 4 — locals versus visitors (BUILD_PLAN 5.6)
         run: python scripts/test_analyze_audience.py
 
+      - name: Phase 4 — verification queue (BUILD_PLAN 5.7)
+        run: python scripts/test_verification_queue.py
+
       - name: Phase 5 — human-validation tooling tests
         run: python scripts/test_phase5_human_validation.py
 
