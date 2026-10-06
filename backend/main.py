@@ -25,6 +25,7 @@ from backend.routers import (
     analytics,
     chat,
     discovery,
+    entities,
     itinerary,
     meta,
     places,
@@ -102,6 +103,7 @@ app.include_router(taxonomy.router)
 app.include_router(analytics.router)
 app.include_router(research.router)
 app.include_router(discovery.router)
+app.include_router(entities.router)
 app.include_router(itinerary.router)
 app.include_router(chat.router)
 

@@ -1,6 +1,5 @@
 entity_id,surface,mentions,phonetic_key,is_canonical
-E0001,Ahsan Manzil,28,ahsn mnjl,True
-E0001,Ahsan Manzil Museum,0,ahsn mnjl msm,False
+E0001,Ahsan Manzil Museum,0,ahsn mnjl msm,True
 E0002,Bagerhat,10,bgrht,True
 E0003,Bandarban,21,bndrbn,True
 E0004,Best Time to Visit,1,bst tm t bst,True
@@ -11,10 +10,7 @@ E0008,Carry water but don't litter,1,cr btr bt dnt ltr,True
 E0009,Chandranath,1,cndrnt,True
 E0010,Chor Bijoy,1,cr bj,True
 E0011,Civic Inn,0,cbc in,True
-E0012,Cox's Bazar,24,cks bjr,True
-E0012,cox's bazar,1,cks bjr,False
-E0012,cox's Bazar,1,cks bjr,False
-E0012,Cox's bazar,1,cks bjr,False
+E0012,Cox's Bazar,5,cks bjr,True
 E0012,Cox's Bazar Beach,0,cks bjr bc,False
 E0013,Fatrar Chor,1,ftr cr,True
 E0014,Fokirhat,1,fkrht,True
@@ -23,48 +19,37 @@ E0016,Gangamati,3,gngmt,True
 E0017,Go early,1,g erl,True
 E0018,Go in the morning to beat the crowd,1,g in t mrng t bt t crbd,True
 E0019,Green Edge Hotel,0,grn edg htl,True
-E0020,Guliakhali,22,glkl,True
-E0020,Guliyakhali,2,glkl,False
-E0020,Guliakhali Sea Beach,0,glkl s bc,False
-E0021,Heritage Hotel Chittagong,0,hrtg htl ctgng,True
-E0022,Hoque Tower International,0,hk tbr intrntnl,True
-E0023,Jaflong,37,jflng,True
-E0023,jaflong,2,jflng,False
-E0023,Jaflong Zero Point,0,jflng jr pnt,False
-E0024,Kaptai,26,kpt,True
-E0024,kaptai,4,kpt,False
-E0024,Kaptai Lake,0,kpt lk,False
-E0025,Karamjal,20,krmjl,True
+E0020,Guliakhali Sea Beach,0,glkl s bc,True
+E0021,Guliyakhali,2,glkl,True
+E0022,Heritage Hotel Chittagong,0,hrtg htl ctgng,True
+E0023,Hoque Tower International,0,hk tbr intrntnl,True
+E0024,Jaflong Zero Point,0,jflng jr pnt,True
+E0025,Kaptai Lake,0,kpt lk,True
 E0026,Kollol Hotel,0,kl htl,True
-E0027,Kuakata,32,kt,True
-E0027,Kuakata Beach,0,kt bc,False
+E0027,Kuakata Beach,0,kt bc,True
 E0028,Lalbagh Fort,0,lbg frt,True
 E0029,Lawachara,1,lbcr,True
 E0030,Madhabpur Lake,1,mdbpr lk,True
 E0031,Mongla,10,mngl,True
-E0032,Nilachal,21,nlcl,True
-E0032,Nilachal Tourist Center,0,nlcl trst cntr,False
+E0032,Nilachal Tourist Center,0,nlcl trst cntr,True
 E0033,Nilgiri,1,nlgr,True
 E0034,Noorjahan Grand Hotel,0,nrjhn grnd htl,True
-E0035,Paharpur,14,phrpr,True
-E0036,Panam City,0,pnm ct,True
-E0037,Pashur,5,psr,True
-E0038,Rangamati,8,rngmt,True
-E0038,rangamati,1,rngmt,False
-E0039,Ratargul,20,rtrgl,True
-E0039,Ratargul Swamp Forest,0,rtrgl sbmp frst,False
-E0040,Royal Pearl Suites,0,rl prl sts,True
-E0041,Saint Martin,25,snt mrtn,True
-E0042,Saint Martins Island,0,snt mrtns islnd,True
-E0043,Sardar Bari,1,srdr br,True
-E0044,Sea Cox Hotel,0,s cks htl,True
-E0045,Sitakunda,12,stknd,True
-E0046,Sixty Dome Mosque,0,skst dm msk,True
-E0047,Sompur Mahavihar (Paharpur),0,smpr mhbhr phrpr,True
-E0048,Sonargaon,22,snrgn,True
-E0049,Sreemangal,13,srmngl,True
-E0049,Srimangal,10,srmngl,False
-E0049,Srimangal Tea Garden,0,srmngl t grdn,False
+E0035,Panam City,0,pnm ct,True
+E0036,Pashur,5,psr,True
+E0037,Rangamati,8,rngmt,True
+E0037,rangamati,1,rngmt,False
+E0038,Ratargul Swamp Forest,0,rtrgl sbmp frst,True
+E0039,Royal Pearl Suites,0,rl prl sts,True
+E0040,Saint Martin,25,snt mrtn,True
+E0041,Saint Martins Island,0,snt mrtns islnd,True
+E0042,Sardar Bari,1,srdr br,True
+E0043,Sea Cox Hotel,0,s cks htl,True
+E0044,Sitakunda,12,stknd,True
+E0045,Sixty Dome Mosque,0,skst dm msk,True
+E0046,Sompur Mahavihar (Paharpur),0,smpr mhbhr phrpr,True
+E0047,Sonargaon,22,snrgn,True
+E0048,Sreemangal,13,srmngl,True
+E0049,Srimangal Tea Garden,0,srmngl t grdn,True
 E0050,Sundarbans,3,sndrbns,True
 E0051,Sundarbans (Karamjal Wildlife Centre),0,sndrbns krmjl bldlf cntr,True
 E0052,Sylhet Paradise Inn,0,slht prds in,True

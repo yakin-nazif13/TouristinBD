@@ -20,7 +20,7 @@ DATA_DIR = Path(os.environ.get("TOURISTINBD_DATA_DIR") or (REPO_ROOT / "data"))
 DB_PATH = DATA_DIR / "touristinbd.db"
 
 # Must match SCHEMA_VERSION in scripts/build_phase8_database.py.
-EXPECTED_SCHEMA_VERSION = 1
+EXPECTED_SCHEMA_VERSION = 2
 
 BUILD_HINT = (
     "Database not found or out of date. Build it with:\n"

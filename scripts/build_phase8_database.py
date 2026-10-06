@@ -36,7 +36,11 @@ OUT_REPORT_MD = DATA_DIR / "phase8_build_report.md"
 OUT_REPORT_JSON = DATA_DIR / "phase8_build_report.json"
 
 # Bumped when the DB schema changes so the API can refuse a stale database.
-SCHEMA_VERSION = 1
+# 2 adds the Phase 4 entity layer: mentions, entities and entity_variants.
+# backend/db.py's EXPECTED_SCHEMA_VERSION must be bumped with it, or the API
+# refuses to serve a database it does not understand — which is the intended
+# behaviour, not something to work around.
+SCHEMA_VERSION = 2
 
 # ---------------------------------------------------------------------------
 # Input files. Everything here is optional; a missing file is reported, not fatal.
@@ -55,6 +59,9 @@ INPUTS = {
     "phase5_recommendations": DATA_DIR / "phase5_recommendations.csv",
     "phase5_manual_sample": DATA_DIR / "phase5_manual_review_sample.csv",
     "phase3_language_labels": DATA_DIR / "phase3_language_labels.csv",
+    "phase4_mentions": DATA_DIR / "phase4_mentions.csv",
+    "phase4_entities": DATA_DIR / "phase4_entities.csv",
+    "phase4_entity_variants": DATA_DIR / "phase4_entity_variants.csv",
     "phase6_metrics": DATA_DIR / "phase6_sensitivity_metrics.csv",
     "phase6_mappings": DATA_DIR / "phase6_sensitivity_mappings.csv",
     "phase7_statistical_tests": DATA_DIR / "phase7_statistical_tests.json",
@@ -318,6 +325,56 @@ CREATE TABLE review_language (
     place_phonetic_key   TEXT
 );
 
+-- ---------------------------------------------------------------------------
+-- Phase 4: the entity layer (BUILD_PLAN section 5).
+--
+-- `mentions` is the evidence base. Every row carries the character offsets it
+-- was found at, so a claim in the register can be traced back to the exact
+-- span of a real review — section 5.2's grounding rule, stored rather than
+-- just enforced at extraction time.
+-- ---------------------------------------------------------------------------
+CREATE TABLE mentions (
+    mention_id       INTEGER PRIMARY KEY AUTOINCREMENT,
+    review_id        TEXT,
+    entity_id        TEXT,
+    entity_type      TEXT,
+    surface          TEXT,
+    start_offset     INTEGER,
+    end_offset       INTEGER,
+    match_kind       TEXT,
+    sentence         TEXT,
+    language         TEXT,
+    extractor        TEXT,
+    confidence       REAL,
+    phonetic_key     TEXT
+);
+
+CREATE INDEX idx_mentions_entity ON mentions(entity_id);
+CREATE INDEX idx_mentions_review ON mentions(review_id);
+
+CREATE TABLE entities (
+    entity_id        TEXT PRIMARY KEY,
+    canonical_name   TEXT,
+    entity_type      TEXT,
+    n_variants       INTEGER,
+    n_mentions       INTEGER,
+    n_reviews        INTEGER,
+    districts        TEXT,
+    divisions        TEXT,
+    languages        TEXT
+);
+
+CREATE TABLE entity_variants (
+    row_id           INTEGER PRIMARY KEY AUTOINCREMENT,
+    entity_id        TEXT,
+    surface          TEXT,
+    mentions         INTEGER,
+    phonetic_key     TEXT,
+    is_canonical     INTEGER
+);
+
+CREATE INDEX idx_variants_entity ON entity_variants(entity_id);
+
 CREATE TABLE metadata (
     key              TEXT PRIMARY KEY,
     value            TEXT
@@ -478,6 +535,54 @@ GROUP BY place_id, preference_id;
 -- is carried deliberately: a `heuristic` row is not a trained decision, and a
 -- mix table that hides the difference would overstate what the classifier has
 -- actually established.
+-- One row per mention, carrying the place whose review it was found in. This
+-- is the join that makes the project's central claim legible: a mention of
+-- Fatrar Chor inside a review *of Kuakata* is a secondary mention, and
+-- section 3.2 snowballs on exactly those.
+CREATE VIEW v_mention_evidence AS
+SELECT
+    m.mention_id,
+    m.entity_id,
+    e.canonical_name,
+    m.entity_type,
+    m.surface,
+    m.sentence,
+    m.match_kind,
+    m.language,
+    m.extractor,
+    m.review_id,
+    r.place_id          AS found_in_place_id,
+    p.place_name        AS found_in_place,
+    p.district          AS found_in_district,
+    p.division          AS found_in_division,
+    r.review_rating,
+    r.review_date
+FROM mentions m
+LEFT JOIN entities e ON e.entity_id = m.entity_id
+LEFT JOIN reviews  r ON r.review_id = m.review_id
+LEFT JOIN places   p ON p.place_id  = r.place_id;
+
+-- Per entity: how much independent evidence it has, and how spread out that
+-- evidence is. Section 5.5 requires 2-3 *independent* mentions before anything
+-- becomes a candidate, and distinct reviews is the honest denominator — ten
+-- mentions in one review is one person's opinion.
+CREATE VIEW v_entity_evidence AS
+SELECT
+    e.entity_id,
+    e.canonical_name,
+    e.entity_type,
+    e.n_variants,
+    COUNT(m.mention_id)                       AS n_mentions,
+    COUNT(DISTINCT m.review_id)               AS n_reviews,
+    COUNT(DISTINCT r.place_id)                AS n_found_in_places,
+    COUNT(DISTINCT p.division)                AS n_divisions,
+    ROUND(AVG(r.review_rating), 3)            AS avg_rating_of_host_reviews
+FROM entities e
+LEFT JOIN mentions m ON m.entity_id = e.entity_id
+LEFT JOIN reviews  r ON r.review_id = m.review_id
+LEFT JOIN places   p ON p.place_id  = r.place_id
+GROUP BY e.entity_id;
+
 CREATE VIEW v_language_mix AS
 SELECT
     l.language_label,
@@ -898,6 +1003,9 @@ def main() -> None:
     p5_recs = load_csv("phase5_recommendations", notes)
     p5_sample = load_csv("phase5_manual_sample", notes)
     p3_language = load_csv("phase3_language_labels", notes)
+    p4_mentions = load_csv("phase4_mentions", notes)
+    p4_entities = load_csv("phase4_entities", notes)
+    p4_variants = load_csv("phase4_entity_variants", notes)
     p6_metrics = load_csv("phase6_metrics", notes)
     p6_mappings = load_csv("phase6_mappings", notes)
     p7_tests = load_json("phase7_statistical_tests", notes)
@@ -986,6 +1094,54 @@ def main() -> None:
             )
             review_language = review_language[~duplicated]
 
+    entities = build_simple(
+        p4_entities,
+        ["entity_id", "canonical_name", "entity_type", "n_variants", "n_mentions",
+         "n_reviews", "districts", "divisions", "languages"],
+        "phase4_entities.csv", notes,
+    )
+    entity_variants = build_simple(
+        p4_variants,
+        ["entity_id", "surface", "mentions", "phonetic_key", "is_canonical"],
+        "phase4_entity_variants.csv", notes,
+    )
+    if not entity_variants.empty:
+        entity_variants["is_canonical"] = to_bool(entity_variants["is_canonical"])
+
+    mentions = build_simple(
+        p4_mentions,
+        ["review_id", "entity_type", "surface", "start", "end", "match_kind",
+         "sentence", "language", "extractor", "confidence", "phonetic_key"],
+        "phase4_mentions.csv", notes,
+    )
+    if not mentions.empty:
+        mentions = mentions.rename(columns={"start": "start_offset", "end": "end_offset"})
+        # The mentions artifact has no entity_id: resolution records the
+        # surface -> entity mapping in the variants file. Joining here keeps
+        # both artifacts single-purpose and re-runnable on their own.
+        if not entity_variants.empty:
+            surface_to_entity = dict(zip(entity_variants["surface"].astype(str),
+                                         entity_variants["entity_id"].astype(str)))
+            mentions["entity_id"] = mentions["surface"].astype(str).map(surface_to_entity)
+            unresolved = mentions["entity_id"].isna().sum()
+            if unresolved:
+                notes.append(
+                    f"phase4_mentions.csv: {int(unresolved)} mention(s) have no entity "
+                    "(re-run scripts/resolve_entities.py after extraction); entity_id NULL"
+                )
+        else:
+            mentions["entity_id"] = pd.NA
+            notes.append("no entity variants available, so mentions carry no entity_id")
+
+        known_reviews = set(reviews["review_id"].astype(str)) if not reviews.empty else set()
+        orphan = ~mentions["review_id"].astype(str).isin(known_reviews)
+        if orphan.any():
+            notes.append(
+                f"phase4_mentions.csv: {int(orphan.sum())} mention(s) name a review_id not "
+                "in the corpus; dropped"
+            )
+            mentions = mentions[~orphan]
+
     built_at = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
 
     DB_PATH.unlink(missing_ok=True)
@@ -1006,6 +1162,9 @@ def main() -> None:
             "sensitivity_metrics": write_table(conn, "sensitivity_metrics", sens_metrics),
             "sensitivity_mappings": write_table(conn, "sensitivity_mappings", sens_mappings),
             "review_language": write_table(conn, "review_language", review_language),
+            "entities": write_table(conn, "entities", entities),
+            "entity_variants": write_table(conn, "entity_variants", entity_variants),
+            "mentions": write_table(conn, "mentions", mentions),
         }
 
         meta_rows = [

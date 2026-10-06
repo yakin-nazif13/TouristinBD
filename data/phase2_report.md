@@ -1,6 +1,6 @@
 # Phase 2 — preprocessing report
 
-Generated: 2026-09-04T02:11:03Z
+Generated: 2026-10-05T23:44:27Z
 
 - Inputs: real_reviews_batch1.csv, real_reviews_booking_batch1.csv
 - Output: `data/processed_reviews.csv` — **538 reviews** across 27 places (from 540 raw rows)

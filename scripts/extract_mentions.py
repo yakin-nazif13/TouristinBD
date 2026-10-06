@@ -141,6 +141,17 @@ def load_gazetteer(corpus: pd.DataFrame) -> list[str]:
     return sorted(usable, key=lambda n: (-len(n), n))
 
 
+def _name_tokens(name: str) -> set[str]:
+    """Lowercased word tokens of a place name, punctuation removed.
+
+    Parentheticals are kept as tokens rather than dropped, because the corpus
+    writes "Sundarbans (Karamjal Wildlife Centre)" and a review of that page
+    saying "Karamjal" is still talking about its own subject.
+    """
+    cleaned = re.sub(r"[^\w\s]", " ", str(name or "").lower())
+    return {t for t in cleaned.split() if t}
+
+
 def _trim_to_word(text: str, start: int, end: int) -> str:
     """The span, pulled back to the last complete word and stripped of punctuation.
 
@@ -162,12 +173,20 @@ def extract_gazetteer(text: str, place_name: str, gazetteer: list[str]) -> list[
     Kuakata review says nothing, while a mention of Fatrar Chor in one is the
     long-tail signal section 3.2 snowballs on.
     """
-    own = {place_name.strip().lower(), strip_qualifier(place_name).lower()}
+    # Every token of the review's own place, so a *short form* of it is
+    # excluded too. Comparing whole strings is not enough: a review of
+    # "Kuakata Beach" saying "Kuakata" was being counted as a secondary
+    # mention, and 224 of 440 mentions (51%) were self-mentions of exactly
+    # that shape. A review talking about its own subject is not a discovery,
+    # and section 3.2's whole premise is mentions found inside reviews of
+    # *other* places.
+    own_tokens = _name_tokens(place_name)
     candidates: list[dict] = []
     claimed: list[tuple[int, int]] = []
 
     for name in gazetteer:
-        if name.lower() in own:
+        name_tokens = _name_tokens(name)
+        if name_tokens and own_tokens and name_tokens <= own_tokens:
             continue
         # Word-boundary match so "Padma" does not fire inside "Padmasana".
         pattern = re.compile(r"(?<![\w])" + re.escape(name) + r"(?![\w])", re.IGNORECASE)

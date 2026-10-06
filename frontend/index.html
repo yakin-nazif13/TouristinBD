@@ -217,6 +217,15 @@
     padding:13px 24px;font-weight:600;cursor:pointer;font-family:'Inter';font-size:0.95rem;
     box-shadow:0 8px 20px -8px rgba(79,140,255,0.6);transition:transform .12s ease, filter .12s ease;
   }
+  /* An entity name that opens its evidence. A real <button> rather than a
+     styled <a>, so it is reachable by keyboard and announced as an action. */
+  .link-btn{
+    background:none;border:none;padding:0;cursor:pointer;font-family:'Inter',sans-serif;
+    font-size:0.95rem;font-weight:600;color:var(--accent);text-align:left;
+    text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:3px;
+  }
+  .link-btn:hover{color:var(--text-light);}
+  .link-btn:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:4px;}
   .primary-btn:hover{filter:brightness(1.08);transform:translateY(-1px);}
   .primary-btn:active{transform:translateY(0);}
   .primary-btn[disabled]{opacity:0.5;cursor:progress;transform:none;}
@@ -374,6 +383,11 @@
         <span class="num">05</span>
         <span class="tab-label">Explore</span>
       </button>
+      <button data-tab="discoveries" title="Discoveries">
+        <span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l2.1 6.3H21l-5.4 3.9 2 6.3L12 15.6 6.4 19.5l2-6.3L3 9.3h6.9z"/></svg></span>
+        <span class="num">06</span>
+        <span class="tab-label">Discoveries</span>
+      </button>
     </nav>
 
     <div class="rail-spacer"></div>
@@ -505,6 +519,47 @@
     <div id="placeDetail"></div>
   </section>
 
+  <!-- DISCOVERIES (Phase 4 entity layer) -->
+  <section class="panel" id="tab-discoveries" style="display:none;">
+    <h2>Places found inside other places' reviews</h2>
+    <p class="muted">
+      The hidden-gem engine. Every row below is a place, food, activity, route or tip
+      extracted from review text, then resolved across its spelling variants. Extraction
+      skips each review's own place — including short forms of it — so everything here was
+      mentioned in a review <em>about somewhere else</em>. That is the signal the project
+      is built on.
+    </p>
+    <p class="muted small">
+      Every mention is grounded: it must appear verbatim in the review, and the character
+      offsets are stored, so each claim below opens to the reviewer's own sentence.
+      Nothing here is generated text.
+    </p>
+    <div class="stat-grid" id="discoveryStats"></div>
+    <div class="form-row">
+      <label>Type
+        <select id="discoveryType">
+          <option value="">all</option>
+          <option value="PLACE">PLACE</option>
+          <option value="FOOD">FOOD</option>
+          <option value="ACTIVITY">ACTIVITY</option>
+          <option value="ACCESS">ACCESS</option>
+          <option value="TIP">TIP</option>
+        </select>
+      </label>
+      <label>Minimum independent reviews
+        <select id="discoveryMinReviews">
+          <option value="1">1 (everything)</option>
+          <option value="2" selected>2 (candidate threshold)</option>
+          <option value="3">3</option>
+          <option value="5">5</option>
+        </select>
+      </label>
+      <button class="primary-btn" onclick="loadDiscoveries()">Apply</button>
+    </div>
+    <div id="discoveryOutput"></div>
+    <div id="discoveryEvidence"></div>
+  </section>
+
   <footer>
     TouristinBD — capstone project. Live data from the FastAPI backend over
     <span class="mono" id="footerApi"></span>.<br>
@@ -617,7 +672,7 @@ function voiceInput(targetId, onDone){
 }
 
 /* ---------------------------- tabs ---------------------------- */
-const TABS = ['overview','chat','itinerary','compare','explore'];
+const TABS = ['overview','chat','itinerary','compare','explore','discoveries'];
 document.querySelectorAll('nav.tabs button').forEach(btn => {
   btn.addEventListener('click', () => {
     document.querySelectorAll('nav.tabs button').forEach(b => b.classList.remove('active'));
@@ -625,8 +680,15 @@ document.querySelectorAll('nav.tabs button').forEach(btn => {
     TABS.forEach(name => {
       document.getElementById('tab-' + name).style.display = (name === btn.dataset.tab) ? 'block' : 'none';
     });
+    // Loaded on first open rather than at boot: the entity tables are the
+    // largest query on the page and most visits never open this tab.
+    if(btn.dataset.tab === 'discoveries' && !DISCOVERIES_LOADED){
+      DISCOVERIES_LOADED = true;
+      loadDiscoveries();
+    }
   });
 });
+let DISCOVERIES_LOADED = false;
 
 function showTab(name){
   const btn = document.querySelector(`nav.tabs button[data-tab="${name}"]`);
@@ -1053,6 +1115,116 @@ async function openPlace(placeId){
   }
 }
 document.getElementById('exploreQuery').addEventListener('keydown', e => { if(e.key === 'Enter') runSearch(); });
+
+/* ----------------------- discoveries (Phase 4) ----------------------- *
+ * The entity layer. Rows are things extracted from review text, resolved
+ * across spelling variants, and each one opens to the sentences behind it.
+ * Evidence is never summarised away: the reviewer's own words are shown.
+ * -------------------------------------------------------------------- */
+async function loadDiscoveries(){
+  const out = document.getElementById('discoveryOutput');
+  const stats = document.getElementById('discoveryStats');
+  const evidence = document.getElementById('discoveryEvidence');
+  evidence.innerHTML = '';
+  out.innerHTML = '<p class="muted">Loading…</p>';
+
+  const type = document.getElementById('discoveryType').value;
+  const minReviews = document.getElementById('discoveryMinReviews').value;
+  const query = `/api/entities?min_reviews=${encodeURIComponent(minReviews)}&limit=200`
+    + (type ? `&entity_type=${encodeURIComponent(type)}` : '');
+
+  try{
+    const [data, all, languages] = await Promise.all([
+      api(query),
+      api('/api/entities?min_reviews=1&limit=1'),
+      api('/api/analytics/language-labels'),
+    ]);
+
+    const mentionTotal = data.entities.reduce((sum, e) => sum + (e.n_mentions || 0), 0);
+    const withVariants = data.entities.filter(e => (e.n_variants || 1) > 1).length;
+    stats.innerHTML = [
+      ['value', all.total, 'entities resolved'],
+      ['value', data.total, 'meet this threshold'],
+      ['value', mentionTotal, 'grounded mentions'],
+      ['value', withVariants, 'with merged variants'],
+      ['value', pct(languages.bangla_or_banglish_share), 'bangla / banglish'],
+    ].map(([, value, label]) =>
+      `<div class="stat"><div class="value">${escapeHtml(value)}</div><div class="label">${escapeHtml(label)}</div></div>`
+    ).join('');
+
+    if(!data.entities.length){
+      out.innerHTML = '<p class="muted">Nothing meets that threshold yet. Lower the minimum, or collect more reviews.</p>';
+      return;
+    }
+
+    const rows = data.entities.map(e => `
+      <tr>
+        <td><button class="link-btn" onclick="showEvidence('${escapeHtml(e.entity_id)}')">${escapeHtml(e.canonical_name)}</button></td>
+        <td class="mono small">${escapeHtml(e.entity_type)}</td>
+        <td>${e.n_reviews ?? 0}</td>
+        <td>${e.n_mentions ?? 0}</td>
+        <td>${e.n_found_in_places ?? 0}</td>
+        <td>${(e.n_variants || 1) > 1 ? e.n_variants : '—'}</td>
+        <td class="small">${escapeHtml((e.divisions || '').split('|').filter(Boolean).join(', ') || '—')}</td>
+      </tr>`).join('');
+
+    out.innerHTML = `
+      <table class="compare-table">
+        <tr>
+          <th>Name</th><th>Type</th><th>Reviews</th><th>Mentions</th>
+          <th>Found in</th><th>Variants</th><th>Divisions</th>
+        </tr>
+        ${rows}
+      </table>
+      <p class="muted small" style="margin-top:10px;">
+        <strong>Reviews</strong> counts distinct reviews mentioning it — the independent
+        evidence that matters. <strong>Mentions</strong> can be higher when one review
+        names it twice. <strong>Found in</strong> is how many different places' review
+        pages it turned up on. Click a name for the evidence.
+      </p>`;
+  }catch(err){
+    out.innerHTML = `<p class="error">${escapeHtml(err.message)}</p>`;
+  }
+}
+
+async function showEvidence(entityId){
+  const out = document.getElementById('discoveryEvidence');
+  out.innerHTML = '<p class="muted">Loading evidence…</p>';
+  try{
+    const detail = await api(`/api/entities/${encodeURIComponent(entityId)}`);
+    const e = detail.entity;
+    const variants = detail.variants.map(v =>
+      `<span class="tag-pill">${escapeHtml(v.surface)}${v.is_canonical ? ' ★' : ''} · ${v.mentions}</span>`
+    ).join('');
+    const quotes = detail.evidence.map(m => `
+      <div class="quote">
+        “${escapeHtml(m.sentence || m.surface)}”
+        <div class="muted small" style="margin-top:6px;">
+          found in a review of <strong>${escapeHtml(m.found_in_place || 'unknown')}</strong>
+          ${m.found_in_division ? '· ' + escapeHtml(m.found_in_division) + ' division' : ''}
+          ${m.review_rating ? '· ' + num(m.review_rating, 1) + '★' : ''}
+          · matched <span class="mono">${escapeHtml(m.match_kind)}</span>
+          · <span class="mono">${escapeHtml(m.language || '')}</span>
+        </div>
+      </div>`).join('');
+
+    out.innerHTML = `
+      <div class="card" style="margin-top:18px;">
+        <h3>${escapeHtml(e.canonical_name)} <span class="mono small">${escapeHtml(e.entity_type)}</span></h3>
+        <p class="muted small">
+          ${e.n_reviews ?? 0} independent review(s) · ${e.n_mentions ?? 0} mention(s)
+          · found on ${e.n_found_in_places ?? 0} other place(s)' pages
+          ${e.districts ? '· ' + escapeHtml(e.districts.split('|').filter(Boolean).join(', ')) : ''}
+        </p>
+        ${variants ? `<div style="margin:10px 0;">${variants}</div>` : ''}
+        <p class="muted small">Evidence — the reviewer's own sentences:</p>
+        ${quotes || '<p class="muted small">No evidence rows.</p>'}
+      </div>`;
+    out.scrollIntoView({behavior: 'smooth', block: 'nearest'});
+  }catch(err){
+    out.innerHTML = `<p class="error">${escapeHtml(err.message)}</p>`;
+  }
+}
 
 boot();
 </script>

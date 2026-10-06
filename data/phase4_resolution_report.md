@@ -5,10 +5,10 @@ spelling variants split one place's evidence, and section 5.5 needs 2-3
 independent mentions before anything becomes a candidate — so this step is
 what stops variants suppressing the gems the project is looking for.
 
-- Distinct surface forms in: **96**
+- Distinct surface forms in: **81**
 - Entities out: **78**
-- Entities with more than one variant: **11**
-  - of which substantive (not just letter case): **9**
+- Entities with more than one variant: **3**
+  - of which substantive (not just letter case): **1**
   - case-only: 2
 
 Weights (fixed in advance): {'phonetic': 0.4, 'string': 0.25, 'containment': 0.2, 'geography': 0.15}, merge threshold 0.72.
@@ -24,15 +24,7 @@ Spelling and local-vs-official cases — what section 5.3 is actually about.
 
 | entity | variants | mentions |
 | --- | --- | --- |
-| Jaflong | Jaflong, Jaflong Zero Point, jaflong | 39 |
-| Kuakata | Kuakata, Kuakata Beach | 32 |
-| Kaptai | Kaptai, Kaptai Lake, kaptai | 30 |
-| Ahsan Manzil | Ahsan Manzil, Ahsan Manzil Museum | 28 |
-| Cox's Bazar | Cox's Bazar, Cox's Bazar Beach, Cox's bazar, cox's Bazar, cox's bazar | 27 |
-| Guliakhali | Guliakhali, Guliakhali Sea Beach, Guliyakhali | 24 |
-| Sreemangal | Sreemangal, Srimangal, Srimangal Tea Garden | 23 |
-| Nilachal | Nilachal, Nilachal Tourist Center | 21 |
-| Ratargul | Ratargul, Ratargul Swamp Forest | 20 |
+| Cox's Bazar | Cox's Bazar, Cox's Bazar Beach | 5 |
 
 ## Case-only groups
 
@@ -44,16 +36,27 @@ resolution works.
 
 ## Evaluation against the hand-made variant groups
 
-- Gold surfaces: 34 (32 present in the corpus)
-- B-cubed precision: 0.9688
-- B-cubed recall: 0.9688
-- **B-cubed F1: 0.9688**
-- Cluster purity: 0.9688
+- Gold surfaces: 34 (21 present in the corpus)
+- B-cubed precision: 0.9524
+- B-cubed recall: 0.8571
+- **B-cubed F1: 0.9023**
+- Cluster purity: 0.9524
 
 Gold surfaces the corpus does not contain, so they could not be scored:
 
+- `Ahsan Manzil`
 - `Char Bijoy`
+- `Guliakhali`
 - `Gulyakhali`
+- `Jaflong`
+- `Kaptai`
+- `Karamjal`
+- `Kuakata`
+- `Nilachal`
+- `Paharpur`
+- `Ratargul`
+- `Srimangal`
+- `kaptai`
 
 ## Notes
 
