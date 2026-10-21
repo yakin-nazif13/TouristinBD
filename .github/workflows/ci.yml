@@ -90,6 +90,12 @@ jobs:
       - name: Scaling tests (10k synthetic import, Phase 4/5 limits)
         run: python scripts/test_scaling.py
 
+      - name: Visitor submissions (storage, API, submit -> approve -> ingest)
+        run: python scripts/test_submissions.py
+
+      - name: Admin panel (accounts, login, approve/reject, ingest)
+        run: python scripts/test_admin.py
+
       - name: Build the SQLite database from the pipeline artifacts
         run: python scripts/build_phase8_database.py
 

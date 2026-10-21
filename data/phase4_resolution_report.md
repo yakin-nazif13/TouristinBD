@@ -34,30 +34,6 @@ resolution works.
 - Rangamati, rangamati
 - Muradpur, muradpur
 
-## Evaluation against the hand-made variant groups
-
-- Gold surfaces: 34 (21 present in the corpus)
-- B-cubed precision: 0.9524
-- B-cubed recall: 0.8571
-- **B-cubed F1: 0.9023**
-- Cluster purity: 0.9524
-
-Gold surfaces the corpus does not contain, so they could not be scored:
-
-- `Ahsan Manzil`
-- `Char Bijoy`
-- `Guliakhali`
-- `Gulyakhali`
-- `Jaflong`
-- `Kaptai`
-- `Karamjal`
-- `Kuakata`
-- `Nilachal`
-- `Paharpur`
-- `Ratargul`
-- `Srimangal`
-- `kaptai`
-
 ## Notes
 
 - embedding signal unavailable (needs torch); phonetic + string + geography only

@@ -1,0 +1,194 @@
+TOURISTINBD - WHAT CHANGED ON 6 OCTOBER 2026
+==============================================
+
+Written for the team. Plain language, no code. For the full detail see
+docs/PROGRESS_BUILD_PLAN.md (the v2 plan checklist) and docs/PROGRESS.md.
+
+In one paragraph
+----------------
+Today the project grew from "a topic-modelling capstone" into the start of a
+hidden-gem platform. The language pipeline and the whole hidden-gem engine were
+built and run on the existing 538 reviews. The project was made safe to grow to
+10,000+ reviews. The first human check of the topic-to-preference mapping was done.
+And the website got a "Share a review" tab, so visitors can send reviews that wait
+for approval and then join the dataset.
+
+By the numbers
+--------------
+- 18 commits before this feature: 15 by Unaiza, 3 by Yakin.
+- About 112 files changed, roughly 13,900 lines added.
+- 21 test suites, 1,079 tests, all passing.
+- Hidden-gem engine on the 538 reviews:
+    182 grounded mentions -> 78 distinct places/foods/tips -> 23 checked against
+    maps -> 4 places found on neither OpenStreetMap nor Wikidata -> 13 candidates
+    ranked -> 0 verified yet (a person has to do that).
+- The 4 places no map knows about: Gangamati, Guliyakhali, Fatrar Chor, Chor Bijoy.
+  All four are mentioned inside reviews of Kuakata, exactly as the plan predicted.
+- Human check of the topic-to-preference mapping (one annotator): precision 1.000,
+  recall 0.769, F1 0.870.
+
+
+WHAT UNAIZA DID
+===============
+
+1. Human validation (first labels)
+   - Labelled all 50 pairs in 17 minutes.
+   - Every mapping the pipeline made was confirmed correct (no false positives).
+   - The three disagreements were all the same kind: she judged a topic to belong to
+     a preference the pipeline had ranked second. So recall is limited by the idea that
+     one topic maps to exactly one preference, not by the similarity threshold.
+   - A second person is still needed before agreement (kappa) can be computed.
+
+2. A way to run the sensitivity study on a Linux machine
+   - Some computers cannot load the torch library. A GitHub Actions workflow now runs
+     the Phase 6 sensitivity analysis on a Linux runner instead.
+
+3. Collection details recorded with every review (plan Phase 2)
+   - Each review can now carry: where it came from (source type), when it was
+     collected, which famous place's page it came from, which discovery round, and
+     coordinates. Old reviews are left blank rather than guessed.
+
+4. The language pipeline (plan Phase 3) - finished
+   - Four language labels instead of two: Bangla, Banglish (Bangla in English
+     letters), English, and mixed. Plus "other" so a Dutch review is not called English.
+   - Bangla text is tidied so look-alike spellings compare equal. A "sound key" makes
+     Guliakhali / Guliyakhali / Gulyakhali, and Bangla "Kuakata" / English "Kuakata",
+     match.
+   - A Banglish detector was built. It deliberately refuses to train until there are
+     real Banglish examples, because training on English-only data would give a
+     meaningless score.
+   - The four embedding models were set up for a head-to-head test.
+   - Result on the 538 reviews: English 532, Bangla 4, mixed 1, other 1. That is only
+     0.9% non-English against the 20% goal, and no Banglish at all. This is the true
+     state of data collected through Google's translation, not a bug.
+
+5. The hidden-gem engine (plan Phase 4) - finished
+   - Finds places, foods, activities, routes and tips mentioned inside reviews of
+     OTHER places. Every item must appear word-for-word in the review, and its exact
+     position is saved, so every claim can be traced to a real sentence.
+   - Merges spelling variants of the same thing into one entity (96 spellings -> 78
+     entities). It deliberately does not merge Karamjal into Sundarbans.
+   - Checks each entity against OpenStreetMap and Wikidata and rates how well known it
+     is: V0 (on no map) to V3 (famous). "We could not look" is recorded as unknown,
+     never as V0, so a network problem cannot create fake discoveries.
+   - Scores candidates with five fixed, visible parts (mentions, how hidden, how
+     distinct, sentiment, recency). Removing the "hidden" part turns the ranking into
+     a list of famous places, which shows that part is what makes it a gem score.
+   - A verification queue: nothing is published automatically. A person decides, and
+     every decision records who, when and why. "Sensitive" places stay in the
+     officer's register and never reach the tourist side.
+   - Locals versus visitors: built, and the honest answer is that it cannot be
+     answered with this data yet (the info that identifies locals clashes with the
+     no-personal-data rule). Language is the safe route once Bangla data exists.
+
+6. The website got a "Discoveries" tab and the database moved to version 2
+   - It lists the places found in other places' reviews and opens each to the
+     reviewer's own sentences.
+
+7. Two mistakes found and fixed along the way
+   - 51% of the first "discoveries" were just a review mentioning its own place
+     (e.g. "Kuakata" inside a Kuakata Beach review). Fixed; the numbers above are the
+     corrected ones. Name-merging quality honestly fell from 0.969 to 0.902.
+   - The language step had been reporting a made-up 100% confidence for 532 reviews.
+     It now records a real figure, or nothing when it has none.
+   - Two UNESCO World Heritage sites briefly scored as "hidden" because of a
+     bracket in their name. Fixed.
+
+8. A progress checklist for the whole v2 plan (docs/PROGRESS_BUILD_PLAN.md).
+
+
+WHAT YAKIN DID
+==============
+
+1. Rebuilt the local database. It was out of date (still held the old 10-preference
+   list instead of the current 5).
+
+2. Made the project safe to grow to 10,000+ reviews
+   - Topic-model settings now scale with the amount of data (and give the same
+     results as before at 538 reviews). Topic runs are now repeatable (seeded).
+   - The paid AI step refuses to run with too many topics instead of failing halfway.
+   - The 50-pair review sample keeps its mix of correct/incorrect pairs with many
+     topics; previously it would have had no wrong pairs at all.
+   - Tests no longer assume exactly 538 reviews and 27 places.
+   - A corpus health report (reviews per division, language mix, places missing
+     locations). It runs after every import.
+   - A synthetic 10,000-review import test, and a data collection guide
+     (docs/DATA_COLLECTION.md) with a tracking template (data/scrape_targets.csv).
+   - Key advice recorded: collect WIDE (many places, all 8 divisions, keep the Bangla
+     originals), not deep. More reviews of the same famous places will not reveal
+     hidden gems. Rangpur and Mymensingh still have no places at all.
+
+3. Fixed the sensitivity analysis (Phase 6) so it is repeatable
+   - Its topic model was not seeded, so results changed on every run.
+   - First repeatable result: NO size of sample was stable. The old claim "the
+     preferences settle at about 400 reviews" is not supported and should not be
+     quoted until the analysis is re-run properly. (The committed Phase 6 files still
+     hold the old run.)
+
+4. Shared the work with GitHub (pull, merge, push) and pulled in Unaiza's work.
+
+
+WHAT WAS ADDED LATER ON THE 6TH (Yakin, with Claude)
+====================================================
+
+1. Visitor review uploads - the "Share a review" tab
+   - A visitor picks a listed place (or adds one that is not listed), gives 1-5 stars
+     and writes a review in Bangla, Banglish or English.
+   - It is saved as a small file in its own folder (data/visitor_uploads/pending/),
+     completely apart from the real dataset. No name, email or IP address is stored.
+   - Nothing reaches the dataset until a person approves it and runs the ingest step:
+       python scripts/process_submissions.py --list
+       python scripts/process_submissions.py --approve ID --by NAME --reason "..."
+       python scripts/process_submissions.py --ingest
+   - Ingest adds the approved reviews and runs them through the same chain as any
+     batch: clean, label language, find mentions, merge spellings, check maps, score,
+     verification queue, rebuild the database. (The topic modelling and paid AI step
+     are left for the next full refresh.)
+   - Spam protection: a hidden trap field, 5 reviews per hour per visitor, duplicate
+     and link detection, a cap of 500 waiting reviews.
+   - Guide: docs/VISITOR_SUBMISSIONS.md. 87 tests, including the whole journey.
+
+2. A safety fix that came with it: hidden-place IDs are now stable
+   - IDs like E0016 used to be handed out by position. Adding any new place would have
+     shuffled them, so a "verified" decision could silently end up on a different
+     place. IDs are now remembered (data/entity_id_registry.json) and never reused.
+
+
+WHAT IS STILL OPEN
+==================
+(From Unaiza's checklist, plus items found today)
+
+Needs a person, no coding
+- A second person labels the 50 pairs (about 17 minutes) so agreement can be measured.
+  Nobody should re-run the preference step before that, or the labels stop matching.
+- Verify the 13 hidden-gem candidates in the queue (about 30 minutes).
+- Hand-label about 500 English-letter texts to train the Banglish detector (needs
+  Banglish data first).
+
+Needs data collection
+- YouTube comment collector (where Banglish lives), blog fetcher, snowball rounds.
+- Re-scrape Google Maps WITH original-language text. This is the most important
+  outstanding item: the research claim is about extraction from the original language,
+  and the current data has none.
+- Reach about 10,000 texts across all 8 divisions, 20%+ Bangla/Banglish.
+
+Needs building
+- Government dashboard (the demo centrepiece, needs no new data).
+- Incremental pipeline, accounts and roles, Bangla interface and chatbot, paid hosting.
+- Re-run Phase 6 (sensitivity) for real and commit the numbers.
+- Run the AI extractor once and compare it to the free baseline (uses paid quota).
+- Fix the proposal document (Yelp vs Booking.com, duplicated citations).
+
+Before the visitor upload tab goes public
+- The free Render host erases files on restart, so waiting reviews would be lost.
+  It needs a saved disk or a database first.
+- Restrict which websites may post to it, and add a CAPTCHA.
+
+Where to find things
+--------------------
+  docs/PROGRESS_BUILD_PLAN.md   v2 plan checklist (Unaiza)
+  docs/PROGRESS.md              original 12-phase project + scaling + uploads
+  docs/DATA_COLLECTION.md       how to collect 10,000+ reviews
+  docs/VISITOR_SUBMISSIONS.md   how visitor uploads and moderation work
+  docs/HUMAN_VALIDATION.md      how to label the 50 pairs
+  docs/BUILD_PLAN.txt           the full v2 plan

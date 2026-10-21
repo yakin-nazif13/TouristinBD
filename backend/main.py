@@ -22,6 +22,7 @@ from fastapi.staticfiles import StaticFiles
 
 from backend import db
 from backend.routers import (
+    admin,
     analytics,
     chat,
     discovery,
@@ -31,6 +32,7 @@ from backend.routers import (
     places,
     research,
     reviews,
+    submissions,
     taxonomy,
 )
 
@@ -60,11 +62,14 @@ app = FastAPI(
         {"name": "discovery", "description": "Search, preference ranking, place comparison."},
         {"name": "itinerary", "description": "Day-by-day trip planning on review evidence."},
         {"name": "chat", "description": "Retrieval-based chatbot built on the discovery endpoints."},
+        {"name": "admin", "description": "Owner-only: sign in, approve or reject visitor reviews, add them to the dataset."},
+        {"name": "submissions", "description": "Visitor reviews: saved as pending in their own folder until a person approves them."},
     ],
 )
 
 # The frontend demo is opened straight from disk (file://) and later served from
-# a different host, so allow any origin — the API is read-only except for /api/chat.
+# a different host, so allow any origin — the API is read-only except for /api/chat and /api/submissions
+# (which only ever writes to its own pending folder).
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -90,6 +95,12 @@ if FRONTEND_AVAILABLE:
     app.mount("/app", StaticFiles(directory=FRONTEND_DIR, html=True), name="frontend")
 
 
+@app.get("/admin", include_in_schema=False)
+def admin_page() -> RedirectResponse:
+    """The owners' page. It is just static HTML; every action it takes needs a login."""
+    return RedirectResponse(url="/app/admin.html")
+
+
 @app.get("/", include_in_schema=False)
 def root() -> RedirectResponse:
     """The interface when it is present, the API docs otherwise."""
@@ -106,6 +117,8 @@ app.include_router(discovery.router)
 app.include_router(entities.router)
 app.include_router(itinerary.router)
 app.include_router(chat.router)
+app.include_router(submissions.router)
+app.include_router(admin.router)
 
 
 def run() -> None:

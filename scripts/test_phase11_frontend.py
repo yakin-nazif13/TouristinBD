@@ -88,6 +88,11 @@ def test_endpoints_exist() -> None:
     for path in sorted(literal):
         base = path.split("?")[0]
         check(f"{base} is a documented route", base in schema, "not in the OpenAPI schema")
+        if base == "/api/submissions":
+            # A POST that would save a file; checking the route is documented is enough
+            # here (test_submissions.py exercises it for real on a throwaway folder).
+            check("/api/submissions is documented as a POST", "post" in schema[base], str(list(schema[base])))
+            continue
         if base == "/api/chat":
             r = client.post(base, json={"message": "hello"})
         else:

@@ -12,3 +12,7 @@ data/bertopic_model_dir_previous/
 *.egg-info/
 dist/
 build/
+# Visitor-submitted reviews wait here until a person approves them (see docs/VISITOR_SUBMISSIONS.md)
+data/visitor_uploads/
+# Owner accounts for the admin panel: scrypt hashes, but still never commit them
+data/admin_users.json

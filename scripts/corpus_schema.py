@@ -2,7 +2,7 @@
 
 BUILD_PLAN section 3.5 adds six provenance columns to the corpus:
 
-    source_type      google_maps | booking | youtube | blog | tripadvisor
+    source_type      google_maps | booking | youtube | blog | tripadvisor | visitor
     collected_at     ISO timestamp of the scrape
     anchor_place      the famous place whose page the text came from
     discovery_round  0 for anchors, 1.. for snowball rounds
@@ -42,7 +42,9 @@ PROVENANCE_COLUMNS = [
 # The vocabulary 3.5 fixes for source_type. Anything else is kept verbatim
 # rather than coerced, so an unforeseen source shows up in the health report as
 # itself instead of silently becoming "other".
-SOURCE_TYPES = ["google_maps", "booking", "youtube", "blog", "tripadvisor"]
+# "visitor" is a review typed into the website's "Share a review" form (see
+# docs/VISITOR_SUBMISSIONS.md); it only enters the corpus after a person approves it.
+SOURCE_TYPES = ["google_maps", "booking", "youtube", "blog", "tripadvisor", "visitor"]
 
 # `source` was free text before 3.5 existed ("booking.com", "google_maps").
 # These map the values actually present in the committed corpus onto the
@@ -56,6 +58,7 @@ _SOURCE_TO_TYPE = {
     "youtube": "youtube",
     "blog": "blog",
     "tripadvisor": "tripadvisor",
+    "visitor": "visitor",
 }
 
 ANCHOR_ROUND = 0

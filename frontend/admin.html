@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>TouristinBD — Owner panel</title>
+<style>
+  :root{
+    --bg:#0B1220; --panel:#111A2E; --card:#16213A; --line:rgba(255,255,255,0.09);
+    --text:#E8EDF7; --dim:#9AA7C0; --accent:#4F8CFF; --ok:#22C598; --bad:#FF6B81; --warn:#F5A524;
+    --input:#0E1729;
+  }
+  @media (prefers-color-scheme: light){
+    :root:not([data-theme="dark"]){--bg:#F4F6FB;--panel:#FFFFFF;--card:#FFFFFF;--line:rgba(15,23,42,0.12);--text:#14203A;--dim:#5B6882;--input:#F4F6FB;}
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--bg);color:var(--text);
+    font:15px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans Bengali","Kohinoor Bangla","Nirmala UI",Roboto,sans-serif;}
+  header{display:flex;align-items:center;gap:14px;padding:14px 22px;border-bottom:1px solid var(--line);background:var(--panel);position:sticky;top:0;z-index:5;}
+  header h1{font-size:1.05rem;margin:0;flex:1;}
+  header .who{color:var(--dim);font-size:0.88rem;}
+  main{max-width:900px;margin:0 auto;padding:22px;}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px;margin-bottom:14px;}
+  .login{max-width:380px;margin:9vh auto 0;}
+  .login h2{margin:0 0 4px;}
+  label{display:block;font-size:0.83rem;color:var(--dim);margin:12px 0 5px;}
+  input,select,textarea{width:100%;padding:10px 12px;border-radius:10px;border:1px solid var(--line);background:var(--input);color:var(--text);font:inherit;}
+  input:focus,select:focus,textarea:focus{outline:2px solid var(--accent);outline-offset:1px;}
+  button{font:inherit;cursor:pointer;border-radius:10px;border:1px solid var(--line);background:transparent;color:var(--text);padding:8px 14px;}
+  button:hover:not(:disabled){border-color:var(--accent);}
+  button:disabled{opacity:0.5;cursor:not-allowed;}
+  button.primary{background:var(--accent);border-color:var(--accent);color:#fff;font-weight:600;}
+  button.good{background:var(--ok);border-color:var(--ok);color:#06251C;font-weight:600;}
+  button.bad{background:var(--bad);border-color:var(--bad);color:#2B0711;font-weight:600;}
+  .msg{border-radius:10px;padding:10px 14px;margin:12px 0;font-size:0.9rem;}
+  .msg.error{background:rgba(255,107,129,0.12);border:1px solid rgba(255,107,129,0.4);}
+  .msg.info{background:rgba(34,197,152,0.12);border:1px solid rgba(34,197,152,0.4);}
+  .chips{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px;}
+  .chip{padding:8px 14px;border-radius:999px;}
+  .chip.active{background:var(--accent);border-color:var(--accent);color:#fff;}
+  .chip b{margin-left:6px;font-family:ui-monospace,Menlo,monospace;}
+  .row{display:flex;gap:10px;flex-wrap:wrap;align-items:center;}
+  .meta{color:var(--dim);font-size:0.8rem;font-family:ui-monospace,Menlo,monospace;}
+  .place{font-weight:700;font-size:1.02rem;}
+  .stars{color:var(--warn);letter-spacing:1px;}
+  .badge{font-size:0.72rem;padding:2px 9px;border-radius:999px;border:1px solid var(--warn);color:var(--warn);}
+  .badge.status{border-color:var(--dim);color:var(--dim);}
+  .text{white-space:pre-wrap;word-break:break-word;margin:12px 0;padding:12px 14px;background:var(--input);border-radius:10px;border:1px solid var(--line);}
+  .history{font-size:0.82rem;color:var(--dim);margin-top:8px;}
+  .actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px;}
+  .decide{margin-top:12px;padding-top:6px;border-top:1px dashed var(--line);}
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;}
+  ol.steps{list-style:none;padding:0;margin:12px 0;}
+  ol.steps li{padding:6px 0;display:flex;gap:10px;}
+  ol.steps .ok{color:var(--ok);} ol.steps .failed{color:var(--bad);} ol.steps .running{color:var(--accent);}
+  .empty{text-align:center;color:var(--dim);padding:34px 10px;}
+  .check{display:flex;gap:8px;align-items:center;margin:8px 0;color:var(--text);font-size:0.9rem;}
+  .check input{width:auto;}
+  [hidden]{display:none !important;}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>🧭 TouristinBD — Owner panel</h1>
+  <span class="who" id="whoami" hidden></span>
+  <button id="logoutBtn" onclick="signOut()" hidden>Sign out</button>
+</header>
+
+<main>
+  <!-- sign in -->
+  <section class="card login" id="loginCard">
+    <h2>Sign in</h2>
+    <p class="meta">For the website's owners only. Use your own email and the owners' shared password.</p>
+    <form id="loginForm" onsubmit="signIn(event)">
+      <label for="loginEmail">Your email</label>
+      <input id="loginEmail" type="email" autocomplete="username" maxlength="254" required>
+      <label for="loginPassword">Shared password</label>
+      <input id="loginPassword" type="password" autocomplete="current-password" maxlength="300" required>
+      <div class="actions"><button class="primary" id="loginBtn" type="submit">Sign in</button></div>
+    </form>
+  </section>
+
+  <div id="adminMessage" role="alert" aria-live="polite"></div>
+
+  <!-- the panel -->
+  <section id="panel" hidden>
+    <div class="chips" id="chips"></div>
+
+    <section class="card" id="ingestCard" hidden>
+      <div class="row"><strong id="ingestTitle">Add approved reviews to the dataset</strong></div>
+      <p class="meta" id="ingestHelp">Approved reviews join the dataset and go through the pipeline: clean, language label, mentions, spelling merge, map check, gem score, queue, database rebuild. This takes a few minutes.</p>
+      <label class="check"><input type="checkbox" id="ingestOffline"> Skip the live map lookups (works without internet)</label>
+      <label class="check"><input type="checkbox" id="ingestSkip"> Only add and clean (skip the rest of the pipeline)</label>
+      <div class="actions"><button class="primary" id="ingestBtn" onclick="startIngest()">Add to dataset</button></div>
+      <ol class="steps" id="ingestSteps"></ol>
+      <div id="ingestResult"></div>
+    </section>
+
+    <div id="list"></div>
+  </section>
+</main>
+
+<script>
+/* The API base: same site by default, or whatever the public page remembered. */
+function resolveApiBase(){
+  const fromQuery = new URLSearchParams(location.search).get('api');
+  if(fromQuery) return fromQuery.replace(/\/$/, '');
+  let stored = null;
+  try{ stored = localStorage.getItem('touristinbd_api'); }catch(e){}
+  if(stored) return stored.replace(/\/$/, '');
+  if(location.protocol === 'http:' || location.protocol === 'https:') return location.origin;
+  return 'http://127.0.0.1:8000';
+}
+const API_BASE = resolveApiBase();
+const TOKEN_KEY = 'touristinbd_admin_token';
+let TOKEN = null, ME = null, DIVISIONS = [], FILTER = 'pending', COUNTS = {}, POLL = null;
+try{ TOKEN = sessionStorage.getItem(TOKEN_KEY); }catch(e){}
+
+const STATUSES = [['pending','Pending'],['approved','Approved'],['rejected','Rejected'],['ingested','Added to dataset']];
+
+/* Everything below builds elements with textContent. Visitor text is never put
+   through innerHTML, so a hostile review cannot run code in this panel. */
+function el(tag, attrs, ...children){
+  const node = document.createElement(tag);
+  for(const [key, value] of Object.entries(attrs || {})){
+    if(key === 'class') node.className = value;
+    else if(key.startsWith('on')) node.addEventListener(key.slice(2), value);
+    else if(value !== null && value !== undefined) node.setAttribute(key, value);
+  }
+  for(const child of children.flat()){
+    if(child === null || child === undefined || child === false) continue;
+    node.append(child instanceof Node ? child : document.createTextNode(String(child)));
+  }
+  return node;
+}
+
+function say(text, kind){
+  const box = document.getElementById('adminMessage');
+  box.replaceChildren();
+  if(text) box.append(el('div', {class: 'msg ' + (kind || 'error')}, text));
+}
+
+async function api(path, options = {}){
+  const headers = Object.assign({}, options.headers || {});
+  if(TOKEN) headers['Authorization'] = 'Bearer ' + TOKEN;
+  if(options.body) headers['Content-Type'] = 'application/json';
+  const response = await fetch(API_BASE + path, Object.assign({}, options, {headers}));
+  const body = await response.json().catch(() => null);
+  if(response.status === 401 && TOKEN){
+    endSession('Your session ended. Please sign in again.');
+    throw new Error('signed out');
+  }
+  if(!response.ok){
+    const detail = body && body.detail;
+    throw new Error(typeof detail === 'string' ? detail : (detail ? JSON.stringify(detail) : response.statusText));
+  }
+  return body;
+}
+
+/* ---------------- sign in / out ---------------- */
+function showPanel(on){
+  document.getElementById('loginCard').hidden = on;
+  document.getElementById('panel').hidden = !on;
+  document.getElementById('logoutBtn').hidden = !on;
+  const who = document.getElementById('whoami');
+  who.hidden = !on;
+  who.textContent = on && ME ? 'Signed in as ' + ME : '';
+}
+
+function endSession(message){
+  TOKEN = null; ME = null;
+  try{ sessionStorage.removeItem(TOKEN_KEY); }catch(e){}
+  if(POLL){ clearInterval(POLL); POLL = null; }
+  showPanel(false);
+  say(message || '', message ? 'error' : null);
+}
+
+async function signIn(event){
+  event.preventDefault();
+  const button = document.getElementById('loginBtn');
+  button.disabled = true;
+  say('');
+  try{
+    const result = await api('/api/admin/login', {
+      method: 'POST',
+      body: JSON.stringify({
+        email: document.getElementById('loginEmail').value.trim(),
+        password: document.getElementById('loginPassword').value,
+      }),
+    });
+    TOKEN = result.token; ME = result.email; DIVISIONS = result.divisions;
+    try{ sessionStorage.setItem(TOKEN_KEY, TOKEN); }catch(e){}
+    document.getElementById('loginPassword').value = '';
+    showPanel(true);
+    await refresh();
+  }catch(err){
+    say(err.message);
+  }finally{
+    button.disabled = false;
+  }
+}
+
+async function signOut(){
+  try{ await api('/api/admin/logout', {method: 'POST'}); }catch(e){}
+  endSession('');
+}
+
+/* ---------------- the panel ---------------- */
+async function refresh(){
+  try{
+    const [summary, list] = await Promise.all([
+      api('/api/admin/summary'),
+      api('/api/admin/submissions?status=' + encodeURIComponent(FILTER)),
+    ]);
+    COUNTS = summary.counts;
+    renderChips();
+    renderIngest(summary.ingest);
+    renderList(list.items);
+  }catch(err){
+    if(err.message !== 'signed out') say(err.message);
+  }
+}
+
+function renderChips(){
+  document.getElementById('chips').replaceChildren(...STATUSES.map(([key, label]) =>
+    el('button', {class: 'chip' + (FILTER === key ? ' active' : ''), onclick: () => { FILTER = key; refresh(); }},
+       label, el('b', {}, COUNTS[key] ?? 0))));
+}
+
+function stars(n){ return '★'.repeat(n) + '☆'.repeat(5 - n); }
+
+function renderList(items){
+  const box = document.getElementById('list');
+  if(!items.length){
+    box.replaceChildren(el('div', {class: 'empty card'}, 'Nothing here.'));
+    return;
+  }
+  box.replaceChildren(...items.map(card));
+}
+
+function card(r){
+  const place = el('div', {class: 'row'},
+    el('span', {class: 'place'}, r.place_name),
+    r.is_new_place ? el('span', {class: 'badge'}, 'NEW PLACE · ' + (r.district || '?')) : null,
+    el('span', {class: 'stars', title: r.rating + ' of 5'}, stars(r.rating)),
+    el('span', {class: 'badge status'}, r.status));
+  const history = (r.decisions || []).map(d =>
+    el('div', {}, el('strong', {}, (d.state === 'approved' ? 'Approved' : 'Rejected') + ' by ' + d.by),
+       ' · ' + d.at_utc + ' — ' + d.reason));
+  if(r.geography) history.push(el('div', {}, 'Location: ' + [r.geography.city, r.geography.district, r.geography.division].filter(Boolean).join(', ')));
+  if(r.ingest_note) history.push(el('div', {}, r.ingest_note));
+
+  const slot = el('div', {});
+  const actions = el('div', {class: 'actions'});
+  if(r.status === 'pending' || r.status === 'rejected')
+    actions.append(el('button', {class: 'good', onclick: () => openDecision(slot, r, 'approve')}, 'Approve'));
+  if(r.status === 'pending' || r.status === 'approved')
+    actions.append(el('button', {class: 'bad', onclick: () => openDecision(slot, r, 'reject')}, 'Reject'));
+
+  return el('article', {class: 'card'},
+    place,
+    el('div', {class: 'meta'}, r.id + ' · sent ' + r.submitted_at_utc),
+    el('div', {class: 'text'}, r.review_text),
+    history.length ? el('div', {class: 'history'}, history) : null,
+    r.status === 'ingested' ? null : actions,
+    slot);
+}
+
+function openDecision(slot, r, kind){
+  const approve = kind === 'approve';
+  const reason = el('input', {type: 'text', maxlength: '500', placeholder: approve ? 'Why is this fine? e.g. genuine review' : 'Why not? e.g. advertising'});
+  const fields = [el('label', {}, 'Reason (required)'), reason];
+  let division, district, city;
+  if(approve && r.is_new_place){
+    division = el('select', {}, el('option', {value: ''}, 'Choose a division…'), DIVISIONS.map(d => el('option', {value: d}, d)));
+    district = el('input', {type: 'text', maxlength: '80', value: r.district || ''});
+    city = el('input', {type: 'text', maxlength: '80', value: r.district || ''});
+    fields.push(el('p', {class: 'meta'}, 'This place is not in the dataset yet. Tell us where it is:'),
+      el('div', {class: 'grid'},
+        el('div', {}, el('label', {}, 'Division (required)'), division),
+        el('div', {}, el('label', {}, 'District'), district),
+        el('div', {}, el('label', {}, 'City / town'), city)));
+  }
+  const go = el('button', {class: approve ? 'good' : 'bad', onclick: async () => {
+    if(!reason.value.trim()) return say('Please give a reason.');
+    if(division && !division.value) return say('Please choose the division of the new place.');
+    go.disabled = true;
+    try{
+      await api('/api/admin/submissions/' + encodeURIComponent(r.id) + '/' + kind, {
+        method: 'POST',
+        body: JSON.stringify(approve
+          ? {reason: reason.value, division: division ? division.value : null,
+             district: district ? district.value : null, city: city ? city.value : null}
+          : {reason: reason.value}),
+      });
+      say((approve ? 'Approved ' : 'Rejected ') + r.id, 'info');
+      await refresh();
+    }catch(err){
+      if(err.message !== 'signed out') say(err.message);
+      go.disabled = false;
+    }
+  }}, approve ? 'Confirm approval' : 'Confirm rejection');
+  slot.replaceChildren(el('div', {class: 'decide'}, fields,
+    el('div', {class: 'actions'}, go, el('button', {onclick: () => slot.replaceChildren()}, 'Cancel'))));
+  reason.focus();
+}
+
+/* ---------------- add to dataset ---------------- */
+const MARK = {waiting: '○', running: '…', ok: '✓', failed: '✗'};
+
+function renderIngest(job){
+  const card = document.getElementById('ingestCard');
+  const approved = COUNTS.approved || 0;
+  const running = job && job.state === 'running';
+  card.hidden = !(approved > 0 || running || (job && (job.state === 'done' || job.state === 'failed')));
+  document.getElementById('ingestTitle').textContent =
+    approved > 0 ? `Add ${approved} approved review${approved === 1 ? '' : 's'} to the dataset` : 'Add approved reviews to the dataset';
+  document.getElementById('ingestBtn').disabled = running || approved === 0;
+  document.getElementById('ingestSteps').replaceChildren(...((job && job.steps) || []).map(s =>
+    el('li', {}, el('span', {class: s.status}, MARK[s.status] || '·'), el('span', {}, s.label),
+       s.detail ? el('span', {class: 'meta'}, s.detail.split('\n').pop()) : null)));
+  const result = document.getElementById('ingestResult');
+  result.replaceChildren();
+  if(job && job.state === 'done' && job.result)
+    result.append(el('div', {class: 'msg info'},
+      `Done: ${job.result.added} review(s) added in batch ${job.result.batch}.` +
+      (job.result.new_places.length ? ' New place(s): ' + job.result.new_places.join(', ') + '.' : '') +
+      (job.result.dropped.length ? ` ${job.result.dropped.length} were already in the dataset.` : '') +
+      ' They show on the site now; topics and preferences come at the next full refresh.'));
+  if(job && job.state === 'failed')
+    result.append(el('div', {class: 'msg error'}, 'It stopped: ' + (job.error || 'see the steps above') +
+      '. The approved reviews are still waiting; fix the problem and press the button again.'));
+  if(running && !POLL) POLL = setInterval(pollIngest, 1500);
+  if(!running && POLL){ clearInterval(POLL); POLL = null; }
+}
+
+async function startIngest(){
+  say('');
+  try{
+    const job = await api('/api/admin/ingest', {
+      method: 'POST',
+      body: JSON.stringify({offline: document.getElementById('ingestOffline').checked,
+                            skip_funnel: document.getElementById('ingestSkip').checked}),
+    });
+    renderIngest(job);
+  }catch(err){
+    if(err.message !== 'signed out') say(err.message);
+  }
+}
+
+async function pollIngest(){
+  try{
+    const job = await api('/api/admin/ingest/status');
+    renderIngest(job);
+    if(job.state !== 'running') refresh();
+  }catch(err){ /* a brief gap while the database is rebuilt is expected */ }
+}
+
+/* resume a session that is still valid in this tab */
+(async function init(){
+  if(!TOKEN) return;
+  try{
+    const me = await api('/api/admin/me');
+    ME = me.email; DIVISIONS = me.divisions;
+    showPanel(true);
+    await refresh();
+  }catch(err){ /* api() already signed us out on a 401 */ }
+})();
+</script>
+</body>
+</html>

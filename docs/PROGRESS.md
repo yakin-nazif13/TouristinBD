@@ -542,6 +542,40 @@ corpus (build plan 6.3) before drawing a conclusion.
 - [ ] Re-run Phase 6 for real (`.venv/bin/python scripts/run_phase6_sensitivity_analysis.py`),
       then Phase 7, `build_phase8_database.py` and the test suites, and commit the artifacts.
 
+## Visitor review uploads (2026-10-06)
+A "Share a review" tab (7th) on the website. Full guide: `docs/VISITOR_SUBMISSIONS.md`.
+- [x] Reviews typed by visitors are saved one-file-each in their own folder,
+      `data/visitor_uploads/{pending,approved,rejected,ingested}/` (git-ignored). Nothing
+      reaches the dataset until a person approves it **and** runs `--ingest`.
+- [x] No name, email or IP is stored; Bangla/Banglish text is kept exactly as typed.
+      Visitors can pick a listed place or add one that is not listed (needs a district).
+- [x] `scripts/process_submissions.py` — `--list`, `--show`, `--approve`, `--reject`
+      (a name and reason are always required), `--ingest`. Ingest runs add_reviews ->
+      clean -> language label -> mentions -> name merging -> map check -> gem score ->
+      verification queue -> database rebuild. BERTopic and the paid preference step are not
+      run per review; those reviews join recommendations at the next full refresh.
+- [x] Safeguards: hidden spam-trap field, 5 submissions/hour per visitor (in memory),
+      duplicate detection, link limit, 500-review inbox cap, markup stripped.
+- [x] **Entity IDs are now stable** (`data/entity_id_registry.json`). They used to be numbered
+      by position, so adding data could shuffle them and silently move a verification decision
+      onto a different place. Retired IDs are recorded and never reused.
+- [x] `scripts/test_submissions.py` — 87 tests including the whole journey on a throwaway copy
+      of the data, checking that no existing entity changed ID and the real `data/` is untouched.
+- [x] **Admin panel** (`/admin`, `frontend/admin.html`, "Owner login" link in the site footer) — see
+      `docs/ADMIN_PANEL.md`. The owners share **one password** (scrypt hash in git-ignored
+      `data/admin_users.json`); each signs in with **their own email**, which must be on the owners'
+      list (`scripts/manage_admins.py set-password / add-owner / remove-owner / list`). Off until both
+      exist. The signed-in email is recorded and shown on every approval or rejection and cannot be
+      supplied by the request. Owners read pending reviews, approve (a new place needs a division) or
+      reject with a reason, and press a button to add approved reviews to the dataset (background run,
+      step-by-step progress, one at a time). 8-hour sessions, lock-out after repeated failures, no
+      cookies. `scripts/test_admin.py` — 117 tests, including "every admin route returns 401 without a
+      token" and "the right password with an unregistered email is refused".
+- [ ] Not done yet: roles (district officers limited to their district), a login audit log, and a
+      public deployment — HTTPS is required, and the free Render plan wipes `admin_users.json` and the
+      pending reviews on restart (needs a saved disk). The panel's "add to dataset" needs the research
+      packages, which the slim public image does not have.
+
 ## Notes for next session
 - The site: `.venv/bin/python -m backend.main`, then open <http://127.0.0.1:8000/app/>.
   It runs entirely on the real corpus now — no mock data anywhere in the project.
@@ -568,14 +602,12 @@ corpus (build plan 6.3) before drawing a conclusion.
 - Rebuild the database after re-running any earlier phase (Phase 1-7 output changed):
   `.venv/bin/python scripts/build_phase8_database.py`
 - Run the API: `.venv/bin/python -m backend.main` (site at /app/, docs at /docs).
-- Verify everything after any change — ten suites, 551 tests, ~1.5 min total:
-  `test_phase2_preprocessing.py`, `test_phase5_human_validation.py`,
-  `test_phase6_reproducibility.py`, `test_phase8_api.py`, `test_phase8_rebuild.py`,
-  `test_phase9_chat.py`, `test_phase10_itinerary.py`, `test_phase11_frontend.py`,
-  `test_phase12_deployment.py`, `test_scaling.py` (all under `scripts/`, all in-process,
-  no network). `data/touristinbd.db` is gitignored — rebuild it
-  (`build_phase8_database.py`) after pulling or changing any artifact, or the Phase 8 tests
-  fail against a stale taxonomy.
+- Verify everything after any change — run every suite (22 suites, about 1,200 tests as of 2026-10-21,
+  a few minutes, all in-process, no network):
+  `for t in scripts/test_*.py; do .venv/bin/python $t | tail -2; done`.
+  `data/touristinbd.db` is gitignored — rebuild it (`build_phase8_database.py`) after pulling or
+  changing any artifact, or the Phase 8 tests fail against a stale database. After a pull, also
+  `pip install -r requirements.txt` (rapidfuzz and vaderSentiment are needed by the pipeline tests).
 - **Adding a new scrape** (the loop to use from now on):
   `.venv/bin/python scripts/add_reviews.py <export.csv> --source google_maps --name batch2`
   (add `--rating-scale 10` for Booking.com exports, `--dry-run` to preview). That merges

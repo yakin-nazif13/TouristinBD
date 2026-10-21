@@ -67,6 +67,9 @@ OUT_ENTITIES = DATA_DIR / "phase4_entities.csv"
 OUT_VARIANTS = DATA_DIR / "phase4_entity_variants.csv"
 OUT_REPORT_MD = DATA_DIR / "phase4_resolution_report.md"
 OUT_REPORT_JSON = DATA_DIR / "phase4_resolution_report.json"
+# Remembers which surface form belongs to which entity ID, so an ID never moves
+# when new data arrives (see assign_entity_ids). Committed with the data.
+ID_REGISTRY = DATA_DIR / "entity_id_registry.json"
 
 # Fixed in advance and reported, like section 5.5's gem-score weights.
 WEIGHTS = {"phonetic": 0.40, "string": 0.25, "containment": 0.20, "geography": 0.15}
@@ -398,11 +401,93 @@ def evaluate(clusters: dict, gold: dict[str, int]) -> dict:
     }
 
 
+# --- stable entity IDs ----------------------------------------------------
+#
+# IDs used to be numbered by position in the sorted cluster list. Adding one new
+# entity renumbered everything after it, so a recorded decision such as
+# "E0016 is verified" would silently start pointing at a different place. An
+# entity now keeps the ID of any surface form it already had; only genuinely
+# new entities get a new number, and a number is never handed out twice.
+
+def _id_number(entity_id: str) -> int:
+    try:
+        return int(str(entity_id).lstrip("E"))
+    except ValueError:
+        return 0
+
+
+def load_id_registry() -> dict:
+    """The saved surface -> ID map. First run: seeded from the existing entities file,
+    so IDs that were already in use (and may already have decisions) carry over."""
+    if ID_REGISTRY.exists():
+        registry = json.loads(ID_REGISTRY.read_text(encoding="utf-8"))
+    else:
+        registry = {"next": 1, "surfaces": {}, "retired": {}}
+        if OUT_VARIANTS.exists():
+            old = pd.read_csv(OUT_VARIANTS)
+            registry["surfaces"] = dict(zip(old["surface"].astype(str), old["entity_id"].astype(str)))
+    used = [_id_number(i) for i in registry["surfaces"].values()] + [_id_number(i) for i in registry["retired"]]
+    registry["next"] = max(int(registry.get("next", 1)), max(used, default=0) + 1)
+    return registry
+
+
+def assign_entity_ids(clusters: dict, registry: dict) -> tuple[dict[str, str], dict, list[str]]:
+    """Give every cluster an ID, reusing the one its members already hold.
+
+    - cluster contains known surfaces -> takes the lowest ID among them
+    - two old IDs end up in one cluster (a merge) -> the lower survives, the other is
+      recorded in `retired` so a decision on it is flagged rather than silently lost
+    - cluster of brand-new surfaces -> next unused number
+    Deterministic: clusters are visited in sorted order.
+    """
+    known = registry["surfaces"]
+    claims = {
+        root: sorted({known[m] for m in members if m in known}, key=_id_number)
+        for root, members in clusters.items()
+    }
+    ids: dict[str, str] = {}
+    taken: set[str] = set()
+    for root in sorted(clusters):
+        for candidate in claims[root]:
+            if candidate not in taken:
+                ids[root] = candidate
+                taken.add(candidate)
+                break
+
+    retired = dict(registry["retired"])
+    notes: list[str] = []
+    for root in sorted(clusters):
+        for candidate in claims[root]:
+            if candidate not in taken and candidate not in retired:
+                survivor = ids.get(root)
+                retired[candidate] = survivor or ""
+                if survivor:
+                    notes.append(f"entity {candidate} was merged into {survivor}; re-check any decision recorded on {candidate}")
+
+    next_number = int(registry["next"])
+    for root in sorted(clusters):
+        if root not in ids:
+            ids[root] = f"E{next_number:04d}"
+            next_number += 1
+
+    surfaces = dict(known)
+    for root, members in clusters.items():
+        for member in members:
+            surfaces[member] = ids[root]
+    updated = {"next": next_number, "surfaces": dict(sorted(surfaces.items())), "retired": dict(sorted(retired.items()))}
+    return ids, updated, notes
+
+
 def write_reports(clusters: dict, groups: dict[str, dict], pairs: list[dict],
                   evaluation: dict | None, notes: list[str]) -> pd.DataFrame:
     entity_rows, variant_rows = [], []
-    for index, (_, members) in enumerate(sorted(clusters.items()), start=1):
-        entity_id = f"E{index:04d}"
+    registry = load_id_registry()
+    ids, new_registry, id_notes = assign_entity_ids(clusters, registry)
+    notes = list(notes) + id_notes
+    ID_REGISTRY.parent.mkdir(parents=True, exist_ok=True)
+    ID_REGISTRY.write_text(json.dumps(new_registry, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+    for root, members in sorted(clusters.items()):
+        entity_id = ids[root]
         # The canonical name is the most-mentioned variant, with the longest
         # winning a tie: "Saint Martin's Island" reads better in a register
         # than "Saint Martin".
@@ -437,7 +522,7 @@ def write_reports(clusters: dict, groups: dict[str, dict], pairs: list[dict],
             "languages": "|".join(sorted(l for l in languages if l)),
         })
 
-    entities = pd.DataFrame(entity_rows).sort_values("n_mentions", ascending=False)
+    entities = pd.DataFrame(entity_rows).sort_values(["n_mentions", "entity_id"], ascending=[False, True])
     entities.to_csv(OUT_ENTITIES, index=False)
     pd.DataFrame(variant_rows).to_csv(OUT_VARIANTS, index=False)
 

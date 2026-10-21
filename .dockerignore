@@ -18,3 +18,5 @@ data/bertopic_model_dir_previous/
 data/.mplconfig/
 *.png
 *.npy
+data/visitor_uploads/
+data/admin_users.json

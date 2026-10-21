@@ -252,6 +252,22 @@
   .form-row input[type=number]{width:90px;}
   .form-row .check{flex-direction:row;align-items:center;gap:8px;padding-bottom:10px;}
 
+  /* Share a review */
+  .share-form{display:flex;flex-direction:column;gap:16px;max-width:680px;margin-top:18px;position:relative;}
+  .share-form label{font-size:0.82rem;color:var(--text-dim);display:flex;flex-direction:column;gap:6px;font-weight:500;}
+  .share-form select, .share-form input[type=text], .share-form textarea{
+    padding:11px 13px;border-radius:12px;border:1px solid var(--line);background:rgba(255,255,255,0.03);
+    color:var(--text-light);font-family:'Inter';font-size:0.92rem;width:100%;box-sizing:border-box;
+    transition:border-color .15s ease, box-shadow .15s ease;
+  }
+  .share-form textarea{resize:vertical;min-height:140px;line-height:1.55;}
+  .share-form select:focus, .share-form input[type=text]:focus, .share-form textarea:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 4px rgba(79,140,255,0.14);}
+  .share-form .pair{display:flex;gap:16px;flex-wrap:wrap;}
+  .share-form .pair label{flex:1;min-width:220px;}
+  .share-form .count{align-self:flex-end;margin-top:-10px;}
+  .share-form .trap{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden;}
+  .share-ok{background:rgba(34,197,152,0.12);border:1px solid rgba(34,197,152,0.4);border-radius:14px;padding:14px 16px;margin-top:16px;font-size:0.9rem;max-width:680px;}
+
   /* Itinerary */
   .summary-strip{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px;}
   .pill{background:rgba(255,255,255,0.03);border:1px solid var(--line);border-radius:20px;padding:7px 13px;font-size:0.8rem;color:var(--text-dim);}
@@ -387,6 +403,11 @@
         <span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l2.1 6.3H21l-5.4 3.9 2 6.3L12 15.6 6.4 19.5l2-6.3L3 9.3h6.9z"/></svg></span>
         <span class="num">06</span>
         <span class="tab-label">Discoveries</span>
+      </button>
+      <button data-tab="share" title="Share a review">
+        <span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/></svg></span>
+        <span class="num">07</span>
+        <span class="tab-label">Share a review</span>
       </button>
     </nav>
 
@@ -560,11 +581,58 @@
     <div id="discoveryEvidence"></div>
   </section>
 
+  <!-- SHARE A REVIEW (visitor uploads) -->
+  <section class="panel" id="tab-share" style="display:none;">
+    <h2>Share your review</h2>
+    <p class="muted">
+      Been somewhere in Bangladesh? Tell us about it — in Bangla, Banglish or English.
+      A person reads every review before it is added to the dataset, so it will not
+      appear straight away. Places that are not listed are welcome too: those are
+      often the ones nobody has written about yet.
+    </p>
+    <p class="muted small">
+      We do not ask for, or store, your name, email or any other personal detail.
+    </p>
+    <form class="share-form" id="shareForm" onsubmit="submitReview(event)" novalidate>
+      <label>Place
+        <select id="sharePlace" onchange="onSharePlaceChange()"></select>
+      </label>
+      <div class="pair" id="shareNewPlace" style="display:none;">
+        <label>Name of the place
+          <input type="text" id="shareNewName" maxlength="120" placeholder="e.g. Fatrar Char">
+        </label>
+        <label>District
+          <input type="text" id="shareDistrict" maxlength="60" list="shareDistricts" placeholder="e.g. Patuakhali">
+          <datalist id="shareDistricts"></datalist>
+        </label>
+      </div>
+      <label>Your rating
+        <select id="shareRating">
+          <option value="5">★★★★★  Excellent</option>
+          <option value="4">★★★★☆  Good</option>
+          <option value="3">★★★☆☆  Okay</option>
+          <option value="2">★★☆☆☆  Poor</option>
+          <option value="1">★☆☆☆☆  Terrible</option>
+        </select>
+      </label>
+      <label>Your review
+        <textarea id="shareText" maxlength="3000" oninput="updateShareCount()" placeholder="What was it like? How did you get there? Anything other visitors should know?"></textarea>
+      </label>
+      <span class="muted small count" id="shareCount">0 / 3000</span>
+      <div class="trap" aria-hidden="true">
+        <label>Leave this empty <input type="text" id="shareWebsite" tabindex="-1" autocomplete="off"></label>
+      </div>
+      <div><button class="primary-btn" id="shareSubmit" type="submit">Send review</button></div>
+    </form>
+    <div id="shareStatus" role="status" aria-live="polite"></div>
+  </section>
+
   <footer>
     TouristinBD — capstone project. Live data from the FastAPI backend over
     <span class="mono" id="footerApi"></span>.<br>
     Pipeline: Apify scrapes → cleaning &amp; language detection → BERTopic → 4-stage LLM
-    preference classification → bidirectional validation → SQLite + API → this interface.
+    preference classification → bidirectional validation → SQLite + API → this interface.<br>
+    <a href="/admin" rel="nofollow" style="color:inherit;opacity:.6;font-size:.85em;">Owner login</a>
   </footer>
   </div>
   </div>
@@ -672,7 +740,7 @@ function voiceInput(targetId, onDone){
 }
 
 /* ---------------------------- tabs ---------------------------- */
-const TABS = ['overview','chat','itinerary','compare','explore','discoveries'];
+const TABS = ['overview','chat','itinerary','compare','explore','discoveries','share'];
 document.querySelectorAll('nav.tabs button').forEach(btn => {
   btn.addEventListener('click', () => {
     document.querySelectorAll('nav.tabs button').forEach(b => b.classList.remove('active'));
@@ -686,9 +754,14 @@ document.querySelectorAll('nav.tabs button').forEach(btn => {
       DISCOVERIES_LOADED = true;
       loadDiscoveries();
     }
+    if(btn.dataset.tab === 'share' && !SHARE_LOADED){
+      SHARE_LOADED = true;
+      loadShareOptions();
+    }
   });
 });
 let DISCOVERIES_LOADED = false;
+let SHARE_LOADED = false;
 
 function showTab(name){
   const btn = document.querySelector(`nav.tabs button[data-tab="${name}"]`);
@@ -1223,6 +1296,87 @@ async function showEvidence(entityId){
     out.scrollIntoView({behavior: 'smooth', block: 'nearest'});
   }catch(err){
     out.innerHTML = `<p class="error">${escapeHtml(err.message)}</p>`;
+  }
+}
+
+/* ------------------------ share a review ------------------------ */
+const NEW_PLACE = '__new__';
+let SHARE_LIMITS = {min_text: 30, max_text: 3000};
+
+async function loadShareOptions(){
+  const select = document.getElementById('sharePlace');
+  try{
+    const opts = await api('/api/submissions/options');
+    SHARE_LIMITS = opts.limits || SHARE_LIMITS;
+    select.innerHTML = '<option value="">Choose a place…</option>' +
+      opts.places.map(p => `<option value="${escapeHtml(p.place_name)}">${escapeHtml(p.place_name)}${p.city ? ' — ' + escapeHtml(p.city) : ''}</option>`).join('') +
+      `<option value="${NEW_PLACE}">➕ A place not listed…</option>`;
+    document.getElementById('shareDistricts').innerHTML =
+      opts.districts.map(d => `<option value="${escapeHtml(d)}"></option>`).join('');
+    document.getElementById('shareText').maxLength = SHARE_LIMITS.max_text;
+    updateShareCount();
+  }catch(err){
+    SHARE_LOADED = false;   // try again next time the tab is opened
+    select.innerHTML = '<option value="">Could not load places</option>';
+    showShareStatus(err.message, true);
+  }
+}
+
+function onSharePlaceChange(){
+  const isNew = document.getElementById('sharePlace').value === NEW_PLACE;
+  document.getElementById('shareNewPlace').style.display = isNew ? 'flex' : 'none';
+}
+
+function updateShareCount(){
+  const length = document.getElementById('shareText').value.length;
+  document.getElementById('shareCount').textContent = `${length} / ${SHARE_LIMITS.max_text}`;
+}
+
+function showShareStatus(message, isError){
+  const box = document.getElementById('shareStatus');
+  box.className = isError ? 'warn' : 'share-ok';
+  box.textContent = message;     // textContent, never innerHTML: the message may echo server text
+}
+
+async function submitReview(event){
+  event.preventDefault();
+  const choice = document.getElementById('sharePlace').value;
+  const isNew = choice === NEW_PLACE;
+  const placeName = isNew ? document.getElementById('shareNewName').value.trim() : choice;
+  const district = isNew ? document.getElementById('shareDistrict').value.trim() : '';
+  const text = document.getElementById('shareText').value.trim();
+
+  if(!choice) return showShareStatus('Please choose a place.', true);
+  if(isNew && !placeName) return showShareStatus('Please type the name of the place.', true);
+  if(isNew && !district) return showShareStatus('Please tell us which district it is in.', true);
+  if(text.length < SHARE_LIMITS.min_text) return showShareStatus(`Please write a little more — at least ${SHARE_LIMITS.min_text} characters.`, true);
+
+  const button = document.getElementById('shareSubmit');
+  button.disabled = true;
+  try{
+    const receipt = await api('/api/submissions', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({
+        place_name: placeName,
+        is_new_place: isNew,
+        district: isNew ? district : null,
+        rating: Number(document.getElementById('shareRating').value),
+        review_text: text,
+        website: document.getElementById('shareWebsite').value,
+      }),
+    });
+    showShareStatus(receipt.message, false);
+    document.getElementById('shareText').value = '';
+    document.getElementById('shareNewName').value = '';
+    document.getElementById('shareDistrict').value = '';
+    document.getElementById('sharePlace').value = '';
+    onSharePlaceChange();
+    updateShareCount();
+  }catch(err){
+    showShareStatus(err.message, true);
+  }finally{
+    button.disabled = false;
   }
 }
 

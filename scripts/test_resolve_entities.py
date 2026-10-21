@@ -300,12 +300,62 @@ def test_corpus_evaluation() -> None:
           "Mongla merged with something")
 
 
+def test_stable_ids() -> None:
+    print("\nstable entity IDs (a decision on E0016 must never move to another place)")
+    fresh = {"next": 1, "surfaces": {}, "retired": {}}
+    clusters = {"Beta": ["Beta"], "Gamma": ["Gamma", "Gama"]}
+    ids, registry, notes = res.assign_entity_ids(clusters, fresh)
+    check("first run numbers clusters from E0001", sorted(ids.values()) == ["E0001", "E0002"], str(ids))
+    check("the same input gives the same IDs",
+          res.assign_entity_ids(clusters, fresh)[0] == ids)
+
+    # A new entity that sorts BEFORE all the others used to renumber everything.
+    grown = {"Alpha": ["Alpha"], **clusters}
+    ids2, registry2, _ = res.assign_entity_ids(grown, registry)
+    check("existing entities keep their IDs when a new one sorts first",
+          ids2["Beta"] == ids["Beta"] and ids2["Gamma"] == ids["Gamma"], str(ids2))
+    check("the new entity gets the next unused number", ids2["Alpha"] == "E0003", str(ids2))
+
+    # A variant of a known place joins it instead of becoming a new entity.
+    ids3, _, _ = res.assign_entity_ids({**grown, "Gamma": ["Gamma", "Gama", "Gammaa"]}, registry2)
+    check("a new spelling of a known place keeps the place's ID", ids3["Gamma"] == ids["Gamma"], str(ids3))
+
+    # A merge keeps the lower ID, retires the other and says so.
+    merged_ids, merged_reg, merged_notes = res.assign_entity_ids({"Beta": ["Beta", "Gamma", "Gama"]}, registry)
+    check("a merge keeps the lower ID", merged_ids["Beta"] == "E0001", str(merged_ids))
+    check("the other ID is recorded as retired", merged_reg["retired"].get("E0002") == "E0001", str(merged_reg["retired"]))
+    check("a merge is reported so decisions on the retired ID get re-checked",
+          any("E0002" in n for n in merged_notes), str(merged_notes))
+    again, _, _ = res.assign_entity_ids({"Beta": ["Beta"], "Delta": ["Delta"]}, merged_reg)
+    check("a retired number is never handed out again", again["Delta"] == "E0003", str(again))
+
+    # A split: only one of the two halves may keep the old ID.
+    split_ids, _, _ = res.assign_entity_ids({"Gamma": ["Gamma"], "Gama": ["Gama"]},
+                                            {**registry, "surfaces": {"Gamma": "E0002", "Gama": "E0002", "Beta": "E0001"}})
+    check("a split gives the old ID to exactly one half", len(set(split_ids.values())) == 2, str(split_ids))
+
+    # The saved registry matches the entities the committed corpus produced.
+    registry_path = REPO_ROOT / "data" / "entity_id_registry.json"
+    variants_path = REPO_ROOT / "data" / "phase4_entity_variants.csv"
+    if registry_path.exists() and variants_path.exists():
+        import json
+        saved = json.loads(registry_path.read_text(encoding="utf-8"))
+        variants = pd.read_csv(variants_path)
+        mismatched = [r.surface for r in variants.itertuples() if saved["surfaces"].get(r.surface) != r.entity_id]
+        check("the committed registry agrees with the committed entities", not mismatched, str(mismatched[:5]))
+        check("the registry's next number is beyond every ID in use",
+              saved["next"] > max(res._id_number(i) for i in variants["entity_id"]), str(saved["next"]))
+    else:
+        print("  SKIP  no committed registry to compare against")
+
+
 def main() -> None:
     print("Entity resolution tests (BUILD_PLAN 5.3)\n")
     test_metrics()
     test_official_form_rule()
     test_signals()
     test_clustering()
+    test_stable_ids()
     test_corpus_evaluation()
     print(f"\n{len(PASSED)} passed, {len(FAILED)} failed")
     if FAILED:
