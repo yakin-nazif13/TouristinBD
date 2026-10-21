@@ -8,6 +8,7 @@ Writes only `data/phase7_*` files (non-destructive).
 from __future__ import annotations
 
 import json
+import os
 from pathlib import Path
 
 import matplotlib.pyplot as plt
@@ -15,7 +16,7 @@ import pandas as pd
 from scipy.stats import mannwhitneyu, ranksums
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
-DATA_DIR = REPO_ROOT / "data"
+DATA_DIR = Path(os.environ.get("TOURISTINBD_DATA_DIR") or (REPO_ROOT / "data"))
 
 # Inputs
 PROCESSED = DATA_DIR / "processed_reviews.csv"

@@ -234,10 +234,10 @@ def test_corpus_evaluation() -> None:
 
     groups = res.build_surface_groups(mentions, geography, corpus)
     check("the corpus's own place names are in the pool",
-          "Kuakata Beach" in groups,
+          "Kuakata Sea Beach" in groups,   # the final name: the longer of "Kuakata Beach" and the list's name
           "without them the local-vs-official case cannot be resolved at all")
     check("a place name carries no mentions of its own",
-          groups["Kuakata Beach"]["mentions"] == 0,
+          groups["Kuakata Sea Beach"]["mentions"] == 0,
           "a place having reviews is not its name being mentioned")
 
     clusters, _ = res.resolve(groups)

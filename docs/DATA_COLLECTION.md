@@ -22,6 +22,36 @@ sites. So:
   entity-level extractor in `docs/BUILD_PLAN.txt` section 5 is what actually finds
   hidden places. More data is the prerequisite for that, not a substitute.
 
+## 0. Quick start: from a list of places to ready-to-run Apify inputs
+
+```bash
+.venv/bin/python scripts/import_place_list.py ~/Downloads/bangladesh_100_tourist_spots.csv --dry-run   # preview
+.venv/bin/python scripts/import_place_list.py ~/Downloads/bangladesh_100_tourist_spots.csv --online      # do it
+```
+
+The list needs `name, division, district, place_id, latitude, longitude` (and `review_count`, `google_maps_url`).
+It then:
+- **Picks one final name per place.** When one location has several names, **the longer name is final** (a tie
+  goes to the name already in the corpus). The other names become aliases. Saved in `data/place_names.csv`,
+  which `add_reviews.py` and Phase 2 both read, so a review arriving as "Kuakata Beach", "kuakata beach" or under
+  its Google place_id all land on "Kuakata Sea Beach". Raw scrape files are never edited.
+- **Recognises places you already have** by exact name or by `data/place_aliases.csv` (`alias,place_id,note`, which you
+  edit). Look-alikes that are not certain are only *suggested* in `data/place_import_report.md`; confirm one by adding
+  a line to the alias file and re-running. It will not merge on a guess (a beach is not its island).
+- **Adds every place to `data/place_geography.csv`** with division, district, town and coordinates.
+- **Plans the collection** (`data/scrape_plan.csv`, `data/scrape_targets.csv`) and writes ready-to-paste inputs for the
+  Apify Google Maps reviews actor in `data/scrape_batches/`: `pilot.json` first, then `relevant/`, `newest/`, `bangla/`.
+  Default is 9,500 new reviews split across divisions (hubs get more, thin divisions get a floor), asking for 1.3x
+  to allow for short and repeated reviews. Change it with `--total`, `--quota Rangpur=900`, `--overcollect`.
+- If an existing place is **renamed**, it re-runs Phase 2 and the mention / entity / gem-score / database steps so the
+  data agrees. The human validation labels and the Phase 3-6 topic files are left alone.
+
+Safe to run again; the same input gives the same result.
+
+**On macOS, if the live map lookups report `CERTIFICATE_VERIFY_FAILED`,** run the lookup step with a certificate
+bundle: `SSL_CERT_FILE=$(.venv/bin/python -c "import certifi;print(certifi.where())") .venv/bin/python scripts/build_gazetteer.py`.
+A failed lookup is recorded as `unknown`, never as "hidden".
+
 ## 1. Plan the places
 
 Copy rows into `data/scrape_targets.csv` (template provided) before scraping, so you

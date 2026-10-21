@@ -1,5 +1,5 @@
 {
-  "n_entities_considered": 78,
+  "n_entities_considered": 162,
   "n_candidates": 13,
   "candidate_gate_min_reviews": 2,
   "weights_declared": {
@@ -32,7 +32,7 @@
     "V1": 1
   },
   "notes": [
-    "`distinct` computed lexically (TF-IDF) for 182 mention(s)",
+    "`distinct` computed lexically (TF-IDF) for 183 mention(s)",
     "8 candidate(s) are already official (V3), and the highest of them (Bandarban, 0.61) outranks 3 candidate(s) that are not \u2014 `mentions` saturates for a much-reviewed famous place. Use already_official to filter the register; the weights were not retuned after seeing this."
   ]
 }

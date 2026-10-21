@@ -1,0 +1,15 @@
+{
+  "placeIds": [
+    "ChIJL8pwzShVUDcRwGUqtR2Esp4",
+    "ChIJmxkWcjdRUDcROW0qIMAkmh4",
+    "ChIJLVnDrttDUDcRvSXdxkc0rrI",
+    "ChIJT-JbyktZUDcRK1RLHQoQWf8",
+    "ChIJz8rAZdd5UTcRXfmIrgznF3s",
+    "ChIJ7RjrYPgwVzcRTxv0bZUudlw"
+  ],
+  "maxReviews": 200,
+  "reviewsSort": "mostRelevant",
+  "language": "en",
+  "reviewsOrigin": "all",
+  "personalData": false
+}

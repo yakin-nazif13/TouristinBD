@@ -576,6 +576,28 @@ A "Share a review" tab (7th) on the website. Full guide: `docs/VISITOR_SUBMISSIO
       pending reviews on restart (needs a saved disk). The panel's "add to dataset" needs the research
       packages, which the slim public image does not have.
 
+## Place list import and final place names (2026-10-21)
+- [x] `scripts/import_place_list.py` turns a list of tourist spots (the 100-place CSV) into: **one final name per
+      place** (where a location has several names, the **longer name is final**), `data/place_names.csv`,
+      geography rows with coordinates, a per-division collection plan for ~9,500 new reviews, and ready-to-paste
+      Apify inputs (`data/scrape_batches/`, pilot first). Explained in `docs/DATA_COLLECTION.md`.
+- [x] `add_reviews.py` and Phase 2 apply the final names (by Google place_id first, then name/alias), so every batch,
+      old or new, agrees; `add_reviews.py` also fills missing coordinates and warns about unknown place names.
+      Found and fixed while testing: the export's `placeId` was being dropped before it could be used.
+- [x] Applied to the real data: 100 places in `place_geography.csv` (100 with coordinates); 40 existing reviews renamed
+      (Kuakata Beach -> **Kuakata Sea Beach**, Sompur Mahavihar (Paharpur) -> **Somapura Mahavihara (Paharpur)**);
+      review ids, raw scrapes, human labels and the Phase 3-6 files untouched; no entity ID moved.
+- [x] `scripts/test_import_place_list.py` — 77 tests. Phase 7 now honours `TOURISTINBD_DATA_DIR` like the others.
+- [x] **Decided (2026-10-21):** "Saint Martins Island" (20 reviews) and the list's "Saint Martin's Island West Beach"
+      stay **separate** places (an island is not a beach on it). Not in the list and left as they are: Cox's Bazar Beach,
+      Kaptai Lake, Srimangal Tea Garden. The import will keep suggesting the Saint Martin pair in
+      `data/place_import_report.md`; ignore it. To merge later, add a line to `data/place_aliases.csv` and re-run.
+- [x] **Fixed: "the Sundarbans" topping the gem list.** The place list names it "The Sundarbans", so the extractor started
+      recording the article form, which the map lookup could not place (V1 instead of V3). A leading "the" is now dropped
+      in the extractor's name pool (`gem_schema.strip_article`) and the map lookup also tries the plain form. Gangamati (V0)
+      is first again; same 4 places on no map, same 13 candidates, 183 mentions.
+- [ ] The scraping itself has not started. Next: run `pilot.json` in Apify and check the export has original-language text.
+
 ## Notes for next session
 - The site: `.venv/bin/python -m backend.main`, then open <http://127.0.0.1:8000/app/>.
   It runs entirely on the real corpus now — no mock data anywhere in the project.
@@ -602,7 +624,7 @@ A "Share a review" tab (7th) on the website. Full guide: `docs/VISITOR_SUBMISSIO
 - Rebuild the database after re-running any earlier phase (Phase 1-7 output changed):
   `.venv/bin/python scripts/build_phase8_database.py`
 - Run the API: `.venv/bin/python -m backend.main` (site at /app/, docs at /docs).
-- Verify everything after any change — run every suite (22 suites, about 1,200 tests as of 2026-10-21,
+- Verify everything after any change — run every suite (23 suites, 1,282 tests as of 2026-10-21,
   a few minutes, all in-process, no network):
   `for t in scripts/test_*.py; do .venv/bin/python $t | tail -2; done`.
   `data/touristinbd.db` is gitignored — rebuild it (`build_phase8_database.py`) after pulling or

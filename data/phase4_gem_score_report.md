@@ -3,7 +3,7 @@
 Five terms, fixed weights, every term stored per entity so a ranking can be
 explained rather than asserted (BUILD_PLAN 5.5).
 
-- Entities considered: 78
+- Entities considered: 162
 - Candidates (>= 2 distinct reviews): **13**
 - Ablated this run: none
 
@@ -45,5 +45,5 @@ renormalised, so a missing term never acts as a zero.
 
 ## Notes
 
-- `distinct` computed lexically (TF-IDF) for 182 mention(s)
+- `distinct` computed lexically (TF-IDF) for 183 mention(s)
 - 8 candidate(s) are already official (V3), and the highest of them (Bandarban, 0.61) outranks 3 candidate(s) that are not — `mentions` saturates for a much-reviewed famous place. Use already_official to filter the register; the weights were not retuned after seeing this.

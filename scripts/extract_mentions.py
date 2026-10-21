@@ -61,6 +61,7 @@ from gem_schema import (  # noqa: E402
     GroundingReport,
     ground,
     is_generic,
+    strip_article,
     strip_qualifier,
 )
 
@@ -123,16 +124,19 @@ def load_gazetteer(corpus: pd.DataFrame) -> list[str]:
     the corpus writes "Sundarbans (Karamjal Wildlife Centre)" while a review
     says "Sundarbans".
     """
+    # A leading "the" is dropped from every name ("The Sundarbans" -> "Sundarbans"), so a
+    # review saying "the Sundarbans" is recorded as the plain, well-known name and not as
+    # a separate entity that the map lookup cannot place.
     names: set[str] = set()
     for name in corpus.get("place_name", pd.Series(dtype=str)).dropna().astype(str):
-        names.add(name.strip())
-        names.add(strip_qualifier(name))
+        names.add(strip_article(name.strip()))
+        names.add(strip_article(strip_qualifier(name)))
     if IN_GEOGRAPHY.exists():
         geography = pd.read_csv(IN_GEOGRAPHY)
         for name in geography.get("place_name", pd.Series(dtype=str)).dropna().astype(str):
-            names.add(name.strip())
-            names.add(strip_qualifier(name))
-    names.update(ANCHOR_SEEDS)
+            names.add(strip_article(name.strip()))
+            names.add(strip_article(strip_qualifier(name)))
+    names.update(strip_article(n) for n in ANCHOR_SEEDS)
 
     # Short or generic names would match inside other words and inside every
     # review ("Padma" is fine, "sea" is not).

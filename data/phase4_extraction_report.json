@@ -1,26 +1,26 @@
 {
   "extractor": "gazetteer",
   "n_reviews": 538,
-  "n_mentions": 182,
+  "n_mentions": 183,
   "reviews_with_a_mention": 89,
   "by_entity_type": {
     "ACCESS": 11,
-    "PLACE": 153,
+    "PLACE": 154,
     "TIP": 18
   },
-  "distinct_surfaces": 54,
+  "distinct_surfaces": 55,
   "grounding": {
-    "candidates": 182,
-    "kept": 182,
+    "candidates": 183,
+    "kept": 183,
     "dropped": 0,
     "drop_rate": 0.0,
     "by_match_kind": {
-      "exact": 182
+      "exact": 183
     },
     "dropped_reasons": {},
     "dropped_examples": []
   },
   "notes": [
-    "gazetteer of 87 known names (corpus + geography + 3.1 anchors)"
+    "gazetteer of 178 known names (corpus + geography + 3.1 anchors)"
   ]
 }

@@ -1,60 +1,146 @@
 entity_id,surface,mentions,phonetic_key,is_canonical
+E0079,Adventure World Family Tourism Park,0,adbntr brld fml trsm prk,True
 E0001,Ahsan Manzil Museum,0,ahsn mnjl msm,True
+E0080,Ali Amjad's Clock,0,al amjds clck,True
+E0081,Alutila Cave,0,altl cb,True
 E0002,Bagerhat,10,bgrht,True
+E0082,Baithakata Floating Market,0,btkt fltng mrkt,True
+E0083,Baliati Jamidar Bari,0,blt jmdr br,True
 E0003,Bandarban,21,bndrbn,True
+E0084,Bangladesh Folk Art & Crafts Foundation (Sonargaon),0,bnglds flk art crfts fndtn snrgn,True
 E0004,Best Time to Visit,1,bst tm t bst,True
 E0005,Best time to visit,1,bst tm t bst,True
+E0085,Bhawal National Park,0,bl ntnl prk,True
+E0086,Bhimruli Floating Guava Market,0,bmrl fltng gb mrkt,True
+E0087,Bichnakandi Tourist Spot,0,bcnknd trst spt,True
+E0088,Bijoypur Lake,0,bjpr lk,True
+E0089,Bijoypur Pahar (border hill),0,bjpr phr brdr hl,True
 E0006,Boga Lake,1,bg lk,True
+E0090,Buddha Dhatu Jadi (Golden Temple),0,bd dt jd gldn tmpl,True
 E0007,Carry water,1,cr btr,True
 E0008,Carry water but don't litter,1,cr btr bt dnt ltr,True
 E0009,Chandranath,1,cndrnt,True
+E0009,Chandranath Hill,0,cndrnt hl,False
+E0091,China Matir Pahar,0,cn mtr phr,True
 E0010,Chor Bijoy,1,cr bj,True
+E0092,Choto Sona Masjid,0,ct sn msjd,True
 E0011,Civic Inn,0,cbc in,True
 E0012,Cox's Bazar,5,cks bjr,True
 E0012,Cox's Bazar Beach,0,cks bjr bc,False
+E0093,Darianagar Nature & Tourism Center,0,drngr ntr trsm cntr,True
+E0094,Debotakhum,0,dbtkm,True
+E0095,Dibir Haor Shapla Bil,0,dbr hr spl bl,True
+E0096,Durga Sagar,0,drg sgr,True
+E0097,Ethnological Museum,0,etnlgcl msm,True
 E0013,Fatrar Chor,1,ftr cr,True
+E0098,Finlay Tea Estate,0,fnl t est,True
 E0014,Fokirhat,1,fkrht,True
 E0015,Foy's Lake Resort,0,fs lk rsrt,True
+E0015,Foy's Lake,0,fs lk,False
 E0016,Gangamati,3,gngmt,True
 E0017,Go early,1,g erl,True
 E0018,Go in the morning to beat the crowd,1,g in t mrng t bt t crbd,True
 E0019,Green Edge Hotel,0,grn edg htl,True
 E0020,Guliakhali Sea Beach,0,glkl s bc,True
 E0021,Guliyakhali,2,glkl,True
+E0099,Gulshan Society Lake Park,0,glsn sct lk prk,True
+E0100,Guthia Baitul Aman Jame Mosque,0,gt btl amn jm msk,True
+E0101,Hatir Banglow,0,htr bnglb,True
+E0102,Hatirjheel Lake,0,htrjl lk,True
+E0103,Hazrat Shahjalal Mazar Sharif,0,hjrt shjl mjr srf,True
 E0022,Heritage Hotel Chittagong,0,hrtg htl ctgng,True
+E0104,Hillview Park & Cafe,0,hlb prk cf,True
+E0105,Himchari Fountain and Hill,0,hmcr fntn and hl,True
+E0106,Hiron Point (Nilkamal),0,hrn pnt nlkml,True
 E0023,Hoque Tower International,0,hk tbr intrntnl,True
+E0107,Hum Hum Waterfall,0,hm hm btrfl,True
+E0108,I-Badh,0,ibd,True
 E0024,Jaflong Zero Point,0,jflng jr pnt,True
+E0109,Jhau Bon Kuakata,0,j bn kt,True
+E0110,Kantajew Temple,0,kntjb tmpl,True
 E0025,Kaptai Lake,0,kpt lk,True
+E0111,Khagrachari HDCH Park,0,kgrcr hdc prk,True
+E0112,Khoiyachara Waterfalls,0,kcr btrfls,True
+E0113,Kolatoli Beach,1,kltl bc,True
 E0026,Kollol Hotel,0,kl htl,True
-E0027,Kuakata Beach,0,kt bc,True
+E0114,Kotka Sea Beach,0,ktk s bc,True
+E0115,Kuakata Sea Beach,0,kt s bc,True
+E0116,Laboni Point Sea Beach,0,lbn pnt s bc,True
+E0117,Lala Khal Zero Point,0,l kl jr pnt,True
 E0028,Lalbagh Fort,0,lbg frt,True
-E0029,Lawachara,1,lbcr,True
+E0118,Lawachara National Park,1,lbcr ntnl prk,True
+E0119,Madhabkunda Waterfall,0,mdbknd btrfl,True
 E0030,Madhabpur Lake,1,mdbpr lk,True
+E0120,Mahasthan Archaeological Museum,0,mhstn arclgcl msm,True
+E0121,Mahasthangarh Tourism Park,0,mhstngrh trsm prk,True
+E0122,Mangrove Forest Kuakata,0,mngrb frst kt,True
+E0123,Mayung Kopal (Stairs to Heaven),0,mng kpl strs t hbn,True
+E0124,Michael Madhusudan Datta Memorial (Sagardari),0,mcl mdsdn dt mrl sgrdr,True
+E0125,Mini Bangladesh (Shadhinata Complex),0,mn bnglds sdnt cmplks,True
+E0126,Mohamaya Lake,0,mhm lk,True
 E0031,Mongla,10,mngl,True
+E0127,Mujibnagar Monument Complex,0,mjbngr mnmnt cmplks,True
+E0128,Museum of Rajas' (Hason Raja Museum),0,msm of rjs hsn rj msm,True
+E0129,Nafakhum Waterfall,0,nfkm btrfl,True
+E0130,National Botanical Garden,0,ntnl btncl grdn,True
+E0131,Natore Rajbari,0,ntr rjbr,True
+E0132,Naval Sea Beach,0,nbl s bc,True
+E0133,New Zealand Para,0,nb jlnd pr,True
+E0134,Nijhum Dwip,0,njm dbp,True
 E0032,Nilachal Tourist Center,0,nlcl trst cntr,True
 E0033,Nilgiri,1,nlgr,True
+E0135,Noor Jahan Tea Garden,0,nr jhn t grdn,True
 E0034,Noorjahan Grand Hotel,0,nrjhn grnd htl,True
+E0136,Osmani Museum,0,osmn msm,True
+E0137,Padma Garden Footbridge,0,pdm grdn ftbrdg,True
 E0035,Panam City,0,pnm ct,True
 E0036,Pashur,5,psr,True
+E0138,Patenga Sea Beach,0,ptng s bc,True
+E0139,Puthia Rajbari,0,pt rjbr,True
+E0140,Rajshahi Central Park & Zoo,0,rjsh cntrl prk j,True
+E0141,Ramna Park,0,rmn prk,True
+E0142,Ramsagar National Park,0,rmsgr ntnl prk,True
 E0037,Rangamati,8,rngmt,True
 E0037,rangamati,1,rngmt,False
 E0038,Ratargul Swamp Forest,0,rtrgl sbmp frst,True
+E0143,Risang Waterfall,0,rsng btrfl,True
 E0039,Royal Pearl Suites,0,rl prl sts,True
+E0144,Sada Matir Pahar (White Clay Hills),0,sd mtr phr bht cl hls,True
 E0040,Saint Martin,25,snt mrtn,True
+E0145,Saint Martin's Island West Beach,0,snt mrtns islnd bst bc,True
 E0041,Saint Martins Island,0,snt mrtns islnd,True
+E0146,Sajek Valley,0,sjk bl,True
 E0042,Sardar Bari,1,srdr br,True
 E0043,Sea Cox Hotel,0,s cks htl,True
+E0147,Shalban Bihar,0,slbn bhr,True
+E0148,Shashi Lodge,0,s ldg,True
+E0149,Shilaidaha Rabindra Kuthibari,0,sldh rbndr ktbr,True
+E0150,Shopnopuri Artificial Amusement Park,0,spnpr artfcl amsmnt prk,True
+E0151,Shreepur Tea Garden,0,srpr t grdn,True
+E0152,Shuvolong Waterfalls,0,sblng btrfls,True
 E0044,Sitakunda,12,stknd,True
 E0045,Sixty Dome Mosque,0,skst dm msk,True
-E0046,Sompur Mahavihar (Paharpur),0,smpr mhbhr phrpr,True
+E0153,Somapura Mahavihara (Paharpur),0,smpr mhbhr phrpr,True
 E0047,Sonargaon,22,snrgn,True
 E0048,Sreemangal,13,srmngl,True
+E0154,Sreepur (Rangpani) Zero Point,0,srpr rngpn jr pnt,True
 E0049,Srimangal Tea Garden,0,srmngl t grdn,True
+E0155,Sugondha Sea Beach,0,sgnd s bc,True
 E0050,Sundarbans,3,sndrbns,True
 E0051,Sundarbans (Karamjal Wildlife Centre),0,sndrbns krmjl bldlf cntr,True
+E0156,Sunset Point Kuakata,0,snst pnt kt,True
 E0052,Sylhet Paradise Inn,0,slht prds in,True
+E0157,T-Badh,0,tbd,True
+E0158,Tajhat Palace,0,tjt plc,True
+E0159,Tanguar Haor,0,tngr hr,True
+E0160,Tara Masjid (Star Mosque),0,tr msjd str msk,True
 E0053,The Crystal Rose Hotel,0,t crstl rs htl,True
+E0161,The Sundarbans,0,t sndrbns,True
+E0162,Tilagor Eco Park,0,tlgr ec prk,True
+E0163,Varendra Research Museum,0,brndr rsrc msm,True
+E0164,Vinno Jogot Amusement Park,0,bn jgt amsmnt prk,True
 E0054,West Park Inn,0,bst prk in,True
+E0165,Zainul Abedin Park,0,jnl abdn prk,True
 E0055,bargain at all the nearby shops,1,brgn at al t nrb sps,True
 E0056,bargain for the boat price,1,brgn fr t bt prc,True
 E0057,bargaining skills mostly,1,brgng skls mstl,True

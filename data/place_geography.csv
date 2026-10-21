@@ -1,28 +1,117 @@
-place_name,city,district,division,place_kind,notes
-Cox's Bazar Beach,Cox's Bazar,Cox's Bazar,Chattogram,attraction,city was blank in processed_reviews.csv
-Srimangal Tea Garden,Sreemangal,Moulvibazar,Sylhet,attraction,
-Nilachal Tourist Center,Bandarban,Bandarban,Chattogram,attraction,
-Jaflong Zero Point,Jaflong,Sylhet,Sylhet,attraction,
-Ratargul Swamp Forest,Gushainpur,Sylhet,Sylhet,attraction,city kept as scraped (Gushainpur union)
-Saint Martins Island,Teknaf,Cox's Bazar,Chattogram,attraction,city was blank; island is administered under Teknaf upazila
-Panam City,Sonargaon,Narayanganj,Dhaka,attraction,
-Sixty Dome Mosque,Bagerhat,Bagerhat,Khulna,attraction,
-Lalbagh Fort,Dhaka,Dhaka,Dhaka,attraction,
-Ahsan Manzil Museum,Dhaka,Dhaka,Dhaka,attraction,
-Kuakata Beach,Kuakata,Patuakhali,Barishal,attraction,
-Kaptai Lake,Rangamati,Rangamati,Chattogram,attraction,city was blank
-Sompur Mahavihar (Paharpur),Naogaon,Naogaon,Rajshahi,attraction,city was blank; Paharpur is in Badalgachhi upazila
-Guliakhali Sea Beach,Sitakunda,Chattogram,Chattogram,attraction,city was blank
-Sundarbans (Karamjal Wildlife Centre),Mongla,Bagerhat,Khulna,attraction,city was blank; Karamjal is reached from Mongla port
-Sea Cox Hotel,Cox's Bazar,Cox's Bazar,Chattogram,accommodation,
-Noorjahan Grand Hotel,Sylhet,Sylhet,Sylhet,accommodation,
-Hoque Tower International,Chittagong,Chattogram,Chattogram,accommodation,
-Foy's Lake Resort,Chittagong,Chattogram,Chattogram,accommodation,
-Royal Pearl Suites,Cox's Bazar,Cox's Bazar,Chattogram,accommodation,
-The Crystal Rose Hotel,Sylhet,Sylhet,Sylhet,accommodation,
-Heritage Hotel Chittagong,Chittagong,Chattogram,Chattogram,accommodation,
-Sylhet Paradise Inn,Sylhet,Sylhet,Sylhet,accommodation,
-Kollol Hotel,Cox's Bazar,Cox's Bazar,Chattogram,accommodation,
-West Park Inn,Dhaka,Dhaka,Dhaka,accommodation,
-Green Edge Hotel,Dhaka,Dhaka,Dhaka,accommodation,
-Civic Inn,Dhaka,Dhaka,Dhaka,accommodation,
+place_name,city,district,division,place_kind,notes,lat,lng,place_id
+Cox's Bazar Beach,Cox's Bazar,Cox's Bazar,Chattogram,attraction,city was blank in processed_reviews.csv,,,
+Srimangal Tea Garden,Sreemangal,Moulvibazar,Sylhet,attraction,,,,
+Nilachal Tourist Center,Bandarban,Bandarban,Chattogram,attraction,,22.1670622,92.2119189,ChIJnwdHKs5rrTARGOIP14bL330
+Jaflong Zero Point,Jaflong,Sylhet,Sylhet,attraction,,25.1822945,92.0178976,ChIJLVnDrttDUDcRvSXdxkc0rrI
+Ratargul Swamp Forest,Gushainpur,Sylhet,Sylhet,attraction,city kept as scraped (Gushainpur union),25.0141875,91.9187031,ChIJmxkWcjdRUDcROW0qIMAkmh4
+Saint Martins Island,Teknaf,Cox's Bazar,Chattogram,attraction,city was blank; island is administered under Teknaf upazila,,,
+Panam City,Sonargaon,Narayanganj,Dhaka,attraction,,23.655827,90.6033894,ChIJldax7-9NVDcRoM_GbGylYB8
+Sixty Dome Mosque,Bagerhat,Bagerhat,Khulna,attraction,,22.6745023,89.7418308,ChIJfdEDX1b0_zkRp12dqHdzf2U
+Lalbagh Fort,Dhaka,Dhaka,Dhaka,attraction,,23.7188605,90.3881596,ChIJAQAAANm4VTcRYuhm_G8xFk4
+Ahsan Manzil Museum,Dhaka,Dhaka,Dhaka,attraction,,23.7085464,90.4060328,ChIJVVWFegS5VTcRV1uIB-Pha9s
+Kuakata Sea Beach,Kuakata,Patuakhali,Barishal,attraction,,21.8137048,90.1224003,ChIJ9-qaZCR9qjARykAzdMaYEjo
+Kaptai Lake,Rangamati,Rangamati,Chattogram,attraction,city was blank,,,
+Somapura Mahavihara (Paharpur),Naogaon,Naogaon,Rajshahi,attraction,city was blank; Paharpur is in Badalgachhi upazila,25.0310522,88.9769126,ChIJWUJo0xyP_DkRNJLY8_77oS8
+Guliakhali Sea Beach,Sitakunda,Chattogram,Chattogram,attraction,city was blank,22.5942579,91.6261365,ChIJq4Qlg8TMrDARHEZTTSrPa0c
+Sundarbans (Karamjal Wildlife Centre),Mongla,Bagerhat,Khulna,attraction,city was blank; Karamjal is reached from Mongla port,22.4284915,89.5916555,ChIJwYv5LSs7ADoR7n6ScF-zW34
+Sea Cox Hotel,Cox's Bazar,Cox's Bazar,Chattogram,accommodation,,,,
+Noorjahan Grand Hotel,Sylhet,Sylhet,Sylhet,accommodation,,,,
+Hoque Tower International,Chittagong,Chattogram,Chattogram,accommodation,,,,
+Foy's Lake Resort,Chittagong,Chattogram,Chattogram,accommodation,,,,
+Royal Pearl Suites,Cox's Bazar,Cox's Bazar,Chattogram,accommodation,,,,
+The Crystal Rose Hotel,Sylhet,Sylhet,Sylhet,accommodation,,,,
+Heritage Hotel Chittagong,Chittagong,Chattogram,Chattogram,accommodation,,,,
+Sylhet Paradise Inn,Sylhet,Sylhet,Sylhet,accommodation,,,,
+Kollol Hotel,Cox's Bazar,Cox's Bazar,Chattogram,accommodation,,,,
+West Park Inn,Dhaka,Dhaka,Dhaka,accommodation,,,,
+Green Edge Hotel,Dhaka,Dhaka,Dhaka,accommodation,,,,
+Civic Inn,Dhaka,Dhaka,Dhaka,accommodation,,,,
+Tara Masjid (Star Mosque),Dhaka,Dhaka,Dhaka,attraction,from the tourist-spot list,23.7156086,90.4016866,ChIJVzztrS3EVTcR9VP-l5pCl_0
+Ramna Park,Dhaka,Dhaka,Dhaka,attraction,from the tourist-spot list,23.737588,90.40129,ChIJT9rnV064VTcRcnhV2Y1e4nQ
+Gulshan Society Lake Park,Dhaka,Dhaka,Dhaka,attraction,from the tourist-spot list,23.8014402,90.4098192,ChIJR1H_VQbHVTcRAsnI-owguJQ
+Hatirjheel Lake,Dhaka,Dhaka,Dhaka,attraction,from the tourist-spot list,23.7673029,90.4118086,ChIJHZTyUjjHVTcRq6luV_pWc-0
+National Botanical Garden,Dhaka,Dhaka,Dhaka,attraction,from the tourist-spot list,23.8127262,90.3476267,ChIJ2dsKmxvBVTcRGddpjMs4Xm8
+Bangladesh Folk Art & Crafts Foundation (Sonargaon),Narayanganj,Narayanganj,Dhaka,attraction,from the tourist-spot list,23.6489066,90.6001296,ChIJsetdq7RMVDcRxNgWhTuxMTQ
+Baliati Jamidar Bari,Manikganj,Manikganj,Dhaka,attraction,from the tourist-spot list,23.9947082,90.0423531,ChIJjyrnp675VTcR08rQrppgMUg
+Bhawal National Park,Gazipur,Gazipur,Dhaka,attraction,from the tourist-spot list,24.0809489,90.3975476,ChIJy65Bn_3YVTcRysBEq49p9CQ
+Shashi Lodge,Mymensingh,Mymensingh,Mymensingh,attraction,from the tourist-spot list,24.7625226,90.4030193,ChIJS1rtDgBPVjcRik_gOnS4lD0
+Zainul Abedin Park,Mymensingh,Mymensingh,Mymensingh,attraction,from the tourist-spot list,24.7696438,90.397954,ChIJiZH881BPVjcRgYANAFIKxA8
+Bijoypur Lake,Netrokona,Netrokona,Mymensingh,attraction,from the tourist-spot list,25.1575807,90.6424833,ChIJAV4vYQkJVzcRiNhc7In53bo
+Sada Matir Pahar (White Clay Hills),Netrokona,Netrokona,Mymensingh,attraction,from the tourist-spot list,25.1587212,90.6424558,ChIJSUKMjUgJVzcRM1X4J7kfybs
+China Matir Pahar,Netrokona,Netrokona,Mymensingh,attraction,from the tourist-spot list,25.1598277,90.6440239,ChIJEYh_ougJVzcRjYJrNsWmMMI
+Bijoypur Pahar (border hill),Netrokona,Netrokona,Mymensingh,attraction,from the tourist-spot list,25.1780731,90.65337,ChIJOYvn1mUJVzcRTSItwT-P6W8
+Patenga Sea Beach,Chattogram,Chattogram,Chattogram,attraction,from the tourist-spot list,22.2352023,91.7913938,ChIJ862ejSzerDAR3YFEoPCB2eg
+Naval Sea Beach,Chattogram,Chattogram,Chattogram,attraction,from the tourist-spot list,22.239307,91.8173847,ChIJy1Af9-_frDAR9LvWqb4K1Eo
+Foy's Lake,Chattogram,Chattogram,Chattogram,attraction,from the tourist-spot list,22.3721435,91.7929924,ChIJCVJAmKrZrDAR0vl4YOKqA7E
+Ethnological Museum,Chattogram,Chattogram,Chattogram,attraction,from the tourist-spot list,22.3280326,91.8150255,ChIJ8xJOSrTYrDAR8uWNcrkuzg4
+Mini Bangladesh (Shadhinata Complex),Chattogram,Chattogram,Chattogram,attraction,from the tourist-spot list,22.375898,91.8496232,ChIJQRF3sL4nrTARKojG9EdI00k
+Hatir Banglow,Chattogram,Chattogram,Chattogram,attraction,from the tourist-spot list,22.3419339,91.822158,ChIJB8fQUhLZrDARYVbcbzsyWoU
+Hillview Park & Cafe,Chattogram,Chattogram,Chattogram,attraction,from the tourist-spot list,22.4231026,91.7966398,ChIJLRioPYHXrDARR-FVyk37XMw
+Chandranath Hill,Sitakunda,Chattogram,Chattogram,attraction,from the tourist-spot list,22.8498441,91.637215,ChIJI4Fqti3XrDARmBno2IMAOsU
+Mohamaya Lake,Mirsharai,Chattogram,Chattogram,attraction,from the tourist-spot list,22.8169767,91.5735457,ChIJLZ93icE5UzcRi3b5Fp1dzqc
+Khoiyachara Waterfalls,Mirsharai,Chattogram,Chattogram,attraction,from the tourist-spot list,22.7697316,91.6124009,ChIJBcade8QwUzcRfZSXJL6uS34
+Shalban Bihar,Cumilla,Cumilla,Chattogram,attraction,from the tourist-spot list,23.4262227,91.1375785,ChIJYchZPvh5VDcR55n26eX1bXw
+Nijhum Dwip,Noakhali,Noakhali,Chattogram,attraction,from the tourist-spot list,22.0564571,91.0107552,ChIJo2KRADpuqzARpU1lHxRcBD4
+Laboni Point Sea Beach,Cox's Bazar,Cox's Bazar,Chattogram,attraction,from the tourist-spot list,21.4266995,91.9732432,ChIJ5euzs0PIrTARbP6cCbE8JA8
+Sugondha Sea Beach,Cox's Bazar,Cox's Bazar,Chattogram,attraction,from the tourist-spot list,21.4209951,91.9762583,ChIJJy-6Wv3JrTARf9InmOMmVEQ
+Kolatoli Beach,Cox's Bazar,Cox's Bazar,Chattogram,attraction,from the tourist-spot list,21.4152217,91.9820462,ChIJLwaTiJnJrTARjfcECcKQiNc
+Himchari Fountain and Hill,Cox's Bazar,Cox's Bazar,Chattogram,attraction,from the tourist-spot list,21.3558151,92.0253746,ChIJxx5lb83FrTARyPbN2IvJZgU
+Darianagar Nature & Tourism Center,Cox's Bazar,Cox's Bazar,Chattogram,attraction,from the tourist-spot list,21.3952061,92.0001581,ChIJC6wp4zzGrTAR9mbrO712BMU
+Saint Martin's Island West Beach,Cox's Bazar,Cox's Bazar,Chattogram,attraction,from the tourist-spot list,20.6325464,92.3172006,ChIJy5v59DsjrjARV2u5bul3B2A
+Buddha Dhatu Jadi (Golden Temple),Bandarban,Bandarban,Chattogram,attraction,from the tourist-spot list,22.2229449,92.1975124,ChIJ89YYPXZqrTARNRU9TBCJWmE
+Nilgiri,Bandarban,Bandarban,Chattogram,attraction,from the tourist-spot list,21.9115428,92.325555,ChIJDcw9k1t5rTARXREVW1DzxaE
+Boga Lake,Bandarban,Bandarban,Chattogram,attraction,from the tourist-spot list,21.980335,92.4699965,ChIJwdJMT32CsjARSI1l57f2gXk
+Nafakhum Waterfall,Bandarban,Bandarban,Chattogram,attraction,from the tourist-spot list,21.7203125,92.5341875,ChIJu6BBDr95sjAR2eLbciyE-Nw
+Debotakhum,Bandarban,Bandarban,Chattogram,attraction,from the tourist-spot list,22.2370375,92.3720469,ChIJwzjQkkldrTARj3oAU1uPKzs
+Shuvolong Waterfalls,Rangamati,Rangamati,Chattogram,attraction,from the tourist-spot list,22.7133246,92.2494697,ChIJOyDgPW-xUjcR-LRHlWJC0Fk
+Sajek Valley,Rangamati,Rangamati,Chattogram,attraction,from the tourist-spot list,23.3838125,92.2939219,ChIJE3OM67n-UjcRTBdPyAx60PE
+Alutila Cave,Khagrachari,Khagrachari,Chattogram,attraction,from the tourist-spot list,23.088868,91.9564205,ChIJz6SQIdflUjcREJ89Q0S_ARU
+Risang Waterfall,Khagrachari,Khagrachari,Chattogram,attraction,from the tourist-spot list,23.0661111,91.9436111,ChIJ2-AUBYzmUjcR4si5f5dDwws
+New Zealand Para,Khagrachari,Khagrachari,Chattogram,attraction,from the tourist-spot list,23.0963748,91.9902651,ChIJgdfyDADvUjcRyk7TcAAOe88
+Khagrachari HDCH Park,Khagrachari,Khagrachari,Chattogram,attraction,from the tourist-spot list,23.098158,91.9722589,ChIJ76R3wujlUjcRPXITptETOIg
+Mayung Kopal (Stairs to Heaven),Khagrachari,Khagrachari,Chattogram,attraction,from the tourist-spot list,23.1354579,91.9362294,ChIJo_UVfHLlUjcRywo7YLV3PKI
+Hazrat Shahjalal Mazar Sharif,Sylhet,Sylhet,Sylhet,attraction,from the tourist-spot list,24.9020901,91.8660339,ChIJL8pwzShVUDcRwGUqtR2Esp4
+Ali Amjad's Clock,Sylhet,Sylhet,Sylhet,attraction,from the tourist-spot list,24.8883359,91.8677683,ChIJOVIbOwCrUTcR7wVE2z1vk2Q
+Museum of Rajas' (Hason Raja Museum),Sylhet,Sylhet,Sylhet,attraction,from the tourist-spot list,24.8947217,91.8672131,ChIJE_TBEitVUDcR934jrPQtaT8
+Osmani Museum,Sylhet,Sylhet,Sylhet,attraction,from the tourist-spot list,24.8939311,91.8773359,ChIJW2jZatNUUDcR7xx0T1D2udg
+Tilagor Eco Park,Sylhet,Sylhet,Sylhet,attraction,from the tourist-spot list,24.9174221,91.906369,ChIJvwCae59UUDcRwo24-vcV4c4
+Adventure World Family Tourism Park,Sylhet,Sylhet,Sylhet,attraction,from the tourist-spot list,24.9525749,91.8725228,ChIJlb2snlJUUDcRMfp_BYCdkoI
+Bichnakandi Tourist Spot,Sylhet,Sylhet,Sylhet,attraction,from the tourist-spot list,25.1759252,91.8866038,ChIJT-JbyktZUDcRK1RLHQoQWf8
+Lala Khal Zero Point,Sylhet,Sylhet,Sylhet,attraction,from the tourist-spot list,25.120454,92.1845033,ChIJJWW470g4UDcR0xT2oDfB0k0
+Sreepur (Rangpani) Zero Point,Sylhet,Sylhet,Sylhet,attraction,from the tourist-spot list,25.183743,92.072831,ChIJQcPv8epBUDcReggJLlgqDZ4
+Shreepur Tea Garden,Sylhet,Sylhet,Sylhet,attraction,from the tourist-spot list,25.1729388,92.0833284,ChIJ-5k7RNFHUDcRZVQ8SedBWg8
+Dibir Haor Shapla Bil,Sylhet,Sylhet,Sylhet,attraction,from the tourist-spot list,25.1598564,92.1220773,ChIJgVH5bzhHUDcRlq7QhmQCI1g
+Lawachara National Park,Moulvibazar,Moulvibazar,Sylhet,attraction,from the tourist-spot list,24.3250642,91.7871472,ChIJz8rAZdd5UTcRXfmIrgznF3s
+Noor Jahan Tea Garden,Moulvibazar,Moulvibazar,Sylhet,attraction,from the tourist-spot list,24.2963019,91.7993686,ChIJjTBNt8d5UTcRVHR4Gmznh84
+Finlay Tea Estate,Moulvibazar,Moulvibazar,Sylhet,attraction,from the tourist-spot list,24.3030859,91.7425316,ChIJN9OQphd6UTcRfEIRkD6owig
+Madhabkunda Waterfall,Moulvibazar,Moulvibazar,Sylhet,attraction,from the tourist-spot list,24.6382272,92.2244897,ChIJS1yN6QzFUTcRmNROamAwp9g
+Hum Hum Waterfall,Moulvibazar,Moulvibazar,Sylhet,attraction,from the tourist-spot list,24.1674888,91.9119447,ChIJK_Z8gC2HUTcREK9vKQ2S190
+Tanguar Haor,Sunamganj,Sunamganj,Sylhet,attraction,from the tourist-spot list,25.140043,91.0883278,ChIJ7RjrYPgwVzcRTxv0bZUudlw
+Varendra Research Museum,Rajshahi,Rajshahi,Rajshahi,attraction,from the tourist-spot list,24.3670528,88.5925182,ChIJ-wWf_Abv-zkRvgOkv2AuS6I
+T-Badh,Rajshahi,Rajshahi,Rajshahi,attraction,from the tourist-spot list,24.3613375,88.5700156,ChIJMze0azvv-zkRTMkeCSpnen0
+I-Badh,Rajshahi,Rajshahi,Rajshahi,attraction,from the tourist-spot list,24.3699125,88.5555156,ChIJ571bjQ_v-zkRib9Dcx9ZO00
+Padma Garden Footbridge,Rajshahi,Rajshahi,Rajshahi,attraction,from the tourist-spot list,24.3623332,88.5969348,ChIJd4fgv1fv-zkRsY8yNESYr5I
+Rajshahi Central Park & Zoo,Rajshahi,Rajshahi,Rajshahi,attraction,from the tourist-spot list,24.3693632,88.5707876,ChIJvzC2XiTv-zkRGZziFIj7uxQ
+Puthia Rajbari,Rajshahi,Rajshahi,Rajshahi,attraction,from the tourist-spot list,24.361949,88.8368161,ChIJg4YiMe4I_DkRAxH83ZKafew
+Natore Rajbari,Natore,Natore,Rajshahi,attraction,from the tourist-spot list,24.4199621,88.9918797,ChIJoV-TbWQR_DkRc6kE30SlZ34
+Choto Sona Masjid,Chapainawabganj,Chapainawabganj,Rajshahi,attraction,from the tourist-spot list,24.8137269,88.1432103,ChIJA7bKMJFU-jkRvoVKieTM7Xk
+Mahasthan Archaeological Museum,Bogura,Bogura,Rajshahi,attraction,from the tourist-spot list,24.962683,89.343932,ChIJZa6HkOj-_DkRyGlbDnXPSbE
+Mahasthangarh Tourism Park,Bogura,Bogura,Rajshahi,attraction,from the tourist-spot list,24.961984,89.3470962,ChIJAYOI2klV_DkRyPCRrd2gxJY
+Tajhat Palace,Rangpur,Rangpur,Rangpur,attraction,from the tourist-spot list,25.7252732,89.2799033,ChIJC95zWLEt4zkRklx04lcERJU
+Vinno Jogot Amusement Park,Rangpur,Rangpur,Rangpur,attraction,from the tourist-spot list,25.8329189,89.11147,ChIJPXyq6q034zkRYT-ta6Qi1sw
+Kantajew Temple,Dinajpur,Dinajpur,Rangpur,attraction,from the tourist-spot list,25.7902954,88.667045,ChIJ-dznJFGu5DkRCxfWSyESO4Y
+Ramsagar National Park,Dinajpur,Dinajpur,Rangpur,attraction,from the tourist-spot list,25.5516875,88.6216875,ChIJdyyIrQhO-zkRTv27Oj0WfqU
+Shopnopuri Artificial Amusement Park,Dinajpur,Dinajpur,Rangpur,attraction,from the tourist-spot list,25.5056243,89.0622426,ChIJb9YnjaW3_DkRiSlKR2tFr3s
+The Sundarbans,Khulna,Khulna,Khulna,attraction,from the tourist-spot list,22.2970845,89.5676802,ChIJjSpO28ZNADoRknMf3AUJn0M
+Hiron Point (Nilkamal),Khulna,Khulna,Khulna,attraction,from the tourist-spot list,21.8160763,89.4625581,ChIJ2zBWOSb_ADoRYqP4grFzijk
+Kotka Sea Beach,Bagerhat,Bagerhat,Khulna,attraction,from the tourist-spot list,21.8543801,89.7734012,ChIJB91qVwCKADoR5L8YKfwuMQA
+Shilaidaha Rabindra Kuthibari,Kushtia,Kushtia,Khulna,attraction,from the tourist-spot list,23.9199375,89.2200625,ChIJVfZt8ESQ_jkRjRqeqQ4-VLw
+Michael Madhusudan Datta Memorial (Sagardari),Jashore,Jashore,Khulna,attraction,from the tourist-spot list,22.8191721,89.1633755,ChIJpw0uSK5o_zkRtccHxIa8A14
+Mujibnagar Monument Complex,Meherpur,Meherpur,Khulna,attraction,from the tourist-spot list,23.6468279,88.5964678,ChIJ-1kmQy06-TkRvdgTh_z3goc
+Durga Sagar,Barishal,Barishal,Barishal,attraction,from the tourist-spot list,22.7610208,90.289515,ChIJKcCxQs1JVTcRM8SGiBdJnmU
+Guthia Baitul Aman Jame Mosque,Barishal,Barishal,Barishal,attraction,from the tourist-spot list,22.7830342,90.2387744,ChIJ4dzJTONJVTcRpdYNNZx72ug
+Bhimruli Floating Guava Market,Jhalokati,Jhalokati,Barishal,attraction,from the tourist-spot list,22.7137311,90.1626921,ChIJ7dAMFuJNVTcR-SfG0HBoWo8
+Baithakata Floating Market,Pirojpur,Pirojpur,Barishal,attraction,from the tourist-spot list,22.8086996,90.0462057,ChIJkVOOi3xXVTcRSXwt7aL3GY8
+Sunset Point Kuakata,Patuakhali,Patuakhali,Barishal,attraction,from the tourist-spot list,21.8180127,90.1131043,ChIJ8X0GYkl9qjARJyz97r2-BfA
+Jhau Bon Kuakata,Patuakhali,Patuakhali,Barishal,attraction,from the tourist-spot list,21.8418999,90.0965196,ChIJ4aEswxt9qjARxi7vL4_62Pw
+Mangrove Forest Kuakata,Patuakhali,Patuakhali,Barishal,attraction,from the tourist-spot list,21.8025422,90.1730843,ChIJ22FveKVjqjARnzDzlTe8P7E

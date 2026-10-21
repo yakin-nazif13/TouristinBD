@@ -52,6 +52,7 @@ import pandas as pd
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from corpus_schema import PROVENANCE_COLUMNS  # noqa: E402
+import place_names  # noqa: E402
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 DATA_DIR = Path(os.environ.get("TOURISTINBD_DATA_DIR") or (REPO_ROOT / "data"))
@@ -232,6 +233,14 @@ def preprocess(
 ) -> tuple[pd.DataFrame, dict]:
     total_in = len(raw)
     df = raw.rename(columns=RENAMES).copy()
+
+    # One final name per place (data/place_names.csv, made by import_place_list.py). Raw
+    # batch files are never edited; the rename happens here, the same way for every batch.
+    final_names, renamed = place_names.canonicalize(df["place_name"], place_names.load_registry(DATA_DIR))
+    if renamed:
+        df["place_name"] = final_names
+        for old, new in sorted(renamed.items()):
+            notes.append(f"place renamed to its final name: {old!r} -> {new!r}")
 
     duplicate_ids = int(df["review_id"].duplicated().sum())
     if duplicate_ids:

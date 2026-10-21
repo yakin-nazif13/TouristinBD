@@ -211,9 +211,12 @@ def test_script_run(tmp: Path) -> None:
     print("\nphase 2 — the script on a copy of the data directory")
     data = tmp / "phase2run"
     data.mkdir()
+    # place_names.csv is an input now: it holds each place's final name, and the committed
+    # corpus was built with it.
     for name in ("real_reviews_batch1.csv", "real_reviews_booking_batch1.csv",
-                 "reviews_with_topics.csv", "place_geography.csv"):
-        shutil.copy2(DATA_DIR / name, data / name)
+                 "reviews_with_topics.csv", "place_geography.csv", "place_names.csv"):
+        if (DATA_DIR / name).exists():
+            shutil.copy2(DATA_DIR / name, data / name)
 
     result = run_script("run_phase2_preprocessing.py", data_dir=data)
     check("the script exits cleanly", result.returncode == 0, result.stderr[-300:])

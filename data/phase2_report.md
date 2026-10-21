@@ -1,6 +1,6 @@
 # Phase 2 — preprocessing report
 
-Generated: 2026-10-05T23:44:27Z
+Generated: 2026-10-21T06:40:16Z
 
 - Inputs: real_reviews_batch1.csv, real_reviews_booking_batch1.csv
 - Output: `data/processed_reviews.csv` — **538 reviews** across 27 places (from 540 raw rows)
@@ -12,5 +12,7 @@ Generated: 2026-10-05T23:44:27Z
 
 - loaded 300 row(s) from real_reviews_batch1.csv
 - loaded 240 row(s) from real_reviews_booking_batch1.csv
+- place renamed to its final name: 'Kuakata Beach' -> 'Kuakata Sea Beach'
+- place renamed to its final name: 'Sompur Mahavihar (Paharpur)' -> 'Somapura Mahavihara (Paharpur)'
 - dropped as too short (< 10 chars): 'Bad. No'
 - dropped as an exact duplicate of an earlier review: 'Good. Good. Good'

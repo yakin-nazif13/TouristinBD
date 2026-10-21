@@ -68,7 +68,7 @@ import pandas as pd
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from corpus_schema import in_bangladesh  # noqa: E402
-from gem_schema import VISIBILITY_LEVELS, strip_qualifier  # noqa: E402
+from gem_schema import VISIBILITY_LEVELS, strip_article, strip_qualifier  # noqa: E402
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 DATA_DIR = Path(os.environ.get("TOURISTINBD_DATA_DIR") or (REPO_ROOT / "data"))
@@ -295,6 +295,11 @@ def query_forms(name: str) -> list[str]:
         inner = name[name.index("(") + 1:name.rindex(")")].strip()
     if inner and inner not in forms:
         forms.append(inner)
+    # "the Sundarbans" is searched as "Sundarbans" too: the article only makes a match worse.
+    for form in list(forms):
+        plain = strip_article(form)
+        if plain and plain not in forms:
+            forms.append(plain)
     return forms
 
 

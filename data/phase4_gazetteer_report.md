@@ -7,14 +7,14 @@ something a discovery rather than a site everyone already lists.**
 A lookup that could not be performed is recorded as `unknown`, never V0.
 Treating an outage as absence would manufacture discoveries.
 
-- PLACE entities checked: **23**
+- PLACE entities checked: **24**
 - Coordinates recovered: **16** (these also serve section 3.6)
 
 | level | meaning | entities |
 | --- | --- | --- |
 | V0 | not on any map or list | 4 |
 | V1 | on the map, barely documented | 6 |
-| V2 | moderately documented | 5 |
+| V2 | moderately documented | 6 |
 | V3 | well known / official | 8 |
 
 ## V0 — undocumented places found in review text
@@ -24,8 +24,8 @@ neither OpenStreetMap nor Wikidata.
 
 - **Gangamati**
 - **Guliyakhali**
-- **Fatrar Chor**
 - **Chor Bijoy**
+- **Fatrar Chor**
 
 ## Thresholds
 

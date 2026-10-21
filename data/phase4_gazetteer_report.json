@@ -1,9 +1,9 @@
 {
-  "n_entities": 23,
+  "n_entities": 24,
   "by_visibility": {
     "V3": 8,
+    "V2": 6,
     "V1": 6,
-    "V2": 5,
     "V0": 4
   },
   "with_coordinates": 16,

@@ -46,6 +46,7 @@ import pandas as pd
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from corpus_schema import PROVENANCE_COLUMNS, SOURCE_TYPES, source_type_of, utc_now_iso  # noqa: E402
+import place_names  # noqa: E402
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 DATA_DIR = Path(os.environ.get("TOURISTINBD_DATA_DIR") or (REPO_ROOT / "data"))
@@ -241,6 +242,40 @@ def normalize_columns(df: pd.DataFrame, extra_map: dict[str, str]) -> tuple[pd.D
     return df[keep].copy(), notes
 
 
+def apply_place_names(df: pd.DataFrame, place_ids: pd.Series | None = None) -> tuple[pd.DataFrame, list[str]]:
+    """Give every row its place's final name and, if missing, the place's coordinates."""
+    notes: list[str] = []
+    reg = place_names.load_registry(DATA_DIR)
+    if not reg:
+        return df, notes
+    final, changed = place_names.canonicalize(df["place_name"], reg, place_ids)
+    df["place_name"] = final
+    for old, new in sorted(changed.items()):
+        notes.append(f"place renamed to its final name: {old!r} -> {new!r}")
+    known = set(reg.by_name.values())
+    strangers = sorted(set(df["place_name"].dropna()) - known)
+    if strangers:
+        notes.append(
+            f"{len(strangers)} place name(s) are not in data/place_names.csv: {', '.join(map(repr, strangers[:6]))}"
+            f"{' …' if len(strangers) > 6 else ''}. If one is a place from your list under another title, add it to "
+            "data/place_aliases.csv and re-run import_place_list.py."
+        )
+    # Coordinates from the place list, for rows the export left blank. Never overwrites an export's own.
+    lat = df["lat"] if "lat" in df.columns else pd.Series(pd.NA, index=df.index, dtype="object")
+    lng = df["lng"] if "lng" in df.columns else pd.Series(pd.NA, index=df.index, dtype="object")
+    lat = pd.to_numeric(lat, errors="coerce")
+    lng = pd.to_numeric(lng, errors="coerce")
+    filled = 0
+    for index, name in df["place_name"].items():
+        if name in reg.coords and (pd.isna(lat.at[index]) or pd.isna(lng.at[index])):
+            lat.at[index], lng.at[index] = reg.coords[name]
+            filled += 1
+    if filled:
+        df["lat"], df["lng"] = lat, lng
+        notes.append(f"filled coordinates from the place list for {filled} row(s)")
+    return df, notes
+
+
 def stamp_provenance(df: pd.DataFrame, args: argparse.Namespace) -> tuple[pd.DataFrame, list[str]]:
     """Fill the BUILD_PLAN 3.5 provenance columns for this batch.
 
@@ -373,6 +408,10 @@ def main() -> int:
     if extra_map:
         df = df.rename(columns={k: v for k, v in extra_map.items() if k in df.columns})
     df, text_notes = resolve_text_columns(df)
+    # The export's Google place_id identifies a place better than its title does, but
+    # normalize_columns drops columns it does not know, so take it out first.
+    id_col = next((c for c in ("placeId", "place_id") if c in df.columns), None)
+    export_place_ids = df[id_col].copy() if id_col else None
     df, notes = normalize_columns(df, extra_map)
     notes = text_notes + notes
 
@@ -388,6 +427,12 @@ def main() -> int:
     elif args.source:
         df["source"] = args.source
         notes.append(f"overrode source={args.source} for every row")
+
+    # One final name per place (data/place_names.csv, made by import_place_list.py). Done
+    # BEFORE ids are generated, so the same review arriving under two titles is one review.
+    if "place_name" in df.columns:
+        df, name_notes = apply_place_names(df, export_place_ids)
+        notes += name_notes
 
     try:
         df, provenance_notes = stamp_provenance(df, args)

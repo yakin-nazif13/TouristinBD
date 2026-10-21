@@ -96,6 +96,9 @@ jobs:
       - name: Admin panel (accounts, login, approve/reject, ingest)
         run: python scripts/test_admin.py
 
+      - name: Place list import (final names, geography, collection plan)
+        run: python scripts/test_import_place_list.py
+
       - name: Build the SQLite database from the pipeline artifacts
         run: python scripts/build_phase8_database.py
 

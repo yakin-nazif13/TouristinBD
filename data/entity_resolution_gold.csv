@@ -17,6 +17,7 @@ Jaflong,6,Jaflong Zero Point,corpus surfaces,singleton: must not merge with any 
 Jaflong Zero Point,6,Jaflong Zero Point,corpus place_name,
 Kuakata,7,Kuakata Beach,corpus surfaces,singleton
 Kuakata Beach,7,Kuakata Beach,corpus place_name,
+Kuakata Sea Beach,7,Kuakata Beach,corpus place_name,"final name since the place-list import (longer name wins); same beach as Kuakata Beach"
 Bandarban,8,Bandarban,corpus surfaces,singleton
 Ratargul,9,Ratargul Swamp Forest,corpus surfaces,singleton
 Ratargul Swamp Forest,9,Ratargul Swamp Forest,corpus place_name,

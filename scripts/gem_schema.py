@@ -374,6 +374,19 @@ def strip_qualifier(name: str) -> str:
     return _squeeze(re.sub(r"\s*\([^)]*\)\s*$", "", str(name or "")))
 
 
+def strip_article(name: str) -> str:
+    """Drop a leading English "the": "The Sundarbans" -> "Sundarbans".
+
+    The place list writes "The Sundarbans" while reviews say "the Sundarbans" or just
+    "Sundarbans". Left alone, the article makes one place look like several entities
+    and gives the map lookup a worse name to search for. A name that is only "the"
+    is returned unchanged.
+    """
+    squeezed = _squeeze(str(name or ""))
+    stripped = re.sub(r"^the\s+", "", squeezed, flags=re.IGNORECASE)
+    return stripped if stripped else squeezed
+
+
 def ascii_fold(text: str) -> str:
     """Strip diacritics from Latin text, for comparison only."""
     decomposed = unicodedata.normalize("NFKD", str(text or ""))
