@@ -7,25 +7,33 @@ something a discovery rather than a site everyone already lists.**
 A lookup that could not be performed is recorded as `unknown`, never V0.
 Treating an outage as absence would manufacture discoveries.
 
-- PLACE entities checked: **24**
-- Coordinates recovered: **16** (these also serve section 3.6)
+- PLACE entities checked: **68**
+- Coordinates recovered: **46** (these also serve section 3.6)
 
 | level | meaning | entities |
 | --- | --- | --- |
-| V0 | not on any map or list | 4 |
-| V1 | on the map, barely documented | 6 |
-| V2 | moderately documented | 6 |
-| V3 | well known / official | 8 |
+| V0 | not on any map or list | 12 |
+| V1 | on the map, barely documented | 14 |
+| V2 | moderately documented | 25 |
+| V3 | well known / official | 17 |
 
 ## V0 — undocumented places found in review text
 
 Each of these was mentioned in a review of somewhere else and appears in
 neither OpenStreetMap nor Wikidata.
 
-- **Gangamati**
+- **Bisnakandi**
+- **Kantaji Temple**
 - **Guliyakhali**
+- **Gangamati**
+- **China Matir Pahar**
+- **T-badh**
+- **I-Badh**
 - **Chor Bijoy**
 - **Fatrar Chor**
+- **mohamaya lake**
+- **Karamjal**
+- **SADA MATIR PAHAR**
 
 ## Thresholds
 

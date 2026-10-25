@@ -7,10 +7,10 @@
 - Chart set saved as `phase7_chart_*.png`.
 
 ## Key Counts
-- Total processed reviews: 538
-- Topic-preference rows: 10
-- Preferences covered: 5
-- Mainstream/long-tail topics: {'mainstream': 10}
+- Total processed reviews: 14841
+- Topic-preference rows: 58
+- Preferences covered: 20
+- Mainstream/long-tail topics: {'mainstream': 58}
 
 ## Statistical Tests
 - Details saved in `phase7_statistical_tests.json`.

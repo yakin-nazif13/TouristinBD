@@ -1,21 +1,21 @@
 {
   "extractor": "gazetteer",
-  "n_reviews": 538,
-  "n_mentions": 183,
-  "reviews_with_a_mention": 89,
+  "n_reviews": 14841,
+  "n_mentions": 2398,
+  "reviews_with_a_mention": 1454,
   "by_entity_type": {
-    "ACCESS": 11,
-    "PLACE": 154,
-    "TIP": 18
+    "ACCESS": 104,
+    "PLACE": 2004,
+    "TIP": 290
   },
-  "distinct_surfaces": 55,
+  "distinct_surfaces": 441,
   "grounding": {
-    "candidates": 183,
-    "kept": 183,
+    "candidates": 2398,
+    "kept": 2398,
     "dropped": 0,
     "drop_rate": 0.0,
     "by_match_kind": {
-      "exact": 183
+      "exact": 2398
     },
     "dropped_reasons": {},
     "dropped_examples": []

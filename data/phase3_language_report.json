@@ -1,22 +1,27 @@
 {
-  "n_reviews": 538,
+  "n_reviews": 14841,
   "by_label": {
-    "bn": 4,
-    "en": 532,
-    "mixed": 1,
-    "other": 1
+    "": 3,
+    "bn": 4042,
+    "bn-latn": 92,
+    "en": 10402,
+    "mixed": 274,
+    "other": 28
   },
   "by_method": {
-    "lid": 452,
-    "script": 4,
-    "script-mix": 1,
-    "short-text": 81
+    "heuristic": 107,
+    "lid": 8801,
+    "no-letters": 3,
+    "script": 4042,
+    "script-mix": 259,
+    "short-text": 1629
   },
   "by_text_basis": {
-    "clean": 538
+    "clean": 538,
+    "original": 14303
   },
-  "original_text_share": 0.0,
-  "bangla_or_banglish_share": 0.0093,
+  "original_text_share": 0.9637,
+  "bangla_or_banglish_share": 0.297,
   "notes": [
     "no trained Banglish classifier; using the lexicon heuristic (train it with scripts/banglish_classifier.py --train)",
     "fastText lid.176 not present; using langdetect for Latin-script languages"

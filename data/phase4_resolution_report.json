@@ -1,9 +1,9 @@
 {
-  "n_surfaces": 167,
-  "n_entities": 162,
-  "n_merged_entities": 5,
-  "n_substantive_merges": 3,
-  "n_case_only_merges": 2,
+  "n_surfaces": 537,
+  "n_entities": 467,
+  "n_merged_entities": 50,
+  "n_substantive_merges": 15,
+  "n_case_only_merges": 35,
   "weights": {
     "phonetic": 0.4,
     "string": 0.25,
@@ -11,7 +11,7 @@
     "geography": 0.15
   },
   "merge_threshold": 0.72,
-  "n_pairs_merged": 5,
+  "n_pairs_merged": 100,
   "evaluation": null,
   "notes": [
     "embedding signal unavailable (needs torch); phonetic + string + geography only"

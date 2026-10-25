@@ -1,34 +1,69 @@
 city,place_name,preference_id,preference_label,preference_type,review_count,avg_rating
-Bagerhat,Sixty Dome Mosque,P03,Historical landmark and ancient city tours,mainstream,20,4.4
-Bandarban,Nilachal Tourist Center,P04,Hill tracts and scenic lake exploration,mainstream,18,4.611
-Bandarban,Nilachal Tourist Center,P02,Coastal beach and coral island excursions,mainstream,1,4.0
-Chittagong,Foy's Lake Resort,P01,Quality hotel accommodation and staff service,mainstream,20,3.2
-Chittagong,Heritage Hotel Chittagong,P01,Quality hotel accommodation and staff service,mainstream,19,2.842
-Chittagong,Hoque Tower International,P01,Quality hotel accommodation and staff service,mainstream,20,2.975
-Cox's Bazar,Kollol Hotel,P01,Quality hotel accommodation and staff service,mainstream,19,3.763
-Cox's Bazar,Royal Pearl Suites,P01,Quality hotel accommodation and staff service,mainstream,19,3.368
-Cox's Bazar,Sea Cox Hotel,P01,Quality hotel accommodation and staff service,mainstream,19,2.947
-Dhaka,Ahsan Manzil Museum,P03,Historical landmark and ancient city tours,mainstream,18,4.556
-Dhaka,Civic Inn,P01,Quality hotel accommodation and staff service,mainstream,19,3.579
-Dhaka,Green Edge Hotel,P01,Quality hotel accommodation and staff service,mainstream,19,3.447
-Dhaka,Lalbagh Fort,P03,Historical landmark and ancient city tours,mainstream,12,4.667
-Dhaka,Lalbagh Fort,P04,Hill tracts and scenic lake exploration,mainstream,1,5.0
-Dhaka,West Park Inn,P01,Quality hotel accommodation and staff service,mainstream,20,3.075
-Gushainpur,Ratargul Swamp Forest,P05,Ecotourism and forest boat safaris,mainstream,15,4.8
-Gushainpur,Ratargul Swamp Forest,P02,Coastal beach and coral island excursions,mainstream,2,4.5
-Gushainpur,Ratargul Swamp Forest,P04,Hill tracts and scenic lake exploration,mainstream,1,4.0
-Jaflong,Jaflong Zero Point,P03,Historical landmark and ancient city tours,mainstream,11,4.455
-Jaflong,Jaflong Zero Point,P04,Hill tracts and scenic lake exploration,mainstream,5,4.8
-Jaflong,Jaflong Zero Point,P01,Quality hotel accommodation and staff service,mainstream,1,5.0
-Jaflong,Jaflong Zero Point,P02,Coastal beach and coral island excursions,mainstream,1,2.0
-Kuakata,Kuakata Sea Beach,P02,Coastal beach and coral island excursions,mainstream,14,4.714
-Kuakata,Kuakata Sea Beach,P01,Quality hotel accommodation and staff service,mainstream,5,4.4
-Kuakata,Kuakata Sea Beach,P04,Hill tracts and scenic lake exploration,mainstream,1,5.0
-Sonargaon,Panam City,P03,Historical landmark and ancient city tours,mainstream,18,4.556
-Sreemangal,Srimangal Tea Garden,P05,Ecotourism and forest boat safaris,mainstream,16,4.688
-Sreemangal,Srimangal Tea Garden,P04,Hill tracts and scenic lake exploration,mainstream,2,5.0
-Sreemangal,Srimangal Tea Garden,P01,Quality hotel accommodation and staff service,mainstream,1,5.0
-Sylhet,Noorjahan Grand Hotel,P01,Quality hotel accommodation and staff service,mainstream,18,3.278
-Sylhet,Noorjahan Grand Hotel,P02,Coastal beach and coral island excursions,mainstream,1,4.5
-Sylhet,Sylhet Paradise Inn,P01,Quality hotel accommodation and staff service,mainstream,20,3.95
-Sylhet,The Crystal Rose Hotel,P01,Quality hotel accommodation and staff service,mainstream,20,3.575
+Bagerhat,Sixty Dome Mosque,P12,Ancient Archaeological Sites and Museums,mainstream,10,4.8
+Bagerhat,Sixty Dome Mosque,P13,Historic Mosques and Islamic Architecture,mainstream,10,4.8
+Bagerhat,Sixty Dome Mosque,P02,Waterfalls and Parks Visits,mainstream,9,3.889
+Bagerhat,Sixty Dome Mosque,P01,Wildlife and Forest Exploration,mainstream,1,5.0
+Bandarban,Nilachal Tourist Center,P08,Hill Tracts and Valley Exploration,mainstream,12,4.667
+Bandarban,Nilachal Tourist Center,P02,Waterfalls and Parks Visits,mainstream,5,4.0
+Bandarban,Nilachal Tourist Center,P01,Wildlife and Forest Exploration,mainstream,3,4.667
+Bandarban,Nilachal Tourist Center,P12,Ancient Archaeological Sites and Museums,mainstream,1,4.0
+Chittagong,Foy's Lake Resort,P20,Hotel Stay and Staff Service,mainstream,14,2.679
+Chittagong,Foy's Lake Resort,P01,Wildlife and Forest Exploration,mainstream,4,4.125
+Chittagong,Foy's Lake Resort,P02,Waterfalls and Parks Visits,mainstream,2,5.0
+Chittagong,Heritage Hotel Chittagong,P20,Hotel Stay and Staff Service,mainstream,17,2.706
+Chittagong,Heritage Hotel Chittagong,P01,Wildlife and Forest Exploration,mainstream,2,1.75
+Chittagong,Heritage Hotel Chittagong,P02,Waterfalls and Parks Visits,mainstream,1,5.0
+Chittagong,Hoque Tower International,P20,Hotel Stay and Staff Service,mainstream,16,2.469
+Chittagong,Hoque Tower International,P01,Wildlife and Forest Exploration,mainstream,3,5.0
+Chittagong,Hoque Tower International,P02,Waterfalls and Parks Visits,mainstream,1,5.0
+Cox's Bazar,Kollol Hotel,P20,Hotel Stay and Staff Service,mainstream,17,3.735
+Cox's Bazar,Kollol Hotel,P02,Waterfalls and Parks Visits,mainstream,3,4.167
+Cox's Bazar,Royal Pearl Suites,P20,Hotel Stay and Staff Service,mainstream,19,3.368
+Cox's Bazar,Royal Pearl Suites,P01,Wildlife and Forest Exploration,mainstream,1,3.5
+Cox's Bazar,Sea Cox Hotel,P20,Hotel Stay and Staff Service,mainstream,18,3.056
+Cox's Bazar,Sea Cox Hotel,P01,Wildlife and Forest Exploration,mainstream,1,1.5
+Cox's Bazar,Sea Cox Hotel,P02,Waterfalls and Parks Visits,mainstream,1,1.0
+Dhaka,Ahsan Manzil Museum,P12,Ancient Archaeological Sites and Museums,mainstream,17,4.647
+Dhaka,Ahsan Manzil Museum,P01,Wildlife and Forest Exploration,mainstream,3,3.667
+Dhaka,Civic Inn,P20,Hotel Stay and Staff Service,mainstream,14,3.107
+Dhaka,Civic Inn,P02,Waterfalls and Parks Visits,mainstream,4,4.875
+Dhaka,Civic Inn,P01,Wildlife and Forest Exploration,mainstream,1,5.0
+Dhaka,Green Edge Hotel,P20,Hotel Stay and Staff Service,mainstream,18,3.306
+Dhaka,Green Edge Hotel,P01,Wildlife and Forest Exploration,mainstream,1,4.5
+Dhaka,Green Edge Hotel,P02,Waterfalls and Parks Visits,mainstream,1,5.0
+Dhaka,Lalbagh Fort,P12,Ancient Archaeological Sites and Museums,mainstream,13,4.538
+Dhaka,Lalbagh Fort,P11,Historic Palaces and Rajbaris,mainstream,12,4.5
+Dhaka,Lalbagh Fort,P02,Waterfalls and Parks Visits,mainstream,4,4.25
+Dhaka,Lalbagh Fort,P01,Wildlife and Forest Exploration,mainstream,2,5.0
+Dhaka,Lalbagh Fort,P20,Hotel Stay and Staff Service,mainstream,1,5.0
+Dhaka,West Park Inn,P20,Hotel Stay and Staff Service,mainstream,18,2.861
+Dhaka,West Park Inn,P01,Wildlife and Forest Exploration,mainstream,1,5.0
+Dhaka,West Park Inn,P02,Waterfalls and Parks Visits,mainstream,1,5.0
+Gushainpur,Ratargul Swamp Forest,P04,Swamp Forest Boat Rides,mainstream,12,4.75
+Gushainpur,Ratargul Swamp Forest,P02,Waterfalls and Parks Visits,mainstream,7,4.429
+Gushainpur,Ratargul Swamp Forest,P15,Spiritual Shrines and Mazar Visits,mainstream,1,5.0
+Jaflong,Jaflong Zero Point,P01,Wildlife and Forest Exploration,mainstream,14,4.286
+Jaflong,Jaflong Zero Point,P08,Hill Tracts and Valley Exploration,mainstream,14,4.286
+Jaflong,Jaflong Zero Point,P02,Waterfalls and Parks Visits,mainstream,5,4.6
+Jaflong,Jaflong Zero Point,P15,Spiritual Shrines and Mazar Visits,mainstream,1,5.0
+Kuakata,Kuakata Sea Beach,P07,Scenic Coastal Scenery and Sunsets,mainstream,10,4.8
+Kuakata,Kuakata Sea Beach,P01,Wildlife and Forest Exploration,mainstream,4,5.0
+Kuakata,Kuakata Sea Beach,P02,Waterfalls and Parks Visits,mainstream,4,4.25
+Kuakata,Kuakata Sea Beach,P12,Ancient Archaeological Sites and Museums,mainstream,3,5.0
+Kuakata,Kuakata Sea Beach,P20,Hotel Stay and Staff Service,mainstream,2,4.0
+Sonargaon,Panam City,P14,Historic City and Folk Art Heritage,mainstream,17,4.588
+Sonargaon,Panam City,P01,Wildlife and Forest Exploration,mainstream,3,4.667
+Sonargaon,Panam City,P12,Ancient Archaeological Sites and Museums,mainstream,1,5.0
+Sreemangal,Srimangal Tea Garden,P17,Tea Gardens and Colonial Estates,mainstream,13,4.692
+Sreemangal,Srimangal Tea Garden,P02,Waterfalls and Parks Visits,mainstream,4,4.25
+Sreemangal,Srimangal Tea Garden,P01,Wildlife and Forest Exploration,mainstream,2,5.0
+Sreemangal,Srimangal Tea Garden,P03,National Parks and Nature Escapes,mainstream,1,5.0
+Sylhet,Noorjahan Grand Hotel,P20,Hotel Stay and Staff Service,mainstream,17,3.147
+Sylhet,Noorjahan Grand Hotel,P01,Wildlife and Forest Exploration,mainstream,1,5.0
+Sylhet,Noorjahan Grand Hotel,P02,Waterfalls and Parks Visits,mainstream,1,5.0
+Sylhet,Sylhet Paradise Inn,P20,Hotel Stay and Staff Service,mainstream,18,3.833
+Sylhet,Sylhet Paradise Inn,P02,Waterfalls and Parks Visits,mainstream,2,5.0
+Sylhet,The Crystal Rose Hotel,P20,Hotel Stay and Staff Service,mainstream,15,3.167
+Sylhet,The Crystal Rose Hotel,P01,Wildlife and Forest Exploration,mainstream,2,4.75
+Sylhet,The Crystal Rose Hotel,P02,Waterfalls and Parks Visits,mainstream,2,4.75
+Sylhet,The Crystal Rose Hotel,P15,Spiritual Shrines and Mazar Visits,mainstream,1,5.0

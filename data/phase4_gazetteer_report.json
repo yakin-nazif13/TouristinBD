@@ -1,12 +1,12 @@
 {
-  "n_entities": 24,
+  "n_entities": 68,
   "by_visibility": {
-    "V3": 8,
-    "V2": 6,
-    "V1": 6,
-    "V0": 4
+    "V2": 25,
+    "V3": 17,
+    "V1": 14,
+    "V0": 12
   },
-  "with_coordinates": 16,
+  "with_coordinates": 46,
   "thresholds": {
     "V3_sitelinks": 20,
     "V3_importance": 0.35,

@@ -6,16 +6,17 @@
     "max_topics_per_preference": 20
   },
   "direction1_precision": {
-    "total_topics": 10,
+    "total_topics": 58,
     "low_similarity_flags": 0,
-    "ambiguous_flags": 0,
-    "pass": 10
+    "ambiguous_flags": 22,
+    "pass": 36,
+    "mapped_to_two_preferences": 22
   },
   "direction2_coverage": {
-    "total_preferences": 5,
-    "under_coverage": 3,
+    "total_preferences": 20,
+    "under_coverage": 9,
     "over_coverage": 0,
-    "adequate": 2
+    "adequate": 11
   },
   "manual_review_sample": {
     "rows": 50,
@@ -24,5 +25,5 @@
     "hard_negative": 15,
     "random_negative": 15
   },
-  "recommendation_count": 4
+  "recommendation_count": 32
 }

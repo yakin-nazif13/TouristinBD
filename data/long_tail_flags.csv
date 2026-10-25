@@ -1,11 +1,59 @@
 topic_id,interpreted_label,preference_id,preference,review_count,corpus_share,scarce,max_sim_to_abundant,sdd,sdd_threshold,scarcity_threshold,preference_type,is_long_tail
-0,Hotel Accommodation and Staff Service,P01,Quality hotel accommodation and staff service,239,0.4442,False,0.3833,0.6167,0.6,0.02,mainstream,False
-1,Coastal and Island Beach Destinations,P02,Coastal beach and coral island excursions,76,0.1413,False,0.6009,0.3991,0.6,0.02,mainstream,False
-2,Exploring Bangladesh's Historical Landmarks,P03,Historical landmark and ancient city tours,73,0.1357,False,0.6009,0.3991,0.6,0.02,mainstream,False
-3,Scenic Hilltop Nature Destinations,P04,Hill tracts and scenic lake exploration,32,0.0595,False,0.5331,0.4669,0.6,0.02,mainstream,False
-4,Historic Panam City and Sonargaon,P03,Historical landmark and ancient city tours,17,0.0316,False,0.4489,0.5511,0.6,0.02,mainstream,False
-5,Scenic Sreemangal Tea Garden Tours,P05,Ecotourism and forest boat safaris,16,0.0297,False,0.524,0.476,0.6,0.02,mainstream,False
-6,Exploring Ratargul Freshwater Swamp Forest,P05,Ecotourism and forest boat safaris,16,0.0297,False,0.4661,0.5339,0.6,0.02,mainstream,False
-7,Karamjal Sundarbans Eco-Tourism Gateway,P05,Ecotourism and forest boat safaris,12,0.0223,False,0.5766,0.4234,0.6,0.02,mainstream,False
-8,Scenic Kaptai Lake in Rangamati,P04,Hill tracts and scenic lake exploration,11,0.0204,False,0.527,0.473,0.6,0.02,mainstream,False
-9,Exploring Historical and Archaeological Sites,P03,Historical landmark and ancient city tours,7,0.013,True,0.9177,0.0823,0.6,0.02,mainstream,False
+0,Natural Beauty And Wildlife Exploration,P01,Wildlife and Forest Exploration,2084,0.1404,False,0.8244,0.1756,0.6,0.008620689655172414,mainstream,False
+1,Nature Parks and Waterfalls Exploration,P02,Waterfalls and Parks Visits,2607,0.1757,False,0.6962,0.3038,0.6,0.008620689655172414,mainstream,False
+2,Family-Friendly Scenic and Historic Parks,P02,Waterfalls and Parks Visits,993,0.0669,False,0.6854,0.3146,0.6,0.008620689655172414,mainstream,False
+3,Hotel Stay and Staff Service,P20,Hotel Stay and Staff Service,736,0.0496,False,0.4644,0.5356,0.6,0.008620689655172414,mainstream,False
+4,Scenic Spots and Historical Landmarks,P01,Wildlife and Forest Exploration,419,0.0282,False,0.8844,0.1156,0.6,0.008620689655172414,mainstream,False
+5,Cox's Bazar Coastal Beach Destinations,P05,Coastal Beach Destinations,241,0.0162,False,0.5962,0.4038,0.6,0.008620689655172414,mainstream,False
+6,Historic Zamindar Palaces and Rajbaris,P11,Historic Palaces and Rajbaris,243,0.0164,False,0.9068,0.0932,0.6,0.008620689655172414,mainstream,False
+7,Ancient Archaeological Sites and Museums,P12,Ancient Archaeological Sites and Museums,220,0.0148,False,0.9231,0.0769,0.6,0.008620689655172414,mainstream,False
+8,Sylhet Shrines And Nature Attractions,P15,Spiritual Shrines and Mazar Visits,231,0.0156,False,0.6164,0.3836,0.6,0.008620689655172414,mainstream,False
+9,General Leisure and Experience Feedback,P01,Wildlife and Forest Exploration,210,0.0141,False,0.7519,0.2481,0.6,0.008620689655172414,mainstream,False
+10,Historic Mosques and Architectural Heritage,P13,Historic Mosques and Islamic Architecture,162,0.0109,False,0.9288,0.0712,0.6,0.008620689655172414,mainstream,False
+11,Historic Panam City and Sonargaon Heritage,P14,Historic City and Folk Art Heritage,116,0.0078,True,0.5776,0.4224,0.6,0.008620689655172414,mainstream,False
+12,Sreemangal Tea Gardens and Estates,P17,Tea Gardens and Colonial Estates,118,0.008,True,0.5306,0.4694,0.6,0.008620689655172414,mainstream,False
+13,Sylhet Historical And Cultural Museums,P12,Ancient Archaeological Sites and Museums,109,0.0073,True,0.7061,0.2939,0.6,0.008620689655172414,mainstream,False
+14,National Parks and Nature Escapes,P03,National Parks and Nature Escapes,88,0.0059,True,0.5874,0.4126,0.6,0.008620689655172414,mainstream,False
+15,Scenic Nature Spots and Attractions,P01,Wildlife and Forest Exploration,269,0.0181,False,0.8844,0.1156,0.6,0.008620689655172414,mainstream,False
+16,Historic Rabindranath Tagore Heritage Site,P16,Buddhist Heritage and Temple Visits,82,0.0055,True,0.6522,0.3478,0.6,0.008620689655172414,mainstream,False
+17,Bandarban Hill Views and Clouds,P08,Hill Tracts and Valley Exploration,88,0.0059,True,0.5796,0.4204,0.6,0.008620689655172414,mainstream,False
+18,Scenic Hill Valley and Nature Exploration,P08,Hill Tracts and Valley Exploration,72,0.0049,True,0.7313,0.2687,0.6,0.008620689655172414,mainstream,False
+19,Chattogram Coastal Beach and Sea Attractions,P05,Coastal Beach Destinations,75,0.0051,True,0.6611,0.3389,0.6,0.008620689655172414,mainstream,False
+20,Wetland and Haor Nature Tours,P18,Wetland and Haor Nature Tours,76,0.0051,True,0.559,0.441,0.6,0.008620689655172414,mainstream,False
+21,Kuakata coastal scenery and sunset,P07,Scenic Coastal Scenery and Sunsets,73,0.0049,True,0.6328,0.3672,0.6,0.008620689655172414,mainstream,False
+22,Sylhet Border Rivers and Hills,P08,Hill Tracts and Valley Exploration,70,0.0047,True,0.6597,0.3403,0.6,0.008620689655172414,mainstream,False
+23,Historic Dhaka Palaces and Museums,P12,Ancient Archaeological Sites and Museums,65,0.0044,True,0.8522,0.1478,0.6,0.008620689655172414,mainstream,False
+24,Historic Mosque Architecture and Heritage,P13,Historic Mosques and Islamic Architecture,67,0.0045,True,0.9189,0.0811,0.6,0.008620689655172414,mainstream,False
+25,Urban Green Spaces and Parks,P01,Wildlife and Forest Exploration,78,0.0053,True,0.7092,0.2908,0.6,0.008620689655172414,mainstream,False
+26,Ratargul Swamp Forest Boat Rides,P04,Swamp Forest Boat Rides,68,0.0046,True,0.5452,0.4548,0.6,0.008620689655172414,mainstream,False
+27,Floating Guava Markets And Boating,P19,Floating Markets and River Culture,69,0.0046,True,0.562,0.438,0.6,0.008620689655172414,mainstream,False
+28,Guliakhali Sea Beach Scenic Exploration,P05,Coastal Beach Destinations,63,0.0042,True,0.5755,0.4245,0.6,0.008620689655172414,mainstream,False
+29,Cox's Bazar Laboni Beach Point,P05,Coastal Beach Destinations,61,0.0041,True,0.8778,0.1222,0.6,0.008620689655172414,mainstream,False
+30,Historic Mughal Architecture and Gardens,P12,Ancient Archaeological Sites and Museums,58,0.0039,True,0.775,0.225,0.6,0.008620689655172414,mainstream,False
+31,North Bengal Amusement And Theme Parks,P09,Trekking and Hill Adventures,102,0.0069,True,0.6317,0.3683,0.6,0.008620689655172414,mainstream,False
+32,Saint Martin Island Beach Tourism,P06,Island and Coral Beach Tourism,55,0.0037,True,0.5672,0.4328,0.6,0.008620689655172414,mainstream,False
+33,Sylhet Border Nature and Water Attractions,P01,Wildlife and Forest Exploration,64,0.0043,True,0.7142,0.2858,0.6,0.008620689655172414,mainstream,False
+34,Kantajew Temple Terracotta Heritage,P13,Historic Mosques and Islamic Architecture,56,0.0038,True,0.611,0.389,0.6,0.008620689655172414,mainstream,False
+35,Sitakunda Trekking and Hill Adventures,P09,Trekking and Hill Adventures,52,0.0035,True,0.5871,0.4129,0.6,0.008620689655172414,mainstream,False
+36,Literary Heritage and Poet Memorials,P12,Ancient Archaeological Sites and Museums,50,0.0034,True,0.6764,0.3236,0.6,0.008620689655172414,mainstream,False
+37,Boga Lake Scenic Mountain Attraction,P18,Wetland and Haor Nature Tours,69,0.0046,True,0.6535,0.3465,0.6,0.008620689655172414,mainstream,False
+38,Cox's Bazar Hill and Waterfall,P05,Coastal Beach Destinations,46,0.0031,True,0.6981,0.3019,0.6,0.008620689655172414,mainstream,False
+39,Popular Tourist Attractions and Natural Destinations,P01,Wildlife and Forest Exploration,2275,0.1533,False,0.8215,0.1785,0.6,0.008620689655172414,mainstream,False
+40,Scenic Nature and Hill Attractions,P01,Wildlife and Forest Exploration,564,0.038,False,0.8535,0.1465,0.6,0.008620689655172414,mainstream,False
+41,Historical Zamindar Palaces and Heritage Sites,P11,Historic Palaces and Rajbaris,216,0.0146,False,0.9068,0.0932,0.6,0.008620689655172414,mainstream,False
+42,Historic Landmarks and Mughal Heritage,P12,Ancient Archaeological Sites and Museums,220,0.0148,False,0.8614,0.1386,0.6,0.008620689655172414,mainstream,False
+43,Historic Architectural Mosques and Heritage,P13,Historic Mosques and Islamic Architecture,170,0.0115,False,0.9288,0.0712,0.6,0.008620689655172414,mainstream,False
+44,Scenic Lakes and Natural Water Bodies,P01,Wildlife and Forest Exploration,168,0.0113,False,0.7983,0.2017,0.6,0.008620689655172414,mainstream,False
+45,Historic Heritage Sites and Archaeological Museums,P12,Ancient Archaeological Sites and Museums,149,0.01,False,0.9231,0.0769,0.6,0.008620689655172414,mainstream,False
+46,National Parks and Wildlife Forests,P01,Wildlife and Forest Exploration,93,0.0063,True,0.8005,0.1995,0.6,0.008620689655172414,mainstream,False
+47,Ancient Buddhist Archaeological Sites and Monasteries,P16,Buddhist Heritage and Temple Visits,78,0.0053,True,0.759,0.241,0.6,0.008620689655172414,mainstream,False
+48,Coastal Beaches And Sea Attractions,P05,Coastal Beach Destinations,74,0.005,True,0.7654,0.2346,0.6,0.008620689655172414,mainstream,False
+49,Bijoypur Hills and Natural Attractions,P01,Wildlife and Forest Exploration,162,0.0109,False,0.7501,0.2499,0.6,0.008620689655172414,mainstream,False
+50,Remote Islands And Adventure Khums,P01,Wildlife and Forest Exploration,61,0.0041,True,0.6531,0.3469,0.6,0.008620689655172414,mainstream,False
+51,Historic Kantajew Temple Terracotta Architecture,P13,Historic Mosques and Islamic Architecture,40,0.0027,True,0.622,0.378,0.6,0.008620689655172414,mainstream,False
+52,Alutila Cave Exploration and Adventure,P10,Cave Exploration and Adventure,33,0.0022,True,0.5561,0.4439,0.6,0.008620689655172414,mainstream,False
+53,Barisal Floating Guava Market Tourism,P19,Floating Markets and River Culture,28,0.0019,True,0.5206,0.4794,0.6,0.008620689655172414,mainstream,False
+54,Mujibnagar Liberation War Historic Site,P12,Ancient Archaeological Sites and Museums,29,0.002,True,0.6428,0.3572,0.6,0.008620689655172414,mainstream,False
+55,Bandarban Golden Temple Buddhist Heritage,P16,Buddhist Heritage and Temple Visits,23,0.0015,True,0.7116,0.2884,0.6,0.008620689655172414,mainstream,False
+56,Himchari hill waterfall and sea views,P05,Coastal Beach Destinations,30,0.002,True,0.5827,0.4173,0.6,0.008620689655172414,mainstream,False
+57,Chandranath Hill Trekking and Temples,P09,Trekking and Hill Adventures,23,0.0015,True,0.5985,0.4015,0.6,0.008620689655172414,mainstream,False

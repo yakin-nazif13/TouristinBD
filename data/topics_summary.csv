@@ -1,11 +1,59 @@
-Topic,Count,top_keywords,topic_name
-0,239,"good, room, staff, hotel",0_good_room_staff_hotel
-1,76,"beach, sea, island, sea beach",1_beach_sea_island_sea beach
-2,73,"dhaka, history, historical, visit",2_dhaka_history_historical_visit
-3,32,"bandarban, nilachal, place, tourist",3_bandarban_nilachal_place_tourist
-4,17,"panam, city, panam city, sonargaon",4_panam_city_panam city_sonargaon
-5,16,"tea, garden, tea garden, sreemangal",5_tea_garden_tea garden_sreemangal
-6,16,"forest, swamp, ratargul, swamp forest",6_forest_swamp_ratargul_swamp forest
-7,12,"karamjal, sundarbans, forest, center",7_karamjal_sundarbans_forest_center
-8,11,"lake, kaptai, kaptai lake, rangamati",8_lake_kaptai_kaptai lake_rangamati
-9,7,"place, historical place, historical, visit",9_place_historical place_historical_visit
+Topic,Count,top_keywords,topic_name,language_group
+0,2084,"bangladesh, place, waterfall, visit, beautiful, beauty, cave, river, natural, forest",0_bangladesh_place_waterfall_visit,other
+1,2607,"place, good, beautiful, time, waterfall, visit, nice, park, ticket, people",1_place_good_beautiful_time,other
+2,993,"place, nice, nice place, good place, good, family, place nice, place visit, beautiful, historical",2_place_nice_nice place_good place,other
+3,736,"good, room, staff, hotel, breakfast, location, stay, service, pool, booking",3_good_room_staff_hotel,other
+4,419,"bangladesh, place, place bangladesh, best, sylhet, place sylhet, bangladesh beautiful, beautiful, beautiful place, historical place",4_bangladesh_place_place bangladesh_best,other
+5,241,"beach, cox, cox bazar, bazar, sea, sea beach, sugondha, kolatoli, beach cox, waves",5_beach_cox_cox bazar_bazar,other
+6,243,"palace, rajbari, puthia, baliati, zamindar, tajhat, natore, bari, architecture, puthia rajbari",6_palace_rajbari_puthia_baliati,other
+7,220,"buddhist, museum, site, ancient, archaeological, monastery, paharpur, mahasthangarh, bihar, century",7_buddhist_museum_site_ancient,other
+8,231,"sylhet, hazrat, shahjalal, shrine, hazrat shahjalal, jalal, mazar, shah jalal, shah, ra",8_sylhet_hazrat_shahjalal_shrine,other
+9,210,"er, valo, onek, ta, onk, jonno, kore, sundor, na, ase",9_er_valo_onek_ta,other
+10,162,"mosque, tara, star, dhaka, masjid, old, tara masjid, mirza, old dhaka, star mosque",10_mosque_tara_star_dhaka,other
+11,116,"panam, sonargaon, city, panam city, nagar, folk, panam nagar, art, folk art, crafts",11_panam_sonargaon_city_panam city,other
+12,118,"tea, tea garden, garden, estate, sreemangal, tea estate, green, tea gardens, beautiful tea, gardens",12_tea_tea garden_garden_estate,other
+13,109,"osmani, museum, raja, sylhet, hason, hason raja, general, hasan, hasan raja, osmani museum",13_osmani_museum_raja_sylhet,other
+14,88,"national park, park, national, lawachara, forest, bhawal, lawachara national, species, bhawal national, nature",14_national park_park_national_lawachara,other
+15,269,"place, beautiful, place beautiful, awesome, beautiful place, nice, nice place, place place, wonderful, wonderful place",15_place_beautiful_place beautiful_awesome,other
+16,82,"tagore, rabindranath, kuthibari, rabindranath tagore, shilaidaha, kushtia, rabindra, kuthi, kuthi bari, poet",16_tagore_rabindranath_kuthibari_rabindranath tagore,other
+17,88,"nilachal, nilgiri, bandarban, clouds, tourist, hills, views, resort, nilachal tourist, breathtaking",17_nilachal_nilgiri_bandarban_clouds,other
+18,72,"sajek, valley, sajek valley, clouds, hills, views, experience, beauty, cloud, hill",18_sajek_valley_sajek valley_clouds,other
+19,75,"beach, sea, patenga, sea beach, patenga sea, chittagong, chattogram, naval, food, coastal",19_beach_sea_patenga_sea beach,other
+20,76,"haor, tanguar, tanguar haor, sunamganj, wetland, boat, water, birds, species, bangladesh",20_haor_tanguar_tanguar haor_sunamganj,other
+21,73,"kuakata, beach, sea, sunset, sunrise, sunrise sunset, kuakata sea, sea beach, daughter sea, daughter",21_kuakata_beach_sea_sunset,other
+22,70,"jaflong, zero, zero point, river, jaflong zero, point, hills, border, sylhet, clear",22_jaflong_zero_zero point_river,other
+23,65,"ahsan, manzil, ahsan manzil, dhaka, palace, pink, nawab, history, museum, buriganga",23_ahsan_manzil_ahsan manzil_dhaka,other
+24,67,"mosque, dome mosque, domes, dome, bagerhat, khan jahan, jahan, khan, heritage, jahan ali",24_mosque_dome mosque_domes_dome,other
+25,78,"ramna, ramna park, park, dhaka, city, trees, morning, green, lake, morning walks",25_ramna_ramna park_park_dhaka,other
+26,68,"forest, swamp, ratargul, swamp forest, ratargul swamp, boat, submerged, water, trees, freshwater swamp",26_forest_swamp_ratargul_swamp forest,other
+27,69,"market, guava, floating, floating market, guava market, floating guava, guavas, bhimruli, boats, market bangladesh",27_market_guava_floating_floating market,other
+28,63,"beach, guliakhali, sea, guliakhali sea, sea beach, sitakunda, grass, green, tide, green grass",28_beach_guliakhali_sea_guliakhali sea,other
+29,61,"laboni, beach, point, laboni beach, cox, cox bazar, laboni point, bazar, sea, sea beach",29_laboni_beach_point_laboni beach,other
+30,58,"fort, lalbagh, lalbagh fort, mughal, dhaka, pari, bibi, history, pari bibi, gardens",30_fort_lalbagh_lalbagh fort_mughal,other
+31,102,"park, rangpur, amusement, amusement park, dinajpur, vinno, picnic, jagat, artificial, jogot",31_park_rangpur_amusement_amusement park,other
+32,55,"island, martin, saint martin, saint, martin island, coral, st, st martin, island bangladesh, coral island",32_island_martin_saint martin_saint,other
+33,64,"bisnakandi, sylhet, bichanakandi, water, hills, india, flowing, bichnakandi, border, stones",33_bisnakandi_sylhet_bichanakandi_water,other
+34,56,"temple, terracotta, kantajew, kantajew temple, dinajpur, krishna, kantaji, maharaja, hindu, nath",34_temple_terracotta_kantajew_kantajew temple,other
+35,52,"chandranath, hill, chandranath hill, sitakunda, climb, chandranath temple, temple, trekking, way, hindu",35_chandranath_hill_chandranath hill_sitakunda,other
+36,50,"madhusudan, michael, poet, michael madhusudan, dutta, dutt, madhusudan dutta, bengali, house, literature",36_madhusudan_michael_poet_michael madhusudan,other
+37,69,"lake, boga, boga lake, ruma, bandarban, water, sea level, feet, water lake, level",37_lake_boga_boga lake_ruma,other
+38,46,"himchari, himchori, hill, fountain, waterfall, cox bazar, cox, bazar, hills, sea",38_himchari_himchori_hill_fountain,other
+39,2275,"সুন্দর, ভালো, সাজেক, যায়, রমনা, সময়, অবস্থিত, যেতে, পার্ক, হয়",39_সুন্দর_ভালো_সাজেক_যায়,bangla
+40,564,"beautiful, place, সুন্দর, beautiful place, জায়গা, সুন্দর জায়গা, অসাধারণ, জায়গা, mountains, সুন্দর জায়গা",40_beautiful_place_সুন্দর_beautiful place,bangla
+41,216,"জমিদার, প্রাসাদ, বালিয়াটি, নাটোর, মন্দির, তাজহাট, প্রাসাদের, রয়েছে, রংপুর, করেন",41_জমিদার_প্রাসাদ_বালিয়াটি_নাটোর,bangla
+42,220,"লালবাগ, কেল্লা, আহসান, মুঘল, লালবাগ কেল্লা, ঢাকার, কেল্লার, মঞ্জিল, আহসান মঞ্জিল, ঐতিহাসিক",42_লালবাগ_কেল্লা_আহসান_মুঘল,bangla
+43,170,"মসজিদ, গম্বুজ, মসজিদের, ষাট, মসজিদটি, ষাট গম্বুজ, mosque, সোনা, নির্মাণ, মসজিদটির",43_মসজিদ_গম্বুজ_মসজিদের_ষাট,bangla
+44,168,"লেক, লেকের, রামসাগর, খনন, বগা, অবস্থিত, হ্রদ, মিটার, মহামায়া, বাংলাদেশের",44_লেক_লেকের_রামসাগর_খনন,bangla
+45,149,"পানাম, প্রাচীন, জাদুঘর, বাংলার, বরেন্দ্র, নগর, বিভিন্ন, মূর্তি, রাজধানী, পানাম নগর",45_পানাম_প্রাচীন_জাদুঘর_বাংলার,bangla
+46,93,"প্রজাতির, জাতীয়, উদ্যান, বন, জাতীয় উদ্যান, উদ্ভিদ, ভাওয়াল, রয়েছে, সুন্দরবন, বনের",46_প্রজাতির_জাতীয়_উদ্যান_বন,bangla
+47,78,"বিহার, শালবন, বৌদ্ধ, বিহারের, সোমপুর, শালবন বিহার, প্রাচীন, বৌদ্ধ বিহার, প্রত্নতাত্ত্বিক, বিহারটি",47_বিহার_শালবন_বৌদ্ধ_বিহারের,bangla
+48,74,"সমুদ্র, সৈকত, সমুদ্র সৈকত, পতেঙ্গা, সৈকতের, সীতাকুণ্ড, চট্টগ্রাম, কুয়াকাটা, সৈকতে, অবস্থিত",48_সমুদ্র_সৈকত_সমুদ্র সৈকত_পতেঙ্গা,bangla
+49,162,"hills, bangladesh, water, museum, clay, white, natural, soil, bijoypur, stream",49_hills_bangladesh_water_museum,bangla
+50,61,"নিঝুম, দ্বীপ, খুমের, নিঝুম দ্বীপ, দেবতাখুম, চর, island, char, শীলবাঁধা, খুমের ভিতর",50_নিঝুম_দ্বীপ_খুমের_নিঝুম দ্বীপ,bangla
+51,40,"মন্দির, মন্দিরের, মন্দিরটি, মহারাজা, temple, দিনাজপুর, নির্মাণ, কান্তজিউ, মন্দিরটির, টেরাকোটা",51_মন্দির_মন্দিরের_মন্দিরটি_মহারাজা,bangla
+52,33,"আলুটিলা, গুহা, গুহার, আলুটিলা গুহা, অন্ধকার, দিয়ে, গুহাটি, মশাল, প্রবেশ, খাগড়াছড়ি",52_আলুটিলা_গুহা_গুহার_আলুটিলা গুহা,bangla
+53,28,"পেয়ারা, ভাসমান, বাজার, বরিশাল, পেয়ারা বাজার, ভাসমান পেয়ারা, ঝালকাঠি, পেয়ারা বাগান, পেয়ারা, বাগান",53_পেয়ারা_ভাসমান_বাজার_বরিশাল,bangla
+54,29,"মুজিবনগর, mujibnagar, government, মেহেরপুর, কমপ্লেক্স, বাংলাদেশের, ঐতিহাসিক, শপথ, সরকার, স্মৃতি",54_মুজিবনগর_mujibnagar_government_মেহেরপুর,bangla
+55,23,"বৌদ্ধ, বুদ্ধ, মন্দির, ধাতু, স্বর্ণ, বান্দরবান, স্বর্ণমন্দির, জাদি, ধাতু জাদি, বান্দরবন",55_বৌদ্ধ_বুদ্ধ_মন্দির_ধাতু,bangla
+56,30,"হিমছড়ি, হিমছড়ি, ঝরনা, কক্সবাজার, পাহাড়, যায়, দৃশ্য, সমুদ্র, পাহাড়ের, পাহাড়ের",56_হিমছড়ি_হিমছড়ি_ঝরনা_কক্সবাজার,bangla
+57,23,"চন্দ্রনাথ, চট্টগ্রাম, সীতাকুণ্ড, চন্দ্রনাথ পাহাড়, পাহাড়, উচ্চতা, পাহাড়ের, ফুট, পাহাড়ের, মন্দির",57_চন্দ্রনাথ_চট্টগ্রাম_সীতাকুণ্ড_চন্দ্রনাথ পাহাড়,bangla

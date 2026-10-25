@@ -1,48 +1,111 @@
 entity_id,surface,mentions,phonetic_key,is_canonical
 E0079,Adventure World Family Tourism Park,0,adbntr brld fml trsm prk,True
-E0001,Ahsan Manzil Museum,0,ahsn mnjl msm,True
+E0001,Ahsan Manzil,5,ahsn mnjl,True
+E0001,Ahsan Manzil Museum,0,ahsn mnjl msm,False
 E0080,Ali Amjad's Clock,0,al amjds clck,True
-E0081,Alutila Cave,0,altl cb,True
-E0002,Bagerhat,10,bgrht,True
+E0166,Alutila,6,altl,True
+E0081,Alutila cave,2,altl cb,True
+E0081,AluTila Cave,1,altl cb,False
+E0081,Alutila Cave,1,altl cb,False
+E0167,BEST Time to visit here is in Winter season,1,bst tm t bst hr is in bntr sn,True
+E0002,Bagerhat,97,bgrht,True
 E0082,Baithakata Floating Market,0,btkt fltng mrkt,True
 E0083,Baliati Jamidar Bari,0,blt jmdr br,True
-E0003,Bandarban,21,bndrbn,True
+E0003,Bandarban,383,bndrbn,True
+E0003,bandarban,28,bndrbn,False
 E0084,Bangladesh Folk Art & Crafts Foundation (Sonargaon),0,bnglds flk art crfts fndtn snrgn,True
-E0004,Best Time to Visit,1,bst tm t bst,True
-E0005,Best time to visit,1,bst tm t bst,True
+E0168,Bargain politely,1,brgn pltl,True
+E0169,Bargain the price with them,1,brgn t prc bt tm,True
+E0170,Bargaining,1,brgng,True
+E0171,Bargaining at stalls,1,brgng at stls,True
+E0172,Best Time to Visit Early morning or late,1,bst tm t bst erl mrng or lt,True
+E0173,Best Time to Visit July,1,bst tm t bst jl,True
+E0174,Best Time to Visit Monsoon,1,bst tm t bst mnsn,True
+E0175,Best Time to Visit Winter,2,bst tm t bst bntr,True
+E0176,Best time is April to October as the flow,1,bst tm is aprl t octbr as t flb,True
+E0177,Best time is the evening time till 8PM,1,bst tm is t ebng tm tl 8pm,True
+E0004,Best time to visit,6,bst tm t bst,False
+E0004,best time to visit,8,bst tm t bst,False
+E0004,Best Time to Visit,17,bst tm t bst,True
+E0004,Best Time to Visit The best time to visit,1,bst tm t bst t bst tm t bst,False
+E0178,Best time to visit I think in rainy season,1,bst tm t bst i tnk in rn sn,True
+E0179,Best time to visit Late afternoon to sunset,1,bst tm t bst lt aftrn t snst,True
+E0180,Best time to visit Rainy season,1,bst tm t bst rn sn,True
+E0181,Best time to visit The dry season,1,bst tm t bst t dr sn,True
+E0182,Best time to visit after 5,1,bst tm t bst aftr 5,True
+E0183,Best time to visit at sunset time,1,bst tm t bst at snst tm,True
+E0184,Best time to visit during rainy season to see it,1,bst tm t bst drng rn sn t s it,True
+E0185,Best time to visit from 4,1,bst tm t bst frm 4,True
+E0186,Best time to visit in the rainy season,1,bst tm t bst in t rn sn,True
+E0187,Best time to visit is during cultural fairs or,1,bst tm t bst is drng cltrl frs or,True
+E0188,Best time to visit is during or just after the,1,bst tm t bst is drng or jst aftr t,True
+E0189,Best time to visit is early morning or late,1,bst tm t bst is erl mrng or lt,True
+E0190,Best time to visit is the winter season November,1,bst tm t bst is t bntr sn nbmbr,True
+E0191,Best time to visit it is afternonn of winter,1,bst tm t bst it is aftrn of bntr,True
+E0192,Best time to visit there is August,1,bst tm t bst tr is agst,True
+E0466,Best time to visit this place is during Rainy,1,bst tm t bst ts plc is drng rn,True
+E0193,Best time to visit this place is during winter,2,bst tm t bst ts plc is drng bntr,True
+E0194,Best time to visit this place is rainy season,1,bst tm t bst ts plc is rn sn,True
+E0195,Best time to visit this waterfall is June,1,bst tm t bst ts btrfl is jn,True
 E0085,Bhawal National Park,0,bl ntnl prk,True
+E0196,Bhimruli,1,bmrl,True
 E0086,Bhimruli Floating Guava Market,0,bmrl fltng gb mrkt,True
 E0087,Bichnakandi Tourist Spot,0,bcnknd trst spt,True
 E0088,Bijoypur Lake,0,bjpr lk,True
 E0089,Bijoypur Pahar (border hill),0,bjpr phr brdr hl,True
-E0006,Boga Lake,1,bg lk,True
+E0197,Birisiri,5,brsr,True
+E0198,Bisnakandi,60,bsnknd,True
+E0198,bisnakandi,4,bsnknd,False
+E0006,Boga Lake,3,bg lk,True
 E0090,Buddha Dhatu Jadi (Golden Temple),0,bd dt jd gldn tmpl,True
-E0007,Carry water,1,cr btr,True
+E0199,Bus from Chittagong or Dhaka to,1,bs frm ctgng or dk t,True
+E0200,Bus from new market or train station,1,bs frm nb mrkt or trn stn,True
+E0201,Carry Umbrella if it is sunny day or,1,cr umbrl if it is sn d or,True
+E0202,Carry a parasol to walk around,1,cr a prsl t blk arnd,True
+E0203,Carry a small pack with you for,1,cr a sml pck bt y fr,True
+E0204,Carry a stick for support,1,cr a stck fr sprt,True
+E0205,Carry all your plastic waste and,1,cr al yr plstc bst and,True
+E0206,Carry at least two photocopies of,1,cr at lst tb ftcps of,True
+E0207,Carry drinking water and foods,1,cr drnkng btr and fds,True
+E0208,Carry insect repellent and be,1,cr insct rplnt and b,True
+E0209,Carry some water and light snacks,1,cr sm btr and lgt sncks,True
 E0008,Carry water but don't litter,1,cr btr bt dnt ltr,True
-E0009,Chandranath,1,cndrnt,True
+E0210,Carry your umbrella and water and a,1,cr yr umbrl and btr and a,True
+E0009,Chandranath,3,cndrnt,True
 E0009,Chandranath Hill,0,cndrnt hl,False
-E0091,China Matir Pahar,0,cn mtr phr,True
+E0091,China Matir Pahar,5,cn mtr phr,True
+E0091,China Matir pahar,1,cn mtr phr,False
 E0010,Chor Bijoy,1,cr bj,True
 E0092,Choto Sona Masjid,0,ct sn msjd,True
 E0011,Civic Inn,0,cbc in,True
-E0012,Cox's Bazar,5,cks bjr,True
-E0012,Cox's Bazar Beach,0,cks bjr bc,False
+E0012,Cox's Bazar,238,cks bjr,True
+E0012,cox's bazar,8,cks bjr,False
+E0012,Cox's Bazar beach,9,cks bjr bc,False
+E0012,Cox's Bazar Beach,3,cks bjr bc,False
+E0012,Cox's bazar,18,cks bjr,False
+E0012,cox's Bazar,5,cks bjr,False
+E0012,Cox'S Bazar,1,cks bjr,False
 E0093,Darianagar Nature & Tourism Center,0,drngr ntr trsm cntr,True
 E0094,Debotakhum,0,dbtkm,True
 E0095,Dibir Haor Shapla Bil,0,dbr hr spl bl,True
 E0096,Durga Sagar,0,drg sgr,True
+E0211,Durgapur,30,drgpr,True
+E0211,durgapur,2,drgpr,False
 E0097,Ethnological Museum,0,etnlgcl msm,True
 E0013,Fatrar Chor,1,ftr cr,True
 E0098,Finlay Tea Estate,0,fnl t est,True
 E0014,Fokirhat,1,fkrht,True
-E0015,Foy's Lake Resort,0,fs lk rsrt,True
+E0015,Foy's lake,1,fs lk,True
+E0015,Foy's Lake Resort,0,fs lk rsrt,False
 E0015,Foy's Lake,0,fs lk,False
-E0016,Gangamati,3,gngmt,True
-E0017,Go early,1,g erl,True
+E0016,Gangamati,7,gngmt,True
+E0212,Go early in the day to avoid,1,g erl in t d t abd,True
+E0213,Go early or before sunset to,1,g erl or bfr snst t,True
 E0018,Go in the morning to beat the crowd,1,g in t mrng t bt t crbd,True
 E0019,Green Edge Hotel,0,grn edg htl,True
 E0020,Guliakhali Sea Beach,0,glkl s bc,True
-E0021,Guliyakhali,2,glkl,True
+E0021,Guliyakhali,7,glkl,True
+E0021,guliyakhali,1,glkl,False
 E0099,Gulshan Society Lake Park,0,glsn sct lk prk,True
 E0100,Guthia Baitul Aman Jame Mosque,0,gt btl amn jm msk,True
 E0101,Hatir Banglow,0,htr bnglb,True
@@ -51,118 +114,425 @@ E0103,Hazrat Shahjalal Mazar Sharif,0,hjrt shjl mjr srf,True
 E0022,Heritage Hotel Chittagong,0,hrtg htl ctgng,True
 E0104,Hillview Park & Cafe,0,hlb prk cf,True
 E0105,Himchari Fountain and Hill,0,hmcr fntn and hl,True
-E0106,Hiron Point (Nilkamal),0,hrn pnt nlkml,True
+E0214,Hiron Point,1,hrn pnt,True
+E0214,Hiron point,1,hrn pnt,False
+E0214,hiron point,1,hrn pnt,False
+E0106,Hiron Point (Nilkamal),1,hrn pnt nlkml,True
 E0023,Hoque Tower International,0,hk tbr intrntnl,True
 E0107,Hum Hum Waterfall,0,hm hm btrfl,True
-E0108,I-Badh,0,ibd,True
-E0024,Jaflong Zero Point,0,jflng jr pnt,True
+E0108,I-Badh,1,ibd,True
+E0108,i-badh,1,ibd,False
+E0024,Jaflong,18,jflng,True
+E0024,jaflong,5,jflng,False
+E0024,Jaflong Zero Point,1,jflng jr pnt,False
 E0109,Jhau Bon Kuakata,0,j bn kt,True
-E0110,Kantajew Temple,0,kntjb tmpl,True
-E0025,Kaptai Lake,0,kpt lk,True
+E0110,Kantajew Temple,2,kntjb tmpl,True
+E0110,Kantajew temple,1,kntjb tmpl,False
+E0215,Kantaji Temple,21,kntj tmpl,True
+E0025,Kaptai Lake,4,kpt lk,False
+E0025,Kaptai lake,5,kpt lk,True
+E0025,Kaptai,4,kpt,False
+E0216,Karamjal,1,krmjl,True
+E0217,Khagrachari,61,kgrcr,True
+E0217,khagrachari,5,kgrcr,False
 E0111,Khagrachari HDCH Park,0,kgrcr hdc prk,True
 E0112,Khoiyachara Waterfalls,0,kcr btrfls,True
-E0113,Kolatoli Beach,1,kltl bc,True
 E0026,Kollol Hotel,0,kl htl,True
-E0114,Kotka Sea Beach,0,ktk s bc,True
-E0115,Kuakata Sea Beach,0,kt s bc,True
+E0114,Kotka,3,ktk,True
+E0114,Kotka Sea Beach,0,ktk s bc,False
+E0115,Kuakata,1,kt,False
+E0115,Kuakata Sea Beach,1,kt s bc,True
+E0115,Kuakata sea beach,1,kt s bc,False
 E0116,Laboni Point Sea Beach,0,lbn pnt s bc,True
 E0117,Lala Khal Zero Point,0,l kl jr pnt,True
-E0028,Lalbagh Fort,0,lbg frt,True
-E0118,Lawachara National Park,1,lbcr ntnl prk,True
+E0218,Lalakhal,40,lkl,True
+E0218,lalakhal,7,lkl,False
+E0028,Lalbagh Fort,5,lbg frt,True
+E0029,Lawachara,1,lbcr,False
+E0029,Lawachara National Park,1,lbcr ntnl prk,True
 E0119,Madhabkunda Waterfall,0,mdbknd btrfl,True
-E0030,Madhabpur Lake,1,mdbpr lk,True
+E0030,Madhabpur Lake,2,mdbpr lk,True
+E0030,madhabpur lake,1,mdbpr lk,False
 E0120,Mahasthan Archaeological Museum,0,mhstn arclgcl msm,True
+E0219,Mahasthangarh,79,mhstngrh,True
+E0219,mahasthangarh,1,mhstngrh,False
 E0121,Mahasthangarh Tourism Park,0,mhstngrh trsm prk,True
 E0122,Mangrove Forest Kuakata,0,mngrb frst kt,True
 E0123,Mayung Kopal (Stairs to Heaven),0,mng kpl strs t hbn,True
 E0124,Michael Madhusudan Datta Memorial (Sagardari),0,mcl mdsdn dt mrl sgrdr,True
 E0125,Mini Bangladesh (Shadhinata Complex),0,mn bnglds sdnt cmplks,True
-E0126,Mohamaya Lake,0,mhm lk,True
-E0031,Mongla,10,mngl,True
+E0031,Mongla,36,mngl,True
+E0031,mongla,3,mngl,False
 E0127,Mujibnagar Monument Complex,0,mjbngr mnmnt cmplks,True
+E0073,Muradpur,16,mrdpr,True
+E0073,muradpur,1,mrdpr,False
 E0128,Museum of Rajas' (Hason Raja Museum),0,msm of rjs hsn rj msm,True
-E0129,Nafakhum Waterfall,0,nfkm btrfl,True
+E0129,Nafakhum Waterfall,1,nfkm btrfl,True
 E0130,National Botanical Garden,0,ntnl btncl grdn,True
-E0131,Natore Rajbari,0,ntr rjbr,True
+E0131,Natore Rajbari,1,ntr rjbr,True
 E0132,Naval Sea Beach,0,nbl s bc,True
 E0133,New Zealand Para,0,nb jlnd pr,True
 E0134,Nijhum Dwip,0,njm dbp,True
-E0032,Nilachal Tourist Center,0,nlcl trst cntr,True
-E0033,Nilgiri,1,nlgr,True
+E0032,Nilachal,1,nlcl,True
+E0032,Nilachal Tourist Center,0,nlcl trst cntr,False
+E0033,Nilgiri,7,nlgr,True
+E0033,nilgiri,2,nlgr,False
 E0135,Noor Jahan Tea Garden,0,nr jhn t grdn,True
 E0034,Noorjahan Grand Hotel,0,nrjhn grnd htl,True
 E0136,Osmani Museum,0,osmn msm,True
+E0220,Padma,183,pdm,True
+E0220,padma,11,pdm,False
 E0137,Padma Garden Footbridge,0,pdm grdn ftbrdg,True
-E0035,Panam City,0,pnm ct,True
-E0036,Pashur,5,psr,True
-E0138,Patenga Sea Beach,0,ptng s bc,True
+E0221,Paharpur,19,phrpr,True
+E0035,Panam City,4,pnm ct,True
+E0035,panam city,2,pnm ct,False
+E0035,Panam city,2,pnm ct,False
+E0036,Pashur,10,psr,True
+E0036,pashur,1,psr,False
+E0222,Puthia,2,pt,True
+E0222,PUTHIA,1,pt,False
 E0139,Puthia Rajbari,0,pt rjbr,True
 E0140,Rajshahi Central Park & Zoo,0,rjsh cntrl prk j,True
-E0141,Ramna Park,0,rmn prk,True
+E0141,Ramna park,1,rmn prk,True
+E0141,Ramna Park,0,rmn prk,False
 E0142,Ramsagar National Park,0,rmsgr ntnl prk,True
-E0037,Rangamati,8,rngmt,True
-E0037,rangamati,1,rngmt,False
+E0037,Rangamati,63,rngmt,True
+E0037,rangamati,3,rngmt,False
 E0038,Ratargul Swamp Forest,0,rtrgl sbmp frst,True
 E0143,Risang Waterfall,0,rsng btrfl,True
 E0039,Royal Pearl Suites,0,rl prl sts,True
+E0223,SADA MATIR PAHAR,1,sd mtr phr,True
 E0144,Sada Matir Pahar (White Clay Hills),0,sd mtr phr bht cl hls,True
-E0040,Saint Martin,25,snt mrtn,True
+E0040,Saint Martin,28,snt mrtn,True
 E0145,Saint Martin's Island West Beach,0,snt mrtns islnd bst bc,True
 E0041,Saint Martins Island,0,snt mrtns islnd,True
-E0146,Sajek Valley,0,sjk bl,True
-E0042,Sardar Bari,1,srdr br,True
+E0224,Saint martin,1,snt mrtn,True
+E0146,Sajek Valley,2,sjk bl,True
+E0146,Sajek valley,1,sjk bl,False
+E0146,sajek valley,1,sjk bl,False
+E0042,Sardar bari,1,srdr br,False
+E0042,Sardar Bari,14,srdr br,True
+E0042,sardar bari,2,srdr br,False
 E0043,Sea Cox Hotel,0,s cks htl,True
 E0147,Shalban Bihar,0,slbn bhr,True
-E0148,Shashi Lodge,0,s ldg,True
 E0149,Shilaidaha Rabindra Kuthibari,0,sldh rbndr ktbr,True
 E0150,Shopnopuri Artificial Amusement Park,0,spnpr artfcl amsmnt prk,True
+E0148,Shoshi Lodge,13,s ldg,True
+E0148,Shashi Lodge,0,s ldg,False
 E0151,Shreepur Tea Garden,0,srpr t grdn,True
 E0152,Shuvolong Waterfalls,0,sblng btrfls,True
-E0044,Sitakunda,12,stknd,True
+E0044,Sitakunda,83,stknd,True
+E0044,sitakunda,8,stknd,False
 E0045,Sixty Dome Mosque,0,skst dm msk,True
+E0225,Somapura Mahavihara,1,smpr mhbhr,True
 E0153,Somapura Mahavihara (Paharpur),0,smpr mhbhr phrpr,True
-E0047,Sonargaon,22,snrgn,True
-E0048,Sreemangal,13,srmngl,True
+E0047,Sonargaon,92,snrgn,True
+E0048,Sreemangal,75,srmngl,True
+E0048,Srimangal,21,srmngl,False
+E0048,sreemangal,11,srmngl,False
+E0048,srimangal,2,srmngl,False
+E0048,Srimangal Tea Garden,0,srmngl t grdn,False
 E0154,Sreepur (Rangpani) Zero Point,0,srpr rngpn jr pnt,True
-E0049,Srimangal Tea Garden,0,srmngl t grdn,True
 E0155,Sugondha Sea Beach,0,sgnd s bc,True
-E0050,Sundarbans,3,sndrbns,True
+E0050,Sundarbans,43,sndrbns,True
+E0050,sundarbans,1,sndrbns,False
 E0051,Sundarbans (Karamjal Wildlife Centre),0,sndrbns krmjl bldlf cntr,True
 E0156,Sunset Point Kuakata,0,snst pnt kt,True
 E0052,Sylhet Paradise Inn,0,slht prds in,True
-E0157,T-Badh,0,tbd,True
+E0157,T-Badh,1,tbd,False
+E0157,T-badh,2,tbd,True
+E0157,t-badh,2,tbd,False
 E0158,Tajhat Palace,0,tjt plc,True
+E0226,Take a CNG or Auto,1,tk a cng or at,True
+E0226,take a CNG or auto,1,tk a cng or at,False
+E0227,Take a boat ride on the Padma River to,1,tk a bt rd on t pdm rbr t,True
+E0228,Take a boat ride on the Piain River,1,tk a bt rd on t pn rbr,True
+E0229,Take a bus,1,tk a bs,True
+E0230,Take a bus from Gulistan,1,tk a bs frm glstn,True
+E0231,Take a bus from Khagrachari or local,1,tk a bs frm kgrcr or lcl,True
+E0232,Take a bus from Sylhet's Kadamtali bus,1,tk a bs frm slhts kdmtl bs,True
+E0467,Take a train from Dhaka to Khulna Railway,1,tk a trn frm dk t kln rlb,True
 E0159,Tanguar Haor,0,tngr hr,True
 E0160,Tara Masjid (Star Mosque),0,tr msjd str msk,True
+E0233,Tetulia,1,tl,True
 E0053,The Crystal Rose Hotel,0,t crstl rs htl,True
 E0161,The Sundarbans,0,t sndrbns,True
 E0162,Tilagor Eco Park,0,tlgr ec prk,True
-E0163,Varendra Research Museum,0,brndr rsrc msm,True
 E0164,Vinno Jogot Amusement Park,0,bn jgt amsmnt prk,True
+E0234,Visit Early morning or late,1,bst erl mrng or lt,True
+E0235,Visit early in the morning on a,1,bst erl in t mrng on a,True
+E0236,Visit early in the morning or,2,bst erl in t mrng or,False
+E0236,visit early in the morning or,3,bst erl in t mrng or,True
+E0237,Visit early in the morning to,1,bst erl in t mrng t,True
+E0238,Visit early morning,2,bst erl mrng,True
+E0468,Visit early morning or during,1,bst erl mrng or drng,True
 E0054,West Park Inn,0,bst prk in,True
 E0165,Zainul Abedin Park,0,jnl abdn prk,True
+E0239,bargain,6,brgn,True
+E0240,bargain about the boat fair from,1,brgn abt t bt fr frm,True
+E0241,bargain all you can while,1,brgn al y cn bhl,True
+E0242,bargain and bring it down to,1,brgn and brng it dbn t,True
+E0243,bargain and it costs around 700,1,brgn and it csts arnd 70,True
+E0244,bargain and settle the price,1,brgn and stl t prc,True
+E0245,bargain as sellers claim price,1,brgn as slrs clm prc,True
 E0055,bargain at all the nearby shops,1,brgn at al t nrb sps,True
+E0246,bargain before buying sea food,1,brgn bfr bng s fd,True
+E0247,bargain before having any,1,brgn bfr hbng an,True
+E0248,bargain before hiring boat as,1,brgn bfr hrng bt as,True
+E0249,bargain before taking the ride,1,brgn bfr tkng t rd,True
+E0250,bargain before you take any boat,1,brgn bfr y tk an bt,True
+E0251,bargain beforehand,1,brgn bfrhnd,True
+E0252,bargain for a reasonable price,1,brgn fr a rsnbl prc,True
+E0253,bargain for each good you buy,1,brgn fr ec gd y b,True
+E0254,bargain for low price,1,brgn fr lb prc,True
+E0255,bargain for prices usually they,1,brgn fr prcs usl t,True
+E0256,bargain for seafood,1,brgn fr sfd,True
+E0257,bargain for the accommodation,1,brgn fr t acmdtn,True
 E0056,bargain for the boat price,1,brgn fr t bt prc,True
+E0258,bargain for the lowest price,1,brgn fr t lbst prc,True
+E0259,bargain for this,1,brgn fr ts,True
+E0260,bargain hard for fair deals,1,brgn hrd fr fr dls,True
+E0261,bargain if you really interested,1,brgn if y rl intrstd,True
+E0262,bargain lot for reasonable price,1,brgn lt fr rsnbl prc,True
+E0263,bargain prices before motorcycle,1,brgn prcs bfr mtrcl,True
+E0264,bargain souvenirs,1,brgn sbnrs,True
+E0265,bargain to fix the boat,1,brgn t fks t bt,True
+E0266,bargain to rent a boat or buy,1,brgn t rnt a bt or b,True
+E0267,bargain with boatman,1,brgn bt btmn,True
+E0268,bargain with everyone,1,brgn bt ebrn,True
+E0269,bargain with the boatman,1,brgn bt t btmn,True
+E0270,bargain with the local shop,1,brgn bt t lcl sp,True
+E0271,bargain with the pilot of the,1,brgn bt t plt of t,True
+E0272,bargain with the vendors,1,brgn bt t bndrs,True
+E0273,bargain with them,1,brgn bt tm,True
+E0274,bargain with them much,1,brgn bt tm mc,True
+E0275,bargaining,3,brgng,True
+E0276,bargaining and drama,1,brgng and drm,True
+E0277,bargaining before buying,1,brgng bfr bng,True
+E0278,bargaining is essential to get,1,brgng is esntl t gt,True
 E0057,bargaining skills mostly,1,brgng skls mstl,True
-E0058,best time to visit,1,bst tm t bst,True
+E0279,bargaining with guide and,1,brgng bt gd and,True
+E0280,best time is December to mid January for,1,bst tm is dcmbr t md jnr fr,True
+E0281,best time to visit Bichanakandi is from June to,1,bst tm t bst bcnknd is frm jn t,True
+E0282,best time to visit Guliakhali Sea Beach is from,1,bst tm t bst glkl s bc is frm,True
+E0283,best time to visit Jaflong is during the monsoon,1,bst tm t bst jflng is drng t mnsn,True
+E0284,best time to visit Jaflong is from November to,1,bst tm t bst jflng is frm nbmbr t,True
 E0059,best time to visit Kuakata is during the cooler,1,bst tm t bst kt is drng t clr,True
+E0285,best time to visit Lalakhal is during the rainy,1,bst tm t bst lkl is drng t rn,True
+E0469,best time to visit Paharpur is between October,1,bst tm t bst phrpr is btbn octbr,True
+E0470,best time to visit R,1,bst tm t bst r,True
+E0286,best time to visit Ratargul,1,bst tm t bst rtrgl,True
+E0287,best time to visit Ratargul is in rainy season,1,bst tm t bst rtrgl is in rn sn,True
+E0288,best time to visit Sajek,1,bst tm t bst sjk,True
+E0289,best time to visit Sajek is during the winter,1,bst tm t bst sjk is drng t bntr,True
+E0290,best time to visit for pleasant weather is from,1,bst tm t bst fr plsnt btr is frm,True
+E0291,best time to visit from October to February,1,bst tm t bst frm octbr t fbr,True
+E0292,best time to visit here is January,1,bst tm t bst hr is jnr,True
+E0293,best time to visit in Winter,1,bst tm t bst in bntr,True
+E0294,best time to visit is any day without weekends,1,bst tm t bst is an d bt bknds,True
+E0295,best time to visit is between February to April,1,bst tm t bst is btbn fbr t aprl,True
 E0060,best time to visit is between November and March,1,bst tm t bst is btbn nbmbr and mrc,True
 E0061,best time to visit is definitely during the,1,bst tm t bst is dfntl drng t,True
-E0062,best time to visit this place,1,bst tm t bst ts plc,True
+E0296,best time to visit is during the dry season,2,bst tm t bst is drng t dr sn,True
+E0297,best time to visit is during the monsoon or just,1,bst tm t bst is drng t mnsn or jst,True
+E0298,best time to visit is during the monsoon season,3,bst tm t bst is drng t mnsn sn,True
+E0299,best time to visit is during the rainy season,2,bst tm t bst is drng t rn sn,True
+E0299,best time to visit is during rainy season,1,bst tm t bst is drng rn sn,False
+E0300,best time to visit is during the spring or fall,1,bst tm t bst is drng t sprng or fl,True
+E0301,best time to visit is during the winter months,3,bst tm t bst is drng t bntr mnts,True
+E0302,best time to visit is from November to March,1,bst tm t bst is frm nbmbr t mrc,True
+E0303,best time to visit is in the afternoon but you,1,bst tm t bst is in t aftrn bt y,True
+E0304,best time to visit is in the morning or late,1,bst tm t bst is in t mrng or lt,True
+E0305,best time to visit such kind of places,1,bst tm t bst sc knd of plcs,True
+E0306,best time to visit the floating market is,1,bst tm t bst t fltng mrkt is,True
+E0307,best time to visit the markets is the months,1,bst tm t bst t mrkts is t mnts,True
+E0308,best time to visit the monastery complex is in,1,bst tm t bst t mnstr cmplks is in,True
+E0309,best time to visit there,1,bst tm t bst tr,True
+E0310,best time to visit this park is winter,1,bst tm t bst ts prk is bntr,True
+E0062,best time to visit this place,6,bst tm t bst ts plc,True
+E0311,best time to visit this place during the rainy,1,bst tm t bst ts plc drng t rn,True
+E0312,best time to visit this place in early morning,1,bst tm t bst ts plc in erl mrng,True
+E0313,best time to visit this place in the June to,1,bst tm t bst ts plc in t jn t,True
+E0314,best time to visit this place is from August to,1,bst tm t bst ts plc is frm agst t,True
+E0315,best time to visit this place is in the evening,1,bst tm t bst ts plc is in t ebng,True
+E0316,best time to visit this place is in the morning,1,bst tm t bst ts plc is in t mrng,True
+E0317,best time to visit this place to feel the real,1,bst tm t bst ts plc t fl t rl,True
+E0318,best time to visit this swamp forest,1,bst tm t bst ts sbmp frst,True
+E0319,best time to visiting there,1,bst tm t bstng tr,True
+E0320,boat from Bangabir point avoid stressfull,1,bt frm bngbr pnt abd strsfl,True
+E0321,boat from Khulna or Mongla,1,bt frm kln or mngl,True
+E0322,boat from Mongla,2,bt frm mngl,True
+E0323,boat from Mongla Ferry Ghat,1,bt frm mngl fr gt,True
+E0324,boat from Tahirpur to Tagerhat,1,bt frm thrpr t tgrht,True
+E0325,boat from Thanchi,1,bt frm tnc,True
+E0326,boat from ferry ghat,1,bt frm fr gt,True
+E0327,boat from ghat which costs 750 and entry,1,bt frm gt bhc csts 750 and entr,True
+E0328,boat from here,1,bt frm hr,True
 E0063,boat from kaptai station,1,bt frm kpt stn,True
+E0329,boat from remakri towards Nafakhum may,1,bt frm rmkr tbrds nfkm m,True
+E0330,boat from the reserve bazaar and visit it,1,bt frm t rsrb bjr and bst it,True
+E0331,bus From Dhaka,1,bs frm dk,True
+E0332,bus from Barisal,3,bs frm brsl,True
+E0333,bus from Chittagong to Comilla,1,bs frm ctgng t cml,True
+E0334,bus from Cox's Bazar,1,bs frm cks bjr,True
+E0335,bus from Dhaka and reach to Shaturia,1,bs frm dk and rc t str,True
+E0336,bus from Dhaka heading towards Rajshahi,1,bs frm dk hdng tbrds rjsh,True
 E0064,bus from Dhaka or Chittagong,1,bs frm dk or ctgng,True
+E0337,bus from Dhaka to Bagerhat,1,bs frm dk t bgrht,True
+E0338,bus from Dhaka to Fakirapul or Saidabad,1,bs frm dk t fkrpl or sdbd,True
+E0339,bus from Dhaka to Kurigram,1,bs frm dk t krgrm,True
+E0340,bus from Dhaka to Shunamgonj,1,bs frm dk t snmgnj,True
+E0341,bus from Gulistan,2,bs frm glstn,True
+E0342,bus from Gulisthan to Mograpara,1,bs frm glstn t mgrpr,True
+E0343,bus from Khagrachari or local jeep,1,bs frm kgrcr or lcl jp,True
+E0344,bus from Mohakhali in Dhaka towards,1,bs frm mhkl in dk tbrds,True
+E0345,bus from Nathullabad bus terminal or opt,1,bs frm ntlbd bs trmnl or opt,True
+E0346,bus from Rajshahi,1,bs frm rjsh,True
+E0347,bus from Sobhanighat in Sylhet city,1,bs frm sbngt in slht ct,True
+E0348,bus from Sylhet city to Hadarpar,1,bs frm slht ct t hdrpr,True
+E0349,bus from Sylhet's Kadamtali bus station,1,bs frm slhts kdmtl bs stn,True
+E0350,bus from any part of the country,1,bs frm an prt of t cntr,True
+E0351,bus from dhaka,1,bs frm dk,True
+E0352,bus from natore or rajshahi city,1,bs frm ntr or rjsh ct,True
+E0353,bus from srimongol to kamalganj,1,bs frm srmngl t kmlgnj,True
+E0354,bus from the main city of Bandarban,1,bs frm t mn ct of bndrbn,True
+E0355,bus from there to Dhaka,1,bs frm tr t dk,True
+E0356,carry a bamboo stick,1,cr a bmb stck,True
+E0357,carry a reliable flashlight or,1,cr a rlbl flslgt or,True
+E0358,carry a swimming suits,1,cr a sbmng sts,True
+E0359,carry a torch light and be careful,1,cr a trc lgt and b crfl,True
+E0360,carry a torch or it is also okay,1,cr a trc or it is als ok,True
+E0361,carry a water bottle with you,1,cr a btr btl bt y,True
+E0362,carry away the goods purchased from,1,cr ab t gds prcsd frm,True
+E0363,carry bags,1,cr bgs,True
+E0364,carry bananas or other food,1,cr bns or otr fd,True
+E0365,carry boats on the far side of the,1,cr bts on t fr sd of t,True
+E0366,carry cap,1,cr cp,True
+E0367,carry drinking water,1,cr drnkng btr,True
+E0368,carry drinking water and some snacks,1,cr drnkng btr and sm sncks,True
+E0369,carry enough water and be physically,1,cr eng btr and b fscl,True
+E0370,carry enough water and food cause,1,cr eng btr and fd cs,True
+E0371,carry extra pair of dress so that,1,cr ekstr pr of drs s t,True
+E0372,carry first aid kit cause God forbid,1,cr frst ad kt cs gd frbd,True
+E0373,carry flare to enter the cave,1,cr flr t entr t cb,True
+E0374,carry food,3,cr fd,True
+E0375,carry food then monkeys will follow,1,cr fd tn mnks bl flb,True
+E0376,carry foods with You,1,cr fds bt y,True
+E0377,carry for a long time,1,cr fr a lng tm,True
+E0378,carry forward the escort,1,cr frbrd t escrt,True
+E0379,carry high price shoes or Sleepers,1,cr hg prc s or slprs,True
+E0380,carry insect repellent for a more,1,cr insct rplnt fr a mr,True
+E0381,carry inside your bag,1,cr insd yr bg,True
+E0382,carry lot of food and drinks and,1,cr lt of fd and drnks and,True
+E0383,carry much mineral water and,1,cr mc mnrl btr and,True
+E0384,carry our tradition,1,cr or trdtn,True
+E0385,carry out an extensive excavation in,1,cr ot an ekstnsb ekscbtn in,True
+E0386,carry pack lunch in case of long day,1,cr pck lnc in cs of lng d,True
+E0387,carry photocopies of your National,1,cr ftcps of yr ntnl,True
+E0388,carry plenty of drinking water,1,cr plnt of drnkng btr,True
+E0389,carry proper cash,1,cr prpr cs,True
+E0390,carry small bottle of water,1,cr sml btl of btr,True
+E0391,carry snacks,1,cr sncks,True
+E0392,carry some salt or lime,1,cr sm slt or lm,True
+E0393,carry the stories of a thousand,1,cr t strs of a tsnd,True
+E0394,carry torches to find their way,1,cr trcs t fnd tr b,True
+E0007,carry water,2,cr btr,True
+E0007,Carry water,1,cr btr,False
+E0395,carry water and cap or umbrella,1,cr btr and cp or umbrl,True
+E0396,carry water and snacks,1,cr btr and sncks,True
 E0065,carry with me,1,cr bt m,True
-E0066,carry your essentials,1,cr yr esntls,True
+E0397,carry you up,1,cr y up,True
+E0066,carry your essentials,2,cr yr esntls,True
+E0398,carry your food as there are no,1,cr yr fd as tr ar n,True
+E0399,carry your own drinking water with,1,cr yr obn drnkng btr bt,True
+E0400,carry your own food,1,cr yr obn fd,True
+E0401,carry your own water,1,cr yr obn btr,True
+E0402,carry your trash back,1,cr yr trs bck,True
+E0403,cox's bazar Beach,1,cks bjr bc,True
 E0067,engine boat from Mongla,1,engn bt frm mngl,True
+E0404,engine boat from Parzatan Corporation,1,engn bt frm prjtn crprtn,True
 E0068,engine boat from kaptai boat station,1,engn bt frm kpt bt stn,True
 E0069,engine boat from the Mongla Ferry Ghat through,1,engn bt frm t mngl fr gt trg,True
 E0070,get off at Fokirhat Bazar and take a CNG,1,gt of at fkrht bjr and tk a cng,True
+E0405,get off at Mograpara and take an auto and,1,gt of at mgrpr and tk an at and,True
 E0071,get off at Sitakunda Bazar,1,gt of at stknd bjr,True
+E0406,get off at Surma Bridge before entering,1,gt of at srm brdg bfr entrng,True
+E0017,go early,2,g erl,True
+E0017,Go early,1,g erl,False
+E0407,go early in the evening,1,g erl in t ebng,True
+E0408,go early in the morning,1,g erl in t mrng,True
+E0409,go early in the morning and,1,g erl in t mrng and,True
+E0410,go early in the morning or,3,g erl in t mrng or,True
+E0411,go early in the morning to,2,g erl in t mrng t,True
+E0411,Go Early in the Morning,1,g erl in t mrng,False
+E0412,go early morning,2,g erl mrng,True
 E0072,go early morning or evening,1,g erl mrng or ebng,True
-E0073,muradpur,1,mrdpr,False
-E0073,Muradpur,3,mrdpr,True
+E0413,go in Winter otherwise it,1,g in bntr otrbs it,True
+E0414,go in the morning,1,g in t mrng,True
+E0415,go in the morning there,1,g in t mrng tr,True
+E0471,go in winter,1,g in bntr,True
+E0416,go in winter or during migration,1,g in bntr or drng mgrtn,True
+E0113,kolatoli beach,2,kltl bc,False
+E0113,Kolatoli Beach,3,kltl bc,True
+E0126,mohamaya lake,1,mhm lk,True
+E0126,Mohamaya Lake,0,mhm lk,False
+E0138,patenga sea beach,1,ptng s bc,True
+E0138,Patenga Sea Beach,0,ptng s bc,False
+E0417,ratargul,1,rtrgl,True
+E0418,take a CNG,2,tk a cng,True
+E0419,take a CNG from Sitakunda or Mirsharai,1,tk a cng frm stknd or mrsr,True
+E0420,take a CNG or Auto to reach the,1,tk a cng or at t rc t,True
 E0074,take a CNG or auto from there,1,tk a cng or at frm tr,True
+E0421,take a CNG to reach the basement of,1,tk a cng t rc t bsmnt of,True
+E0422,take a CNG to travel from Chapai,1,tk a cng t trbl frm cp,True
 E0075,take a boat,1,tk a bt,True
+E0423,take a boat across the lake to reach a,1,tk a bt acrs t lk t rc a,True
+E0424,take a boat and go to inside of the lake,1,tk a bt and g t insd of t lk,True
+E0425,take a boat and go to the waterfall side,1,tk a bt and g t t btrfl sd,True
+E0426,take a boat around the bends of these,1,tk a bt arnd t bnds of ts,True
+E0472,take a boat or another vehicle to reach,1,tk a bt or antr bhcl t rc,True
+E0427,take a boat ride,2,tk a bt rd,True
+E0428,take a boat ride before sunset,1,tk a bt rd bfr snst,True
+E0429,take a boat ride during flow tide,1,tk a bt rd drng flb td,True
+E0430,take a boat ride into the sea with the,1,tk a bt rd int t s bt t,True
+E0431,take a boat ride on the curved water,1,tk a bt rd on t crbd btr,True
+E0432,take a boat ride there,1,tk a bt rd tr,True
+E0433,take a boat ride through the calm waters,1,tk a bt rd trg t clm btrs,True
+E0434,take a boat ride to Bichanakandi,1,tk a bt rd t bcnknd,True
+E0435,take a boat ride to enjoy the view and,1,tk a bt rd t enj t b and,True
+E0436,take a boat ride to see the other,1,tk a bt rd t s t otr,True
+E0473,take a boat ride to the Padma chars and,1,tk a bt rd t t pdm crs and,True
 E0076,take a boat ride to the precise Zero,1,tk a bt rd t t prcs jr,True
 E0077,take a boat to reach the main beach,1,tk a bt t rc t mn bc,True
+E0437,take a boat to roam on the Padma River,1,tk a bt t rm on t pdm rbr,True
+E0438,take a boat to travel and roam around the,1,tk a bt t trbl and rm arnd t,True
+E0439,take a bus from Dhaka and reach to,1,tk a bs frm dk and rc t,True
+E0440,take a bus from Dhaka to Bagerhat,1,tk a bs frm dk t bgrht,True
+E0441,take a bus from Dhaka to Fakirapul or,1,tk a bs frm dk t fkrpl or,True
+E0442,take a bus from Dhaka to Kurigram,1,tk a bs frm dk t krgrm,True
+E0443,take a bus from Nathullabad bus terminal,1,tk a bs frm ntlbd bs trmnl,True
+E0444,take a bus or a CNG to Kacchaptali,1,tk a bs or a cng t kcptl,True
+E0445,take a bus or an auto,1,tk a bs or an at,True
+E0446,take a bus to Badalgachi and then a CNG,1,tk a bs t bdlgc and tn a cng,True
+E0447,take a bus to Sharupkathi then take auto,1,tk a bs t srpkt tn tk at,True
+E0448,take a cng or battery operated riksha,1,tk a cng or btr oprtd rks,True
+E0449,take a rickshaw,1,tk a rcksb,True
+E0450,take a rickshaw directly to Panam Nagar,1,tk a rcksb drctl t pnm ngr,True
+E0451,take a rickshaw it will cost 30tk or walk on,1,tk a rcksb it bl cst 30tk or blk on,True
+E0452,take a rickshaw or van inside to visit the,1,tk a rcksb or bn insd t bst t,True
+E0453,varendra museum,1,brndr msm,True
+E0163,varendra research museum,1,brndr rsrc msm,False
+E0163,Varendra Research Museum,1,brndr rsrc msm,True
+E0454,visit early in the morning,2,bst erl in t mrng,True
+E0455,visit early in the morning and,1,bst erl in t mrng and,True
 E0078,visit early in the morning for,1,bst erl in t mrng fr,True
+E0456,visit early in the morning when,1,bst erl in t mrng bhn,True
+E0457,visit early morning like 10 am,1,bst erl mrng lk 10 am,True
+E0458,visit early to avoid crowds,1,bst erl t abd crbds,True
+E0459,visit in Winter,1,bst in bntr,True
+E0460,visit in the morning or late afternoon,1,bst in t mrng or lt aftrn,True
+E0461,visit in winter,3,bst in bntr,True
+E0462,visit in winter only,1,bst in bntr onl,True
+E0463,visit in winter season,2,bst in bntr sn,True
+E0464,visit in winter when the weather is,1,bst in bntr bhn t btr is,True
+E0465,visit in winter you can take a walk,1,bst in bntr y cn tk a blk,True

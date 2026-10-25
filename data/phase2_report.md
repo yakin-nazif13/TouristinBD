@@ -1,18 +1,33 @@
 # Phase 2 — preprocessing report
 
-Generated: 2026-10-21T06:40:16Z
+Generated: 2026-10-23T15:31:02Z
 
-- Inputs: real_reviews_batch1.csv, real_reviews_booking_batch1.csv
-- Output: `data/processed_reviews.csv` — **538 reviews** across 27 places (from 540 raw rows)
-- Dropped: 1 too short, 1 duplicate text, 0 duplicate id
-- By source: {'google_maps': 300, 'booking.com': 238}
-- By detected language: {'en': 530, 'bn-en-mixed': 5, 'bn': 2, 'nl': 1}
+- Inputs: real_reviews_all_trimmed.csv, real_reviews_bangla_runs.csv, real_reviews_batch1.csv, real_reviews_booking_batch1.csv
+- Output: `data/processed_reviews.csv` — **14841 reviews** across 116 places (from 16107 raw rows)
+- Dropped: 1099 too short, 167 duplicate text, 0 duplicate id
+- By source: {'google_maps': 14603, 'booking.com': 238}
+- By detected language: {'en': 10333, 'bn': 3591, 'bn-en-mixed': 845, 'id': 19, 'sl': 11, 'sq': 7, 'no': 5, 'fr': 4, 'hr': 4, 'et': 3, 'sv': 3, 'nl': 2, 'de': 2, 'af': 2, 'fi': 2, 'ko': 1, 'unknown': 1, 'tr': 1, 'ar': 1, 'ro': 1, 'es': 1, 'so': 1, 'sk': 1}
+- Original-language text kept for 14303 reviews; 318 of them were machine-translated by the platform
+
+## Warnings
+
+- 4177 review(s) have no topic assignment yet. They will load with topic_id NULL — counted in ratings and totals, but contributing no preference evidence to recommendations or itineraries. Re-run Phase 3 (and then Phase 4) to cluster them.
 
 ## Notes
 
+- loaded 11298 row(s) from real_reviews_all_trimmed.csv
+- loaded 4269 row(s) from real_reviews_bangla_runs.csv
 - loaded 300 row(s) from real_reviews_batch1.csv
 - loaded 240 row(s) from real_reviews_booking_batch1.csv
 - place renamed to its final name: 'Kuakata Beach' -> 'Kuakata Sea Beach'
 - place renamed to its final name: 'Sompur Mahavihar (Paharpur)' -> 'Somapura Mahavihara (Paharpur)'
-- dropped as too short (< 10 chars): 'Bad. No'
-- dropped as an exact duplicate of an earlier review: 'Good. Good. Good'
+- dropped as too short (< 10 chars): '❤️👍'
+- dropped as too short (< 10 chars): '♥'
+- dropped as too short (< 10 chars): 'Very nice'
+- dropped as too short (< 10 chars): 'Good'
+- dropped as too short (< 10 chars): 'Fantastic'
+- dropped as an exact duplicate of an earlier review: 'If you are visiting Dinajpur, Then Visit Kantajeu Temple. Its one of the must visit place in Dinajpur . Beautiful terracotta work on the wall of the temple makes it look magnificent. Built in 1752 by Pran Nath, a renowned maharaja from Dinajpur. The temple was built in a navaratna style before the destruction caused by the earthquake of 1897. But still its look beautiful.. Though its a Hindu temple but it have great historical and architecture value. Reminds the golden past. People from any religion can visit this.'
+- dropped as an exact duplicate of an earlier review: 'Beautiful place'
+- dropped as an exact duplicate of an earlier review: 'Nice place'
+- dropped as an exact duplicate of an earlier review: 'nice place'
+- dropped as an exact duplicate of an earlier review: 'historical'

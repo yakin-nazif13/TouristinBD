@@ -1,11 +1,59 @@
 topic_id,interpreted_label,preference_id,category,subcategory,preference,similarity,second_best_preference_id,second_best_similarity,confidence,needs_review,tau_sim,sim_gap,low_similarity_flag,ambiguous_flag,precision_status
-0,Hotel Accommodation and Staff Service,P01,Accommodation,Hotel & Resort Services,Quality hotel accommodation and staff service,0.8111,P03,0.3518,high,False,0.4,0.4593,False,False,pass
-1,Coastal and Island Beach Destinations,P02,Attractions & Activities,Coastal & Beach Tourism,Coastal beach and coral island excursions,0.8134,P04,0.4938,high,False,0.4,0.3196,False,False,pass
-2,Exploring Bangladesh's Historical Landmarks,P03,Attractions & Activities,Heritage & Archaeological Tourism,Historical landmark and ancient city tours,0.6678,P05,0.4401,high,False,0.4,0.2277,False,False,pass
-3,Scenic Hilltop Nature Destinations,P04,Attractions & Activities,Nature & Adventure Tourism,Hill tracts and scenic lake exploration,0.7344,P03,0.5953,high,False,0.4,0.1391,False,False,pass
-4,Historic Panam City and Sonargaon,P03,Attractions & Activities,Heritage & Archaeological Tourism,Historical landmark and ancient city tours,0.6226,P04,0.4275,high,False,0.4,0.1951,False,False,pass
-5,Scenic Sreemangal Tea Garden Tours,P05,Attractions & Activities,Ecotourism & Wildlife,Ecotourism and forest boat safaris,0.6421,P04,0.5276,high,False,0.4,0.1145,False,False,pass
-6,Exploring Ratargul Freshwater Swamp Forest,P05,Attractions & Activities,Ecotourism & Wildlife,Ecotourism and forest boat safaris,0.632,P03,0.5037,high,False,0.4,0.1283,False,False,pass
-7,Karamjal Sundarbans Eco-Tourism Gateway,P05,Attractions & Activities,Ecotourism & Wildlife,Ecotourism and forest boat safaris,0.6039,P04,0.5187,high,False,0.4,0.0852,False,False,pass
-8,Scenic Kaptai Lake in Rangamati,P04,Attractions & Activities,Nature & Adventure Tourism,Hill tracts and scenic lake exploration,0.7341,P05,0.4939,high,False,0.4,0.2402,False,False,pass
-9,Exploring Historical and Archaeological Sites,P03,Attractions & Activities,Heritage & Archaeological Tourism,Historical landmark and ancient city tours,0.71,P05,0.4833,high,False,0.4,0.2267,False,False,pass
+0,Natural Beauty And Wildlife Exploration,P01,Attractions & Activities,Nature & Wildlife,Wildlife and Forest Exploration,0.8702,P12,0.6968,high,False,0.4,0.1734,False,False,pass
+1,Nature Parks and Waterfalls Exploration,P02,Attractions & Activities,Nature & Wildlife,Waterfalls and Parks Visits,0.8569,P10,0.6845,high,False,0.4,0.1724,False,False,pass
+2,Family-Friendly Scenic and Historic Parks,P02,Attractions & Activities,Nature & Wildlife,Waterfalls and Parks Visits,0.6425,P03,0.5609,high,False,0.4,0.0816,False,False,pass
+3,Hotel Stay and Staff Service,P20,Accommodation,Hotel Amenities & Service,Hotel Stay and Staff Service,0.8736,P07,0.4302,high,False,0.4,0.4434,False,False,pass
+4,Scenic Spots and Historical Landmarks,P01,Attractions & Activities,Nature & Wildlife,Wildlife and Forest Exploration,0.7531,P12,0.6893,high,False,0.4,0.0638,False,True,ambiguous
+5,Cox's Bazar Coastal Beach Destinations,P05,Attractions & Activities,Coastal & Marine,Coastal Beach Destinations,0.8883,P07,0.6331,high,False,0.4,0.2552,False,False,pass
+6,Historic Zamindar Palaces and Rajbaris,P11,Attractions & Activities,Heritage & Culture,Historic Palaces and Rajbaris,0.8366,P12,0.7121,high,False,0.4,0.1245,False,False,pass
+7,Ancient Archaeological Sites and Museums,P12,Attractions & Activities,Heritage & Culture,Ancient Archaeological Sites and Museums,0.9241,P11,0.7035,high,False,0.4,0.2206,False,False,pass
+8,Sylhet Shrines And Nature Attractions,P15,Attractions & Activities,Religious & Spiritual,Spiritual Shrines and Mazar Visits,0.8108,P16,0.6095,high,False,0.4,0.2013,False,False,pass
+9,General Leisure and Experience Feedback,P01,Attractions & Activities,Nature & Wildlife,Wildlife and Forest Exploration,0.6961,P12,0.5339,high,False,0.4,0.1622,False,False,pass
+10,Historic Mosques and Architectural Heritage,P13,Attractions & Activities,Heritage & Culture,Historic Mosques and Islamic Architecture,0.7802,P12,0.7484,high,False,0.4,0.0318,False,True,ambiguous
+11,Historic Panam City and Sonargaon Heritage,P14,Attractions & Activities,Heritage & Culture,Historic City and Folk Art Heritage,0.7383,P11,0.5989,high,False,0.4,0.1394,False,False,pass
+12,Sreemangal Tea Gardens and Estates,P17,Attractions & Activities,Ecotourism & Scenic Tours,Tea Gardens and Colonial Estates,0.8803,P16,0.5671,high,False,0.4,0.3132,False,False,pass
+13,Sylhet Historical And Cultural Museums,P12,Attractions & Activities,Heritage & Culture,Ancient Archaeological Sites and Museums,0.6782,P11,0.6756,high,False,0.4,0.0026,False,True,ambiguous
+14,National Parks and Nature Escapes,P03,Attractions & Activities,Nature & Wildlife,National Parks and Nature Escapes,0.8752,P02,0.5719,high,False,0.4,0.3033,False,False,pass
+15,Scenic Nature Spots and Attractions,P01,Attractions & Activities,Nature & Wildlife,Wildlife and Forest Exploration,0.7727,P02,0.6275,high,False,0.4,0.1452,False,False,pass
+16,Historic Rabindranath Tagore Heritage Site,P16,Attractions & Activities,Religious & Spiritual,Buddhist Heritage and Temple Visits,0.5829,P11,0.5817,high,False,0.4,0.0012,False,True,ambiguous
+17,Bandarban Hill Views and Clouds,P08,Attractions & Activities,Adventure & Trekking,Hill Tracts and Valley Exploration,0.6804,P09,0.5763,high,False,0.4,0.1041,False,False,pass
+18,Scenic Hill Valley and Nature Exploration,P08,Attractions & Activities,Adventure & Trekking,Hill Tracts and Valley Exploration,0.8504,P09,0.6601,high,False,0.4,0.1903,False,False,pass
+19,Chattogram Coastal Beach and Sea Attractions,P05,Attractions & Activities,Coastal & Marine,Coastal Beach Destinations,0.6711,P07,0.6442,high,False,0.4,0.0269,False,True,ambiguous
+20,Wetland and Haor Nature Tours,P18,Attractions & Activities,Ecotourism & Scenic Tours,Wetland and Haor Nature Tours,0.8819,P04,0.5394,high,False,0.4,0.3425,False,False,pass
+21,Kuakata coastal scenery and sunset,P07,Attractions & Activities,Coastal & Marine,Scenic Coastal Scenery and Sunsets,0.8059,P05,0.6462,high,False,0.4,0.1597,False,False,pass
+22,Sylhet Border Rivers and Hills,P08,Attractions & Activities,Adventure & Trekking,Hill Tracts and Valley Exploration,0.5518,P01,0.5301,high,False,0.4,0.0217,False,True,ambiguous
+23,Historic Dhaka Palaces and Museums,P12,Attractions & Activities,Heritage & Culture,Ancient Archaeological Sites and Museums,0.7785,P11,0.6759,high,False,0.4,0.1026,False,False,pass
+24,Historic Mosque Architecture and Heritage,P13,Attractions & Activities,Heritage & Culture,Historic Mosques and Islamic Architecture,0.7689,P12,0.7472,high,False,0.4,0.0217,False,True,ambiguous
+25,Urban Green Spaces and Parks,P01,Attractions & Activities,Nature & Wildlife,Wildlife and Forest Exploration,0.6228,P03,0.5514,high,False,0.4,0.0714,False,True,ambiguous
+26,Ratargul Swamp Forest Boat Rides,P04,Attractions & Activities,Nature & Wildlife,Swamp Forest Boat Rides,0.7615,P01,0.5319,high,False,0.4,0.2296,False,False,pass
+27,Floating Guava Markets And Boating,P19,Attractions & Activities,Ecotourism & Scenic Tours,Floating Markets and River Culture,0.7451,P04,0.5263,high,False,0.4,0.2188,False,False,pass
+28,Guliakhali Sea Beach Scenic Exploration,P05,Attractions & Activities,Coastal & Marine,Coastal Beach Destinations,0.6242,P07,0.5838,high,False,0.4,0.0404,False,True,ambiguous
+29,Cox's Bazar Laboni Beach Point,P05,Attractions & Activities,Coastal & Marine,Coastal Beach Destinations,0.7191,P06,0.5026,high,False,0.4,0.2165,False,False,pass
+30,Historic Mughal Architecture and Gardens,P12,Attractions & Activities,Heritage & Culture,Ancient Archaeological Sites and Museums,0.6704,P11,0.6131,high,False,0.4,0.0573,False,True,ambiguous
+31,North Bengal Amusement And Theme Parks,P09,Attractions & Activities,Adventure & Trekking,Trekking and Hill Adventures,0.5388,P02,0.5174,high,False,0.4,0.0214,False,True,ambiguous
+32,Saint Martin Island Beach Tourism,P06,Attractions & Activities,Coastal & Marine,Island and Coral Beach Tourism,0.7644,P05,0.5149,high,False,0.4,0.2495,False,False,pass
+33,Sylhet Border Nature and Water Attractions,P01,Attractions & Activities,Nature & Wildlife,Wildlife and Forest Exploration,0.6584,P12,0.5399,high,False,0.4,0.1185,False,False,pass
+34,Kantajew Temple Terracotta Heritage,P13,Attractions & Activities,Heritage & Culture,Historic Mosques and Islamic Architecture,0.7019,P11,0.6317,high,False,0.4,0.0702,False,True,ambiguous
+35,Sitakunda Trekking and Hill Adventures,P09,Attractions & Activities,Adventure & Trekking,Trekking and Hill Adventures,0.8617,P08,0.6748,high,False,0.4,0.1869,False,False,pass
+36,Literary Heritage and Poet Memorials,P12,Attractions & Activities,Heritage & Culture,Ancient Archaeological Sites and Museums,0.6525,P11,0.646,high,False,0.4,0.0065,False,True,ambiguous
+37,Boga Lake Scenic Mountain Attraction,P18,Attractions & Activities,Ecotourism & Scenic Tours,Wetland and Haor Nature Tours,0.6331,P08,0.5885,high,False,0.4,0.0446,False,True,ambiguous
+38,Cox's Bazar Hill and Waterfall,P05,Attractions & Activities,Coastal & Marine,Coastal Beach Destinations,0.6726,P02,0.5665,high,False,0.4,0.1061,False,False,pass
+39,Popular Tourist Attractions and Natural Destinations,P01,Attractions & Activities,Nature & Wildlife,Wildlife and Forest Exploration,0.806,P12,0.6301,high,False,0.4,0.1759,False,False,pass
+40,Scenic Nature and Hill Attractions,P01,Attractions & Activities,Nature & Wildlife,Wildlife and Forest Exploration,0.8081,P08,0.6498,high,False,0.4,0.1583,False,False,pass
+41,Historical Zamindar Palaces and Heritage Sites,P11,Attractions & Activities,Heritage & Culture,Historic Palaces and Rajbaris,0.7408,P13,0.6484,high,False,0.4,0.0924,False,False,pass
+42,Historic Landmarks and Mughal Heritage,P12,Attractions & Activities,Heritage & Culture,Ancient Archaeological Sites and Museums,0.7456,P13,0.6505,high,False,0.4,0.0951,False,False,pass
+43,Historic Architectural Mosques and Heritage,P13,Attractions & Activities,Heritage & Culture,Historic Mosques and Islamic Architecture,0.7634,P12,0.6983,high,False,0.4,0.0651,False,True,ambiguous
+44,Scenic Lakes and Natural Water Bodies,P01,Attractions & Activities,Nature & Wildlife,Wildlife and Forest Exploration,0.7089,P12,0.6181,high,False,0.4,0.0908,False,False,pass
+45,Historic Heritage Sites and Archaeological Museums,P12,Attractions & Activities,Heritage & Culture,Ancient Archaeological Sites and Museums,0.8125,P01,0.6766,high,False,0.4,0.1359,False,False,pass
+46,National Parks and Wildlife Forests,P01,Attractions & Activities,Nature & Wildlife,Wildlife and Forest Exploration,0.7654,P03,0.6929,high,False,0.4,0.0725,False,True,ambiguous
+47,Ancient Buddhist Archaeological Sites and Monasteries,P16,Attractions & Activities,Religious & Spiritual,Buddhist Heritage and Temple Visits,0.7698,P12,0.6916,high,False,0.4,0.0782,False,True,ambiguous
+48,Coastal Beaches And Sea Attractions,P05,Attractions & Activities,Coastal & Marine,Coastal Beach Destinations,0.7155,P07,0.6971,high,False,0.4,0.0184,False,True,ambiguous
+49,Bijoypur Hills and Natural Attractions,P01,Attractions & Activities,Nature & Wildlife,Wildlife and Forest Exploration,0.6592,P12,0.6569,high,False,0.4,0.0023,False,True,ambiguous
+50,Remote Islands And Adventure Khums,P01,Attractions & Activities,Nature & Wildlife,Wildlife and Forest Exploration,0.6304,P05,0.5359,high,False,0.4,0.0945,False,False,pass
+51,Historic Kantajew Temple Terracotta Architecture,P13,Attractions & Activities,Heritage & Culture,Historic Mosques and Islamic Architecture,0.6809,P11,0.5886,high,False,0.4,0.0923,False,False,pass
+52,Alutila Cave Exploration and Adventure,P10,Attractions & Activities,Adventure & Trekking,Cave Exploration and Adventure,0.7895,P09,0.5236,high,False,0.4,0.2659,False,False,pass
+53,Barisal Floating Guava Market Tourism,P19,Attractions & Activities,Ecotourism & Scenic Tours,Floating Markets and River Culture,0.6223,P04,0.5015,high,False,0.4,0.1208,False,False,pass
+54,Mujibnagar Liberation War Historic Site,P12,Attractions & Activities,Heritage & Culture,Ancient Archaeological Sites and Museums,0.5103,P11,0.4903,high,False,0.4,0.02,False,True,ambiguous
+55,Bandarban Golden Temple Buddhist Heritage,P16,Attractions & Activities,Religious & Spiritual,Buddhist Heritage and Temple Visits,0.6334,P15,0.6005,high,False,0.4,0.0329,False,True,ambiguous
+56,Himchari hill waterfall and sea views,P05,Attractions & Activities,Coastal & Marine,Coastal Beach Destinations,0.5951,P08,0.5437,high,False,0.4,0.0514,False,True,ambiguous
+57,Chandranath Hill Trekking and Temples,P09,Attractions & Activities,Adventure & Trekking,Trekking and Hill Adventures,0.7325,P08,0.5936,high,False,0.4,0.1389,False,False,pass

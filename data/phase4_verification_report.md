@@ -4,15 +4,15 @@ Nothing auto-publishes (BUILD_PLAN 5.7). A high gem score decides what a
 district officer sees first; only a recorded human decision makes anything
 visible to the public.
 
-- Candidates in the queue: **13**
+- Candidates in the queue: **76**
 - Publishable to the tourist side: **0**
-- In the district register (everything but rejected): **13**
+- In the district register (everything but rejected): **76**
 
 ## States
 
 | state | meaning | count | tourist-visible |
 | --- | --- | --- | --- |
-| candidate | extracted and resolved, awaiting a human decision | 13 | no |
+| candidate | extracted and resolved, awaiting a human decision | 76 | no |
 | verified | a district officer confirmed it | 0 | yes |
 | rejected | a district officer rejected it | 0 | no |
 | sensitive | fragile ecology, restricted area or a private/home business | 0 | no |
@@ -34,17 +34,24 @@ cannot be audited.
 
 | entity | score | visibility | reviews | divisions |
 | --- | --- | --- | --- | --- |
-| Gangamati | 0.69 | V0 | 2 | Barishal |
-| Pashur | 0.62 | V1 | 4 | Khulna |
-| Bandarban | 0.61 | V3 | 12 | Chattogram |
-| Saint Martin | 0.61 | V3 | 14 | Chattogram |
-| Sitakunda | 0.60 | V2 | 7 | Chattogram |
-| Sonargaon | 0.60 | V3 | 13 | Dhaka |
-| Mongla | 0.57 | V2 | 6 | Khulna |
-| Muradpur | 0.51 | V2 | 4 | Chattogram |
-| Cox's Bazar | 0.49 | V3 | 5 | Barishal|Chattogram |
-| Bagerhat | 0.49 | V3 | 6 | Khulna |
-| Rangamati | 0.43 | V3 | 5 | Chattogram |
-| Sundarbans | 0.41 | V3 | 3 | Chattogram|Khulna|Sylhet |
-| Sreemangal | 0.37 | V3 | 3 | Sylhet |
+| Best Time to Visit | 0.95 | unknown | 31 | Barishal|Chattogram|Dhaka|Rajshahi|Sylhet |
+| Bisnakandi | 0.85 | V0 | 28 | Sylhet |
+| Kantaji Temple | 0.85 | V0 | 16 | Rajshahi|Rangpur |
+| Sardar Bari | 0.80 | V1 | 14 | Dhaka |
+| Gangamati | 0.79 | V0 | 6 | Barishal |
+| Nilgiri | 0.76 | V1 | 9 | Chattogram |
+| Pashur | 0.75 | V1 | 10 | Chattogram|Khulna |
+| visit early in the morning or | 0.74 | unknown | 5 | Chattogram|Dhaka|Sylhet |
+| Guliyakhali | 0.73 | V0 | 6 | Chattogram |
+| China Matir Pahar | 0.71 | V0 | 5 | Mymensingh |
+| T-badh | 0.69 | V0 | 4 | Rajshahi |
+| Jaflong | 0.67 | V2 | 21 | Mymensingh|Sylhet |
+| Panam City | 0.67 | V1 | 8 | Dhaka |
+| Mongla | 0.67 | V2 | 30 | Khulna |
+| Sitakunda | 0.66 | V2 | 56 | Chattogram|Sylhet |
+| best time to visit is during the winter months | 0.66 | unknown | 3 | Dhaka |
+| Mahasthangarh | 0.66 | V2 | 36 | Rajshahi |
+| Lalakhal | 0.65 | V2 | 19 | Sylhet |
+| Kolatoli Beach | 0.65 | V1 | 5 | Chattogram |
+| Boga Lake | 0.65 | V1 | 3 | Chattogram |
 

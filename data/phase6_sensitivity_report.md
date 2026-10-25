@@ -2,30 +2,30 @@
 
 ## What changed (easy language)
 - The full paper tests the pipeline at 20k / 40k / 60k / 80k reviews.
-- This MVP run uses the same **4-step ladder**, scaled to your **538** reviews:
-  `[151, 247, 398, 538]`.
+- This MVP run uses the same **4-step ladder**, scaled to your **14841** reviews:
+  `[4155, 6827, 10982, 14841]`.
 - For each size we **re-find topics**, then match them to the **same Phase 4 preference
   list** (no new LLM taxonomy). That keeps later phases stable.
 - Results are saved only as `phase6_*` files — Phase 3–5 outputs were **not** overwritten.
 
 ## Metrics tracked
 - topic count
-- how many of the 10 preferences get at least one topic
+- how many of the preferences get at least one topic
 - average mapping similarity + high-confidence rate (sim ≥ 0.4)
 - Jaccard similarity of the mapped preference set vs the previous sample size
 
 ## Results
 | sample_size | topics | prefs covered | avg sim | high-conf | Jaccard vs prev |
 |------------:|-------:|--------------:|--------:|----------:|----------------:|
-| 151 | 2 | 2/5 | 0.503 | 1.000 | 1.000 |
-| 247 | 12 | 5/5 | 0.434 | 0.750 | 0.400 |
-| 398 | 9 | 5/5 | 0.455 | 0.778 | 1.000 |
-| 538 | 10 | 5/5 | 0.476 | 0.800 | 1.000 |
+| 4155 | 39 | 19/20 | 0.435 | 0.667 | 1.000 |
+| 6827 | 39 | 18/20 | 0.444 | 0.641 | 0.850 |
+| 10982 | 39 | 17/20 | 0.437 | 0.641 | 0.842 |
+| 14841 | 37 | 17/20 | 0.430 | 0.568 | 0.889 |
 
 ## Recommendation
 - Stability rule: consecutive Jaccard ≥ `0.95` (<5% change).
-- Recommended minimum corpus size (MVP): **398**
-- Mapped preference set is stable at/above this size for the current taxonomy.
+- Recommended minimum corpus size (MVP): **not reached — keep collecting data**
+- Smallest subsample where mapped preference-ID set changes <5% vs the previous size (Jaccard >= 0.95). None means the MVP corpus never fully stabilized — keep collecting toward the paper's 20k+ ladder.
 
 ## Later-phase safety
 - Preference IDs (P01–P10) stay the Phase 4 taxonomy.

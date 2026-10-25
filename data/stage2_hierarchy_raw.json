@@ -1,69 +1,146 @@
 {
-  "raw": "{\n  \"preferences\": [\n    {\n      \"preference_id\": \"P01\",\n      \"category\": \"Accommodation\",\n      \"subcategory\": \"Hotel Amenities & Service\",\n      \"preference\": \"Hotel room quality and staff service\",\n      \"description\": \"Travelers value clean accommodations, overall value, and attentive or professional hotel staff behavior.\"\n    },\n    {\n      \"preference_id\": \"P02\",\n      \"category\": \"Attractions & Activities\",\n      \"subcategory\": \"Coastal & Island Tourism\",\n      \"preference\": \"Coastal beaches and island exploration\",\n      \"description\": \"Travelers enjoy visiting scenic sea beaches, coral islands, and coastal destinations across Bangladesh.\"\n    },\n    {\n      \"preference_id\": \"P03\",\n      \"category\": \"Attractions & Activities\",\n      \"subcategory\": \"Heritage & Historical Sites\",\n      \"preference\": \"Historic landmarks and architectural heritage\",\n      \"description\": \"Travelers explore ancient forts, museums, mosques, and UNESCO World Heritage sites reflecting the country's history.\"\n    },\n    {\n      \"preference_id\": \"P04\",\n      \"category\": \"Attractions & Activities\",\n      \"subcategory\": \"Hill Country & Nature\",\n      \"preference\": \"Bandarban hill country scenic views\",\n      \"description\": \"Travelers seek panoramic mountain vistas, peaceful atmospheres, and viewpoints like Nilachal in the hill tracts.\"\n    },\n    {\n      \"preference_id\": \"P05\",\n      \"category\": \"Attractions & Activities\",\n      \"subcategory\": \"Heritage & Historical Sites\",\n      \"preference\": \"Historic Panam City architectural heritage\",\n      \"description\": \"Travelers visit Sonargaon to explore ancient ruins and unique 19th-century colonial architecture in Panam City.\"\n    },\n    {\n      \"preference_id\": \"P06\",\n      \"category\": \"Attractions & Activities\",\n      \"subcategory\": \"Ecotourism & Nature\",\n      \"preference\": \"Sreemangal tea garden nature tourism\",\n      \"description\": \"Travelers experience lush green hills, tea cultivation, and peaceful nature getaways in the tea capital.\"\n    },\n    {\n      \"preference_id\": \"P07\",\n      \"category\": \"Attractions & Activities\",\n      \"subcategory\": \"Ecotourism & Nature\",\n      \"preference\": \"Ratargul swamp forest exploration\",\n      \"description\": \"Travelers enjoy unique boat ride experiences and seasonal water landscapes at the Ratargul Swamp Forest.\"\n    },\n    {\n      \"preference_id\": \"P08\",\n      \"category\": \"Attractions & Activities\",\n      \"subcategory\": \"Ecotourism & Wildlife\",\n      \"preference\": \"Sundarbans Karamjal wildlife day trips\",\n      \"description\": \"Travelers take short eco-tourism day trips from Mongla to experience the Sundarbans mangrove forest gateway.\"\n    },\n    {\n      \"preference_id\": \"P09\",\n      \"category\": \"Attractions & Activities\",\n      \"subcategory\": \"Scenic Lakes & Waterways\",\n      \"preference\": \"Kaptai Lake and Rangamati scenic tours\",\n      \"description\": \"Travelers appreciate the breathtaking natural beauty, peaceful lake views, and scenic landscapes of Rangamati.\"\n    }\n  ]\n}",
+  "raw": "{\n  \"preferences\": [\n    {\n      \"preference_id\": \"P01\",\n      \"category\": \"Attractions & Activities\",\n      \"subcategory\": \"Nature & Wildlife\",\n      \"preference\": \"Wildlife and Forest Exploration\",\n      \"description\": \"Travelers enjoy peaceful visits to natural spots, rivers, forests, and biodiversity reserves across Bangladesh.\"\n    },\n    {\n      \"preference_id\": \"P02\",\n      \"category\": \"Attractions & Activities\",\n      \"subcategory\": \"Nature & Wildlife\",\n      \"preference\": \"Waterfalls and Parks Visits\",\n      \"description\": \"Travelers appreciate scenic outdoor locations featuring waterfalls, parks, and natural recreation areas.\"\n    },\n    {\n      \"preference_id\": \"P03\",\n      \"category\": \"Attractions & Activities\",\n      \"subcategory\": \"Nature & Wildlife\",\n      \"preference\": \"National Parks and Nature Escapes\",\n      \"description\": \"Travelers seek peaceful nature walks and wildlife watching in lush forested parks like Lawachara and Bhawal.\"\n    },\n    {\n      \"preference_id\": \"P04\",\n      \"category\": \"Attractions & Activities\",\n      \"subcategory\": \"Nature & Wildlife\",\n      \"preference\": \"Swamp Forest Boat Rides\",\n      \"description\": \"Travelers experience scenic boat rides through submerged freshwater swamp forests like Ratargul, especially during monsoon.\"\n    },\n    {\n      \"preference_id\": \"P05\",\n      \"category\": \"Attractions & Activities\",\n      \"subcategory\": \"Coastal & Marine\",\n      \"preference\": \"Coastal Beach Destinations\",\n      \"description\": \"Travelers enjoy lively sea beaches, sunsets, and coastal atmospheres at Cox's Bazar locations like Sugondha and Kolatoli.\"\n    },\n    {\n      \"preference_id\": \"P06\",\n      \"category\": \"Attractions & Activities\",\n      \"subcategory\": \"Coastal & Marine\",\n      \"preference\": \"Island and Coral Beach Tourism\",\n      \"description\": \"Travelers visit premier coastal getaways like Saint Martin's Island to enjoy coral beaches and peaceful environments.\"\n    },\n    {\n      \"preference_id\": \"P07\",\n      \"category\": \"Attractions & Activities\",\n      \"subcategory\": \"Coastal & Marine\",\n      \"preference\": \"Scenic Coastal Scenery and Sunsets\",\n      \"description\": \"Travelers explore serene coastal environments and unique sunrise and sunset views around destinations like Kuakata and Patenga.\"\n    },\n    {\n      \"preference_id\": \"P08\",\n      \"category\": \"Attractions & Activities\",\n      \"subcategory\": \"Adventure & Trekking\",\n      \"preference\": \"Hill Tracts and Valley Exploration\",\n      \"description\": \"Travelers visit picturesque hill tracts and valleys like Sajek and Bandarban to enjoy cloud-covered mountains and refreshing getaways.\"\n    },\n    {\n      \"preference_id\": \"P09\",\n      \"category\": \"Attractions & Activities\",\n      \"subcategory\": \"Adventure & Trekking\",\n      \"preference\": \"Trekking and Hill Adventures\",\n      \"description\": \"Travelers undertake challenging climbs and trekking adventures at Chandranath Hill and surrounding nature spots in Sitakunda.\"\n    },\n    {\n      \"preference_id\": \"P10\",\n      \"category\": \"Attractions & Activities\",\n      \"subcategory\": \"Adventure & Trekking\",\n      \"preference\": \"Cave Exploration and Adventure\",\n      \"description\": \"Travelers enjoy adventurous experiences exploring the dark, natural rock formations of caves like Alutila in Khagrachhari.\"\n    },\n    {\n      \"preference_id\": \"P11\",\n      \"category\": \"Attractions & Activities\",\n      \"subcategory\": \"Heritage & Culture\",\n      \"preference\": \"Historic Palaces and Rajbaris\",\n      \"description\": \"Travelers explore rich architectural heritage and colonial history by visiting magnificent historic zamindar palaces and royal estates.\"\n    },\n    {\n      \"preference_id\": \"P12\",\n      \"category\": \"Attractions & Activities\",\n      \"subcategory\": \"Heritage & Culture\",\n      \"preference\": \"Ancient Archaeological Sites and Museums\",\n      \"description\": \"Travelers discover ancient Buddhist monasteries, historic ruins, and archaeological museums across Bangladesh.\"\n    },\n    {\n      \"preference_id\": \"P13\",\n      \"category\": \"Attractions & Activities\",\n      \"subcategory\": \"Heritage & Culture\",\n      \"preference\": \"Historic Mosques and Islamic Architecture\",\n      \"description\": \"Travelers visit historical mosques highlighting intricate architectural details, terracotta artwork, and majestic domes.\"\n    },\n    {\n      \"preference_id\": \"P14\",\n      \"category\": \"Attractions & Activities\",\n      \"subcategory\": \"Heritage & Culture\",\n      \"preference\": \"Historic City and Folk Art Heritage\",\n      \"description\": \"Travelers explore ancient ruins of historic cities like Panam Nagar and cultural artifacts at folk art museums.\"\n    },\n    {\n      \"preference_id\": \"P15\",\n      \"category\": \"Attractions & Activities\",\n      \"subcategory\": \"Religious & Spiritual\",\n      \"preference\": \"Spiritual Shrines and Mazar Visits\",\n      \"description\": \"Travelers undertake spiritual visits and pay respects at prominent shrines and mazars such as Hazrat Shahjalal Mazar Sharif.\"\n    },\n    {\n      \"preference_id\": \"P16\",\n      \"category\": \"Attractions & Activities\",\n      \"subcategory\": \"Religious & Spiritual\",\n      \"preference\": \"Buddhist Heritage and Temple Visits\",\n      \"description\": \"Travelers explore the spiritual significance, architectural beauty, and sacred heritage of prominent Buddhist temples and monasteries.\"\n    },\n    {\n      \"preference_id\": \"P17\",\n      \"category\": \"Attractions & Activities\",\n      \"subcategory\": \"Ecotourism & Scenic Tours\",\n      \"preference\": \"Tea Gardens and Colonial Estates\",\n      \"description\": \"Travelers explore vast green tea gardens and historic colonial-era estates in regions like Sreemangal for tranquil atmospheres.\"\n    },\n    {\n      \"preference_id\": \"P18\",\n      \"category\": \"Attractions & Activities\",\n      \"subcategory\": \"Ecotourism & Scenic Tours\",\n      \"preference\": \"Wetland and Haor Nature Tours\",\n      \"description\": \"Travelers experience serene boat rides, sunrises, and vibrant aquatic landscapes in wetland destinations like Tanguar Haor.\"\n    },\n    {\n      \"preference_id\": \"P19\",\n      \"category\": \"Attractions & Activities\",\n      \"subcategory\": \"Ecotourism & Scenic Tours\",\n      \"preference\": \"Floating Markets and River Culture\",\n      \"description\": \"Travelers explore southern river culture by visiting picturesque floating wholesale markets featuring boats selling fresh produce.\"\n    },\n    {\n      \"preference_id\": \"P20\",\n      \"category\": \"Accommodation\",\n      \"subcategory\": \"Hotel Amenities & Service\",\n      \"preference\": \"Hotel Stay and Staff Service\",\n      \"description\": \"Travelers value quality accommodation experiences featuring helpful staff, well-maintained rooms, and good breakfast variety.\"\n    }\n  ]\n}",
   "parsed": {
     "preferences": [
       {
         "preference_id": "P01",
-        "category": "Accommodation",
-        "subcategory": "Hotel Amenities & Service",
-        "preference": "Hotel room quality and staff service",
-        "description": "Travelers value clean accommodations, overall value, and attentive or professional hotel staff behavior."
+        "category": "Attractions & Activities",
+        "subcategory": "Nature & Wildlife",
+        "preference": "Wildlife and Forest Exploration",
+        "description": "Travelers enjoy peaceful visits to natural spots, rivers, forests, and biodiversity reserves across Bangladesh."
       },
       {
         "preference_id": "P02",
         "category": "Attractions & Activities",
-        "subcategory": "Coastal & Island Tourism",
-        "preference": "Coastal beaches and island exploration",
-        "description": "Travelers enjoy visiting scenic sea beaches, coral islands, and coastal destinations across Bangladesh."
+        "subcategory": "Nature & Wildlife",
+        "preference": "Waterfalls and Parks Visits",
+        "description": "Travelers appreciate scenic outdoor locations featuring waterfalls, parks, and natural recreation areas."
       },
       {
         "preference_id": "P03",
         "category": "Attractions & Activities",
-        "subcategory": "Heritage & Historical Sites",
-        "preference": "Historic landmarks and architectural heritage",
-        "description": "Travelers explore ancient forts, museums, mosques, and UNESCO World Heritage sites reflecting the country's history."
+        "subcategory": "Nature & Wildlife",
+        "preference": "National Parks and Nature Escapes",
+        "description": "Travelers seek peaceful nature walks and wildlife watching in lush forested parks like Lawachara and Bhawal."
       },
       {
         "preference_id": "P04",
         "category": "Attractions & Activities",
-        "subcategory": "Hill Country & Nature",
-        "preference": "Bandarban hill country scenic views",
-        "description": "Travelers seek panoramic mountain vistas, peaceful atmospheres, and viewpoints like Nilachal in the hill tracts."
+        "subcategory": "Nature & Wildlife",
+        "preference": "Swamp Forest Boat Rides",
+        "description": "Travelers experience scenic boat rides through submerged freshwater swamp forests like Ratargul, especially during monsoon."
       },
       {
         "preference_id": "P05",
         "category": "Attractions & Activities",
-        "subcategory": "Heritage & Historical Sites",
-        "preference": "Historic Panam City architectural heritage",
-        "description": "Travelers visit Sonargaon to explore ancient ruins and unique 19th-century colonial architecture in Panam City."
+        "subcategory": "Coastal & Marine",
+        "preference": "Coastal Beach Destinations",
+        "description": "Travelers enjoy lively sea beaches, sunsets, and coastal atmospheres at Cox's Bazar locations like Sugondha and Kolatoli."
       },
       {
         "preference_id": "P06",
         "category": "Attractions & Activities",
-        "subcategory": "Ecotourism & Nature",
-        "preference": "Sreemangal tea garden nature tourism",
-        "description": "Travelers experience lush green hills, tea cultivation, and peaceful nature getaways in the tea capital."
+        "subcategory": "Coastal & Marine",
+        "preference": "Island and Coral Beach Tourism",
+        "description": "Travelers visit premier coastal getaways like Saint Martin's Island to enjoy coral beaches and peaceful environments."
       },
       {
         "preference_id": "P07",
         "category": "Attractions & Activities",
-        "subcategory": "Ecotourism & Nature",
-        "preference": "Ratargul swamp forest exploration",
-        "description": "Travelers enjoy unique boat ride experiences and seasonal water landscapes at the Ratargul Swamp Forest."
+        "subcategory": "Coastal & Marine",
+        "preference": "Scenic Coastal Scenery and Sunsets",
+        "description": "Travelers explore serene coastal environments and unique sunrise and sunset views around destinations like Kuakata and Patenga."
       },
       {
         "preference_id": "P08",
         "category": "Attractions & Activities",
-        "subcategory": "Ecotourism & Wildlife",
-        "preference": "Sundarbans Karamjal wildlife day trips",
-        "description": "Travelers take short eco-tourism day trips from Mongla to experience the Sundarbans mangrove forest gateway."
+        "subcategory": "Adventure & Trekking",
+        "preference": "Hill Tracts and Valley Exploration",
+        "description": "Travelers visit picturesque hill tracts and valleys like Sajek and Bandarban to enjoy cloud-covered mountains and refreshing getaways."
       },
       {
         "preference_id": "P09",
         "category": "Attractions & Activities",
-        "subcategory": "Scenic Lakes & Waterways",
-        "preference": "Kaptai Lake and Rangamati scenic tours",
-        "description": "Travelers appreciate the breathtaking natural beauty, peaceful lake views, and scenic landscapes of Rangamati."
+        "subcategory": "Adventure & Trekking",
+        "preference": "Trekking and Hill Adventures",
+        "description": "Travelers undertake challenging climbs and trekking adventures at Chandranath Hill and surrounding nature spots in Sitakunda."
+      },
+      {
+        "preference_id": "P10",
+        "category": "Attractions & Activities",
+        "subcategory": "Adventure & Trekking",
+        "preference": "Cave Exploration and Adventure",
+        "description": "Travelers enjoy adventurous experiences exploring the dark, natural rock formations of caves like Alutila in Khagrachhari."
+      },
+      {
+        "preference_id": "P11",
+        "category": "Attractions & Activities",
+        "subcategory": "Heritage & Culture",
+        "preference": "Historic Palaces and Rajbaris",
+        "description": "Travelers explore rich architectural heritage and colonial history by visiting magnificent historic zamindar palaces and royal estates."
+      },
+      {
+        "preference_id": "P12",
+        "category": "Attractions & Activities",
+        "subcategory": "Heritage & Culture",
+        "preference": "Ancient Archaeological Sites and Museums",
+        "description": "Travelers discover ancient Buddhist monasteries, historic ruins, and archaeological museums across Bangladesh."
+      },
+      {
+        "preference_id": "P13",
+        "category": "Attractions & Activities",
+        "subcategory": "Heritage & Culture",
+        "preference": "Historic Mosques and Islamic Architecture",
+        "description": "Travelers visit historical mosques highlighting intricate architectural details, terracotta artwork, and majestic domes."
+      },
+      {
+        "preference_id": "P14",
+        "category": "Attractions & Activities",
+        "subcategory": "Heritage & Culture",
+        "preference": "Historic City and Folk Art Heritage",
+        "description": "Travelers explore ancient ruins of historic cities like Panam Nagar and cultural artifacts at folk art museums."
+      },
+      {
+        "preference_id": "P15",
+        "category": "Attractions & Activities",
+        "subcategory": "Religious & Spiritual",
+        "preference": "Spiritual Shrines and Mazar Visits",
+        "description": "Travelers undertake spiritual visits and pay respects at prominent shrines and mazars such as Hazrat Shahjalal Mazar Sharif."
+      },
+      {
+        "preference_id": "P16",
+        "category": "Attractions & Activities",
+        "subcategory": "Religious & Spiritual",
+        "preference": "Buddhist Heritage and Temple Visits",
+        "description": "Travelers explore the spiritual significance, architectural beauty, and sacred heritage of prominent Buddhist temples and monasteries."
+      },
+      {
+        "preference_id": "P17",
+        "category": "Attractions & Activities",
+        "subcategory": "Ecotourism & Scenic Tours",
+        "preference": "Tea Gardens and Colonial Estates",
+        "description": "Travelers explore vast green tea gardens and historic colonial-era estates in regions like Sreemangal for tranquil atmospheres."
+      },
+      {
+        "preference_id": "P18",
+        "category": "Attractions & Activities",
+        "subcategory": "Ecotourism & Scenic Tours",
+        "preference": "Wetland and Haor Nature Tours",
+        "description": "Travelers experience serene boat rides, sunrises, and vibrant aquatic landscapes in wetland destinations like Tanguar Haor."
+      },
+      {
+        "preference_id": "P19",
+        "category": "Attractions & Activities",
+        "subcategory": "Ecotourism & Scenic Tours",
+        "preference": "Floating Markets and River Culture",
+        "description": "Travelers explore southern river culture by visiting picturesque floating wholesale markets featuring boats selling fresh produce."
+      },
+      {
+        "preference_id": "P20",
+        "category": "Accommodation",
+        "subcategory": "Hotel Amenities & Service",
+        "preference": "Hotel Stay and Staff Service",
+        "description": "Travelers value quality accommodation experiences featuring helpful staff, well-maintained rooms, and good breakfast variety."
       }
     ]
   }

@@ -1,44 +1,96 @@
 entity_id,canonical_name,entity_type,n_variants,n_mentions,n_reviews,districts,divisions,languages
-E0040,Saint Martin,PLACE,1,25,14,Cox's Bazar,Chattogram,en
-E0047,Sonargaon,PLACE,1,22,13,Narayanganj,Dhaka,en
-E0003,Bandarban,PLACE,1,21,12,Bandarban,Chattogram,en
-E0048,Sreemangal,PLACE,1,13,3,Moulvibazar,Sylhet,en
-E0044,Sitakunda,PLACE,1,12,7,Chattogram,Chattogram,en
-E0002,Bagerhat,PLACE,1,10,6,Bagerhat,Khulna,en
-E0031,Mongla,PLACE,1,10,6,Bagerhat,Khulna,en
-E0037,Rangamati,PLACE,2,9,5,Rangamati,Chattogram,en
-E0012,Cox's Bazar,PLACE,2,5,5,Chattogram|Cox's Bazar|Patuakhali,Barishal|Chattogram,en
-E0036,Pashur,PLACE,1,5,4,Bagerhat,Khulna,en
-E0073,Muradpur,PLACE,2,4,4,Chattogram,Chattogram,en
-E0016,Gangamati,PLACE,1,3,2,Patuakhali,Barishal,en
-E0050,Sundarbans,PLACE,1,3,3,Bagerhat|Chattogram|Sylhet,Chattogram|Khulna|Sylhet,en
-E0021,Guliyakhali,PLACE,1,2,1,Chattogram,Chattogram,en
-E0004,Best Time to Visit,TIP,1,1,1,Chattogram,Chattogram,en
-E0005,Best time to visit,TIP,1,1,1,Patuakhali,Barishal,en
-E0006,Boga Lake,PLACE,1,1,1,Bandarban,Chattogram,en
-E0007,Carry water,TIP,1,1,1,Chattogram,Chattogram,en
+E0003,Bandarban,PLACE,2,411,251,Bandarban|Chattogram|Cox's Bazar|Khagrachari|Moulvibazar|Rangamati,Chattogram|Sylhet,bn|bn-latn|en|mixed|other
+E0012,Cox's Bazar,PLACE,7,282,181,Bandarban|Chattogram|Cox's Bazar|Moulvibazar|Netrokona|Noakhali|Patuakhali,Barishal|Chattogram|Mymensingh|Sylhet,bn|en|mixed
+E0220,Padma,PLACE,2,194,133,Bagerhat|Cox's Bazar|Jhalokati|Kushtia|Patuakhali|Rajshahi|Sunamganj,Barishal|Chattogram|Khulna|Rajshahi|Sylhet,bn|en|mixed
+E0048,Sreemangal,PLACE,5,109,72,Moulvibazar|Patuakhali|Sunamganj,Barishal|Sylhet,en|mixed
+E0002,Bagerhat,PLACE,1,97,68,Bagerhat|Chapainawabganj|Khulna,Khulna|Rajshahi,bn|en|mixed
+E0047,Sonargaon,PLACE,1,92,50,Narayanganj,Dhaka,en|mixed
+E0044,Sitakunda,PLACE,2,91,56,Chattogram|Sylhet,Chattogram|Sylhet,bn|en|mixed
+E0219,Mahasthangarh,PLACE,2,80,36,Bogura|Rajshahi,Rajshahi,bn|en|mixed
+E0037,Rangamati,PLACE,2,66,53,Bandarban|Chattogram|Rangamati,Chattogram,bn|en|mixed|other
+E0217,Khagrachari,PLACE,2,66,42,Bandarban|Chattogram|Khagrachari|Rangamati,Chattogram,en|mixed
+E0198,Bisnakandi,PLACE,2,64,28,Sylhet,Sylhet,bn|en|mixed|other
+E0218,Lalakhal,PLACE,2,47,19,Sylhet,Sylhet,en
+E0050,Sundarbans,PLACE,2,44,33,Bagerhat|Chattogram|Khulna|Netrokona|Noakhali|Patuakhali|Sunamganj|Sylhet,Barishal|Chattogram|Khulna|Mymensingh|Sylhet,en|mixed
+E0031,Mongla,PLACE,2,39,30,Bagerhat|Khulna,Khulna,en|mixed
+E0004,Best Time to Visit,TIP,4,32,31,Bandarban|Chapainawabganj|Chattogram|Cox's Bazar|Dhaka|Jhalokati|Moulvibazar|Patuakhali|Rajshahi|Rangamati|Sylhet,Barishal|Chattogram|Dhaka|Rajshahi|Sylhet,bn|en|mixed
+E0211,Durgapur,PLACE,2,32,28,Chattogram|Netrokona,Chattogram|Mymensingh,bn|en|mixed
+E0040,Saint Martin,PLACE,1,28,17,Cox's Bazar,Chattogram,en
+E0024,Jaflong,PLACE,3,24,21,Moulvibazar|Netrokona|Sylhet,Mymensingh|Sylhet,en|mixed
+E0215,Kantaji Temple,PLACE,1,21,16,Dinajpur|Rajshahi,Rajshahi|Rangpur,bn|en|mixed
+E0221,Paharpur,PLACE,1,19,16,Bogura|Chattogram|Cumilla|Rajshahi,Chattogram|Rajshahi,en|mixed
+E0042,Sardar Bari,PLACE,3,17,14,Narayanganj,Dhaka,en
+E0073,Muradpur,PLACE,2,17,13,Chattogram,Chattogram,en
+E0025,Kaptai lake,PLACE,3,13,13,Bandarban|Chattogram|Rangamati|Sunamganj,Chattogram|Sylhet,en|other
+E0148,Shoshi Lodge,PLACE,2,13,4,Mymensingh,Mymensingh,bn|en
+E0036,Pashur,PLACE,2,11,10,Bagerhat|Noakhali,Chattogram|Khulna,en
+E0033,Nilgiri,PLACE,2,9,9,Bandarban|Chattogram|Khagrachari,Chattogram,en|mixed
+E0021,Guliyakhali,PLACE,2,8,6,Chattogram,Chattogram,en|mixed
+E0035,Panam City,PLACE,3,8,8,Narayanganj,Dhaka,bn|en
+E0016,Gangamati,PLACE,1,7,6,Patuakhali,Barishal,en
+E0062,best time to visit this place,TIP,1,6,6,Cumilla|Khagrachari|Naogaon|Netrokona|Noakhali|Sylhet,Chattogram|Mymensingh|Rajshahi|Sylhet,en
+E0091,China Matir Pahar,PLACE,2,6,5,Netrokona,Mymensingh,bn|en
+E0166,Alutila,PLACE,1,6,6,Khagrachari,Chattogram,en
+E0239,bargain,TIP,1,6,5,Cox's Bazar|Narayanganj|Patuakhali|Sylhet,Barishal|Chattogram|Dhaka|Sylhet,en
+E0001,Ahsan Manzil,PLACE,2,5,5,Chattogram|Dhaka|Rangpur,Chattogram|Dhaka|Rangpur,en
+E0028,Lalbagh Fort,PLACE,1,5,5,Chattogram|Dhaka,Chattogram|Dhaka,en
+E0113,Kolatoli Beach,PLACE,2,5,5,Cox's Bazar,Chattogram,en
+E0157,T-badh,PLACE,3,5,4,Rajshahi,Rajshahi,en
+E0197,Birisiri,PLACE,1,5,4,Netrokona,Mymensingh,en
+E0236,visit early in the morning or,TIP,2,5,5,Chattogram|Cox's Bazar|Dhaka|Narayanganj|Sylhet,Chattogram|Dhaka|Sylhet,en
+E0081,Alutila cave,PLACE,3,4,4,Khagrachari,Chattogram,bn|en
+E0146,Sajek Valley,PLACE,3,4,4,Chattogram|Khagrachari|Rangamati,Chattogram,en
+E0006,Boga Lake,PLACE,1,3,3,Bandarban,Chattogram,en
+E0007,carry water,TIP,2,3,3,Chattogram|Narayanganj,Chattogram|Dhaka,en
+E0009,Chandranath,PLACE,2,3,3,Chattogram,Chattogram,en
+E0017,go early,TIP,2,3,3,Chattogram|Cox's Bazar|Moulvibazar,Chattogram|Sylhet,en
+E0030,Madhabpur Lake,PLACE,2,3,3,Moulvibazar,Sylhet,en|mixed
+E0110,Kantajew Temple,PLACE,2,3,3,Chattogram|Dinajpur|Rajshahi,Chattogram|Rajshahi|Rangpur,en
+E0114,Kotka,PLACE,2,3,3,Bagerhat|Khulna,Khulna,en
+E0115,Kuakata Sea Beach,PLACE,3,3,3,Chattogram|Cox's Bazar|Patuakhali,Barishal|Chattogram,en
+E0214,Hiron Point,PLACE,3,3,3,Khulna,Khulna,bn-latn|en
+E0222,Puthia,PLACE,2,3,3,Dinajpur|Natore,Rajshahi|Rangpur,en
+E0275,bargaining,TIP,1,3,3,Chattogram|Cox's Bazar,Chattogram,en|mixed
+E0298,best time to visit is during the monsoon season,TIP,1,3,3,Sylhet,Sylhet,en
+E0299,best time to visit is during the rainy season,TIP,2,3,3,Sunamganj|Sylhet,Sylhet,en|mixed
+E0301,best time to visit is during the winter months,TIP,1,3,3,Dhaka,Dhaka,en
+E0332,bus from Barisal,ACCESS,1,3,3,Barishal,Barishal,en
+E0374,carry food,TIP,1,3,3,Bandarban|Gazipur,Chattogram|Dhaka,en
+E0410,go early in the morning or,TIP,1,3,3,Bandarban|Dhaka|Natore,Chattogram|Dhaka|Rajshahi,en
+E0411,go early in the morning to,TIP,2,3,3,Moulvibazar|Sylhet,Sylhet,en|mixed
+E0461,visit in winter,TIP,1,3,3,Narayanganj|Rajshahi|Sylhet,Dhaka|Rajshahi|Sylhet,en
+E0029,Lawachara National Park,PLACE,2,2,2,Moulvibazar,Sylhet,en
+E0066,carry your essentials,TIP,1,2,2,Sylhet,Sylhet,en
+E0108,I-Badh,PLACE,2,2,2,Rajshahi,Rajshahi,en|mixed
+E0163,Varendra Research Museum,PLACE,2,2,2,Bogura|Rajshahi,Rajshahi,en
+E0175,Best Time to Visit Winter,TIP,1,2,2,Naogaon|Natore,Rajshahi,en
+E0193,Best time to visit this place is during winter,TIP,1,2,2,Netrokona,Mymensingh,en
+E0226,Take a CNG or Auto,ACCESS,2,2,2,Cumilla|Khagrachari,Chattogram,en
+E0238,Visit early morning,TIP,1,2,2,Sylhet,Sylhet,en
+E0296,best time to visit is during the dry season,TIP,1,2,2,Cox's Bazar,Chattogram,en
+E0322,boat from Mongla,ACCESS,1,2,2,Bagerhat,Khulna,en|mixed
+E0341,bus from Gulistan,ACCESS,1,2,2,Narayanganj,Dhaka,en
+E0412,go early morning,TIP,1,2,2,Sylhet,Sylhet,en
+E0418,take a CNG,ACCESS,1,2,2,Bagerhat|Chattogram,Chattogram|Khulna,en
+E0427,take a boat ride,ACCESS,1,2,2,Chattogram|Rajshahi,Chattogram|Rajshahi,en
+E0454,visit early in the morning,TIP,1,2,2,Dinajpur|Sylhet,Rangpur|Sylhet,en
+E0463,visit in winter season,TIP,1,2,2,Bandarban|Cumilla,Chattogram,en
 E0008,Carry water but don't litter,TIP,1,1,1,Bagerhat,Khulna,en
-E0009,Chandranath,PLACE,2,1,1,Chattogram,Chattogram,en
 E0010,Chor Bijoy,PLACE,1,1,1,Patuakhali,Barishal,en
 E0013,Fatrar Chor,PLACE,1,1,1,Patuakhali,Barishal,en
 E0014,Fokirhat,PLACE,1,1,1,Chattogram,Chattogram,en
-E0017,Go early,TIP,1,1,1,Cox's Bazar,Chattogram,en
+E0015,Foy's lake,PLACE,3,1,1,Chattogram,Chattogram,en
 E0018,Go in the morning to beat the crowd,TIP,1,1,1,Sylhet,Sylhet,en
-E0030,Madhabpur Lake,PLACE,1,1,1,Moulvibazar,Sylhet,en
-E0033,Nilgiri,PLACE,1,1,1,Bandarban,Chattogram,en
-E0042,Sardar Bari,PLACE,1,1,1,Narayanganj,Dhaka,en
+E0032,Nilachal,PLACE,2,1,1,Bandarban,Chattogram,en
 E0055,bargain at all the nearby shops,TIP,1,1,1,Sylhet,Sylhet,en
 E0056,bargain for the boat price,TIP,1,1,1,Sylhet,Sylhet,en
 E0057,bargaining skills mostly,TIP,1,1,1,Rangamati,Chattogram,en
-E0058,best time to visit,TIP,1,1,1,Dhaka,Dhaka,en
 E0059,best time to visit Kuakata is during the cooler,TIP,1,1,1,Patuakhali,Barishal,en
 E0060,best time to visit is between November and March,TIP,1,1,1,Cox's Bazar,Chattogram,en
 E0061,best time to visit is definitely during the,TIP,1,1,1,Sylhet,Sylhet,en
-E0062,best time to visit this place,TIP,1,1,1,Naogaon,Rajshahi,en
 E0063,boat from kaptai station,ACCESS,1,1,1,Rangamati,Chattogram,en
 E0064,bus from Dhaka or Chittagong,ACCESS,1,1,1,Chattogram,Chattogram,en
 E0065,carry with me,TIP,1,1,1,Cox's Bazar,Chattogram,en
-E0066,carry your essentials,TIP,1,1,1,Sylhet,Sylhet,en
 E0067,engine boat from Mongla,ACCESS,1,1,1,Bagerhat,Khulna,en
 E0068,engine boat from kaptai boat station,ACCESS,1,1,1,Rangamati,Chattogram,en
 E0069,engine boat from the Mongla Ferry Ghat through,ACCESS,1,1,1,Bagerhat,Khulna,en
@@ -50,35 +102,303 @@ E0075,take a boat,ACCESS,1,1,1,Chattogram,Chattogram,en
 E0076,take a boat ride to the precise Zero,ACCESS,1,1,1,Sylhet,Sylhet,en
 E0077,take a boat to reach the main beach,ACCESS,1,1,1,Chattogram,Chattogram,en
 E0078,visit early in the morning for,TIP,1,1,1,Sylhet,Sylhet,en
-E0113,Kolatoli Beach,PLACE,1,1,1,Cox's Bazar,Chattogram,en
-E0118,Lawachara National Park,PLACE,1,1,1,Moulvibazar,Sylhet,en
-E0001,Ahsan Manzil Museum,PLACE,1,0,0,Dhaka,Dhaka,
+E0106,Hiron Point (Nilkamal),PLACE,1,1,1,Khulna,Khulna,en
+E0126,mohamaya lake,PLACE,2,1,1,Chattogram,Chattogram,en
+E0129,Nafakhum Waterfall,PLACE,1,1,1,Bandarban,Chattogram,en
+E0131,Natore Rajbari,PLACE,1,1,1,Natore|Rajshahi,Rajshahi,en
+E0138,patenga sea beach,PLACE,2,1,1,Chattogram,Chattogram,en
+E0141,Ramna park,PLACE,2,1,1,Dhaka,Dhaka,en
+E0167,BEST Time to visit here is in Winter season,TIP,1,1,1,Narayanganj,Dhaka,en
+E0168,Bargain politely,TIP,1,1,1,Cox's Bazar,Chattogram,en
+E0169,Bargain the price with them,TIP,1,1,1,Rajshahi,Rajshahi,en
+E0170,Bargaining,TIP,1,1,1,Patuakhali,Barishal,en
+E0171,Bargaining at stalls,TIP,1,1,1,Cox's Bazar,Chattogram,en
+E0172,Best Time to Visit Early morning or late,TIP,1,1,1,Sylhet,Sylhet,en
+E0173,Best Time to Visit July,TIP,1,1,1,Cox's Bazar,Chattogram,en
+E0174,Best Time to Visit Monsoon,TIP,1,1,1,Sunamganj,Sylhet,en
+E0176,Best time is April to October as the flow,TIP,1,1,1,Bandarban,Chattogram,en
+E0177,Best time is the evening time till 8PM,TIP,1,1,1,Rajshahi,Rajshahi,en
+E0178,Best time to visit I think in rainy season,TIP,1,1,1,Sylhet,Sylhet,en
+E0179,Best time to visit Late afternoon to sunset,TIP,1,1,1,Rajshahi,Rajshahi,en
+E0180,Best time to visit Rainy season,TIP,1,1,1,Sylhet,Sylhet,en
+E0181,Best time to visit The dry season,TIP,1,1,1,Cox's Bazar,Chattogram,en
+E0182,Best time to visit after 5,TIP,1,1,1,Bandarban,Chattogram,en
+E0183,Best time to visit at sunset time,TIP,1,1,1,Chattogram,Chattogram,en
+E0184,Best time to visit during rainy season to see it,TIP,1,1,1,Sylhet,Sylhet,en
+E0185,Best time to visit from 4,TIP,1,1,1,Bandarban,Chattogram,en
+E0186,Best time to visit in the rainy season,TIP,1,1,1,Rangamati,Chattogram,en
+E0187,Best time to visit is during cultural fairs or,TIP,1,1,1,Narayanganj,Dhaka,en
+E0188,Best time to visit is during or just after the,TIP,1,1,1,Moulvibazar,Sylhet,en
+E0189,Best time to visit is early morning or late,TIP,1,1,1,Moulvibazar,Sylhet,en
+E0190,Best time to visit is the winter season November,TIP,1,1,1,Sylhet,Sylhet,en
+E0191,Best time to visit it is afternonn of winter,TIP,1,1,1,Bandarban,Chattogram,en
+E0192,Best time to visit there is August,TIP,1,1,1,Sunamganj,Sylhet,en
+E0194,Best time to visit this place is rainy season,TIP,1,1,1,Sylhet,Sylhet,en
+E0195,Best time to visit this waterfall is June,TIP,1,1,1,Khagrachari,Chattogram,en
+E0196,Bhimruli,PLACE,1,1,1,Pirojpur,Barishal,en
+E0199,Bus from Chittagong or Dhaka to,ACCESS,1,1,1,Chattogram,Chattogram,en
+E0200,Bus from new market or train station,ACCESS,1,1,1,Chattogram,Chattogram,en
+E0201,Carry Umbrella if it is sunny day or,TIP,1,1,1,Sylhet,Sylhet,en
+E0202,Carry a parasol to walk around,TIP,1,1,1,Naogaon,Rajshahi,en
+E0203,Carry a small pack with you for,TIP,1,1,1,Moulvibazar,Sylhet,en
+E0204,Carry a stick for support,TIP,1,1,1,Chattogram,Chattogram,en
+E0205,Carry all your plastic waste and,TIP,1,1,1,Chattogram,Chattogram,en
+E0206,Carry at least two photocopies of,TIP,1,1,1,Bandarban,Chattogram,en
+E0207,Carry drinking water and foods,TIP,1,1,1,Chattogram,Chattogram,en
+E0208,Carry insect repellent and be,TIP,1,1,1,Moulvibazar,Sylhet,en
+E0209,Carry some water and light snacks,TIP,1,1,1,Moulvibazar,Sylhet,en
+E0210,Carry your umbrella and water and a,TIP,1,1,1,Sylhet,Sylhet,en
+E0212,Go early in the day to avoid,TIP,1,1,1,Khagrachari,Chattogram,en
+E0213,Go early or before sunset to,TIP,1,1,1,Chattogram,Chattogram,en
+E0216,Karamjal,PLACE,1,1,1,Khulna,Khulna,en
+E0223,SADA MATIR PAHAR,PLACE,1,1,1,Netrokona,Mymensingh,en
+E0224,Saint martin,PLACE,1,1,1,Patuakhali,Barishal,en
+E0225,Somapura Mahavihara,PLACE,1,1,1,Cumilla,Chattogram,en
+E0227,Take a boat ride on the Padma River to,ACCESS,1,1,1,Jhalokati,Barishal,en
+E0228,Take a boat ride on the Piain River,ACCESS,1,1,1,Sylhet,Sylhet,en
+E0229,Take a bus,ACCESS,1,1,1,Cumilla,Chattogram,en
+E0230,Take a bus from Gulistan,ACCESS,1,1,1,Narayanganj,Dhaka,en
+E0231,Take a bus from Khagrachari or local,ACCESS,1,1,1,Khagrachari,Chattogram,en
+E0232,Take a bus from Sylhet's Kadamtali bus,ACCESS,1,1,1,Moulvibazar,Sylhet,en
+E0233,Tetulia,PLACE,1,1,1,Jashore,Khulna,en
+E0234,Visit Early morning or late,TIP,1,1,1,Sylhet,Sylhet,en
+E0235,Visit early in the morning on a,TIP,1,1,1,Narayanganj,Dhaka,en
+E0237,Visit early in the morning to,TIP,1,1,1,Dhaka,Dhaka,en
+E0240,bargain about the boat fair from,TIP,1,1,1,Sylhet,Sylhet,en
+E0241,bargain all you can while,TIP,1,1,1,Sylhet,Sylhet,en
+E0242,bargain and bring it down to,TIP,1,1,1,Sylhet,Sylhet,en
+E0243,bargain and it costs around 700,TIP,1,1,1,Sylhet,Sylhet,en
+E0244,bargain and settle the price,TIP,1,1,1,Cox's Bazar,Chattogram,en
+E0245,bargain as sellers claim price,TIP,1,1,1,Cox's Bazar,Chattogram,en
+E0246,bargain before buying sea food,TIP,1,1,1,Chattogram,Chattogram,en
+E0247,bargain before having any,TIP,1,1,1,Cox's Bazar,Chattogram,en
+E0248,bargain before hiring boat as,TIP,1,1,1,Sylhet,Sylhet,en
+E0249,bargain before taking the ride,TIP,1,1,1,Sunamganj,Sylhet,en
+E0250,bargain before you take any boat,TIP,1,1,1,Sunamganj,Sylhet,en
+E0251,bargain beforehand,TIP,1,1,1,Cox's Bazar,Chattogram,en
+E0252,bargain for a reasonable price,TIP,1,1,1,Patuakhali,Barishal,en
+E0253,bargain for each good you buy,TIP,1,1,1,Cumilla,Chattogram,en
+E0254,bargain for low price,TIP,1,1,1,Sylhet,Sylhet,en
+E0255,bargain for prices usually they,TIP,1,1,1,Cox's Bazar,Chattogram,en
+E0256,bargain for seafood,TIP,1,1,1,Patuakhali,Barishal,en
+E0257,bargain for the accommodation,TIP,1,1,1,Rangamati,Chattogram,en
+E0258,bargain for the lowest price,TIP,1,1,1,Cox's Bazar,Chattogram,en
+E0259,bargain for this,TIP,1,1,1,Cox's Bazar,Chattogram,en
+E0260,bargain hard for fair deals,TIP,1,1,1,Cox's Bazar,Chattogram,en
+E0261,bargain if you really interested,TIP,1,1,1,Chapainawabganj,Rajshahi,en
+E0262,bargain lot for reasonable price,TIP,1,1,1,Sylhet,Sylhet,en
+E0263,bargain prices before motorcycle,TIP,1,1,1,Patuakhali,Barishal,en
+E0264,bargain souvenirs,TIP,1,1,1,Cox's Bazar,Chattogram,en
+E0265,bargain to fix the boat,TIP,1,1,1,Chattogram,Chattogram,en
+E0266,bargain to rent a boat or buy,TIP,1,1,1,Sunamganj,Sylhet,en
+E0267,bargain with boatman,TIP,1,1,1,Sylhet,Sylhet,en
+E0268,bargain with everyone,TIP,1,1,1,Patuakhali,Barishal,en
+E0269,bargain with the boatman,TIP,1,1,1,Barishal,Barishal,en
+E0270,bargain with the local shop,TIP,1,1,1,Patuakhali,Barishal,en
+E0271,bargain with the pilot of the,TIP,1,1,1,Sylhet,Sylhet,en
+E0272,bargain with the vendors,TIP,1,1,1,Jhalokati,Barishal,en
+E0273,bargain with them,TIP,1,1,1,Sylhet,Sylhet,en
+E0274,bargain with them much,TIP,1,1,1,Jhalokati,Barishal,en
+E0276,bargaining and drama,TIP,1,1,1,Chattogram,Chattogram,en
+E0277,bargaining before buying,TIP,1,1,1,Chattogram,Chattogram,en
+E0278,bargaining is essential to get,TIP,1,1,1,Chattogram,Chattogram,en
+E0279,bargaining with guide and,TIP,1,1,1,Netrokona,Mymensingh,en
+E0280,best time is December to mid January for,TIP,1,1,1,Sunamganj,Sylhet,en
+E0281,best time to visit Bichanakandi is from June to,TIP,1,1,1,Sylhet,Sylhet,en
+E0282,best time to visit Guliakhali Sea Beach is from,TIP,1,1,1,Chattogram,Chattogram,en
+E0283,best time to visit Jaflong is during the monsoon,TIP,1,1,1,Sylhet,Sylhet,en
+E0284,best time to visit Jaflong is from November to,TIP,1,1,1,Sylhet,Sylhet,en
+E0285,best time to visit Lalakhal is during the rainy,TIP,1,1,1,Sylhet,Sylhet,en
+E0286,best time to visit Ratargul,TIP,1,1,1,Sylhet,Sylhet,en
+E0287,best time to visit Ratargul is in rainy season,TIP,1,1,1,Sylhet,Sylhet,en
+E0288,best time to visit Sajek,TIP,1,1,1,Rangamati,Chattogram,en
+E0289,best time to visit Sajek is during the winter,TIP,1,1,1,Rangamati,Chattogram,en
+E0290,best time to visit for pleasant weather is from,TIP,1,1,1,Cox's Bazar,Chattogram,en
+E0291,best time to visit from October to February,TIP,1,1,1,Noakhali,Chattogram,en
+E0292,best time to visit here is January,TIP,1,1,1,Meherpur,Khulna,en
+E0293,best time to visit in Winter,TIP,1,1,1,Bandarban,Chattogram,en
+E0294,best time to visit is any day without weekends,TIP,1,1,1,Chattogram,Chattogram,en
+E0295,best time to visit is between February to April,TIP,1,1,1,Moulvibazar,Sylhet,en
+E0297,best time to visit is during the monsoon or just,TIP,1,1,1,Moulvibazar,Sylhet,en
+E0300,best time to visit is during the spring or fall,TIP,1,1,1,Bandarban,Chattogram,en
+E0302,best time to visit is from November to March,TIP,1,1,1,Cox's Bazar,Chattogram,en
+E0303,best time to visit is in the afternoon but you,TIP,1,1,1,Dinajpur,Rangpur,en
+E0304,best time to visit is in the morning or late,TIP,1,1,1,Cox's Bazar,Chattogram,en
+E0305,best time to visit such kind of places,TIP,1,1,1,Narayanganj,Dhaka,en
+E0306,best time to visit the floating market is,TIP,1,1,1,Jhalokati,Barishal,en
+E0307,best time to visit the markets is the months,TIP,1,1,1,Jhalokati,Barishal,en
+E0308,best time to visit the monastery complex is in,TIP,1,1,1,Naogaon,Rajshahi,en
+E0309,best time to visit there,TIP,1,1,1,Rajshahi,Rajshahi,en
+E0310,best time to visit this park is winter,TIP,1,1,1,Moulvibazar,Sylhet,en
+E0311,best time to visit this place during the rainy,TIP,1,1,1,Sylhet,Sylhet,en
+E0312,best time to visit this place in early morning,TIP,1,1,1,Rajshahi,Rajshahi,en
+E0313,best time to visit this place in the June to,TIP,1,1,1,Sylhet,Sylhet,en
+E0314,best time to visit this place is from August to,TIP,1,1,1,Rangamati,Chattogram,en
+E0315,best time to visit this place is in the evening,TIP,1,1,1,Chattogram,Chattogram,en
+E0316,best time to visit this place is in the morning,TIP,1,1,1,Rajshahi,Rajshahi,en
+E0317,best time to visit this place to feel the real,TIP,1,1,1,Sylhet,Sylhet,en
+E0318,best time to visit this swamp forest,TIP,1,1,1,Sylhet,Sylhet,en
+E0319,best time to visiting there,TIP,1,1,1,Chattogram,Chattogram,en
+E0320,boat from Bangabir point avoid stressfull,ACCESS,1,1,1,Sylhet,Sylhet,en
+E0321,boat from Khulna or Mongla,ACCESS,1,1,1,Khulna,Khulna,en
+E0323,boat from Mongla Ferry Ghat,ACCESS,1,1,1,Bagerhat,Khulna,en
+E0324,boat from Tahirpur to Tagerhat,ACCESS,1,1,1,Sunamganj,Sylhet,en
+E0325,boat from Thanchi,ACCESS,1,1,1,Bandarban,Chattogram,en
+E0326,boat from ferry ghat,ACCESS,1,1,1,Rangamati,Chattogram,en
+E0327,boat from ghat which costs 750 and entry,ACCESS,1,1,1,Sylhet,Sylhet,en
+E0328,boat from here,ACCESS,1,1,1,Rajshahi,Rajshahi,en
+E0329,boat from remakri towards Nafakhum may,ACCESS,1,1,1,Bandarban,Chattogram,en
+E0330,boat from the reserve bazaar and visit it,ACCESS,1,1,1,Rangamati,Chattogram,en
+E0331,bus From Dhaka,ACCESS,1,1,1,Natore,Rajshahi,en
+E0333,bus from Chittagong to Comilla,ACCESS,1,1,1,Cumilla,Chattogram,en
+E0334,bus from Cox's Bazar,ACCESS,1,1,1,Cox's Bazar,Chattogram,en
+E0335,bus from Dhaka and reach to Shaturia,ACCESS,1,1,1,Manikganj,Dhaka,en
+E0336,bus from Dhaka heading towards Rajshahi,ACCESS,1,1,1,Rajshahi,Rajshahi,en
+E0337,bus from Dhaka to Bagerhat,ACCESS,1,1,1,Bagerhat,Khulna,en
+E0338,bus from Dhaka to Fakirapul or Saidabad,ACCESS,1,1,1,Moulvibazar,Sylhet,en
+E0339,bus from Dhaka to Kurigram,ACCESS,1,1,1,Rangpur,Rangpur,en
+E0340,bus from Dhaka to Shunamgonj,ACCESS,1,1,1,Sunamganj,Sylhet,en
+E0342,bus from Gulisthan to Mograpara,ACCESS,1,1,1,Narayanganj,Dhaka,en
+E0343,bus from Khagrachari or local jeep,ACCESS,1,1,1,Khagrachari,Chattogram,en
+E0344,bus from Mohakhali in Dhaka towards,ACCESS,1,1,1,Gazipur,Dhaka,en
+E0345,bus from Nathullabad bus terminal or opt,ACCESS,1,1,1,Barishal,Barishal,en
+E0346,bus from Rajshahi,ACCESS,1,1,1,Natore,Rajshahi,en
+E0347,bus from Sobhanighat in Sylhet city,ACCESS,1,1,1,Sylhet,Sylhet,en
+E0348,bus from Sylhet city to Hadarpar,ACCESS,1,1,1,Sylhet,Sylhet,en
+E0349,bus from Sylhet's Kadamtali bus station,ACCESS,1,1,1,Moulvibazar,Sylhet,en
+E0350,bus from any part of the country,ACCESS,1,1,1,Rajshahi,Rajshahi,en
+E0351,bus from dhaka,ACCESS,1,1,1,Chattogram,Chattogram,en
+E0352,bus from natore or rajshahi city,ACCESS,1,1,1,Rajshahi,Rajshahi,en
+E0353,bus from srimongol to kamalganj,ACCESS,1,1,1,Moulvibazar,Sylhet,en
+E0354,bus from the main city of Bandarban,ACCESS,1,1,1,Bandarban,Chattogram,en
+E0355,bus from there to Dhaka,ACCESS,1,1,1,Manikganj,Dhaka,en
+E0356,carry a bamboo stick,TIP,1,1,1,Chattogram,Chattogram,en
+E0357,carry a reliable flashlight or,TIP,1,1,1,Khagrachari,Chattogram,en
+E0358,carry a swimming suits,TIP,1,1,1,Cox's Bazar,Chattogram,en
+E0359,carry a torch light and be careful,TIP,1,1,1,Khagrachari,Chattogram,en
+E0360,carry a torch or it is also okay,TIP,1,1,1,Khagrachari,Chattogram,en
+E0361,carry a water bottle with you,TIP,1,1,1,Dhaka,Dhaka,en
+E0362,carry away the goods purchased from,TIP,1,1,1,Pirojpur,Barishal,en
+E0363,carry bags,TIP,1,1,1,Bandarban,Chattogram,en
+E0364,carry bananas or other food,TIP,1,1,1,Gazipur,Dhaka,en
+E0365,carry boats on the far side of the,TIP,1,1,1,Chattogram,Chattogram,en
+E0366,carry cap,TIP,1,1,1,Khagrachari,Chattogram,en
+E0367,carry drinking water,TIP,1,1,1,Chattogram,Chattogram,en
+E0368,carry drinking water and some snacks,TIP,1,1,1,Sylhet,Sylhet,en
+E0369,carry enough water and be physically,TIP,1,1,1,Chattogram,Chattogram,en
+E0370,carry enough water and food cause,TIP,1,1,1,Chattogram,Chattogram,en
+E0371,carry extra pair of dress so that,TIP,1,1,1,Khagrachari,Chattogram,en
+E0372,carry first aid kit cause God forbid,TIP,1,1,1,Moulvibazar,Sylhet,en
+E0373,carry flare to enter the cave,TIP,1,1,1,Khagrachari,Chattogram,en
+E0375,carry food then monkeys will follow,TIP,1,1,1,Gazipur,Dhaka,en
+E0376,carry foods with You,TIP,1,1,1,Cumilla,Chattogram,en
+E0377,carry for a long time,TIP,1,1,1,Chattogram,Chattogram,en
+E0378,carry forward the escort,TIP,1,1,1,Rangamati,Chattogram,en
+E0379,carry high price shoes or Sleepers,TIP,1,1,1,Cox's Bazar,Chattogram,en
+E0380,carry insect repellent for a more,TIP,1,1,1,Gazipur,Dhaka,en
+E0381,carry inside your bag,TIP,1,1,1,Dhaka,Dhaka,en
+E0382,carry lot of food and drinks and,TIP,1,1,1,Moulvibazar,Sylhet,en
+E0383,carry much mineral water and,TIP,1,1,1,Chattogram,Chattogram,en
+E0384,carry our tradition,TIP,1,1,1,Dhaka,Dhaka,en
+E0385,carry out an extensive excavation in,TIP,1,1,1,Naogaon,Rajshahi,en
+E0386,carry pack lunch in case of long day,TIP,1,1,1,Narayanganj,Dhaka,en
+E0387,carry photocopies of your National,TIP,1,1,1,Bandarban,Chattogram,en
+E0388,carry plenty of drinking water,TIP,1,1,1,Chattogram,Chattogram,en
+E0389,carry proper cash,TIP,1,1,1,Bogura,Rajshahi,en
+E0390,carry small bottle of water,TIP,1,1,1,Dhaka,Dhaka,en
+E0391,carry snacks,TIP,1,1,1,Moulvibazar,Sylhet,en
+E0392,carry some salt or lime,TIP,1,1,1,Moulvibazar,Sylhet,en
+E0393,carry the stories of a thousand,TIP,1,1,1,Cumilla,Chattogram,en
+E0394,carry torches to find their way,TIP,1,1,1,Khagrachari,Chattogram,en
+E0395,carry water and cap or umbrella,TIP,1,1,1,Cumilla,Chattogram,en
+E0396,carry water and snacks,TIP,1,1,1,Bandarban,Chattogram,en
+E0397,carry you up,TIP,1,1,1,Khagrachari,Chattogram,en
+E0398,carry your food as there are no,TIP,1,1,1,Netrokona,Mymensingh,en
+E0399,carry your own drinking water with,TIP,1,1,1,Cumilla,Chattogram,en
+E0400,carry your own food,TIP,1,1,1,Chattogram,Chattogram,en
+E0401,carry your own water,TIP,1,1,1,Khagrachari,Chattogram,en
+E0402,carry your trash back,TIP,1,1,1,Moulvibazar,Sylhet,en
+E0403,cox's bazar Beach,PLACE,1,1,1,Rajshahi,Rajshahi,en
+E0404,engine boat from Parzatan Corporation,ACCESS,1,1,1,Rangamati,Chattogram,en
+E0405,get off at Mograpara and take an auto and,ACCESS,1,1,1,Narayanganj,Dhaka,en
+E0406,get off at Surma Bridge before entering,ACCESS,1,1,1,Sunamganj,Sylhet,en
+E0407,go early in the evening,TIP,1,1,1,Chattogram,Chattogram,en
+E0408,go early in the morning,TIP,1,1,1,Dhaka,Dhaka,en
+E0409,go early in the morning and,TIP,1,1,1,Manikganj,Dhaka,en
+E0413,go in Winter otherwise it,TIP,1,1,1,Cox's Bazar,Chattogram,en
+E0414,go in the morning,TIP,1,1,1,Patuakhali,Barishal,en
+E0415,go in the morning there,TIP,1,1,1,Khagrachari,Chattogram,en
+E0416,go in winter or during migration,TIP,1,1,1,Sylhet,Sylhet,en
+E0417,ratargul,PLACE,1,1,1,Jhalokati,Barishal,en
+E0419,take a CNG from Sitakunda or Mirsharai,ACCESS,1,1,1,Chattogram,Chattogram,en
+E0420,take a CNG or Auto to reach the,ACCESS,1,1,1,Manikganj,Dhaka,en
+E0421,take a CNG to reach the basement of,ACCESS,1,1,1,Chattogram,Chattogram,en
+E0422,take a CNG to travel from Chapai,ACCESS,1,1,1,Chapainawabganj,Rajshahi,en
+E0423,take a boat across the lake to reach a,ACCESS,1,1,1,Chattogram,Chattogram,en
+E0424,take a boat and go to inside of the lake,ACCESS,1,1,1,Chattogram,Chattogram,en
+E0425,take a boat and go to the waterfall side,ACCESS,1,1,1,Chattogram,Chattogram,en
+E0426,take a boat around the bends of these,ACCESS,1,1,1,Chattogram,Chattogram,en
+E0428,take a boat ride before sunset,ACCESS,1,1,1,Rajshahi,Rajshahi,en
+E0429,take a boat ride during flow tide,ACCESS,1,1,1,Chattogram,Chattogram,en
+E0430,take a boat ride into the sea with the,ACCESS,1,1,1,Chattogram,Chattogram,en
+E0431,take a boat ride on the curved water,ACCESS,1,1,1,Khulna,Khulna,en
+E0432,take a boat ride there,ACCESS,1,1,1,Narayanganj,Dhaka,en
+E0433,take a boat ride through the calm waters,ACCESS,1,1,1,Sylhet,Sylhet,en
+E0434,take a boat ride to Bichanakandi,ACCESS,1,1,1,Sylhet,Sylhet,en
+E0435,take a boat ride to enjoy the view and,ACCESS,1,1,1,Rajshahi,Rajshahi,en
+E0436,take a boat ride to see the other,ACCESS,1,1,1,Chattogram,Chattogram,en
+E0437,take a boat to roam on the Padma River,ACCESS,1,1,1,Rajshahi,Rajshahi,en
+E0438,take a boat to travel and roam around the,ACCESS,1,1,1,Sunamganj,Sylhet,en
+E0439,take a bus from Dhaka and reach to,ACCESS,1,1,1,Manikganj,Dhaka,en
+E0440,take a bus from Dhaka to Bagerhat,ACCESS,1,1,1,Bagerhat,Khulna,en
+E0441,take a bus from Dhaka to Fakirapul or,ACCESS,1,1,1,Moulvibazar,Sylhet,en
+E0442,take a bus from Dhaka to Kurigram,ACCESS,1,1,1,Rangpur,Rangpur,en
+E0443,take a bus from Nathullabad bus terminal,ACCESS,1,1,1,Barishal,Barishal,en
+E0444,take a bus or a CNG to Kacchaptali,ACCESS,1,1,1,Bandarban,Chattogram,en
+E0445,take a bus or an auto,ACCESS,1,1,1,Gazipur,Dhaka,en
+E0446,take a bus to Badalgachi and then a CNG,ACCESS,1,1,1,Naogaon,Rajshahi,en
+E0447,take a bus to Sharupkathi then take auto,ACCESS,1,1,1,Jhalokati,Barishal,en
+E0448,take a cng or battery operated riksha,ACCESS,1,1,1,Cox's Bazar,Chattogram,en
+E0449,take a rickshaw,ACCESS,1,1,1,Natore,Rajshahi,en
+E0450,take a rickshaw directly to Panam Nagar,ACCESS,1,1,1,Narayanganj,Dhaka,en
+E0451,take a rickshaw it will cost 30tk or walk on,ACCESS,1,1,1,Dhaka,Dhaka,en
+E0452,take a rickshaw or van inside to visit the,ACCESS,1,1,1,Dinajpur,Rangpur,en
+E0453,varendra museum,PLACE,1,1,1,Bogura,Rajshahi,en
+E0455,visit early in the morning and,TIP,1,1,1,Chattogram,Chattogram,en
+E0456,visit early in the morning when,TIP,1,1,1,Bandarban,Chattogram,en
+E0457,visit early morning like 10 am,TIP,1,1,1,Naogaon,Rajshahi,en
+E0458,visit early to avoid crowds,TIP,1,1,1,Sylhet,Sylhet,en
+E0459,visit in Winter,TIP,1,1,1,Bandarban,Chattogram,en
+E0460,visit in the morning or late afternoon,TIP,1,1,1,Narayanganj,Dhaka,en
+E0462,visit in winter only,TIP,1,1,1,Dinajpur,Rangpur,en
+E0464,visit in winter when the weather is,TIP,1,1,1,Rajshahi,Rajshahi,en
+E0465,visit in winter you can take a walk,TIP,1,1,1,Sylhet,Sylhet,en
+E0466,Best time to visit this place is during Rainy,TIP,1,1,1,Sylhet,Sylhet,bn
+E0467,Take a train from Dhaka to Khulna Railway,ACCESS,1,1,1,Bagerhat,Khulna,mixed
+E0468,Visit early morning or during,TIP,1,1,1,Dhaka,Dhaka,mixed
+E0469,best time to visit Paharpur is between October,TIP,1,1,1,Naogaon,Rajshahi,mixed
+E0470,best time to visit R,TIP,1,1,1,Sylhet,Sylhet,mixed
+E0471,go in winter,TIP,1,1,1,Chattogram,Chattogram,en
+E0472,take a boat or another vehicle to reach,ACCESS,1,1,1,Sylhet,Sylhet,mixed
+E0473,take a boat ride to the Padma chars and,ACCESS,1,1,1,Rajshahi,Rajshahi,mixed
 E0011,Civic Inn,PLACE,1,0,0,Dhaka,Dhaka,
-E0015,Foy's Lake Resort,PLACE,2,0,0,Chattogram,Chattogram,
 E0019,Green Edge Hotel,PLACE,1,0,0,Dhaka,Dhaka,
 E0020,Guliakhali Sea Beach,PLACE,1,0,0,Chattogram,Chattogram,
 E0022,Heritage Hotel Chittagong,PLACE,1,0,0,Chattogram,Chattogram,
 E0023,Hoque Tower International,PLACE,1,0,0,Chattogram,Chattogram,
-E0024,Jaflong Zero Point,PLACE,1,0,0,Sylhet,Sylhet,
-E0025,Kaptai Lake,PLACE,1,0,0,Rangamati,Chattogram,
 E0026,Kollol Hotel,PLACE,1,0,0,Cox's Bazar,Chattogram,
-E0028,Lalbagh Fort,PLACE,1,0,0,Dhaka,Dhaka,
-E0032,Nilachal Tourist Center,PLACE,1,0,0,Bandarban,Chattogram,
 E0034,Noorjahan Grand Hotel,PLACE,1,0,0,Sylhet,Sylhet,
-E0035,Panam City,PLACE,1,0,0,Narayanganj,Dhaka,
 E0038,Ratargul Swamp Forest,PLACE,1,0,0,Sylhet,Sylhet,
 E0039,Royal Pearl Suites,PLACE,1,0,0,Cox's Bazar,Chattogram,
 E0041,Saint Martins Island,PLACE,1,0,0,Cox's Bazar,Chattogram,
 E0043,Sea Cox Hotel,PLACE,1,0,0,Cox's Bazar,Chattogram,
 E0045,Sixty Dome Mosque,PLACE,1,0,0,Bagerhat,Khulna,
-E0049,Srimangal Tea Garden,PLACE,1,0,0,Moulvibazar,Sylhet,
 E0051,Sundarbans (Karamjal Wildlife Centre),PLACE,1,0,0,Bagerhat,Khulna,
 E0052,Sylhet Paradise Inn,PLACE,1,0,0,Sylhet,Sylhet,
 E0053,The Crystal Rose Hotel,PLACE,1,0,0,Sylhet,Sylhet,
 E0054,West Park Inn,PLACE,1,0,0,Dhaka,Dhaka,
 E0079,Adventure World Family Tourism Park,PLACE,1,0,0,Sylhet,Sylhet,
 E0080,Ali Amjad's Clock,PLACE,1,0,0,Sylhet,Sylhet,
-E0081,Alutila Cave,PLACE,1,0,0,Khagrachari,Chattogram,
 E0082,Baithakata Floating Market,PLACE,1,0,0,Pirojpur,Barishal,
 E0083,Baliati Jamidar Bari,PLACE,1,0,0,Manikganj,Dhaka,
 E0084,Bangladesh Folk Art & Crafts Foundation (Sonargaon),PLACE,1,0,0,Narayanganj,Dhaka,
@@ -88,7 +408,6 @@ E0087,Bichnakandi Tourist Spot,PLACE,1,0,0,Sylhet,Sylhet,
 E0088,Bijoypur Lake,PLACE,1,0,0,Netrokona,Mymensingh,
 E0089,Bijoypur Pahar (border hill),PLACE,1,0,0,Netrokona,Mymensingh,
 E0090,Buddha Dhatu Jadi (Golden Temple),PLACE,1,0,0,Bandarban,Chattogram,
-E0091,China Matir Pahar,PLACE,1,0,0,Netrokona,Mymensingh,
 E0092,Choto Sona Masjid,PLACE,1,0,0,Chapainawabganj,Rajshahi,
 E0093,Darianagar Nature & Tourism Center,PLACE,1,0,0,Cox's Bazar,Chattogram,
 E0094,Debotakhum,PLACE,1,0,0,Bandarban,Chattogram,
@@ -103,15 +422,10 @@ E0102,Hatirjheel Lake,PLACE,1,0,0,Dhaka,Dhaka,
 E0103,Hazrat Shahjalal Mazar Sharif,PLACE,1,0,0,Sylhet,Sylhet,
 E0104,Hillview Park & Cafe,PLACE,1,0,0,Chattogram,Chattogram,
 E0105,Himchari Fountain and Hill,PLACE,1,0,0,Cox's Bazar,Chattogram,
-E0106,Hiron Point (Nilkamal),PLACE,1,0,0,Khulna,Khulna,
 E0107,Hum Hum Waterfall,PLACE,1,0,0,Moulvibazar,Sylhet,
-E0108,I-Badh,PLACE,1,0,0,Rajshahi,Rajshahi,
 E0109,Jhau Bon Kuakata,PLACE,1,0,0,Patuakhali,Barishal,
-E0110,Kantajew Temple,PLACE,1,0,0,Dinajpur,Rangpur,
 E0111,Khagrachari HDCH Park,PLACE,1,0,0,Khagrachari,Chattogram,
 E0112,Khoiyachara Waterfalls,PLACE,1,0,0,Chattogram,Chattogram,
-E0114,Kotka Sea Beach,PLACE,1,0,0,Bagerhat,Khulna,
-E0115,Kuakata Sea Beach,PLACE,1,0,0,Patuakhali,Barishal,
 E0116,Laboni Point Sea Beach,PLACE,1,0,0,Cox's Bazar,Chattogram,
 E0117,Lala Khal Zero Point,PLACE,1,0,0,Sylhet,Sylhet,
 E0119,Madhabkunda Waterfall,PLACE,1,0,0,Moulvibazar,Sylhet,
@@ -121,29 +435,22 @@ E0122,Mangrove Forest Kuakata,PLACE,1,0,0,Patuakhali,Barishal,
 E0123,Mayung Kopal (Stairs to Heaven),PLACE,1,0,0,Khagrachari,Chattogram,
 E0124,Michael Madhusudan Datta Memorial (Sagardari),PLACE,1,0,0,Jashore,Khulna,
 E0125,Mini Bangladesh (Shadhinata Complex),PLACE,1,0,0,Chattogram,Chattogram,
-E0126,Mohamaya Lake,PLACE,1,0,0,Chattogram,Chattogram,
 E0127,Mujibnagar Monument Complex,PLACE,1,0,0,Meherpur,Khulna,
 E0128,Museum of Rajas' (Hason Raja Museum),PLACE,1,0,0,Sylhet,Sylhet,
-E0129,Nafakhum Waterfall,PLACE,1,0,0,Bandarban,Chattogram,
 E0130,National Botanical Garden,PLACE,1,0,0,Dhaka,Dhaka,
-E0131,Natore Rajbari,PLACE,1,0,0,Natore,Rajshahi,
 E0132,Naval Sea Beach,PLACE,1,0,0,Chattogram,Chattogram,
 E0133,New Zealand Para,PLACE,1,0,0,Khagrachari,Chattogram,
 E0134,Nijhum Dwip,PLACE,1,0,0,Noakhali,Chattogram,
 E0135,Noor Jahan Tea Garden,PLACE,1,0,0,Moulvibazar,Sylhet,
 E0136,Osmani Museum,PLACE,1,0,0,Sylhet,Sylhet,
 E0137,Padma Garden Footbridge,PLACE,1,0,0,Rajshahi,Rajshahi,
-E0138,Patenga Sea Beach,PLACE,1,0,0,Chattogram,Chattogram,
 E0139,Puthia Rajbari,PLACE,1,0,0,Rajshahi,Rajshahi,
 E0140,Rajshahi Central Park & Zoo,PLACE,1,0,0,Rajshahi,Rajshahi,
-E0141,Ramna Park,PLACE,1,0,0,Dhaka,Dhaka,
 E0142,Ramsagar National Park,PLACE,1,0,0,Dinajpur,Rangpur,
 E0143,Risang Waterfall,PLACE,1,0,0,Khagrachari,Chattogram,
 E0144,Sada Matir Pahar (White Clay Hills),PLACE,1,0,0,Netrokona,Mymensingh,
 E0145,Saint Martin's Island West Beach,PLACE,1,0,0,Cox's Bazar,Chattogram,
-E0146,Sajek Valley,PLACE,1,0,0,Rangamati,Chattogram,
 E0147,Shalban Bihar,PLACE,1,0,0,Cumilla,Chattogram,
-E0148,Shashi Lodge,PLACE,1,0,0,Mymensingh,Mymensingh,
 E0149,Shilaidaha Rabindra Kuthibari,PLACE,1,0,0,Kushtia,Khulna,
 E0150,Shopnopuri Artificial Amusement Park,PLACE,1,0,0,Dinajpur,Rangpur,
 E0151,Shreepur Tea Garden,PLACE,1,0,0,Sylhet,Sylhet,
@@ -152,12 +459,10 @@ E0153,Somapura Mahavihara (Paharpur),PLACE,1,0,0,Naogaon,Rajshahi,
 E0154,Sreepur (Rangpani) Zero Point,PLACE,1,0,0,Sylhet,Sylhet,
 E0155,Sugondha Sea Beach,PLACE,1,0,0,Cox's Bazar,Chattogram,
 E0156,Sunset Point Kuakata,PLACE,1,0,0,Patuakhali,Barishal,
-E0157,T-Badh,PLACE,1,0,0,Rajshahi,Rajshahi,
 E0158,Tajhat Palace,PLACE,1,0,0,Rangpur,Rangpur,
 E0159,Tanguar Haor,PLACE,1,0,0,Sunamganj,Sylhet,
 E0160,Tara Masjid (Star Mosque),PLACE,1,0,0,Dhaka,Dhaka,
 E0161,The Sundarbans,PLACE,1,0,0,Khulna,Khulna,
 E0162,Tilagor Eco Park,PLACE,1,0,0,Sylhet,Sylhet,
-E0163,Varendra Research Museum,PLACE,1,0,0,Rajshahi,Rajshahi,
 E0164,Vinno Jogot Amusement Park,PLACE,1,0,0,Rangpur,Rangpur,
 E0165,Zainul Abedin Park,PLACE,1,0,0,Mymensingh,Mymensingh,

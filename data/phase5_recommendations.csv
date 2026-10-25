@@ -1,5 +1,33 @@
 type,target_id,severity,details,suggested_action
-preference_coverage_issue,P01,medium,mapped_topic_count=1,merge_or_expand
-preference_coverage_issue,P02,medium,mapped_topic_count=1,merge_or_expand
-preference_coverage_issue,P04,medium,mapped_topic_count=2,merge_or_expand
+topic_precision_issue,topic_4,medium,"mapped P01 sim=0.7531, second=P12 sim=0.6893, gap=0.0638",manual_remap_review
+topic_precision_issue,topic_10,medium,"mapped P13 sim=0.7802, second=P12 sim=0.7484, gap=0.0318",manual_remap_review
+topic_precision_issue,topic_13,medium,"mapped P12 sim=0.6782, second=P11 sim=0.6756, gap=0.0026",manual_remap_review
+topic_precision_issue,topic_16,medium,"mapped P16 sim=0.5829, second=P11 sim=0.5817, gap=0.0012",manual_remap_review
+topic_precision_issue,topic_19,medium,"mapped P05 sim=0.6711, second=P07 sim=0.6442, gap=0.0269",manual_remap_review
+topic_precision_issue,topic_22,medium,"mapped P08 sim=0.5518, second=P01 sim=0.5301, gap=0.0217",manual_remap_review
+topic_precision_issue,topic_24,medium,"mapped P13 sim=0.7689, second=P12 sim=0.7472, gap=0.0217",manual_remap_review
+topic_precision_issue,topic_25,medium,"mapped P01 sim=0.6228, second=P03 sim=0.5514, gap=0.0714",manual_remap_review
+topic_precision_issue,topic_28,medium,"mapped P05 sim=0.6242, second=P07 sim=0.5838, gap=0.0404",manual_remap_review
+topic_precision_issue,topic_30,medium,"mapped P12 sim=0.6704, second=P11 sim=0.6131, gap=0.0573",manual_remap_review
+topic_precision_issue,topic_31,medium,"mapped P09 sim=0.5388, second=P02 sim=0.5174, gap=0.0214",manual_remap_review
+topic_precision_issue,topic_34,medium,"mapped P13 sim=0.7019, second=P11 sim=0.6317, gap=0.0702",manual_remap_review
+topic_precision_issue,topic_36,medium,"mapped P12 sim=0.6525, second=P11 sim=0.6460, gap=0.0065",manual_remap_review
+topic_precision_issue,topic_37,medium,"mapped P18 sim=0.6331, second=P08 sim=0.5885, gap=0.0446",manual_remap_review
+topic_precision_issue,topic_43,medium,"mapped P13 sim=0.7634, second=P12 sim=0.6983, gap=0.0651",manual_remap_review
+topic_precision_issue,topic_46,medium,"mapped P01 sim=0.7654, second=P03 sim=0.6929, gap=0.0725",manual_remap_review
+topic_precision_issue,topic_47,medium,"mapped P16 sim=0.7698, second=P12 sim=0.6916, gap=0.0782",manual_remap_review
+topic_precision_issue,topic_48,medium,"mapped P05 sim=0.7155, second=P07 sim=0.6971, gap=0.0184",manual_remap_review
+topic_precision_issue,topic_49,medium,"mapped P01 sim=0.6592, second=P12 sim=0.6569, gap=0.0023",manual_remap_review
+topic_precision_issue,topic_54,medium,"mapped P12 sim=0.5103, second=P11 sim=0.4903, gap=0.0200",manual_remap_review
+topic_precision_issue,topic_55,medium,"mapped P16 sim=0.6334, second=P15 sim=0.6005, gap=0.0329",manual_remap_review
+topic_precision_issue,topic_56,medium,"mapped P05 sim=0.5951, second=P08 sim=0.5437, gap=0.0514",manual_remap_review
+preference_coverage_issue,P04,medium,mapped_topic_count=1,merge_or_expand
+preference_coverage_issue,P06,medium,mapped_topic_count=1,merge_or_expand
+preference_coverage_issue,P10,medium,mapped_topic_count=1,merge_or_expand
+preference_coverage_issue,P14,medium,mapped_topic_count=1,merge_or_expand
+preference_coverage_issue,P15,medium,mapped_topic_count=2,merge_or_expand
+preference_coverage_issue,P17,medium,mapped_topic_count=1,merge_or_expand
+preference_coverage_issue,P18,medium,mapped_topic_count=2,merge_or_expand
+preference_coverage_issue,P19,medium,mapped_topic_count=2,merge_or_expand
+preference_coverage_issue,P20,medium,mapped_topic_count=1,merge_or_expand
 topic_spot_check,topic_2,low,Mixed heritage/Jaflong signal historically observed; spot-check manually.,manual_sample_review

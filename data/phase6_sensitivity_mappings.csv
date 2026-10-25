@@ -1,34 +1,155 @@
 sample_size,topic_id,topic_name,review_count,preference_id,preference,category,similarity,high_confidence
-151,0,0_place_beach_visit_bangladesh,83,P05,Ecotourism and forest boat safaris,Attractions & Activities,0.4544,True
-151,1,1_good_room_location_staff,68,P01,Quality hotel accommodation and staff service,Accommodation,0.5525,True
-247,0,0_good_hotel_staff_stay,42,P01,Quality hotel accommodation and staff service,Accommodation,0.7052,True
-247,1,1_room_bad_good_staff,38,P01,Quality hotel accommodation and staff service,Accommodation,0.4316,True
-247,2,2_beach_sea_sea beach_island,29,P02,Coastal beach and coral island excursions,Attractions & Activities,0.5768,True
-247,3,3_history_place_historical_dhaka,27,P03,Historical landmark and ancient city tours,Attractions & Activities,0.4854,True
-247,4,4_exceptional_good_good good_good exceptional,19,P01,Quality hotel accommodation and staff service,Accommodation,0.2685,False
-247,5,5_jaflong_jaflong zero_zero point_zero,12,P04,Hill tracts and scenic lake exploration,Attractions & Activities,0.2662,False
-247,6,6_place_ticket_trail_great place,11,P05,Ecotourism and forest boat safaris,Attractions & Activities,0.4377,True
-247,7,7_forest_swamp_water_swamp forest,10,P05,Ecotourism and forest boat safaris,Attractions & Activities,0.4559,True
-247,8,8_sunset_drive_area_weather,10,P02,Coastal beach and coral island excursions,Attractions & Activities,0.4092,True
-247,9,9_panam_city_panam nagar_nagar,9,P03,Historical landmark and ancient city tours,Attractions & Activities,0.4397,True
-247,10,10_karamjal_sundarbans_forest_center,9,P05,Ecotourism and forest boat safaris,Attractions & Activities,0.4568,True
-247,11,11_booking_price_com_booking com,8,P01,Quality hotel accommodation and staff service,Accommodation,0.2753,False
-398,0,0_good_room_staff_location,173,P01,Quality hotel accommodation and staff service,Accommodation,0.5513,True
-398,1,1_dhaka_history_fort_visit,50,P03,Historical landmark and ancient city tours,Attractions & Activities,0.4912,True
-398,2,2_beach_sea_island_sea beach,45,P02,Coastal beach and coral island excursions,Attractions & Activities,0.5879,True
-398,3,3_sundarbans_karamjal_forest_center,25,P05,Ecotourism and forest boat safaris,Attractions & Activities,0.4897,True
-398,4,4_jaflong_hills_zero point_zero,24,P04,Hill tracts and scenic lake exploration,Attractions & Activities,0.332,False
-398,5,5_tea_garden_tea garden_quality,14,P05,Ecotourism and forest boat safaris,Attractions & Activities,0.3644,False
-398,6,6_forest_swamp_ratargul_swamp forest,13,P05,Ecotourism and forest boat safaris,Attractions & Activities,0.4201,True
-398,7,7_panam_city_panam city_sonargaon,12,P03,Historical landmark and ancient city tours,Attractions & Activities,0.4061,True
-398,8,8_place_sunset_return_boat,8,P02,Coastal beach and coral island excursions,Attractions & Activities,0.4548,True
-538,0,0_good_room_staff_hotel,240,P01,Quality hotel accommodation and staff service,Accommodation,0.6694,True
-538,1,1_dhaka_history_visit_place,78,P03,Historical landmark and ancient city tours,Attractions & Activities,0.4866,True
-538,2,2_beach_sea_island_sea beach,77,P02,Coastal beach and coral island excursions,Attractions & Activities,0.588,True
-538,3,3_nilachal_bandarban_place_hills,34,P04,Hill tracts and scenic lake exploration,Attractions & Activities,0.4345,True
-538,4,4_forest_swamp_swamp forest_ratargul,17,P05,Ecotourism and forest boat safaris,Attractions & Activities,0.4323,True
-538,5,5_panam_city_panam city_sonargaon,17,P03,Historical landmark and ancient city tours,Attractions & Activities,0.3921,False
-538,6,6_tea_garden_tea garden_sreemangal,16,P05,Ecotourism and forest boat safaris,Attractions & Activities,0.3892,False
-538,7,7_karamjal_sundarbans_forest_mongla,13,P05,Ecotourism and forest boat safaris,Attractions & Activities,0.4351,True
-538,8,8_lake_kaptai_kaptai lake_rangamati,11,P04,Hill tracts and scenic lake exploration,Attractions & Activities,0.4541,True
-538,9,9_place_historical place_history_historical,8,P03,Historical landmark and ancient city tours,Attractions & Activities,0.4825,True
+4155,0,0_অবস্থিত_বাংলাদেশের_যা_যায়,632,P10,Cave Exploration and Adventure,Attractions & Activities,0.2015,False
+4155,1,1_সুন্দর_জায়গা_ভালো_জায়গা,490,P10,Cave Exploration and Adventure,Attractions & Activities,0.3106,False
+4155,2,2_bangladesh_museum_place_history,238,P12,Ancient Archaeological Sites and Museums,Attractions & Activities,0.665,True
+4155,3,3_place_family_nice_nice place,132,P02,Waterfalls and Parks Visits,Attractions & Activities,0.3445,False
+4155,4,4_historical_place_palace_historical place,114,P14,Historic City and Folk Art Heritage,Attractions & Activities,0.5269,True
+4155,5,5_temple_buddhist_paharpur_puthia,98,P16,Buddhist Heritage and Temple Visits,Attractions & Activities,0.4609,True
+4155,6,6_park_animals_zoo_rides,97,P03,National Parks and Nature Escapes,Attractions & Activities,0.4551,True
+4155,7,7_lake_place_boat_water,81,P04,Swamp Forest Boat Rides,Attractions & Activities,0.4832,True
+4155,8,8_waterfall_water_hum_waterfalls,80,P02,Waterfalls and Parks Visits,Attractions & Activities,0.5161,True
+4155,9,9_beach_cox_bazar_cox bazar,79,P05,Coastal Beach Destinations,Attractions & Activities,0.6317,True
+4155,10,10_beach_sea_sea beach_guliakhali,77,P05,Coastal Beach Destinations,Attractions & Activities,0.5457,True
+4155,11,11_sylhet_boat_water_haor,77,P18,Wetland and Haor Nature Tours,Attractions & Activities,0.3845,False
+4155,12,12_forest_mangrove_sundarbans_nijhum,72,P03,National Parks and Nature Escapes,Attractions & Activities,0.3697,False
+4155,13,13_mosque_jahan_domes_khan jahan,67,P13,Historic Mosques and Islamic Architecture,Attractions & Activities,0.4553,True
+4155,14,14_bandarban_nilachal_nilgiri_debotakhum,65,P09,Trekking and Hill Adventures,Attractions & Activities,0.4444,True
+4155,15,15_baliati_palace_rangpur_zamindar,57,P12,Ancient Archaeological Sites and Museums,Attractions & Activities,0.4993,True
+4155,16,16_beauty_natural_nature_beautiful,55,P02,Waterfalls and Parks Visits,Attractions & Activities,0.4355,True
+4155,17,17_rajshahi_padma_badh_padma river,51,P11,Historic Palaces and Rajbaris,Attractions & Activities,0.3587,False
+4155,18,18_cave_alutila_khagrachari_inside,43,P10,Cave Exploration and Adventure,Attractions & Activities,0.6174,True
+4155,19,19_chittagong_lake_foy_foy lake,42,P01,Wildlife and Forest Exploration,Attractions & Activities,0.4126,True
+4155,20,20_ta_onk_jonno_onek,39,P07,Scenic Coastal Scenery and Sunsets,Attractions & Activities,0.2468,False
+4155,21,21_staff_room_good_service,37,P20,Hotel Stay and Staff Service,Accommodation,0.5322,True
+4155,22,22_lake_bijoypur_white_clay,36,P09,Trekking and Hill Adventures,Attractions & Activities,0.2647,False
+4155,23,23_tagore_poet_rabindranath_rabindranath tagore,32,P16,Buddhist Heritage and Temple Visits,Attractions & Activities,0.2812,False
+4155,24,24_park_ramna_ramna park_dhaka,29,P02,Waterfalls and Parks Visits,Attractions & Activities,0.4147,True
+4155,25,25_tea_tea garden_garden_finlay,29,P17,Tea Gardens and Colonial Estates,Attractions & Activities,0.4677,True
+4155,26,26_ticket_ticket price_price_taka,28,P09,Trekking and Hill Adventures,Attractions & Activities,0.3037,False
+4155,27,27_shahjalal_hazrat_hazrat shahjalal_shrine,28,P15,Spiritual Shrines and Mazar Visits,Attractions & Activities,0.4478,True
+4155,28,28_kuakata_beach_sea_kuakata sea,26,P07,Scenic Coastal Scenery and Sunsets,Attractions & Activities,0.5997,True
+4155,29,29_panam_city_sonargaon_panam city,26,P14,Historic City and Folk Art Heritage,Attractions & Activities,0.3728,False
+4155,30,30_jaflong_river_zero point_zero,25,P01,Wildlife and Forest Exploration,Attractions & Activities,0.3139,False
+4155,31,31_waterfall_stream_falls_madhabkunda,25,P02,Waterfalls and Parks Visits,Attractions & Activities,0.4525,True
+4155,32,32_forest_jungle_place_deep forest,24,P03,National Parks and Nature Escapes,Attractions & Activities,0.4323,True
+4155,33,33_sajek_valley_sajek valley_clouds,23,P08,Hill Tracts and Valley Exploration,Attractions & Activities,0.5352,True
+4155,34,34_dhaka_manzil_ahsan_ahsan manzil,22,P15,Spiritual Shrines and Mazar Visits,Attractions & Activities,0.4232,True
+4155,35,35_beautiful beautiful_beautiful_awesome_words eyes,21,P10,Cave Exploration and Adventure,Attractions & Activities,0.2409,False
+4155,36,36_guava_market_floating_floating market,19,P19,Floating Markets and River Culture,Attractions & Activities,0.4966,True
+4155,37,37_lawachara_park_lawachara national_national park,19,P03,National Parks and Nature Escapes,Attractions & Activities,0.5414,True
+4155,38,38_chandranath_hill_chandranath hill_climb,18,P09,Trekking and Hill Adventures,Attractions & Activities,0.4618,True
+6827,0,0_অবস্থিত_বাংলাদেশের_যা_রয়েছে,928,P10,Cave Exploration and Adventure,Attractions & Activities,0.2071,False
+6827,1,1_সুন্দর_ভালো_জায়গা_পরিবেশ,901,P03,National Parks and Nature Escapes,Attractions & Activities,0.2197,False
+6827,2,2_place_boat_good_nice,295,P04,Swamp Forest Boat Rides,Attractions & Activities,0.44,True
+6827,3,3_waterfall_water_waterfalls_falls,287,P02,Waterfalls and Parks Visits,Attractions & Activities,0.5546,True
+6827,4,4_bangladesh_place_place bangladesh_historical,247,P12,Ancient Archaeological Sites and Museums,Attractions & Activities,0.6024,True
+6827,5,5_historical_place_historical place_museum,198,P14,Historic City and Folk Art Heritage,Attractions & Activities,0.5402,True
+6827,6,6_temple_buddhist_monastery_place,183,P16,Buddhist Heritage and Temple Visits,Attractions & Activities,0.5036,True
+6827,7,7_beach_sea_sea beach_cox,172,P05,Coastal Beach Destinations,Attractions & Activities,0.6031,True
+6827,8,8_mosque_domes_masjid_built,167,P13,Historic Mosques and Islamic Architecture,Attractions & Activities,0.511,True
+6827,9,9_park_animals_zoo_place,145,P03,National Parks and Nature Escapes,Attractions & Activities,0.5039,True
+6827,10,10_sylhet_jaflong_river_hills,136,P01,Wildlife and Forest Exploration,Attractions & Activities,0.3785,False
+6827,11,11_good_room_staff_hotel,101,P20,Hotel Stay and Staff Service,Accommodation,0.6131,True
+6827,12,12_ticket_taka_fee_price,99,P01,Wildlife and Forest Exploration,Attractions & Activities,0.326,False
+6827,13,13_rajshahi_padma_river_padma river,98,P04,Swamp Forest Boat Rides,Attractions & Activities,0.3488,False
+6827,14,14_sundarbans_forest_mangrove_mangrove forest,97,P04,Swamp Forest Boat Rides,Attractions & Activities,0.408,True
+6827,15,15_bandarban_nilachal_nilgiri_tourist,81,P09,Trekking and Hill Adventures,Attractions & Activities,0.4801,True
+6827,16,16_rangpur_tajhat_palace_park,74,P14,Historic City and Folk Art Heritage,Attractions & Activities,0.4246,True
+6827,17,17_hazrat_shahjalal_shrine_hazrat shahjalal,71,P15,Spiritual Shrines and Mazar Visits,Attractions & Activities,0.4659,True
+6827,18,18_tea_tea garden_garden_finlay,66,P17,Tea Gardens and Colonial Estates,Attractions & Activities,0.5104,True
+6827,19,19_place_beautiful_place beautiful_beautiful place,62,P02,Waterfalls and Parks Visits,Attractions & Activities,0.3366,False
+6827,20,20_natural_nature_place_beautiful,61,P02,Waterfalls and Parks Visits,Attractions & Activities,0.4675,True
+6827,21,21_rajbari_puthia_palace_natore,56,P11,Historic Palaces and Rajbaris,Attractions & Activities,0.3312,False
+6827,22,22_valo_onek_er_jonno,56,P07,Scenic Coastal Scenery and Sunsets,Attractions & Activities,0.1821,False
+6827,23,23_market_guava_floating_floating market,54,P19,Floating Markets and River Culture,Attractions & Activities,0.5193,True
+6827,24,24_cave_alutila_alutila cave_khagrachari,51,P10,Cave Exploration and Adventure,Attractions & Activities,0.6193,True
+6827,25,25_durga_hills_birishiri_lake,50,P09,Trekking and Hill Adventures,Attractions & Activities,0.3879,False
+6827,26,26_chittagong_lake_foy_foy lake,49,P05,Coastal Beach Destinations,Attractions & Activities,0.382,False
+6827,27,27_kuakata_beach_sea_sunset,49,P07,Scenic Coastal Scenery and Sunsets,Attractions & Activities,0.5963,True
+6827,28,28_panam_sonargaon_city_panam city,42,P14,Historic City and Folk Art Heritage,Attractions & Activities,0.3864,False
+6827,29,29_tagore_kuthibari_rabindranath_rabindranath tagore,33,P09,Trekking and Hill Adventures,Attractions & Activities,0.3604,False
+6827,30,30_ahsan_manzil_ahsan manzil_dhaka,33,P15,Spiritual Shrines and Mazar Visits,Attractions & Activities,0.4199,True
+6827,31,31_park_khagrachari_khagrachhari_hanging,32,P03,National Parks and Nature Escapes,Attractions & Activities,0.4446,True
+6827,32,32_lawachara_forest_lawachara national_park,32,P03,National Parks and Nature Escapes,Attractions & Activities,0.5296,True
+6827,33,33_fort_lalbagh_mughal_lalbagh fort,31,P14,Historic City and Folk Art Heritage,Attractions & Activities,0.3568,False
+6827,34,34_ramna_park_ramna park_dhaka,30,P03,National Parks and Nature Escapes,Attractions & Activities,0.3894,False
+6827,35,35_forest_swamp_swamp forest_ratargul,30,P04,Swamp Forest Boat Rides,Attractions & Activities,0.5158,True
+6827,36,36_guliakhali_beach_guliakhali sea_sea,30,P05,Coastal Beach Destinations,Attractions & Activities,0.4474,True
+6827,37,37_island_martin_martin island_saint martin,30,P06,Island and Coral Beach Tourism,Attractions & Activities,0.5677,True
+6827,38,38_laboni_beach_point_laboni beach,28,P05,Coastal Beach Destinations,Attractions & Activities,0.4431,True
+10982,0,0_সুন্দর_জায়গা_ভালো_পরিবেশ,1498,P10,Cave Exploration and Adventure,Attractions & Activities,0.2167,False
+10982,1,1_অবস্থিত_বাংলাদেশের_রয়েছে_যা,1364,P10,Cave Exploration and Adventure,Attractions & Activities,0.2067,False
+10982,2,2_bangladesh_place_museum_visit,583,P12,Ancient Archaeological Sites and Museums,Attractions & Activities,0.6061,True
+10982,3,3_beach_cox_sea_cox bazar,364,P05,Coastal Beach Destinations,Attractions & Activities,0.6274,True
+10982,4,4_place_historical_historical place_museum,359,P14,Historic City and Folk Art Heritage,Attractions & Activities,0.5596,True
+10982,5,5_waterfall_waterfalls_water_falls,322,P02,Waterfalls and Parks Visits,Attractions & Activities,0.5517,True
+10982,6,6_rajshahi_palace_rangpur_padma,311,P11,Historic Palaces and Rajbaris,Attractions & Activities,0.4198,True
+10982,7,7_temple_buddhist_site_bihar,270,P12,Ancient Archaeological Sites and Museums,Attractions & Activities,0.4878,True
+10982,8,8_place_nice place_nice_family,256,P02,Waterfalls and Parks Visits,Attractions & Activities,0.2947,False
+10982,9,9_place_lake_beautiful_natural,238,P02,Waterfalls and Parks Visits,Attractions & Activities,0.4637,True
+10982,10,10_lake_chittagong_water_hills,204,P01,Wildlife and Forest Exploration,Attractions & Activities,0.4297,True
+10982,11,11_park_zoo_animals_place,178,P03,National Parks and Nature Escapes,Attractions & Activities,0.4741,True
+10982,12,12_sundarbans_forest_mangrove_sundarban,175,P03,National Parks and Nature Escapes,Attractions & Activities,0.3919,False
+10982,13,13_mosque_domes_dome_dome mosque,174,P13,Historic Mosques and Islamic Architecture,Attractions & Activities,0.5356,True
+10982,14,14_sylhet_water_lalakhal_place,162,P09,Trekking and Hill Adventures,Attractions & Activities,0.365,False
+10982,15,15_room_good_staff_breakfast,148,P20,Hotel Stay and Staff Service,Accommodation,0.516,True
+10982,16,16_cave_alutila_khagrachari_khagrachhari,128,P10,Cave Exploration and Adventure,Attractions & Activities,0.6227,True
+10982,17,17_tea_tea garden_garden_estate,123,P17,Tea Gardens and Colonial Estates,Attractions & Activities,0.5463,True
+10982,18,18_bandarban_nilachal_debotakhum_place,112,P09,Trekking and Hill Adventures,Attractions & Activities,0.4657,True
+10982,19,19_hazrat_shahjalal_hazrat shahjalal_shrine,108,P15,Spiritual Shrines and Mazar Visits,Attractions & Activities,0.4365,True
+10982,20,20_valo_er_onek_jonno,104,P07,Scenic Coastal Scenery and Sunsets,Attractions & Activities,0.2638,False
+10982,21,21_ticket_taka_entry_fee,88,P01,Wildlife and Forest Exploration,Attractions & Activities,0.3544,False
+10982,22,22_market_guava_floating_floating market,87,P19,Floating Markets and River Culture,Attractions & Activities,0.5128,True
+10982,23,23_rajbari_puthia_natore_palace,79,P11,Historic Palaces and Rajbaris,Attractions & Activities,0.344,False
+10982,24,24_boat_place_experience_ride,71,P04,Swamp Forest Boat Rides,Attractions & Activities,0.5633,True
+10982,25,25_kuakata_beach_sea_sunset,64,P07,Scenic Coastal Scenery and Sunsets,Attractions & Activities,0.5579,True
+10982,26,26_tagore_rabindranath_kuthibari_rabindranath tagore,61,P09,Trekking and Hill Adventures,Attractions & Activities,0.2887,False
+10982,27,27_panam_city_sonargaon_panam city,61,P14,Historic City and Folk Art Heritage,Attractions & Activities,0.3344,False
+10982,28,28_excellent_beautiful_good_incredibly beautiful,57,P02,Waterfalls and Parks Visits,Attractions & Activities,0.2352,False
+10982,29,29_ramna_park_ramna park_dhaka,56,P03,National Parks and Nature Escapes,Attractions & Activities,0.4032,True
+10982,30,30_forest_swamp_ratargul_swamp forest,53,P04,Swamp Forest Boat Rides,Attractions & Activities,0.5023,True
+10982,31,31_jaflong_zero point_zero_river,52,P01,Wildlife and Forest Exploration,Attractions & Activities,0.2892,False
+10982,32,32_ahsan_manzil_ahsan manzil_dhaka,52,P12,Ancient Archaeological Sites and Museums,Attractions & Activities,0.4071,True
+10982,33,33_poet_madhusudan_michael_michael madhusudan,51,P12,Ancient Archaeological Sites and Museums,Attractions & Activities,0.3043,False
+10982,34,34_fort_lalbagh_mughal_lalbagh fort,50,P12,Ancient Archaeological Sites and Museums,Attractions & Activities,0.3524,False
+10982,35,35_sajek_valley_sajek valley_clouds,50,P08,Hill Tracts and Valley Exploration,Attractions & Activities,0.5317,True
+10982,36,36_lawachara_forest_lawachara national_park,48,P03,National Parks and Nature Escapes,Attractions & Activities,0.532,True
+10982,37,37_beach_patenga_sea_patenga sea,48,P05,Coastal Beach Destinations,Attractions & Activities,0.5249,True
+10982,38,38_hill_view_place_climbing,47,P09,Trekking and Hill Adventures,Attractions & Activities,0.5412,True
+14841,0,0_সুন্দর_জায়গা_ভালো_জায়গা,1967,P16,Buddhist Heritage and Temple Visits,Attractions & Activities,0.1516,False
+14841,1,1_অবস্থিত_বাংলাদেশের_রয়েছে_যা,1963,P10,Cave Exploration and Adventure,Attractions & Activities,0.1711,False
+14841,2,2_tea_tea garden_garden_estate,157,P17,Tea Gardens and Colonial Estates,Attractions & Activities,0.5708,True
+14841,3,3_market_guava_floating_floating market,81,P19,Floating Markets and River Culture,Attractions & Activities,0.5042,True
+14841,4,4_valo_er_onk_ta,139,P07,Scenic Coastal Scenery and Sunsets,Attractions & Activities,0.2572,False
+14841,5,5_tagore_rabindranath_kuthibari_rabindranath tagore,82,P16,Buddhist Heritage and Temple Visits,Attractions & Activities,0.2826,False
+14841,6,6_madhusudan_poet_michael_michael madhusudan,62,P12,Ancient Archaeological Sites and Museums,Attractions & Activities,0.299,False
+14841,7,7_ahsan_manzil_ahsan manzil_dhaka,72,P15,Spiritual Shrines and Mazar Visits,Attractions & Activities,0.421,True
+14841,8,8_cave_alutila_khagrachari_alutila cave,168,P10,Cave Exploration and Adventure,Attractions & Activities,0.657,True
+14841,9,9_hill_chandranath_chandranath hill_climb,66,P09,Trekking and Hill Adventures,Attractions & Activities,0.4512,True
+14841,10,10_sajek_valley_sajek valley_clouds,73,P08,Hill Tracts and Valley Exploration,Attractions & Activities,0.5396,True
+14841,11,11_hazrat_shahjalal_shrine_sylhet,126,P15,Spiritual Shrines and Mazar Visits,Attractions & Activities,0.4742,True
+14841,12,12_bandarban_nilachal_debotakhum_bandarban city,141,P09,Trekking and Hill Adventures,Attractions & Activities,0.3989,False
+14841,13,13_waterfall_waterfalls_water_hum,242,P02,Waterfalls and Parks Visits,Attractions & Activities,0.4651,True
+14841,14,14_mosque_domes_bagerhat_dome,79,P13,Historic Mosques and Islamic Architecture,Attractions & Activities,0.4908,True
+14841,15,15_mosque_old_beautiful mosque_beautiful,147,P13,Historic Mosques and Islamic Architecture,Attractions & Activities,0.5171,True
+14841,16,16_temple_terracotta_golden_bandarban,214,P13,Historic Mosques and Islamic Architecture,Attractions & Activities,0.4521,True
+14841,17,17_forest_swamp_ratargul_swamp forest,65,P04,Swamp Forest Boat Rides,Attractions & Activities,0.5265,True
+14841,18,18_sundarbans_forest_mangrove_sundarban,227,P03,National Parks and Nature Escapes,Attractions & Activities,0.3945,False
+14841,19,19_kuakata_beach_sea_sunset,89,P07,Scenic Coastal Scenery and Sunsets,Attractions & Activities,0.6006,True
+14841,20,20_padma_river_rajshahi_badh,120,P04,Swamp Forest Boat Rides,Attractions & Activities,0.3852,False
+14841,21,21_chittagong_place_lake_place chittagong,69,P01,Wildlife and Forest Exploration,Attractions & Activities,0.4133,True
+14841,22,22_jaflong_zero point_zero_river,79,P01,Wildlife and Forest Exploration,Attractions & Activities,0.2942,False
+14841,23,23_sylhet_place_place sylhet_bichanakandi,161,P09,Trekking and Hill Adventures,Attractions & Activities,0.3523,False
+14841,24,24_puthia_rajbari_puthia rajbari_palace,71,P11,Historic Palaces and Rajbaris,Attractions & Activities,0.398,False
+14841,25,25_rajshahi_zoo_park_park zoo,71,P03,National Parks and Nature Escapes,Attractions & Activities,0.4441,True
+14841,26,26_place_good_nice_beautiful,3911,P02,Waterfalls and Parks Visits,Attractions & Activities,0.3816,False
+14841,27,27_place_historical_historical place_museum,451,P14,Historic City and Folk Art Heritage,Attractions & Activities,0.5307,True
+14841,28,28_beach_sea_sea beach_patenga,284,P05,Coastal Beach Destinations,Attractions & Activities,0.5405,True
+14841,29,29_beach_cox_cox bazar_bazar,259,P05,Coastal Beach Destinations,Attractions & Activities,0.65,True
+14841,30,30_buddhist_paharpur_monastery_bihar,136,P16,Buddhist Heritage and Temple Visits,Attractions & Activities,0.4657,True
+14841,31,31_fort_lalbagh_lalbagh fort_mughal,66,P12,Ancient Archaeological Sites and Museums,Attractions & Activities,0.3457,False
+14841,32,32_panam_city_panam city_sonargaon,79,P14,Historic City and Folk Art Heritage,Attractions & Activities,0.3305,False
+14841,33,33_lake_bijoypur_clay_hills,160,P09,Trekking and Hill Adventures,Attractions & Activities,0.3517,False
+14841,34,34_palace_rangpur_tajhat_baliati,211,P11,Historic Palaces and Rajbaris,Attractions & Activities,0.4193,True
+14841,35,35_ramna_park_ramna park_dhaka,67,P03,National Parks and Nature Escapes,Attractions & Activities,0.3721,False
+14841,36,36_bangladesh_place_museum_dhaka,904,P12,Ancient Archaeological Sites and Museums,Attractions & Activities,0.6132,True

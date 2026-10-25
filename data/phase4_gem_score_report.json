@@ -1,6 +1,6 @@
 {
-  "n_entities_considered": 162,
-  "n_candidates": 13,
+  "n_entities_considered": 467,
+  "n_candidates": 76,
   "candidate_gate_min_reviews": 2,
   "weights_declared": {
     "mentions": 0.3,
@@ -26,13 +26,14 @@
     "V3": 0.0
   },
   "by_visibility": {
-    "V3": 8,
-    "V2": 3,
-    "V0": 1,
-    "V1": 1
+    "unknown": 28,
+    "V2": 17,
+    "V3": 15,
+    "V1": 9,
+    "V0": 7
   },
   "notes": [
-    "`distinct` computed lexically (TF-IDF) for 183 mention(s)",
-    "8 candidate(s) are already official (V3), and the highest of them (Bandarban, 0.61) outranks 3 candidate(s) that are not \u2014 `mentions` saturates for a much-reviewed famous place. Use already_official to filter the register; the weights were not retuned after seeing this."
+    "`distinct` computed lexically (TF-IDF) for 2398 mention(s)",
+    "15 candidate(s) are already official (V3), and the highest of them (Sundarbans, 0.60) outranks 29 candidate(s) that are not \u2014 `mentions` saturates for a much-reviewed famous place. Use already_official to filter the register; the weights were not retuned after seeing this."
   ]
 }

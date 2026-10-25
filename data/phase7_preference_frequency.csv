@@ -1,6 +1,21 @@
 preference_id,preference_label,category,subcategory,preference_type,topic_count,review_count,review_share
-P01,Quality hotel accommodation and staff service,Accommodation,Hotel & Resort Services,mainstream,1,239,0.479
-P03,Historical landmark and ancient city tours,Attractions & Activities,Heritage & Archaeological Tourism,mainstream,3,97,0.1944
-P02,Coastal beach and coral island excursions,Attractions & Activities,Coastal & Beach Tourism,mainstream,1,76,0.1523
-P05,Ecotourism and forest boat safaris,Attractions & Activities,Ecotourism & Wildlife,mainstream,3,44,0.0882
-P04,Hill tracts and scenic lake exploration,Attractions & Activities,Nature & Adventure Tourism,mainstream,2,43,0.0862
+P01,Wildlife and Forest Exploration,Attractions & Activities,Nature & Wildlife,mainstream,12,6447,0.4344
+P02,Waterfalls and Parks Visits,Attractions & Activities,Nature & Wildlife,mainstream,2,3600,0.2426
+P12,Ancient Archaeological Sites and Museums,Attractions & Activities,Heritage & Culture,mainstream,8,900,0.0606
+P20,Hotel Stay and Staff Service,Accommodation,Hotel Amenities & Service,mainstream,1,736,0.0496
+P05,Coastal Beach Destinations,Attractions & Activities,Coastal & Marine,mainstream,7,590,0.0398
+P13,Historic Mosques and Islamic Architecture,Attractions & Activities,Heritage & Culture,mainstream,5,495,0.0334
+P11,Historic Palaces and Rajbaris,Attractions & Activities,Heritage & Culture,mainstream,2,459,0.0309
+P15,Spiritual Shrines and Mazar Visits,Attractions & Activities,Religious & Spiritual,mainstream,1,231,0.0156
+P08,Hill Tracts and Valley Exploration,Attractions & Activities,Adventure & Trekking,mainstream,3,230,0.0155
+P16,Buddhist Heritage and Temple Visits,Attractions & Activities,Religious & Spiritual,mainstream,3,183,0.0123
+P09,Trekking and Hill Adventures,Attractions & Activities,Adventure & Trekking,mainstream,3,177,0.0119
+P18,Wetland and Haor Nature Tours,Attractions & Activities,Ecotourism & Scenic Tours,mainstream,2,145,0.0098
+P17,Tea Gardens and Colonial Estates,Attractions & Activities,Ecotourism & Scenic Tours,mainstream,1,118,0.008
+P14,Historic City and Folk Art Heritage,Attractions & Activities,Heritage & Culture,mainstream,1,116,0.0078
+P19,Floating Markets and River Culture,Attractions & Activities,Ecotourism & Scenic Tours,mainstream,2,97,0.0065
+P03,National Parks and Nature Escapes,Attractions & Activities,Nature & Wildlife,mainstream,1,88,0.0059
+P07,Scenic Coastal Scenery and Sunsets,Attractions & Activities,Coastal & Marine,mainstream,1,73,0.0049
+P04,Swamp Forest Boat Rides,Attractions & Activities,Nature & Wildlife,mainstream,1,68,0.0046
+P06,Island and Coral Beach Tourism,Attractions & Activities,Coastal & Marine,mainstream,1,55,0.0037
+P10,Cave Exploration and Adventure,Attractions & Activities,Adventure & Trekking,mainstream,1,33,0.0022

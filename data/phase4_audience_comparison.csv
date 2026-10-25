@@ -1,67 +1,399 @@
 dimension,group,domestic_mentions,foreign_mentions,unknown_mentions,domestic_share,foreign_share,comparable
-entity_type,ACCESS,0,0,11,,0.0,False
-entity_type,PLACE,0,0,153,,0.0,False
-entity_type,TIP,0,1,17,,1.0,False
-division,Barishal,0,0,8,,0.0,False
-division,Chattogram,0,1,96,,1.0,False
-division,Dhaka,0,0,24,,0.0,False
-division,Khulna,0,0,29,,0.0,False
-division,Rajshahi,0,0,1,,0.0,False
-division,Sylhet,0,0,23,,0.0,False
-visibility,V0,0,0,7,,0.0,False
-visibility,V1,0,0,10,,0.0,False
-visibility,V2,0,0,28,,0.0,False
-visibility,V3,0,0,108,,0.0,False
-visibility,unknown,0,1,28,,1.0,False
-entity,Bagerhat,0,0,10,,0.0,False
-entity,Bandarban,0,0,21,,0.0,False
-entity,Best Time to Visit,0,0,1,,0.0,False
-entity,Best time to visit,0,0,1,,0.0,False
-entity,Boga Lake,0,0,1,,0.0,False
-entity,Carry water,0,0,1,,0.0,False
-entity,Carry water but don't litter,0,0,1,,0.0,False
-entity,Chandranath,0,0,1,,0.0,False
-entity,Chor Bijoy,0,0,1,,0.0,False
-entity,Cox's Bazar,0,0,5,,0.0,False
-entity,Fatrar Chor,0,0,1,,0.0,False
-entity,Fokirhat,0,0,1,,0.0,False
-entity,Gangamati,0,0,3,,0.0,False
-entity,Go early,0,1,0,,1.0,False
-entity,Go in the morning to beat the crowd,0,0,1,,0.0,False
-entity,Guliyakhali,0,0,2,,0.0,False
-entity,Lawachara,0,0,1,,0.0,False
-entity,Madhabpur Lake,0,0,1,,0.0,False
-entity,Mongla,0,0,10,,0.0,False
-entity,Muradpur,0,0,4,,0.0,False
-entity,Nilgiri,0,0,1,,0.0,False
-entity,Pashur,0,0,5,,0.0,False
-entity,Rangamati,0,0,9,,0.0,False
-entity,Saint Martin,0,0,25,,0.0,False
-entity,Sardar Bari,0,0,1,,0.0,False
-entity,Sitakunda,0,0,12,,0.0,False
-entity,Sonargaon,0,0,22,,0.0,False
-entity,Sreemangal,0,0,13,,0.0,False
-entity,Sundarbans,0,0,3,,0.0,False
-entity,bargain at all the nearby shops,0,0,1,,0.0,False
-entity,bargain for the boat price,0,0,1,,0.0,False
-entity,bargaining skills mostly,0,0,1,,0.0,False
-entity,best time to visit,0,0,1,,0.0,False
-entity,best time to visit Kuakata is during the cooler,0,0,1,,0.0,False
-entity,best time to visit is between November and March,0,0,1,,0.0,False
-entity,best time to visit is definitely during the,0,0,1,,0.0,False
-entity,best time to visit this place,0,0,1,,0.0,False
-entity,boat from kaptai station,0,0,1,,0.0,False
-entity,bus from Dhaka or Chittagong,0,0,1,,0.0,False
-entity,carry with me,0,0,1,,0.0,False
-entity,carry your essentials,0,0,1,,0.0,False
-entity,engine boat from Mongla,0,0,1,,0.0,False
-entity,engine boat from kaptai boat station,0,0,1,,0.0,False
-entity,engine boat from the Mongla Ferry Ghat through,0,0,1,,0.0,False
-entity,get off at Fokirhat Bazar and take a CNG,0,0,1,,0.0,False
-entity,get off at Sitakunda Bazar,0,0,1,,0.0,False
-entity,go early morning or evening,0,0,1,,0.0,False
-entity,take a CNG or auto from there,0,0,1,,0.0,False
-entity,take a boat,0,0,1,,0.0,False
-entity,take a boat ride to the precise Zero,0,0,1,,0.0,False
-entity,take a boat to reach the main beach,0,0,1,,0.0,False
-entity,visit early in the morning for,0,0,1,,0.0,False
+entity_type,PLACE,94,0,1910,0.8624,0.0,False
+entity_type,TIP,11,1,278,0.1009,1.0,False
+entity_type,ACCESS,4,0,100,0.0367,0.0,False
+division,Chattogram,36,1,1150,0.3303,1.0,False
+division,Khulna,21,0,212,0.1927,0.0,False
+division,Rajshahi,20,0,276,0.1835,0.0,False
+division,Sylhet,16,0,345,0.1468,0.0,False
+division,Mymensingh,10,0,50,0.0917,0.0,False
+division,Dhaka,4,0,163,0.0367,0.0,False
+division,Rangpur,2,0,26,0.0183,0.0,False
+division,Barishal,0,0,66,0.0,0.0,False
+visibility,V3,60,0,1395,0.5505,0.0,False
+visibility,V2,15,0,337,0.1376,0.0,False
+visibility,unknown,15,1,378,0.1376,1.0,False
+visibility,V0,10,0,108,0.0917,0.0,False
+visibility,V1,9,0,70,0.0826,0.0,False
+entity,Padma,13,0,181,0.1193,0.0,False
+entity,Bagerhat,12,0,85,0.1101,0.0,False
+entity,Bandarban,11,0,400,0.1009,0.0,False
+entity,Mahasthangarh,7,0,73,0.0642,0.0,False
+entity,Cox's Bazar,7,0,275,0.0642,0.0,False
+entity,Shoshi Lodge,6,0,7,0.055,0.0,False
+entity,Paharpur,5,0,14,0.0459,0.0,False
+entity,Kantaji Temple,4,0,17,0.0367,0.0,False
+entity,Durgapur,4,0,28,0.0367,0.0,False
+entity,Best Time to Visit,4,0,28,0.0367,0.0,False
+entity,Sreemangal,3,0,106,0.0275,0.0,False
+entity,Bisnakandi,3,0,61,0.0275,0.0,False
+entity,Jaflong,3,0,21,0.0275,0.0,False
+entity,Rangamati,2,0,64,0.0183,0.0,False
+entity,Sitakunda,2,0,89,0.0183,0.0,False
+entity,I-Badh,1,0,1,0.0092,0.0,False
+entity,Hiron Point,1,0,2,0.0092,0.0,False
+entity,Guliyakhali,1,0,7,0.0092,0.0,False
+entity,best time to visit R,1,0,0,0.0092,0.0,False
+entity,Khagrachari,1,0,65,0.0092,0.0,False
+entity,bargaining,1,0,2,0.0092,0.0,False
+entity,take a boat or another vehicle to reach,1,0,0,0.0092,0.0,False
+entity,Madhabpur Lake,1,0,2,0.0092,0.0,False
+entity,take a boat ride to the Padma chars and,1,0,0,0.0092,0.0,False
+entity,China Matir Pahar,1,0,5,0.0092,0.0,False
+entity,Nilgiri,1,0,8,0.0092,0.0,False
+entity,go early in the morning to,1,0,2,0.0092,0.0,False
+entity,Mongla,1,0,38,0.0092,0.0,False
+entity,Best time to visit this place is during Rainy,1,0,0,0.0092,0.0,False
+entity,best time to visit Paharpur is between October,1,0,0,0.0092,0.0,False
+entity,best time to visit is during the rainy season,1,0,2,0.0092,0.0,False
+entity,Panam City,1,0,7,0.0092,0.0,False
+entity,Take a train from Dhaka to Khulna Railway,1,0,0,0.0092,0.0,False
+entity,boat from Mongla,1,0,1,0.0092,0.0,False
+entity,Sundarbans,1,0,43,0.0092,0.0,False
+entity,Sonargaon,1,0,91,0.0092,0.0,False
+entity,Visit early morning or during,1,0,0,0.0092,0.0,False
+entity,Alutila cave,1,0,3,0.0092,0.0,False
+entity,carry torches to find their way,0,0,1,0.0,0.0,False
+entity,carry cap,0,0,1,0.0,0.0,False
+entity,carry drinking water,0,0,1,0.0,0.0,False
+entity,carry boats on the far side of the,0,0,1,0.0,0.0,False
+entity,carry small bottle of water,0,0,1,0.0,0.0,False
+entity,carry drinking water and some snacks,0,0,1,0.0,0.0,False
+entity,carry enough water and be physically,0,0,1,0.0,0.0,False
+entity,carry the stories of a thousand,0,0,1,0.0,0.0,False
+entity,carry some salt or lime,0,0,1,0.0,0.0,False
+entity,carry snacks,0,0,1,0.0,0.0,False
+entity,carry enough water and food cause,0,0,1,0.0,0.0,False
+entity,carry extra pair of dress so that,0,0,1,0.0,0.0,False
+entity,carry forward the escort,0,0,1,0.0,0.0,False
+entity,carry first aid kit cause God forbid,0,0,1,0.0,0.0,False
+entity,carry out an extensive excavation in,0,0,1,0.0,0.0,False
+entity,carry for a long time,0,0,1,0.0,0.0,False
+entity,carry insect repellent for a more,0,0,1,0.0,0.0,False
+entity,carry inside your bag,0,0,1,0.0,0.0,False
+entity,carry lot of food and drinks and,0,0,1,0.0,0.0,False
+entity,carry much mineral water and,0,0,1,0.0,0.0,False
+entity,carry our tradition,0,0,1,0.0,0.0,False
+entity,carry foods with You,0,0,1,0.0,0.0,False
+entity,carry high price shoes or Sleepers,0,0,1,0.0,0.0,False
+entity,carry food then monkeys will follow,0,0,1,0.0,0.0,False
+entity,carry pack lunch in case of long day,0,0,1,0.0,0.0,False
+entity,carry food,0,0,3,0.0,0.0,False
+entity,carry photocopies of your National,0,0,1,0.0,0.0,False
+entity,carry plenty of drinking water,0,0,1,0.0,0.0,False
+entity,carry proper cash,0,0,1,0.0,0.0,False
+entity,carry flare to enter the cave,0,0,1,0.0,0.0,False
+entity,carry a swimming suits,0,0,1,0.0,0.0,False
+entity,carry bananas or other food,0,0,1,0.0,0.0,False
+entity,boat from kaptai station,0,0,1,0.0,0.0,False
+entity,bus from Dhaka to Bagerhat,0,0,1,0.0,0.0,False
+entity,bus from Dhaka or Chittagong,0,0,1,0.0,0.0,False
+entity,bus from Dhaka heading towards Rajshahi,0,0,1,0.0,0.0,False
+entity,bus from Dhaka and reach to Shaturia,0,0,1,0.0,0.0,False
+entity,bus from Cox's Bazar,0,0,1,0.0,0.0,False
+entity,bus from Chittagong to Comilla,0,0,1,0.0,0.0,False
+entity,bus from Barisal,0,0,3,0.0,0.0,False
+entity,bus From Dhaka,0,0,1,0.0,0.0,False
+entity,boat from the reserve bazaar and visit it,0,0,1,0.0,0.0,False
+entity,boat from remakri towards Nafakhum may,0,0,1,0.0,0.0,False
+entity,boat from here,0,0,1,0.0,0.0,False
+entity,carry bags,0,0,1,0.0,0.0,False
+entity,boat from ghat which costs 750 and entry,0,0,1,0.0,0.0,False
+entity,boat from ferry ghat,0,0,1,0.0,0.0,False
+entity,boat from Thanchi,0,0,1,0.0,0.0,False
+entity,boat from Tahirpur to Tagerhat,0,0,1,0.0,0.0,False
+entity,boat from Mongla Ferry Ghat,0,0,1,0.0,0.0,False
+entity,boat from Khulna or Mongla,0,0,1,0.0,0.0,False
+entity,boat from Bangabir point avoid stressfull,0,0,1,0.0,0.0,False
+entity,best time to visiting there,0,0,1,0.0,0.0,False
+entity,best time to visit this swamp forest,0,0,1,0.0,0.0,False
+entity,best time to visit this place to feel the real,0,0,1,0.0,0.0,False
+entity,bus from Dhaka to Fakirapul or Saidabad,0,0,1,0.0,0.0,False
+entity,bus from Dhaka to Kurigram,0,0,1,0.0,0.0,False
+entity,bus from Dhaka to Shunamgonj,0,0,1,0.0,0.0,False
+entity,bus from Gulistan,0,0,2,0.0,0.0,False
+entity,carry away the goods purchased from,0,0,1,0.0,0.0,False
+entity,carry a water bottle with you,0,0,1,0.0,0.0,False
+entity,carry a torch or it is also okay,0,0,1,0.0,0.0,False
+entity,carry a torch light and be careful,0,0,1,0.0,0.0,False
+entity,carry water and cap or umbrella,0,0,1,0.0,0.0,False
+entity,carry a reliable flashlight or,0,0,1,0.0,0.0,False
+entity,carry a bamboo stick,0,0,1,0.0,0.0,False
+entity,bus from there to Dhaka,0,0,1,0.0,0.0,False
+entity,bus from the main city of Bandarban,0,0,1,0.0,0.0,False
+entity,bus from srimongol to kamalganj,0,0,1,0.0,0.0,False
+entity,bus from natore or rajshahi city,0,0,1,0.0,0.0,False
+entity,bus from dhaka,0,0,1,0.0,0.0,False
+entity,bus from any part of the country,0,0,1,0.0,0.0,False
+entity,bus from Sylhet's Kadamtali bus station,0,0,1,0.0,0.0,False
+entity,bus from Sylhet city to Hadarpar,0,0,1,0.0,0.0,False
+entity,bus from Sobhanighat in Sylhet city,0,0,1,0.0,0.0,False
+entity,bus from Rajshahi,0,0,1,0.0,0.0,False
+entity,bus from Nathullabad bus terminal or opt,0,0,1,0.0,0.0,False
+entity,bus from Mohakhali in Dhaka towards,0,0,1,0.0,0.0,False
+entity,bus from Khagrachari or local jeep,0,0,1,0.0,0.0,False
+entity,bus from Gulisthan to Mograpara,0,0,1,0.0,0.0,False
+entity,carry water,0,0,3,0.0,0.0,False
+entity,engine boat from kaptai boat station,0,0,1,0.0,0.0,False
+entity,carry water and snacks,0,0,1,0.0,0.0,False
+entity,take a boat to reach the main beach,0,0,1,0.0,0.0,False
+entity,take a bus or a CNG to Kacchaptali,0,0,1,0.0,0.0,False
+entity,take a bus from Nathullabad bus terminal,0,0,1,0.0,0.0,False
+entity,take a bus from Dhaka to Kurigram,0,0,1,0.0,0.0,False
+entity,take a bus from Dhaka to Fakirapul or,0,0,1,0.0,0.0,False
+entity,take a bus from Dhaka to Bagerhat,0,0,1,0.0,0.0,False
+entity,take a bus from Dhaka and reach to,0,0,1,0.0,0.0,False
+entity,take a boat to travel and roam around the,0,0,1,0.0,0.0,False
+entity,take a boat to roam on the Padma River,0,0,1,0.0,0.0,False
+entity,take a boat ride to the precise Zero,0,0,1,0.0,0.0,False
+entity,take a bus to Badalgachi and then a CNG,0,0,1,0.0,0.0,False
+entity,take a boat ride to see the other,0,0,1,0.0,0.0,False
+entity,take a boat ride to enjoy the view and,0,0,1,0.0,0.0,False
+entity,take a boat ride to Bichanakandi,0,0,1,0.0,0.0,False
+entity,take a boat ride through the calm waters,0,0,1,0.0,0.0,False
+entity,take a boat ride there,0,0,1,0.0,0.0,False
+entity,take a boat ride on the curved water,0,0,1,0.0,0.0,False
+entity,take a boat ride into the sea with the,0,0,1,0.0,0.0,False
+entity,take a boat ride during flow tide,0,0,1,0.0,0.0,False
+entity,take a bus or an auto,0,0,1,0.0,0.0,False
+entity,take a bus to Sharupkathi then take auto,0,0,1,0.0,0.0,False
+entity,take a boat ride,0,0,2,0.0,0.0,False
+entity,visit early in the morning when,0,0,1,0.0,0.0,False
+entity,visit in winter when the weather is,0,0,1,0.0,0.0,False
+entity,visit in winter season,0,0,2,0.0,0.0,False
+entity,visit in winter only,0,0,1,0.0,0.0,False
+entity,visit in winter,0,0,3,0.0,0.0,False
+entity,visit in the morning or late afternoon,0,0,1,0.0,0.0,False
+entity,visit in Winter,0,0,1,0.0,0.0,False
+entity,visit early to avoid crowds,0,0,1,0.0,0.0,False
+entity,visit early morning like 10 am,0,0,1,0.0,0.0,False
+entity,visit early in the morning or,0,0,5,0.0,0.0,False
+entity,take a cng or battery operated riksha,0,0,1,0.0,0.0,False
+entity,visit early in the morning for,0,0,1,0.0,0.0,False
+entity,visit early in the morning and,0,0,1,0.0,0.0,False
+entity,visit early in the morning,0,0,2,0.0,0.0,False
+entity,varendra museum,0,0,1,0.0,0.0,False
+entity,take a rickshaw or van inside to visit the,0,0,1,0.0,0.0,False
+entity,take a rickshaw it will cost 30tk or walk on,0,0,1,0.0,0.0,False
+entity,take a rickshaw directly to Panam Nagar,0,0,1,0.0,0.0,False
+entity,take a rickshaw,0,0,1,0.0,0.0,False
+entity,take a boat ride before sunset,0,0,1,0.0,0.0,False
+entity,take a boat around the bends of these,0,0,1,0.0,0.0,False
+entity,carry with me,0,0,1,0.0,0.0,False
+entity,engine boat from Parzatan Corporation,0,0,1,0.0,0.0,False
+entity,go early in the evening,0,0,1,0.0,0.0,False
+entity,go early,0,1,2,0.0,1.0,False
+entity,get off at Surma Bridge before entering,0,0,1,0.0,0.0,False
+entity,get off at Sitakunda Bazar,0,0,1,0.0,0.0,False
+entity,get off at Mograpara and take an auto and,0,0,1,0.0,0.0,False
+entity,get off at Fokirhat Bazar and take a CNG,0,0,1,0.0,0.0,False
+entity,engine boat from the Mongla Ferry Ghat through,0,0,1,0.0,0.0,False
+entity,best time to visit this place is in the evening,0,0,1,0.0,0.0,False
+entity,engine boat from Mongla,0,0,1,0.0,0.0,False
+entity,go early in the morning and,0,0,1,0.0,0.0,False
+entity,cox's bazar Beach,0,0,1,0.0,0.0,False
+entity,carry your trash back,0,0,1,0.0,0.0,False
+entity,carry your own water,0,0,1,0.0,0.0,False
+entity,carry your own food,0,0,1,0.0,0.0,False
+entity,carry your own drinking water with,0,0,1,0.0,0.0,False
+entity,carry your food as there are no,0,0,1,0.0,0.0,False
+entity,carry your essentials,0,0,2,0.0,0.0,False
+entity,carry you up,0,0,1,0.0,0.0,False
+entity,go early in the morning,0,0,1,0.0,0.0,False
+entity,go early in the morning or,0,0,3,0.0,0.0,False
+entity,take a boat and go to the waterfall side,0,0,1,0.0,0.0,False
+entity,take a CNG,0,0,2,0.0,0.0,False
+entity,take a boat and go to inside of the lake,0,0,1,0.0,0.0,False
+entity,take a boat across the lake to reach a,0,0,1,0.0,0.0,False
+entity,take a boat,0,0,1,0.0,0.0,False
+entity,take a CNG to travel from Chapai,0,0,1,0.0,0.0,False
+entity,take a CNG to reach the basement of,0,0,1,0.0,0.0,False
+entity,take a CNG or auto from there,0,0,1,0.0,0.0,False
+entity,take a CNG or Auto to reach the,0,0,1,0.0,0.0,False
+entity,take a CNG from Sitakunda or Mirsharai,0,0,1,0.0,0.0,False
+entity,ratargul,0,0,1,0.0,0.0,False
+entity,go early morning,0,0,2,0.0,0.0,False
+entity,patenga sea beach,0,0,1,0.0,0.0,False
+entity,mohamaya lake,0,0,1,0.0,0.0,False
+entity,go in winter or during migration,0,0,1,0.0,0.0,False
+entity,go in winter,0,0,1,0.0,0.0,False
+entity,go in the morning there,0,0,1,0.0,0.0,False
+entity,go in the morning,0,0,1,0.0,0.0,False
+entity,go in Winter otherwise it,0,0,1,0.0,0.0,False
+entity,go early morning or evening,0,0,1,0.0,0.0,False
+entity,best time to visit this place is in the morning,0,0,1,0.0,0.0,False
+entity,Ahsan Manzil,0,0,5,0.0,0.0,False
+entity,best time to visit this place is from August to,0,0,1,0.0,0.0,False
+entity,Go in the morning to beat the crowd,0,0,1,0.0,0.0,False
+entity,Lalakhal,0,0,47,0.0,0.0,False
+entity,Kuakata Sea Beach,0,0,3,0.0,0.0,False
+entity,Kotka,0,0,3,0.0,0.0,False
+entity,Kolatoli Beach,0,0,5,0.0,0.0,False
+entity,Karamjal,0,0,1,0.0,0.0,False
+entity,Kaptai lake,0,0,13,0.0,0.0,False
+entity,Kantajew Temple,0,0,3,0.0,0.0,False
+entity,Hiron Point (Nilkamal),0,0,1,0.0,0.0,False
+entity,Go early or before sunset to,0,0,1,0.0,0.0,False
+entity,Lawachara National Park,0,0,2,0.0,0.0,False
+entity,Go early in the day to avoid,0,0,1,0.0,0.0,False
+entity,Gangamati,0,0,7,0.0,0.0,False
+entity,Foy's lake,0,0,1,0.0,0.0,False
+entity,Fokirhat,0,0,1,0.0,0.0,False
+entity,Fatrar Chor,0,0,1,0.0,0.0,False
+entity,Chor Bijoy,0,0,1,0.0,0.0,False
+entity,Chandranath,0,0,3,0.0,0.0,False
+entity,Carry your umbrella and water and a,0,0,1,0.0,0.0,False
+entity,Lalbagh Fort,0,0,5,0.0,0.0,False
+entity,Muradpur,0,0,17,0.0,0.0,False
+entity,Carry some water and light snacks,0,0,1,0.0,0.0,False
+entity,Sardar Bari,0,0,17,0.0,0.0,False
+entity,Take a bus from Khagrachari or local,0,0,1,0.0,0.0,False
+entity,Take a bus from Gulistan,0,0,1,0.0,0.0,False
+entity,Take a bus,0,0,1,0.0,0.0,False
+entity,Take a boat ride on the Piain River,0,0,1,0.0,0.0,False
+entity,Take a boat ride on the Padma River to,0,0,1,0.0,0.0,False
+entity,Take a CNG or Auto,0,0,2,0.0,0.0,False
+entity,T-badh,0,0,5,0.0,0.0,False
+entity,Somapura Mahavihara,0,0,1,0.0,0.0,False
+entity,Sajek Valley,0,0,4,0.0,0.0,False
+entity,Nafakhum Waterfall,0,0,1,0.0,0.0,False
+entity,Saint martin,0,0,1,0.0,0.0,False
+entity,Saint Martin,0,0,28,0.0,0.0,False
+entity,SADA MATIR PAHAR,0,0,1,0.0,0.0,False
+entity,Ramna park,0,0,1,0.0,0.0,False
+entity,Puthia,0,0,3,0.0,0.0,False
+entity,Pashur,0,0,11,0.0,0.0,False
+entity,Nilachal,0,0,1,0.0,0.0,False
+entity,Natore Rajbari,0,0,1,0.0,0.0,False
+entity,Carry water but don't litter,0,0,1,0.0,0.0,False
+entity,Carry insect repellent and be,0,0,1,0.0,0.0,False
+entity,best time to visit this place in the June to,0,0,1,0.0,0.0,False
+entity,Best time is April to October as the flow,0,0,1,0.0,0.0,False
+entity,Best time to visit during rainy season to see it,0,0,1,0.0,0.0,False
+entity,Best time to visit at sunset time,0,0,1,0.0,0.0,False
+entity,Best time to visit after 5,0,0,1,0.0,0.0,False
+entity,Best time to visit The dry season,0,0,1,0.0,0.0,False
+entity,Best time to visit Rainy season,0,0,1,0.0,0.0,False
+entity,Best time to visit Late afternoon to sunset,0,0,1,0.0,0.0,False
+entity,Best time to visit I think in rainy season,0,0,1,0.0,0.0,False
+entity,Best time is the evening time till 8PM,0,0,1,0.0,0.0,False
+entity,Best Time to Visit Winter,0,0,2,0.0,0.0,False
+entity,Best time to visit in the rainy season,0,0,1,0.0,0.0,False
+entity,Best Time to Visit Monsoon,0,0,1,0.0,0.0,False
+entity,Best Time to Visit July,0,0,1,0.0,0.0,False
+entity,Best Time to Visit Early morning or late,0,0,1,0.0,0.0,False
+entity,Bargaining at stalls,0,0,1,0.0,0.0,False
+entity,Bargaining,0,0,1,0.0,0.0,False
+entity,Bargain the price with them,0,0,1,0.0,0.0,False
+entity,Bargain politely,0,0,1,0.0,0.0,False
+entity,BEST Time to visit here is in Winter season,0,0,1,0.0,0.0,False
+entity,Best time to visit from 4,0,0,1,0.0,0.0,False
+entity,Best time to visit is during cultural fairs or,0,0,1,0.0,0.0,False
+entity,Carry drinking water and foods,0,0,1,0.0,0.0,False
+entity,Boga Lake,0,0,3,0.0,0.0,False
+entity,Carry at least two photocopies of,0,0,1,0.0,0.0,False
+entity,Carry all your plastic waste and,0,0,1,0.0,0.0,False
+entity,Carry a stick for support,0,0,1,0.0,0.0,False
+entity,Carry a small pack with you for,0,0,1,0.0,0.0,False
+entity,Carry a parasol to walk around,0,0,1,0.0,0.0,False
+entity,Carry Umbrella if it is sunny day or,0,0,1,0.0,0.0,False
+entity,Bus from new market or train station,0,0,1,0.0,0.0,False
+entity,Bus from Chittagong or Dhaka to,0,0,1,0.0,0.0,False
+entity,Birisiri,0,0,5,0.0,0.0,False
+entity,Best time to visit is during or just after the,0,0,1,0.0,0.0,False
+entity,Bhimruli,0,0,1,0.0,0.0,False
+entity,Best time to visit this waterfall is June,0,0,1,0.0,0.0,False
+entity,Best time to visit this place is rainy season,0,0,1,0.0,0.0,False
+entity,Best time to visit this place is during winter,0,0,2,0.0,0.0,False
+entity,Best time to visit there is August,0,0,1,0.0,0.0,False
+entity,Best time to visit it is afternonn of winter,0,0,1,0.0,0.0,False
+entity,Best time to visit is the winter season November,0,0,1,0.0,0.0,False
+entity,Best time to visit is early morning or late,0,0,1,0.0,0.0,False
+entity,Take a bus from Sylhet's Kadamtali bus,0,0,1,0.0,0.0,False
+entity,Tetulia,0,0,1,0.0,0.0,False
+entity,Varendra Research Museum,0,0,2,0.0,0.0,False
+entity,best time to visit Lalakhal is during the rainy,0,0,1,0.0,0.0,False
+entity,best time to visit in Winter,0,0,1,0.0,0.0,False
+entity,best time to visit here is January,0,0,1,0.0,0.0,False
+entity,best time to visit from October to February,0,0,1,0.0,0.0,False
+entity,best time to visit for pleasant weather is from,0,0,1,0.0,0.0,False
+entity,best time to visit Sajek is during the winter,0,0,1,0.0,0.0,False
+entity,best time to visit Sajek,0,0,1,0.0,0.0,False
+entity,best time to visit Ratargul is in rainy season,0,0,1,0.0,0.0,False
+entity,best time to visit Ratargul,0,0,1,0.0,0.0,False
+entity,best time to visit Kuakata is during the cooler,0,0,1,0.0,0.0,False
+entity,best time to visit is between February to April,0,0,1,0.0,0.0,False
+entity,best time to visit Jaflong is from November to,0,0,1,0.0,0.0,False
+entity,best time to visit Jaflong is during the monsoon,0,0,1,0.0,0.0,False
+entity,best time to visit Guliakhali Sea Beach is from,0,0,1,0.0,0.0,False
+entity,best time to visit Bichanakandi is from June to,0,0,1,0.0,0.0,False
+entity,best time is December to mid January for,0,0,1,0.0,0.0,False
+entity,bargaining with guide and,0,0,1,0.0,0.0,False
+entity,bargaining skills mostly,0,0,1,0.0,0.0,False
+entity,bargaining is essential to get,0,0,1,0.0,0.0,False
+entity,best time to visit is any day without weekends,0,0,1,0.0,0.0,False
+entity,best time to visit is between November and March,0,0,1,0.0,0.0,False
+entity,Visit Early morning or late,0,0,1,0.0,0.0,False
+entity,best time to visit such kind of places,0,0,1,0.0,0.0,False
+entity,best time to visit this place in early morning,0,0,1,0.0,0.0,False
+entity,best time to visit this place during the rainy,0,0,1,0.0,0.0,False
+entity,best time to visit this place,0,0,6,0.0,0.0,False
+entity,best time to visit this park is winter,0,0,1,0.0,0.0,False
+entity,best time to visit there,0,0,1,0.0,0.0,False
+entity,best time to visit the monastery complex is in,0,0,1,0.0,0.0,False
+entity,best time to visit the markets is the months,0,0,1,0.0,0.0,False
+entity,best time to visit the floating market is,0,0,1,0.0,0.0,False
+entity,best time to visit is in the morning or late,0,0,1,0.0,0.0,False
+entity,best time to visit is definitely during the,0,0,1,0.0,0.0,False
+entity,best time to visit is in the afternoon but you,0,0,1,0.0,0.0,False
+entity,best time to visit is from November to March,0,0,1,0.0,0.0,False
+entity,best time to visit is during the winter months,0,0,3,0.0,0.0,False
+entity,best time to visit is during the spring or fall,0,0,1,0.0,0.0,False
+entity,Alutila,0,0,6,0.0,0.0,False
+entity,best time to visit is during the monsoon season,0,0,3,0.0,0.0,False
+entity,best time to visit is during the monsoon or just,0,0,1,0.0,0.0,False
+entity,best time to visit is during the dry season,0,0,2,0.0,0.0,False
+entity,bargaining before buying,0,0,1,0.0,0.0,False
+entity,bargaining and drama,0,0,1,0.0,0.0,False
+entity,bargain with them much,0,0,1,0.0,0.0,False
+entity,bargain as sellers claim price,0,0,1,0.0,0.0,False
+entity,bargain for a reasonable price,0,0,1,0.0,0.0,False
+entity,bargain beforehand,0,0,1,0.0,0.0,False
+entity,bargain before you take any boat,0,0,1,0.0,0.0,False
+entity,bargain before taking the ride,0,0,1,0.0,0.0,False
+entity,bargain before hiring boat as,0,0,1,0.0,0.0,False
+entity,bargain before having any,0,0,1,0.0,0.0,False
+entity,bargain before buying sea food,0,0,1,0.0,0.0,False
+entity,bargain at all the nearby shops,0,0,1,0.0,0.0,False
+entity,bargain and settle the price,0,0,1,0.0,0.0,False
+entity,bargain with them,0,0,1,0.0,0.0,False
+entity,bargain and it costs around 700,0,0,1,0.0,0.0,False
+entity,bargain and bring it down to,0,0,1,0.0,0.0,False
+entity,bargain all you can while,0,0,1,0.0,0.0,False
+entity,bargain about the boat fair from,0,0,1,0.0,0.0,False
+entity,bargain,0,0,6,0.0,0.0,False
+entity,Visit early morning,0,0,2,0.0,0.0,False
+entity,Visit early in the morning to,0,0,1,0.0,0.0,False
+entity,Visit early in the morning on a,0,0,1,0.0,0.0,False
+entity,bargain for each good you buy,0,0,1,0.0,0.0,False
+entity,bargain for low price,0,0,1,0.0,0.0,False
+entity,bargain for prices usually they,0,0,1,0.0,0.0,False
+entity,bargain for seafood,0,0,1,0.0,0.0,False
+entity,bargain with the vendors,0,0,1,0.0,0.0,False
+entity,bargain with the pilot of the,0,0,1,0.0,0.0,False
+entity,bargain with the local shop,0,0,1,0.0,0.0,False
+entity,bargain with the boatman,0,0,1,0.0,0.0,False
+entity,bargain with everyone,0,0,1,0.0,0.0,False
+entity,bargain with boatman,0,0,1,0.0,0.0,False
+entity,bargain to rent a boat or buy,0,0,1,0.0,0.0,False
+entity,bargain to fix the boat,0,0,1,0.0,0.0,False
+entity,bargain souvenirs,0,0,1,0.0,0.0,False
+entity,bargain prices before motorcycle,0,0,1,0.0,0.0,False
+entity,bargain lot for reasonable price,0,0,1,0.0,0.0,False
+entity,bargain if you really interested,0,0,1,0.0,0.0,False
+entity,bargain hard for fair deals,0,0,1,0.0,0.0,False
+entity,bargain for this,0,0,1,0.0,0.0,False
+entity,bargain for the lowest price,0,0,1,0.0,0.0,False
+entity,bargain for the boat price,0,0,1,0.0,0.0,False
+entity,bargain for the accommodation,0,0,1,0.0,0.0,False
+entity,visit in winter you can take a walk,0,0,1,0.0,0.0,False

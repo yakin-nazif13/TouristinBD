@@ -1,35 +1,70 @@
 {
-  "generated_at_utc": "2026-10-21T06:40:16Z",
+  "generated_at_utc": "2026-10-23T15:31:02Z",
   "inputs": [
+    "real_reviews_all_trimmed.csv",
+    "real_reviews_bangla_runs.csv",
     "real_reviews_batch1.csv",
     "real_reviews_booking_batch1.csv"
   ],
   "output": "processed_reviews.csv",
   "min_clean_length": 10,
   "short_text_max": 50,
-  "rows_in": 540,
-  "rows_out": 538,
+  "rows_in": 16107,
+  "rows_out": 14841,
   "dropped_duplicate_id": 0,
-  "dropped_too_short": 1,
-  "dropped_duplicate_text": 1,
+  "dropped_too_short": 1099,
+  "dropped_duplicate_text": 167,
   "by_source": {
-    "google_maps": 300,
+    "google_maps": 14603,
     "booking.com": 238
   },
   "by_language": {
-    "en": 530,
-    "bn-en-mixed": 5,
-    "bn": 2,
-    "nl": 1
+    "en": 10333,
+    "bn": 3591,
+    "bn-en-mixed": 845,
+    "id": 19,
+    "sl": 11,
+    "sq": 7,
+    "no": 5,
+    "fr": 4,
+    "hr": 4,
+    "et": 3,
+    "sv": 3,
+    "nl": 2,
+    "de": 2,
+    "af": 2,
+    "fi": 2,
+    "ko": 1,
+    "unknown": 1,
+    "tr": 1,
+    "ar": 1,
+    "ro": 1,
+    "es": 1,
+    "so": 1,
+    "sk": 1
   },
-  "places": 27,
+  "places": 116,
+  "with_original_text": 14303,
+  "translated_by_platform": 318,
   "notes": [
+    "loaded 11298 row(s) from real_reviews_all_trimmed.csv",
+    "loaded 4269 row(s) from real_reviews_bangla_runs.csv",
     "loaded 300 row(s) from real_reviews_batch1.csv",
     "loaded 240 row(s) from real_reviews_booking_batch1.csv",
     "place renamed to its final name: 'Kuakata Beach' -> 'Kuakata Sea Beach'",
     "place renamed to its final name: 'Sompur Mahavihar (Paharpur)' -> 'Somapura Mahavihara (Paharpur)'",
-    "dropped as too short (< 10 chars): 'Bad. No'",
-    "dropped as an exact duplicate of an earlier review: 'Good. Good. Good'"
+    "dropped as too short (< 10 chars): '❤️👍'",
+    "dropped as too short (< 10 chars): '♥'",
+    "dropped as too short (< 10 chars): 'Very nice'",
+    "dropped as too short (< 10 chars): 'Good'",
+    "dropped as too short (< 10 chars): 'Fantastic'",
+    "dropped as an exact duplicate of an earlier review: 'If you are visiting Dinajpur, Then Visit Kantajeu Temple. Its one of the must visit place in Dinajpur . Beautiful terracotta work on the wall of the temple makes it look magnificent. Built in 1752 by Pran Nath, a renowned maharaja from Dinajpur. The temple was built in a navaratna style before the destruction caused by the earthquake of 1897. But still its look beautiful.. Though its a Hindu temple but it have great historical and architecture value. Reminds the golden past. People from any religion can visit this.'",
+    "dropped as an exact duplicate of an earlier review: 'Beautiful place'",
+    "dropped as an exact duplicate of an earlier review: 'Nice place'",
+    "dropped as an exact duplicate of an earlier review: 'nice place'",
+    "dropped as an exact duplicate of an earlier review: 'historical'"
   ],
-  "warnings": []
+  "warnings": [
+    "4177 review(s) have no topic assignment yet. They will load with topic_id NULL — counted in ratings and totals, but contributing no preference evidence to recommendations or itineraries. Re-run Phase 3 (and then Phase 4) to cluster them."
+  ]
 }
