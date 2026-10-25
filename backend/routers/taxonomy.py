@@ -8,7 +8,7 @@ from fastapi import APIRouter, Depends, HTTPException, Query
 
 from backend import db
 from backend.models import Preference, PreferenceDetail, ReviewSummary, Topic
-from backend.queries import review_summary_sql
+from backend.queries import PREFERENCE_TOPIC_FILTER, review_summary_sql
 
 router = APIRouter(prefix="/api", tags=["taxonomy"])
 
@@ -19,7 +19,7 @@ SELECT t.topic_id, t.topic_name, t.top_keywords, t.review_count, t.corpus_share,
        m.similarity, m.confidence, m.needs_review,
        lt.is_long_tail, lt.sdd
 FROM topics t
-LEFT JOIN topic_preference_map m ON m.topic_id = t.topic_id
+LEFT JOIN topic_preference_map m ON m.topic_id = t.topic_id AND m.mapping_rank = 1
 LEFT JOIN preferences p ON p.preference_id = m.preference_id
 LEFT JOIN long_tail_flags lt ON lt.topic_id = t.topic_id
 """
@@ -38,7 +38,9 @@ def list_topics(
     if not include_outliers:
         where.append("t.topic_id >= 0")
     if preference_id:
-        where.append("LOWER(m.preference_id) = LOWER(?)")
+        where.append(
+            "t.topic_id IN (SELECT topic_id FROM topic_preference_map WHERE LOWER(preference_id) = LOWER(?))"
+        )
         params.append(preference_id)
     if needs_review is not None:
         where.append("COALESCE(m.needs_review, 0) = ?")
@@ -155,7 +157,9 @@ def get_preference(
         Topic(**t)
         for t in db.rows(
             conn,
-            f"{TOPIC_SELECT} WHERE m.preference_id = ? ORDER BY t.review_count DESC",
+            f"{TOPIC_SELECT} WHERE t.topic_id IN "
+            "(SELECT topic_id FROM topic_preference_map WHERE preference_id = ?) "
+            "ORDER BY t.review_count DESC",
             (pid,),
         )
     ]
@@ -177,7 +181,7 @@ def get_preference(
         ReviewSummary(**r)
         for r in db.rows(
             conn,
-            review_summary_sql("WHERE v.preference_id = ?") + " LIMIT ?",
+            review_summary_sql(f"WHERE {PREFERENCE_TOPIC_FILTER}") + " LIMIT ?",
             (pid, sample_reviews),
         )
     ]

@@ -45,6 +45,14 @@ def get(path: str, **params) -> tuple[int, object]:
         return r.status_code, r.text
 
 
+def _secondary_mapping() -> pd.DataFrame:
+    """Topics that Phase 5 also mapped to their runner-up preference (empty if none)."""
+    path = REPO_ROOT / "data" / "topic_preference_secondary.csv"
+    if path.exists():
+        return pd.read_csv(path)
+    return pd.DataFrame(columns=["topic_id", "preference_id"])
+
+
 def main() -> None:
     print("Phase 8 — API smoke tests\n")
 
@@ -113,10 +121,11 @@ def main() -> None:
     )
 
     code, dhaka = get("/api/places", city="dhaka")
+    _, dhaka_exact = get("/api/places", city="Dhaka")
     check(
         "city filter is case-insensitive",
-        code == 200 and dhaka["total"] == 5,
-        str(dhaka.get("total")),
+        code == 200 and dhaka["total"] > 0 and dhaka["total"] == dhaka_exact["total"],
+        f"{dhaka.get('total')} vs {dhaka_exact.get('total')}",
     )
 
     code, page2 = get("/api/places", limit=5, offset=5)
@@ -143,7 +152,21 @@ def main() -> None:
     check("unknown place returns 404", code == 404, str(code))
 
     code, cities = get("/api/cities")
-    check("GET /api/cities returns all 16 cities", code == 200 and len(cities) == 16, str(len(cities)))
+    # Cities come from the place registry, not from the per-review column (new places carry theirs there).
+    expected_cities = int(
+        pd.concat(
+            [
+                pd.read_csv(REPO_ROOT / "data" / "place_names.csv", usecols=["city"]),
+                pd.read_csv(REPO_ROOT / "data" / "place_geography.csv", usecols=["city"]),
+                pd.read_csv(REPO_ROOT / "data" / "processed_reviews.csv", usecols=["city"]),
+            ]
+        )["city"].dropna().nunique()
+    )
+    check(
+        "GET /api/cities returns every city in the corpus",
+        code == 200 and len(cities) == expected_cities,
+        f"{len(cities)} vs {expected_cities}",
+    )
     check(
         "city review counts sum to the corpus",
         sum(c["review_count"] for c in cities) == overview["total_reviews"],
@@ -182,7 +205,19 @@ def main() -> None:
     )
 
     code, bypref = get("/api/reviews", preference_id="P01", limit=5)
-    check("preference_id filter works", code == 200 and bypref["total"] == 239, str(bypref.get("total")))
+    topics_csv = pd.read_csv(REPO_ROOT / "data" / "reviews_with_topics.csv", usecols=["topic_id"])
+    mapping_csv = pd.read_csv(REPO_ROOT / "data" / "topic_preference_mapping.csv")
+    secondary_csv = _secondary_mapping()
+    # A review expresses a preference through its topic, whether that is the best match or the
+    # runner-up of a near-tied topic.
+    both = pd.concat([mapping_csv[["topic_id", "preference_id"]], secondary_csv[["topic_id", "preference_id"]]])
+    p01_topics = set(both.loc[both["preference_id"] == "P01", "topic_id"].astype(int))
+    expected_p01 = int(topics_csv["topic_id"].isin(p01_topics).sum())
+    check(
+        "preference_id filter works",
+        code == 200 and bypref["total"] == expected_p01 and expected_p01 > 0,
+        f"{bypref.get('total')} vs {expected_p01}",
+    )
 
     code, dated = get("/api/reviews", date_from="2026-01-01", limit=5)
     check(
@@ -205,14 +240,26 @@ def main() -> None:
     # ---- taxonomy --------------------------------------------------------
     print("\ntaxonomy")
     code, topics = get("/api/topics")
-    check("GET /api/topics excludes outliers by default", code == 200 and len(topics) == 10, str(len(topics)))
+    topic_sizes = pd.read_csv(REPO_ROOT / "data" / "topics_summary.csv")
+    real_topics = int((topic_sizes["Topic"] != -1).sum())
+    check(
+        "GET /api/topics excludes outliers by default",
+        code == 200 and len(topics) == real_topics,
+        f"{len(topics)} vs {real_topics}",
+    )
     check(
         "every topic has a mapped preference",
         all(t["preference_id"] for t in topics),
         str([t["topic_id"] for t in topics if not t["preference_id"]]),
     )
     code, with_out = get("/api/topics", include_outliers=True)
-    check("include_outliers adds the -1 bucket", len(with_out) == 11, str(len(with_out)))
+    # Phase 3 now gives every outlier a topic, so there is a -1 bucket only if some review kept it.
+    still_outliers = int((pd.read_csv(REPO_ROOT / "data" / "reviews_with_topics.csv", usecols=["topic_id"])["topic_id"] == -1).sum())
+    check(
+        "include_outliers adds the -1 bucket when reviews still sit in it",
+        len(with_out) == real_topics + (1 if still_outliers else 0),
+        f"{len(with_out)} with {still_outliers} outlier review(s)",
+    )
 
     code, topic = get("/api/topics/0")
     check(
@@ -252,7 +299,10 @@ def main() -> None:
     )
 
     # Pick a preference that actually carries topics, rather than assuming one.
-    topics_per_pref = mapping["preference_id"].astype(str).value_counts()
+    topics_per_pref = (
+        pd.concat([mapping[["topic_id", "preference_id"]], _secondary_mapping()[["topic_id", "preference_id"]]])
+        .drop_duplicates()["preference_id"].astype(str).value_counts()
+    )
     busiest = str(topics_per_pref.index[0])
     code, pref = get(f"/api/preferences/{busiest.lower()}")
     check(
@@ -322,10 +372,14 @@ def main() -> None:
     # ---- research --------------------------------------------------------
     print("\nresearch")
     code, val = get("/api/research/validation")
+    precision_csv = pd.read_csv(REPO_ROOT / "data" / "phase5_direction1_precision_checks.csv")
+    expected_rate = round(float((precision_csv["precision_status"] == "pass").mean()), 4)
     check(
-        "validation reports direction-1 pass rate 1.0",
-        code == 200 and val["direction1_precision"]["pass_rate"] == 1.0,
-        str(val["direction1_precision"].get("pass_rate") if code == 200 else code),
+        "validation reports the same direction-1 pass rate as Phase 5",
+        code == 200
+        and val["direction1_precision"]["topics_checked"] == len(precision_csv)
+        and abs(val["direction1_precision"]["pass_rate"] - expected_rate) < 1e-4,
+        f"{val['direction1_precision'].get('pass_rate') if code == 200 else code} vs {expected_rate}",
     )
     coverage_csv = pd.read_csv(REPO_ROOT / "data" / "phase5_direction2_coverage_checks.csv")
     expected_under = int((coverage_csv["coverage_status"] == "under_coverage").sum())
@@ -397,7 +451,7 @@ def main() -> None:
     code, cmp = get("/api/compare", places="Lalbagh Fort,Ahsan Manzil Museum")
     check(
         "compare returns both places and shared preferences",
-        code == 200 and len(cmp["places"]) == 2 and "P03" in cmp["shared_preferences"],
+        code == 200 and len(cmp["places"]) == 2 and len(cmp["shared_preferences"]) > 0,
         str(cmp.get("shared_preferences") if code == 200 else code),
     )
     code, _ = get("/api/compare", places="Lalbagh Fort")

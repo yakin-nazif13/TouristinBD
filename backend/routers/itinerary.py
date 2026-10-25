@@ -38,7 +38,7 @@ from backend.models import (
     ItinerarySummary,
     PreferenceEvidence,
 )
-from backend.queries import review_summary_sql
+from backend.queries import PREFERENCE_TOPIC_FILTER, review_summary_sql
 from backend.routers.discovery import _recommend_impl
 
 router = APIRouter(prefix="/api", tags=["itinerary"])
@@ -125,7 +125,7 @@ def _snippet(
     )
     params: list = [place_id]
     if preference_id:
-        where += " AND v.preference_id = ?"
+        where += f" AND {PREFERENCE_TOPIC_FILTER}"
         params.append(preference_id)
     row = db.one(
         conn,

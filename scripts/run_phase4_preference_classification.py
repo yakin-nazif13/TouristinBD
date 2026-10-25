@@ -393,15 +393,22 @@ def stage1_interpret(
         topic_reviews = topic_df["review_text_clean"].dropna().astype(str).tolist()
         if not topic_reviews:
             continue
+        # Read the topic from the reviews that formed it. Outliers reassigned to it by
+        # Phase 3 count towards its size but are the least typical members.
+        core_df = topic_df
+        if "topic_assignment" in topic_df.columns:
+            clustered = topic_df[topic_df["topic_assignment"] == "cluster"]
+            if not clustered.empty:
+                core_df = clustered
 
         prompt = STAGE1_PROMPT.format(
             topic_id=topic_id,
             topic_name=topic_name,
             top_keywords=keywords,
-            place_mix=place_mix_summary(topic_df),
+            place_mix=place_mix_summary(core_df),
             review_count=len(topic_reviews),
             corpus_size=corpus_size,
-            sample_reviews=make_diverse_samples(topic_df),
+            sample_reviews=make_diverse_samples(core_df),
         )
         print(f"  interpreting topic {topic_id}: {topic_name} ({len(topic_reviews)} reviews)")
         parsed, raw = call_llm_json(

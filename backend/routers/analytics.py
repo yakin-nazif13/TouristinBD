@@ -147,6 +147,7 @@ def long_tail(conn: sqlite3.Connection = Depends(db.get_conn)) -> dict:
         LEFT JOIN topics t      ON t.topic_id = m.topic_id
         LEFT JOIN preferences p ON p.preference_id = m.preference_id
         LEFT JOIN long_tail_flags lt ON lt.topic_id = m.topic_id
+        WHERE m.mapping_rank = 1
         GROUP BY COALESCE(p.preference_type, 'unmapped')
         ORDER BY review_count DESC
         """,

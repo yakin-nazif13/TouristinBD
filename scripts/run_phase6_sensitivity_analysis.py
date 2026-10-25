@@ -38,6 +38,7 @@ from umap import UMAP
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import corpus_scaling as scaling  # noqa: E402
+import topic_embedding  # noqa: E402
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 DATA_DIR = Path(os.environ.get("TOURISTINBD_DATA_DIR") or (REPO_ROOT / "data"))
@@ -156,7 +157,9 @@ def fit_topics(
         umap_model=umap_model,
         min_topic_size=min_topic_size,
         nr_topics=scaling.choose_nr_topics(len(texts)),
-        vectorizer_model=CountVectorizer(ngram_range=(1, 2), stop_words="english"),
+        vectorizer_model=CountVectorizer(
+            ngram_range=(1, 2), stop_words=topic_embedding.STOP_WORDS, token_pattern=topic_embedding.TOKEN_PATTERN
+        ),
         top_n_words=10,
         verbose=False,
         calculate_probabilities=False,
@@ -242,11 +245,14 @@ def run_size(
     pref_ids: list[str],
     preferences: pd.DataFrame,
     seed: int = RANDOM_SEED,
+    cluster_embedder: SentenceTransformer | None = None,
 ) -> tuple[dict, pd.DataFrame]:
     texts = build_texts(sample)
     min_size = adaptive_min_topic_size(sample_size)
     print(f"  fitting BERTopic (n={sample_size}, min_topic_size={min_size})")
-    topics = fit_topics(texts, embedder, min_size, seed)
+    # Reviews are clustered with the Bengali-capable model (as in Phase 3); topics are matched to
+    # preferences with `embedder`, the model Phase 4's threshold was calibrated on.
+    topics = fit_topics(texts, cluster_embedder or embedder, min_size, seed)
     mappings = map_topics_to_preferences(
         topics, pref_texts, pref_ids, preferences, embedder
     )
@@ -357,6 +363,7 @@ def main() -> None:
 
     print(f"Loading embedding model: {EMBEDDING_MODEL_NAME}")
     embedder = SentenceTransformer(EMBEDDING_MODEL_NAME, device="cpu")
+    cluster_embedder = topic_embedding.load_cluster_encoder()
 
     all_metrics: list[dict] = []
     all_mappings: list[pd.DataFrame] = []
@@ -366,7 +373,7 @@ def main() -> None:
         print(f"\n=== sample_size={size} ===")
         sample = stratified_sample(reviews, size, seed=seed + size)
         metrics, mappings = run_size(
-            sample, size, embedder, pref_texts, pref_ids, preferences, seed
+            sample, size, embedder, pref_texts, pref_ids, preferences, seed, cluster_embedder
         )
         metrics["sample_fraction"] = round(size / corpus_n, 4)
         mapped = set(metrics["mapped_preference_ids"])
@@ -443,6 +450,7 @@ def main() -> None:
             "tau_sim": TAU_SIM,
             "stability_delta": STABILITY_DELTA,
             "embedding_model": EMBEDDING_MODEL_NAME,
+            "clustering_model": topic_embedding.CLUSTER_MODEL_NAME,
         },
         "corpus_size": corpus_n,
         "metrics": all_metrics,
@@ -471,7 +479,7 @@ def main() -> None:
 
 ## Metrics tracked
 - topic count
-- how many of the 10 preferences get at least one topic
+- how many of the preferences get at least one topic
 - average mapping similarity + high-confidence rate (sim ≥ {TAU_SIM})
 - Jaccard similarity of the mapped preference set vs the previous sample size
 

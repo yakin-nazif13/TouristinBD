@@ -52,6 +52,7 @@ INPUTS = {
     "stage1_interpretations": DATA_DIR / "stage1_topic_interpretations.csv",
     "preference_classification": DATA_DIR / "preference_classification.csv",
     "topic_preference_mapping": DATA_DIR / "topic_preference_mapping.csv",
+    "topic_preference_secondary": DATA_DIR / "topic_preference_secondary.csv",
     "long_tail_flags": DATA_DIR / "long_tail_flags.csv",
     "topic_preferences": DATA_DIR / "topic_preferences.csv",
     "phase5_precision": DATA_DIR / "phase5_direction1_precision_checks.csv",
@@ -137,6 +138,7 @@ DROP VIEW  IF EXISTS v_temporal_volume;
 DROP VIEW  IF EXISTS v_preference_frequency;
 DROP VIEW  IF EXISTS v_city_preference_rollup;
 DROP VIEW  IF EXISTS v_venue_preference_rollup;
+DROP VIEW  IF EXISTS v_review_preference_all;
 DROP VIEW  IF EXISTS v_review_preference;
 
 DROP TABLE IF EXISTS metadata;
@@ -215,8 +217,11 @@ CREATE TABLE preferences (
     preference_type  TEXT              -- mainstream | long_tail
 );
 
+-- A topic has one primary preference (mapping_rank 1). When its best two were too close to
+-- call (Phase 5), it also carries the runner-up as mapping_rank 2.
 CREATE TABLE topic_preference_map (
-    topic_id         INTEGER PRIMARY KEY REFERENCES topics(topic_id),
+    topic_id         INTEGER NOT NULL REFERENCES topics(topic_id),
+    mapping_rank     INTEGER NOT NULL DEFAULT 1,
     preference_id    TEXT REFERENCES preferences(preference_id),
     similarity       REAL,
     second_best_preference_id TEXT,
@@ -224,7 +229,8 @@ CREATE TABLE topic_preference_map (
     sim_gap          REAL,
     confidence       TEXT,
     needs_review     INTEGER,
-    tau_sim          REAL
+    tau_sim          REAL,
+    PRIMARY KEY (topic_id, mapping_rank)
 );
 CREATE INDEX idx_tpm_pref ON topic_preference_map(preference_id);
 
@@ -415,6 +421,40 @@ SELECT
 FROM reviews r
 LEFT JOIN places  p  ON p.place_id = r.place_id
 LEFT JOIN topics  t  ON t.topic_id = r.topic_id
+LEFT JOIN topic_preference_map m ON m.topic_id = r.topic_id AND m.mapping_rank = 1
+LEFT JOIN preferences pr ON pr.preference_id = m.preference_id;
+
+-- The same, but a review whose topic is mapped to two preferences appears once under each.
+-- Use it to measure how much evidence a preference has; use v_review_preference to list reviews.
+CREATE VIEW v_review_preference_all AS
+SELECT
+    r.review_id,
+    r.place_id,
+    p.place_name,
+    p.city,
+    p.district,
+    p.division,
+    p.category,
+    p.place_kind,
+    r.source,
+    r.review_rating,
+    r.review_date,
+    r.review_month,
+    r.review_year,
+    r.detected_language,
+    r.text_length,
+    r.topic_id,
+    t.interpreted_label,
+    m.preference_id,
+    pr.preference_label,
+    pr.category      AS preference_category,
+    pr.subcategory   AS preference_subcategory,
+    pr.preference_type,
+    m.similarity     AS mapping_similarity,
+    m.confidence     AS mapping_confidence
+FROM reviews r
+LEFT JOIN places  p  ON p.place_id = r.place_id
+LEFT JOIN topics  t  ON t.topic_id = r.topic_id
 LEFT JOIN topic_preference_map m ON m.topic_id = r.topic_id
 LEFT JOIN preferences pr ON pr.preference_id = m.preference_id;
 
@@ -511,7 +551,7 @@ SELECT
     preference_type,
     COUNT(*)                        AS review_count,
     ROUND(AVG(review_rating), 3)    AS avg_rating
-FROM v_review_preference
+FROM v_review_preference_all
 WHERE preference_id IS NOT NULL AND city IS NOT NULL AND city <> ''
 GROUP BY city, preference_id;
 
@@ -527,7 +567,7 @@ SELECT
     preference_type,
     COUNT(*)                        AS review_count,
     ROUND(AVG(review_rating), 3)    AS avg_rating
-FROM v_review_preference
+FROM v_review_preference_all
 WHERE preference_id IS NOT NULL
 GROUP BY place_id, preference_id;
 
@@ -871,10 +911,14 @@ def build_preferences(
 
 
 def build_topic_preference_map(
-    mapping: pd.DataFrame | None, precision: pd.DataFrame | None, notes: list[str]
+    mapping: pd.DataFrame | None,
+    precision: pd.DataFrame | None,
+    notes: list[str],
+    secondary: pd.DataFrame | None = None,
 ) -> pd.DataFrame:
     cols = [
         "topic_id",
+        "mapping_rank",
         "preference_id",
         "similarity",
         "second_best_preference_id",
@@ -894,7 +938,24 @@ def build_topic_preference_map(
             out["similarity"].astype(float) - out["second_best_similarity"].astype(float)
         ).round(4)
     out["needs_review"] = to_bool(out["needs_review"])
-    return out.drop_duplicates(subset=["topic_id"])
+    out["mapping_rank"] = 1
+    out = out.drop_duplicates(subset=["topic_id"])
+
+    if secondary is not None and not secondary.empty:
+        extra = pd.DataFrame(index=secondary.index)
+        extra["topic_id"] = secondary["topic_id"]
+        extra["mapping_rank"] = 2
+        extra["preference_id"] = secondary["preference_id"]
+        extra["similarity"] = secondary["similarity"]
+        extra["second_best_preference_id"] = secondary.get("primary_preference_id")
+        extra["second_best_similarity"] = secondary.get("primary_similarity")
+        extra["sim_gap"] = secondary.get("sim_gap")
+        extra["confidence"] = "medium"
+        extra["needs_review"] = 1
+        extra["tau_sim"] = out["tau_sim"].dropna().iloc[0] if out["tau_sim"].notna().any() else pd.NA
+        out = pd.concat([out, extra[cols]], ignore_index=True)
+        notes.append(f"{len(extra)} near-tied topic(s) are also mapped to their runner-up preference")
+    return out
 
 
 def build_long_tail(long_tail: pd.DataFrame | None, notes: list[str]) -> pd.DataFrame:
@@ -997,6 +1058,7 @@ def main() -> None:
     topic_prefs = load_csv("topic_preferences", notes)
     pref_class = load_csv("preference_classification", notes)
     mapping = load_csv("topic_preference_mapping", notes)
+    secondary = load_csv("topic_preference_secondary", notes)
     long_tail = load_csv("long_tail_flags", notes)
     p5_precision = load_csv("phase5_precision", notes)
     p5_coverage = load_csv("phase5_coverage", notes)
@@ -1015,7 +1077,7 @@ def main() -> None:
     topics = build_topics(topics_summary, interpretations, topic_prefs, with_topics if with_topics is not None else processed.assign(topic_id=pd.NA), notes)
     reviews = build_reviews(processed, with_topics, places, notes)
     preferences = build_preferences(pref_class, long_tail, notes)
-    tpm = build_topic_preference_map(mapping, p5_precision, notes)
+    tpm = build_topic_preference_map(mapping, p5_precision, notes, secondary)
     lt = build_long_tail(long_tail, notes)
 
     # Referential integrity: never write a mapping that points at a missing row.

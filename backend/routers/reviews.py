@@ -8,7 +8,7 @@ from fastapi import APIRouter, Depends, HTTPException, Query
 
 from backend import db
 from backend.models import Page, ReviewSummary
-from backend.queries import REVIEW_SUMMARY_FROM, REVIEW_SUMMARY_SELECT
+from backend.queries import PREFERENCE_TOPIC_FILTER, REVIEW_SUMMARY_FROM, REVIEW_SUMMARY_SELECT
 
 router = APIRouter(prefix="/api", tags=["reviews"])
 
@@ -65,7 +65,9 @@ def list_reviews(
     eq("v.city", city)
     eq("v.source", source)
     eq("v.detected_language", language)
-    eq("v.preference_id", preference_id)
+    if preference_id:
+        where.append(PREFERENCE_TOPIC_FILTER)
+        params.append(preference_id)
     eq("v.preference_type", preference_type)
     cmp("v.topic_id", "=", topic_id)
     cmp("v.review_rating", ">=", min_rating)

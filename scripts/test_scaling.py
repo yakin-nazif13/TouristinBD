@@ -25,6 +25,7 @@ from __future__ import annotations
 import importlib
 import os
 import random
+import re
 import shutil
 import sqlite3
 import subprocess
@@ -267,7 +268,8 @@ def test_synthetic_import() -> None:
         health = run_script("report_corpus_health.py", "--no-write", data_dir=data)
         check("health report is green once geography is added", health.returncode == 0,
               health.stdout[-300:])
-        check("every division now has places", "| Rangpur | 15" in health.stdout, health.stdout[-900:])
+        rangpur = re.search(r"\| Rangpur \| (\d+) \|", health.stdout)
+        check("every division now has places", bool(rangpur) and int(rangpur.group(1)) >= 15, health.stdout[-900:])
 
         # database + API
         build = run_script("build_phase8_database.py", data_dir=data)

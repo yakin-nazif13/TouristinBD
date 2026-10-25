@@ -166,14 +166,17 @@ def test_reproduces_committed_output() -> None:
         detail = str(exc).splitlines()[0]
     check("the whole frame is identical", identical, detail)
 
+    # "Documented" means what the committed report says: a re-run must reproduce it exactly.
+    documented = json.loads((DATA_DIR / "phase2_report.json").read_text())
     check(
         "the documented drops happened",
-        stats["dropped_too_short"] == 1 and stats["dropped_duplicate_text"] == 1,
+        stats["dropped_too_short"] == documented["dropped_too_short"]
+        and stats["dropped_duplicate_text"] == documented["dropped_duplicate_text"],
         str(stats),
     )
     check(
         "the language mix is the documented one",
-        stats["by_language"] == {"en": 530, "bn-en-mixed": 5, "bn": 2, "nl": 1},
+        stats["by_language"] == documented["by_language"],
         str(stats["by_language"]),
     )
 
@@ -213,8 +216,8 @@ def test_script_run(tmp: Path) -> None:
     data.mkdir()
     # place_names.csv is an input now: it holds each place's final name, and the committed
     # corpus was built with it.
-    for name in ("real_reviews_batch1.csv", "real_reviews_booking_batch1.csv",
-                 "reviews_with_topics.csv", "place_geography.csv", "place_names.csv"):
+    raw_batches = sorted(p.name for p in DATA_DIR.glob("real_reviews_*.csv"))
+    for name in (*raw_batches, "reviews_with_topics.csv", "place_geography.csv", "place_names.csv"):
         if (DATA_DIR / name).exists():
             shutil.copy2(DATA_DIR / name, data / name)
 
@@ -230,7 +233,7 @@ def test_script_run(tmp: Path) -> None:
         )
     check("it writes a report", (data / "phase2_report.md").exists(), "missing")
     report = json.loads((data / "phase2_report.json").read_text())
-    check("the report records both inputs", len(report["inputs"]) == 2, str(report["inputs"]))
+    check("the report records every input", len(report["inputs"]) == len(raw_batches), str(report["inputs"]))
     check("the report records the row counts", report["rows_out"] == len(pd.read_csv(DATA_DIR / "processed_reviews.csv")), str(report["rows_out"]))
     check(
         "no warning fires when every review is already clustered",

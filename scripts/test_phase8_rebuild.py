@@ -129,7 +129,7 @@ def scenario_new_place(tmp: Path) -> None:
     )
     check(
         "new place: new place appears in /api/places",
-        overview["total_places"] == 28,
+        overview["total_places"] == reviews["place_name"].nunique() + 1,
         str(overview["total_places"]),
     )
     detail = client.get("/api/places/Bichanakandi Stone Quarry")
@@ -158,7 +158,7 @@ def scenario_new_preference(tmp: Path) -> None:
     data = fresh_data_dir(tmp / "new_pref")
     prefs = pd.read_csv(data / "preference_classification.csv")
     prefs.loc[len(prefs)] = {
-        "preference_id": "P11",
+        "preference_id": "P99",
         "category": "Culinary",
         "subcategory": "Local Food",
         "preference": "Street food and local cuisine",
@@ -176,7 +176,7 @@ def scenario_new_preference(tmp: Path) -> None:
     listed = client.get("/api/preferences").json()
     check(
         "new preference: appears with zero evidence",
-        any(p["preference_id"] == "P11" and p["review_count"] == 0 for p in listed),
+        any(p["preference_id"] == "P99" and p["review_count"] == 0 for p in listed),
         str([p["preference_id"] for p in listed]),
     )
     tree = client.get("/api/taxonomy").json()
@@ -185,7 +185,7 @@ def scenario_new_preference(tmp: Path) -> None:
         any(c["category"] == "Culinary" for c in tree),
         str([c["category"] for c in tree]),
     )
-    rec = client.get("/api/recommend", params={"preferences": "P11"})
+    rec = client.get("/api/recommend", params={"preferences": "P99"})
     check(
         "new preference: recommend accepts it and returns no evidence",
         rec.status_code == 200 and rec.json() == [],

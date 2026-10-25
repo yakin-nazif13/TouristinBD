@@ -236,8 +236,10 @@ def test_corpus_evaluation() -> None:
     check("the corpus's own place names are in the pool",
           "Kuakata Sea Beach" in groups,   # the final name: the longer of "Kuakata Beach" and the list's name
           "without them the local-vs-official case cannot be resolved at all")
-    check("a place name carries no mentions of its own",
-          groups["Kuakata Sea Beach"]["mentions"] == 0,
+    # Only mentions found in review text count. Another place's reviews may legitimately
+    # name Kuakata Sea Beach; its own reviews existing must add nothing on top.
+    check("a place name carries only the mentions actually found in text",
+          groups["Kuakata Sea Beach"]["mentions"] == int((mentions["surface"] == "Kuakata Sea Beach").sum()),
           "a place having reviews is not its name being mentioned")
 
     clusters, _ = res.resolve(groups)
@@ -296,7 +298,8 @@ def test_corpus_evaluation() -> None:
               assignment["Karamjal"] != assignment["Sundarbans"],
               f"{assignment['Karamjal']} vs {assignment['Sundarbans']}")
     check("Mongla stays separate from everything else",
-          sum(1 for s, c in assignment.items() if c == assignment.get("Mongla")) == 1,
+          sum(1 for s, c in assignment.items()
+              if c == assignment.get("Mongla") and s.lower() != "mongla") == 0,
           "Mongla merged with something")
 
 

@@ -34,6 +34,7 @@ REVIEW_SAMPLE_PATH = DATA_DIR / "phase5_manual_review_sample.csv"
 REPORT_JSON_PATH = DATA_DIR / "phase5_validation_report.json"
 REPORT_MD_PATH = DATA_DIR / "phase5_validation_report.md"
 RECOMMENDATIONS_PATH = DATA_DIR / "phase5_recommendations.csv"
+SECONDARY_PATH = DATA_DIR / "topic_preference_secondary.csv"
 
 TAU_SIM = 0.4
 AMBIGUITY_MARGIN = 0.08
@@ -66,16 +67,56 @@ def run_direction1_precision(mapping: pd.DataFrame) -> pd.DataFrame:
     return out
 
 
+def build_secondary_mapping(precision: pd.DataFrame) -> pd.DataFrame:
+    """Second preference for topics whose best two are too close to call.
+
+    A topic about historic temples genuinely speaks to both "heritage sites" and
+    "temple architecture". When the best preference beats the runner-up by less than
+    AMBIGUITY_MARGIN, picking one throws the other away and makes the result depend on a
+    coin-flip-sized similarity difference. Such a topic is mapped to both instead, as long as
+    the runner-up still clears TAU_SIM. The primary mapping is untouched; this is an addition.
+    """
+    pick = precision["ambiguous_flag"] & ~precision["low_similarity_flag"] & (
+        precision["second_best_similarity"] >= TAU_SIM
+    )
+    sec = precision.loc[
+        pick,
+        ["topic_id", "second_best_preference_id", "second_best_similarity", "preference_id", "similarity", "sim_gap"],
+    ].rename(
+        columns={
+            "second_best_preference_id": "preference_id",
+            "second_best_similarity": "similarity",
+            "preference_id": "primary_preference_id",
+            "similarity": "primary_similarity",
+        }
+    )
+    sec["mapping_rank"] = 2
+    return sec.reset_index(drop=True)
+
+
 def run_direction2_coverage(
-    mapping: pd.DataFrame, preferences: pd.DataFrame
+    mapping: pd.DataFrame, preferences: pd.DataFrame, secondary: pd.DataFrame | None = None
 ) -> pd.DataFrame:
-    counts = (
+    """Topics per preference, counting a topic under every preference it is mapped to."""
+    primary_counts = (
         mapping.groupby("preference_id", as_index=False)["topic_id"]
+        .count()
+        .rename(columns={"topic_id": "primary_topic_count"})
+    )
+    total = mapping[["topic_id", "preference_id"]]
+    if secondary is not None and not secondary.empty:
+        total = pd.concat([total, secondary[["topic_id", "preference_id"]]], ignore_index=True)
+    counts = (
+        total.drop_duplicates()
+        .groupby("preference_id", as_index=False)["topic_id"]
         .count()
         .rename(columns={"topic_id": "mapped_topic_count"})
     )
-    coverage = preferences.merge(counts, on="preference_id", how="left")
+    coverage = preferences.merge(counts, on="preference_id", how="left").merge(
+        primary_counts, on="preference_id", how="left"
+    )
     coverage["mapped_topic_count"] = coverage["mapped_topic_count"].fillna(0).astype(int)
+    coverage["primary_topic_count"] = coverage["primary_topic_count"].fillna(0).astype(int)
 
     coverage["coverage_status"] = np.where(
         coverage["mapped_topic_count"] < MIN_TOPICS_PER_PREFERENCE,
@@ -311,6 +352,7 @@ def write_reports(
     coverage: pd.DataFrame,
     sample: pd.DataFrame,
     recommendations: pd.DataFrame,
+    secondary: pd.DataFrame,
 ) -> None:
     low_sim = int((precision["low_similarity_flag"]).sum())
     ambiguous = int((precision["ambiguous_flag"]).sum())
@@ -330,6 +372,7 @@ def write_reports(
             "low_similarity_flags": low_sim,
             "ambiguous_flags": ambiguous,
             "pass": int((precision["precision_status"] == "pass").sum()),
+            "mapped_to_two_preferences": int(len(secondary)),
         },
         "direction2_coverage": {
             "total_preferences": int(len(coverage)),
@@ -365,6 +408,7 @@ def write_reports(
 - low-similarity flags: `{summary["direction1_precision"]["low_similarity_flags"]}`
 - ambiguous flags: `{summary["direction1_precision"]["ambiguous_flags"]}`
 - pass: `{summary["direction1_precision"]["pass"]}`
+- near-tied topics also mapped to their runner-up preference: `{summary["direction1_precision"]["mapped_to_two_preferences"]}` (`data/topic_preference_secondary.csv`)
 
 ## Direction 2 (Preference -> Topic)
 - total preferences: `{summary["direction2_coverage"]["total_preferences"]}`
@@ -384,6 +428,7 @@ def write_reports(
 - `data/phase5_direction2_coverage_checks.csv`
 - `data/phase5_manual_review_sample.csv`
 - `data/phase5_recommendations.csv`
+- `data/topic_preference_secondary.csv`
 - `data/phase5_validation_report.json`
 """
     REPORT_MD_PATH.write_text(md, encoding="utf-8")
@@ -405,8 +450,12 @@ def main() -> None:
     precision = run_direction1_precision(mapping)
     precision.to_csv(PRECISION_PATH, index=False)
 
+    secondary = build_secondary_mapping(precision)
+    secondary.to_csv(SECONDARY_PATH, index=False)
+    print(f"Mapped {len(secondary)} near-tied topic(s) to a second preference as well")
+
     print("Running direction 2 coverage checks")
-    coverage = run_direction2_coverage(mapping, preferences)
+    coverage = run_direction2_coverage(mapping, preferences, secondary)
     coverage.to_csv(COVERAGE_PATH, index=False)
 
     print(f"Building manual review sample (target {TARGET_REVIEW_SAMPLE_SIZE})")
@@ -420,7 +469,7 @@ def main() -> None:
     recommendations.to_csv(RECOMMENDATIONS_PATH, index=False)
 
     print("Writing reports")
-    write_reports(precision, coverage, sample, recommendations)
+    write_reports(precision, coverage, sample, recommendations, secondary)
 
     print("Phase 5 complete.")
     print(f"  precision rows: {len(precision)}")

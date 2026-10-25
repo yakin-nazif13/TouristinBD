@@ -207,11 +207,23 @@ def mapping_quality(phase5_precision: pd.DataFrame | None, phase5_coverage: pd.D
 
 
 def city_and_venue_rollups(reviews_topics: pd.DataFrame, topic_prefs: pd.DataFrame) -> tuple[pd.DataFrame, pd.DataFrame]:
-    merged = reviews_topics.merge(
-        topic_prefs[["topic_id", "preference_id", "preference_label", "preference_type"]],
-        on="topic_id",
-        how="left",
-    )
+    cols = ["topic_id", "preference_id", "preference_label", "preference_type"]
+    mapped = topic_prefs[cols]
+    # A topic whose best two preferences were too close to call (Phase 5) speaks for both, so
+    # its reviews count under each. Same rule as the database's v_review_preference_all.
+    secondary_path = TOPIC_PREFS.parent / "topic_preference_secondary.csv"
+    if secondary_path.exists():
+        secondary = pd.read_csv(secondary_path)[["topic_id", "preference_id"]]
+        # Labels come from the taxonomy itself: a preference reached only as a runner-up has no
+        # primary topic, so topic_prefs cannot name it.
+        labels = (
+            pd.read_csv(TOPIC_PREFS.parent / "preference_classification.csv")
+            .rename(columns={"preference": "preference_label"})
+            [["preference_id", "preference_label", "preference_type"]]
+        )
+        extra = secondary.merge(labels, on="preference_id", how="inner")
+        mapped = pd.concat([mapped, extra[cols]], ignore_index=True)
+    merged = reviews_topics.merge(mapped, on="topic_id", how="left")
     city_roll = (
         merged.groupby(["city", "preference_id", "preference_label", "preference_type"], as_index=False)
         .agg(

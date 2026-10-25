@@ -198,7 +198,7 @@ def test_filters() -> None:
     cities = {a["city"] for a in activities(body)}
     check("exclude_city is respected", "Cox's Bazar" not in cities, str(cities))
 
-    body = plan(days=3, city="Dhaka", preferences="P03")
+    body = plan(days=3, city="Dhaka", preferences="P01")
     check(
         "city anchor starts the trip there",
         body["days"][0]["base_city"] == "Dhaka",
@@ -233,7 +233,8 @@ def test_filters() -> None:
 
 def test_degradation() -> None:
     print("\nitinerary — honest degradation")
-    body = plan(days=14, pace="packed")
+    # A corner of the country, not the whole of it: the full corpus is now large enough to fill 14 days.
+    body = plan(days=14, pace="packed", division="Rangpur")
     days = body["days"]
     check("still returns 14 days", len(days) == 14, str(len(days)))
     empty = [d["day"] for d in days if not d["activities"]]
