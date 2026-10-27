@@ -1,9 +1,9 @@
 {
-  "n_surfaces": 537,
-  "n_entities": 467,
-  "n_merged_entities": 50,
-  "n_substantive_merges": 15,
-  "n_case_only_merges": 35,
+  "n_surfaces": 809,
+  "n_entities": 527,
+  "n_merged_entities": 117,
+  "n_substantive_merges": 97,
+  "n_case_only_merges": 20,
   "weights": {
     "phonetic": 0.4,
     "string": 0.25,
@@ -11,9 +11,26 @@
     "geography": 0.15
   },
   "merge_threshold": 0.72,
-  "n_pairs_merged": 100,
-  "evaluation": null,
+  "n_pairs_merged": 574,
+  "evaluation": {
+    "gold_surfaces": 35,
+    "gold_surfaces_present_in_corpus": 29,
+    "missing_from_corpus": [
+      "Char Bijoy",
+      "Guliakhali",
+      "Gulyakhali",
+      "Kuakata Beach",
+      "Ratargul",
+      "kaptai"
+    ],
+    "bcubed_precision": 0.9655,
+    "bcubed_recall": 0.9655,
+    "bcubed_f1": 0.9655,
+    "purity": 0.9655
+  },
   "notes": [
-    "embedding signal unavailable (needs torch); phonetic + string + geography only"
+    "embedding signal unavailable (needs torch); phonetic + string + geography only",
+    "entity E0215 was merged into E0110; re-check any decision recorded on E0215",
+    "entity E0198 was merged into E0087; re-check any decision recorded on E0198"
   ]
 }

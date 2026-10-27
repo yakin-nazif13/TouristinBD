@@ -1,0 +1,259 @@
+TOURISTINBD - WHAT CHANGED ON 27 OCTOBER 2026
+===============================================
+
+Written for the team and the supervisor. Plain language, no code. The work below
+was done by Unaiza on top of the 15,567 Google Maps reviews Yakin collected.
+
+In one paragraph
+----------------
+The hidden-gem engine now reads Bangla, understands what is a place and what is
+a food or an activity, and no longer calls famous places "hidden". Before this
+work it found no foods, no activities and nothing written in Bangla script, and
+its number-one "gem" was the tip "Best Time to Visit". Now it finds 918 food
+mentions, 2,037 activity mentions and 2,178 mentions written in Bangla, every one
+traceable to the exact sentence in a real review. Each place has a card of what
+it offers, a dozen local food specialities were found (Kushtia kulfi, Bogura
+kotkoti, Sreemangal seven-layer tea...), and every gem now has a point on a map
+and a label saying how recent its evidence is. No review was changed.
+
+
+BEFORE AND AFTER (same 14,841 reviews, before = last commit a710338)
+====================================================================
+
+                                          before      after
+  Mentions found in reviews                2,398      6,938
+    places                                 2,004      3,131
+    foods                                      0        918
+    activities                                 0      2,037
+    transport (CNG, launch, bus...)          104        562
+    tips                                     290        290
+  Mentions written in Bangla script            0      2,178
+  Reviews contributing at least one mention 1,454      3,415
+  Spellings merged into one entity           537 -> 467   809 -> 527
+  Name-merging quality (B-cubed F1)      not run      0.966
+  Gem candidates                              76         54
+    of which are not places (tips etc.)       28          0
+  Places with map coordinates (gazetteer)     46         65
+  Gems with a point on the map           not served   53 of 54
+  "On no map" (V0) places                     12          3
+  Place cards (place + what it offers)         0      1,064 rows, 104 places
+  Local food specialities                      0         12
+  Database tables                             16         19
+  API endpoints for gems and place cards       0          5
+  Tests                              ~1,280 in 23 suites   1,374 in 24 suites
+
+Top of the gem ranking
+
+  before                                   after
+  1  Best Time to Visit   (a tip)          1  Gangamati       V0  12 reviews
+  2  Bisnakandi       V0  (5,263 Google    2  Sardar Bari     V1  20 reviews
+                           reviews!)
+  3  Kantaji Temple   V0  (4,827 Google    3  Birisiri        V1  16 reviews
+                           reviews!)
+  4  Sardar Bari      V1                   4  Pashur          V1  10 reviews
+  5  Gangamati        V0   6 reviews       5  Fatrar Chor     V0   3 reviews
+
+Local specialities found (food, district, reviews there / all reviews)
+  Guava (floating market)   Jhalokati     80 / 94
+  Seafood                   Cox's Bazar   68 / 101
+  Bamboo chicken            Rangamati     12 / 13
+  Dried fish (shutki)       Cox's Bazar   12 / 17
+  Kulfi                     Kushtia       10 / 10
+  Lobster                   Cox's Bazar    8 / 11
+  Crab fry                  Chattogram     6 / 9
+  Pineapple                 Moulvibazar    6 / 9
+  Date palm juice           Noakhali       4 / 4
+  Kotkoti                   Bogura         4 / 4
+  Rupchanda (pomfret)       Cox's Bazar    4 / 4
+  Seven-layer tea           Moulvibazar    3 / 3
+  Rule, fixed before looking: at least 3 reviews, at least 60% from one district.
+  Each comes with a real sentence, e.g. "Ate Kushtia's famous Kulfi Malai here,
+  which in one word is amazing to eat, incomparable taste."
+
+
+WHAT WAS DONE
+=============
+
+Part 1 - Places, foods and activities, in Bangla too
+----------------------------------------------------
+
+1. Only places are ranked as gems
+   - Before, tips like "Best Time to Visit" and "visit early in the morning" were
+     scored as if they were places, and the tip came first.
+   - Now foods, activities, transport and tips are not gems. They describe the
+     place the review is about, and appear on that place's card.
+
+2. Foods and activities are found, from real review text
+   - A reviewed word list (data/food_activity_lexicon.csv): about 45 foods and 20
+     activities, each in English, Banglish and Bangla spellings ("fuchka",
+     "ফুচকা"; "boat ride", "নৌকা ভ্রমণ").
+   - Every spelling was checked by counting it in the reviews and reading the
+     sentences before it was accepted.
+   - Words that mislead are kept in the list as REJECTED, with the reason written
+     down, so the decision can be checked:
+       পান   means "get / drink" far more often than betel leaf
+       আম    (mango) would match inside আমি ("I")
+       ভেলা   (raft) is mostly the phrase মেঘের ভেলা, "a raft of clouds"
+       crab   is mostly the red crabs on beaches, not food
+
+3. Bangla names of places are recognised
+   - 171 Bangla spellings were mined from the Bangla reviews themselves by matching
+     their sound to known place names. 134 were accepted, 37 rejected with reasons
+     (লোকাল "local" sounds like Lalakhal; পসরা "wares"; বর্ষার "of the monsoon").
+     File: data/place_names_bn.csv.
+   - Bangla word endings are handled: বান্দরবানের, আলুটিলায়, ইলিশের are found as
+     বান্দরবান, আলুটিলা, ইলিশ. A word inside another word is never matched.
+   - A Bangla review mentioning its own place (বান্দরবান in a Bandarban review) is
+     not counted as a discovery, the same rule as for English.
+   - Effect: Gangamati went from 6 to 12 supporting reviews, because half of its
+     evidence was in Bangla and was invisible before.
+
+4. Place cards and local specialities
+   - For each of 104 places: the foods, activities, transport and tips its reviews
+     mention, with counts and one real sentence for each
+     (data/phase4_place_attributes.csv).
+   - The 12 local specialities above (data/phase4_local_specialities.csv).
+
+Part 2 - Famous places no longer called hidden; gems on the database and map
+---------------------------------------------------------------------------
+
+5. A serious error found and fixed: famous places were ranked as "undocumented"
+   - Several "V0 - on no map" gems were places we had scraped from Google Maps
+     ourselves: T-Badh (7,902 Google reviews), Bichnakandi (5,263, spelled
+     "Bisnakandi"), Kantajew Temple (4,827, spelled "Kantaji Temple"), Mohamaya
+     Lake, Karamjal, Bijoypur Lake, I-Badh. OpenStreetMap simply spells them
+     differently.
+   - The fix uses what the v2 plan already asks for in section 5.4: a candidate's
+     Google Maps presence and review count. A place on our own place list is on a
+     map, so it is never V0. Its level comes from its Google review count:
+     1,000+ is V3, 100-999 is V2, fewer is V1.
+   - This rule can only make a place LESS hidden, never more, so it removes false
+     discoveries and cannot create new ones.
+   - Spelling differences (Kantaji / Kantajew) are proposed automatically but only
+     used once a person accepts them (data/place_spellings.csv: 5 accepted, each
+     with a reason; one review even says "Kantaji Temple or Kantajew Temple").
+   - 29 places moved up a level. 12 V0 places became 3.
+
+6. How recent the evidence is
+   - The reviews go back to 2011, so a place card could quote a 2017 bus fare.
+   - Every gem now shows the year of its newest evidence and is marked "recent"
+     (a review in the last 3 years) or "old". Old gems stay listed, because the
+     evidence is real, but are flagged "needs recent confirmation". Today: 3 of 54
+     (Hiron Point, Puthia, I-Badh).
+   - Place cards quote a recent review whenever one exists, and transport or tips
+     with no recent review are marked out of date. 326 of the 1,064 card rows
+     have no review from the last 3 years.
+   - The 3-year window is the same one the gem score already used, kept in one
+     place so the two can never disagree.
+   - Checked on the data: 89% of reviews are from 2018 or later and only 11 are
+     older than 2016. The Bangla share has been steady at about 25% every year
+     since 2019, so it does not drift with time.
+
+7. Gems, place cards and specialities are in the database and the API
+   - Database version 3: three new tables (gems, place_attributes,
+     local_specialities), map coordinates for the 100 listed places, and two
+     views that work out freshness automatically.
+   - New API endpoints (all read-only):
+       /api/gems                 ranked gems; filter by level, division, freshness
+       /api/gems/map             map data: gem points and the 100 places
+       /api/gems/{id}            one gem with its sentences, newest first
+       /api/place-attributes     what a place offers, with real sentences
+       /api/local-specialities   the specialities
+   - Every map point says where it came from: OpenStreetMap (36), our Google Maps
+     place list (15), or - for the 3 places on no map at all - "near" the place
+     whose reviews mention them (Gangamati and Fatrar Chor near Kuakata).
+   - Madhabpur Lake has no point: placing it "near" the review that mentions it
+     would have put it in the wrong district, so it is left off and listed as
+     unmapped instead.
+
+8. Other mistakes found and fixed along the way
+   - The name merger crashed on a Bangla/English pair; fixed.
+   - Bangla word endings with য় failed to match because of two ways of writing
+     the same letter; fixed.
+   - Seven duplicate entities were merged (for example "Padma" had two IDs). Their
+     old IDs are kept as pointers, so nothing that refers to them breaks.
+
+
+IS THE COLLECTED DATA SAFE?
+===========================
+Yes. Checked against the last commit:
+  - Every review file is byte-for-byte unchanged: processed_reviews.csv (14,841
+    reviews), reviews_with_topics.csv, phase3_language_labels.csv, every raw
+    scrape batch, and the place list (place_names.csv, place_geography.csv,
+    place_aliases.csv).
+  - No file was deleted.
+  - Only files the pipeline generates were regenerated (phase4_*, phase8_*).
+  - The map-lookup cache only grew (70 -> 82 names); no entry removed or changed.
+  - The entity ID registry only grew (540 -> 812 spellings); no ID was lost.
+  - The verification queue had no human decisions yet, so none could be lost.
+  - New files are all reviewed lists or generated outputs.
+
+
+WHAT IS STILL OPEN
+==================
+Needs a person
+  - Look through the three reviewed lists and change any decision you disagree
+    with: data/food_activity_lexicon.csv, data/place_names_bn.csv,
+    data/place_spellings.csv. Re-running the pipeline applies the change.
+  - Muradpur: reviews say it is the local name of Guliakhali beach. Left separate
+    on purpose, because "local name versus official name" is a human call.
+  - Verify the 54 candidates in the verification queue.
+Needs building next
+  - The map tab on the website, using /api/gems/map.
+  - Place cards on the website, using /api/place-attributes.
+  - A few duplicates remain: "Hiron Point" / "Hiron Point (Nilkamal)",
+    "varendra museum" / "Varendra Research Museum".
+  - Finding places that are on no list at all from Bangla word patterns
+    (ঘাট, বাজার, চর, টিলা).
+
+
+Where to find things
+--------------------
+  data/phase4_gem_score_report.md         the gem ranking, with all five parts
+  data/phase4_gazetteer_report.md         visibility levels, and what the place list raised
+  data/phase4_place_attributes_report.md  place cards and local specialities
+  data/phase4_extraction_report.md        mentions by type, Bangla mentions
+  data/phase4_resolution_report.md        spellings merged, F1
+  docs/PROGRESS_BUILD_PLAN.md             how to run everything, in order
+
+
+EXACT CHANGES, FILE BY FILE
+===========================
+New programs
+  scripts/mine_bangla_place_names.py   finds Bangla spellings of known places
+  scripts/place_attributes.py          builds place cards and local specialities
+  backend/routers/gems.py              the five new API endpoints
+  scripts/test_entity_typing.py        43 tests: Bangla word edges, lists, outputs
+
+Changed programs
+  scripts/gem_schema.py          which types are gems; Bangla word matching; one
+                                 shared 3-year recency window
+  scripts/extract_mentions.py    reads Bangla place names and the food/activity list
+  scripts/resolve_entities.py    applies the three reviewed lists; crash fix
+  scripts/build_gazetteer.py     place-list rule, Google review counts, coordinate
+                                 fallback, spelling proposals
+  scripts/score_gems.py          ranks places only; uses the shared window
+  scripts/build_phase8_database.py  database version 3: gems, place cards,
+                                 specialities, place coordinates, freshness views
+  backend/db.py, backend/main.py expects version 3; registers the new endpoints
+  scripts/test_gazetteer.py      +20 tests for the place-list rule
+  scripts/test_phase8_api.py     +27 tests for the new endpoints
+  scripts/test_resolve_entities.py  own-place check covers Bangla names
+  .github/workflows/ci.yml       runs the new test suite on every push
+  docs/PROGRESS_BUILD_PLAN.md    run order updated
+
+New reviewed lists (a decision and, for every reject, a reason on each row)
+  data/food_activity_lexicon.csv
+  data/place_names_bn.csv
+  data/place_spellings.csv
+
+New generated outputs
+  data/phase4_place_attributes.csv, data/phase4_local_specialities.csv,
+  data/phase4_place_attributes_report.md / .json
+
+Regenerated outputs (re-run, not hand-edited)
+  data/phase4_mentions.csv, phase4_entities.csv, phase4_entity_variants.csv,
+  phase4_gazetteer.csv, phase4_gem_scores.csv, phase4_verification_queue.csv,
+  phase4_district_register.csv, phase4_audience_comparison.csv, their reports,
+  data/phase8_build_report.md / .json, data/gazetteer_cache.json,
+  data/entity_id_registry.json

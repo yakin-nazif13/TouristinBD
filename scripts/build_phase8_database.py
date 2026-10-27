@@ -37,10 +37,15 @@ OUT_REPORT_JSON = DATA_DIR / "phase8_build_report.json"
 
 # Bumped when the DB schema changes so the API can refuse a stale database.
 # 2 adds the Phase 4 entity layer: mentions, entities and entity_variants.
+# 3 adds the gem register (gems, place_attributes, local_specialities), place
+# coordinates and the evidence-freshness views.
 # backend/db.py's EXPECTED_SCHEMA_VERSION must be bumped with it, or the API
 # refuses to serve a database it does not understand — which is the intended
 # behaviour, not something to work around.
-SCHEMA_VERSION = 2
+SCHEMA_VERSION = 3
+
+# Used only when the gem-score report does not say which window it used.
+DEFAULT_RECENCY_WINDOW_YEARS = 3
 
 # ---------------------------------------------------------------------------
 # Input files. Everything here is optional; a missing file is reported, not fatal.
@@ -63,6 +68,12 @@ INPUTS = {
     "phase4_mentions": DATA_DIR / "phase4_mentions.csv",
     "phase4_entities": DATA_DIR / "phase4_entities.csv",
     "phase4_entity_variants": DATA_DIR / "phase4_entity_variants.csv",
+    "phase4_gem_scores": DATA_DIR / "phase4_gem_scores.csv",
+    "phase4_gem_score_report": DATA_DIR / "phase4_gem_score_report.json",
+    "phase4_gazetteer": DATA_DIR / "phase4_gazetteer.csv",
+    "phase4_verification_queue": DATA_DIR / "phase4_verification_queue.csv",
+    "phase4_place_attributes": DATA_DIR / "phase4_place_attributes.csv",
+    "phase4_local_specialities": DATA_DIR / "phase4_local_specialities.csv",
     "phase6_metrics": DATA_DIR / "phase6_sensitivity_metrics.csv",
     "phase6_mappings": DATA_DIR / "phase6_sensitivity_mappings.csv",
     "phase7_statistical_tests": DATA_DIR / "phase7_statistical_tests.json",
@@ -166,7 +177,9 @@ CREATE TABLE places (
     source           TEXT,
     place_avg_rating REAL,
     source_url       TEXT,
-    geo_resolved     INTEGER         -- 1 = matched place_geography.csv
+    geo_resolved     INTEGER,        -- 1 = matched place_geography.csv
+    lat              REAL,
+    lng              REAL
 );
 
 CREATE TABLE topics (
@@ -381,6 +394,77 @@ CREATE TABLE entity_variants (
 
 CREATE INDEX idx_variants_entity ON entity_variants(entity_id);
 
+-- The gem register (sections 5.4-5.7): one row per scored PLACE, with its
+-- score terms, how visible it already is, where it is, and what a person
+-- decided about it. `coord_source` says where the point came from, and
+-- `near_place` is set when it is only the place whose reviews mention it — an
+-- undocumented place has no coordinates of its own, by definition.
+CREATE TABLE gems (
+    entity_id          TEXT PRIMARY KEY,
+    canonical_name     TEXT,
+    gem_rank           INTEGER,
+    gem_score          REAL,
+    n_reviews          INTEGER,
+    n_mentions         INTEGER,
+    n_sources          INTEGER,
+    n_years            INTEGER,
+    visibility         TEXT,
+    visibility_reason  TEXT,
+    already_official   INTEGER,
+    term_mentions      REAL,
+    term_sentiment     REAL,
+    term_hidden        REAL,
+    term_distinct      REAL,
+    term_recency       REAL,
+    maps_place         TEXT,
+    maps_review_count  INTEGER,
+    wikidata_qid       TEXT,
+    lat                REAL,
+    lng                REAL,
+    coord_source       TEXT,           -- openstreetmap | google_maps_place_list | near_host_place
+    near_place         TEXT,
+    divisions          TEXT,           -- of the reviews it was found in, "|"-separated
+    state              TEXT,           -- candidate | verified | rejected | sensitive
+    publishable        INTEGER,
+    decided_by         TEXT,
+    decided_at_utc     TEXT,
+    decision_reason    TEXT
+);
+
+-- What each place offers: foods, activities, transport and tips, each with a
+-- sentence from a real review and how fresh that evidence is.
+CREATE TABLE place_attributes (
+    row_id             INTEGER PRIMARY KEY AUTOINCREMENT,
+    place_name         TEXT,
+    district           TEXT,
+    division           TEXT,
+    entity_type        TEXT,
+    entity_id          TEXT,
+    name               TEXT,
+    n_reviews          INTEGER,
+    n_mentions         INTEGER,
+    first_year         INTEGER,
+    last_year          INTEGER,
+    n_recent_reviews   INTEGER,
+    example_review_id  TEXT,
+    example_sentence   TEXT,
+    example_year       INTEGER
+);
+
+CREATE INDEX idx_attributes_place ON place_attributes(place_name);
+
+CREATE TABLE local_specialities (
+    entity_id           TEXT,
+    name                TEXT,
+    district            TEXT,
+    division            TEXT,
+    reviews_in_district INTEGER,
+    reviews_total       INTEGER,
+    share               REAL,
+    places              TEXT,
+    example_sentence    TEXT
+);
+
 CREATE TABLE metadata (
     key              TEXT PRIMARY KEY,
     value            TEXT
@@ -470,6 +554,8 @@ SELECT
     p.source,
     p.place_avg_rating,
     p.source_url,
+    p.lat,
+    p.lng,
     COUNT(r.review_id)                       AS review_count,
     ROUND(AVG(r.review_rating), 3)           AS avg_review_rating,
     SUM(CASE WHEN r.review_rating >= 4 THEN 1 ELSE 0 END) AS positive_reviews,
@@ -637,6 +723,56 @@ GROUP BY l.language_label, l.language_method, l.text_basis;
 """
 
 
+def freshness_views_sql(window_years: int) -> str:
+    """Views saying how recent each entity's evidence is.
+
+    The reviews go back to 2011, and a place whose newest mention is from 2017
+    may have changed beyond recognition. The window is measured from the newest
+    review in the corpus, not today, exactly as the gem score's recency term is,
+    so the two can never disagree about what "recent" means.
+    """
+    window = int(window_years)
+    return f"""
+-- Per entity: the first and last review that mentions it, and how many of the
+-- reviews mentioning it fall inside the recency window.
+CREATE VIEW v_entity_freshness AS
+WITH bounds AS (
+    SELECT date(MAX(review_date), '-{window} years') AS recent_since FROM reviews
+)
+SELECT
+    m.entity_id,
+    MIN(r.review_date)                                   AS first_evidence_date,
+    MAX(r.review_date)                                   AS last_evidence_date,
+    CAST(substr(MAX(r.review_date), 1, 4) AS INTEGER)    AS last_evidence_year,
+    COUNT(DISTINCT CASE WHEN r.review_date >= b.recent_since
+                        THEN m.review_id END)            AS n_recent_reviews,
+    b.recent_since                                       AS recent_since
+FROM mentions m
+JOIN reviews r ON r.review_id = m.review_id
+CROSS JOIN bounds b
+WHERE m.entity_id IS NOT NULL
+GROUP BY m.entity_id;
+
+-- The register as served. A gem with no recent evidence is not hidden from
+-- the list — the evidence is real — but it is marked and flagged so nobody is
+-- sent to a place on the strength of a 2017 review alone.
+CREATE VIEW v_gems AS
+SELECT
+    g.*,
+    f.first_evidence_date,
+    f.last_evidence_date,
+    f.last_evidence_year,
+    COALESCE(f.n_recent_reviews, 0)                      AS n_recent_reviews,
+    f.recent_since,
+    CASE WHEN COALESCE(f.n_recent_reviews, 0) > 0
+         THEN 'recent' ELSE 'old' END                    AS freshness,
+    CASE WHEN COALESCE(f.n_recent_reviews, 0) = 0
+         THEN 1 ELSE 0 END                               AS needs_recent_confirmation
+FROM gems g
+LEFT JOIN v_entity_freshness f ON f.entity_id = g.entity_id;
+"""
+
+
 # ---------------------------------------------------------------------------
 # Loaders
 # ---------------------------------------------------------------------------
@@ -658,7 +794,7 @@ def build_places(
     )
 
     if geo is not None and not geo.empty:
-        geo_cols = project(geo, ["place_name", "city", "district", "division", "place_kind"])
+        geo_cols = project(geo, ["place_name", "city", "district", "division", "place_kind", "lat", "lng"])
         geo_cols["place_name"] = geo_cols["place_name"].astype(str).str.strip()
         merged = agg.merge(geo_cols, on="place_name", how="left", indicator=True)
         unmapped = merged.loc[merged["_merge"] == "left_only", "place_name"].tolist()
@@ -680,6 +816,8 @@ def build_places(
         merged["district"] = pd.NA
         merged["division"] = pd.NA
         merged["place_kind"] = pd.NA
+        merged["lat"] = pd.NA
+        merged["lng"] = pd.NA
         merged["geo_resolved"] = 0
 
     # Geography file wins; fall back to whatever the review CSV had.
@@ -709,6 +847,8 @@ def build_places(
             "place_avg_rating",
             "source_url",
             "geo_resolved",
+            "lat",
+            "lng",
         ]
     ]
 
@@ -1032,6 +1172,79 @@ def build_manual_sample(df: pd.DataFrame | None, notes: list[str]) -> pd.DataFra
     return out
 
 
+GEM_COLUMNS = [
+    "entity_id", "canonical_name", "gem_rank", "gem_score", "n_reviews", "n_mentions",
+    "n_sources", "n_years", "visibility", "visibility_reason", "already_official",
+    "term_mentions", "term_sentiment", "term_hidden", "term_distinct", "term_recency",
+    "maps_place", "maps_review_count", "wikidata_qid", "lat", "lng", "coord_source",
+    "near_place", "divisions", "state", "publishable", "decided_by", "decided_at_utc", "decision_reason",
+]
+
+
+def build_gems(
+    scores: pd.DataFrame | None,
+    gazetteer: pd.DataFrame | None,
+    queue: pd.DataFrame | None,
+    mentions: pd.DataFrame,
+    reviews: pd.DataFrame,
+    places: pd.DataFrame,
+    notes: list[str],
+) -> pd.DataFrame:
+    """One row per scored gem: score, visibility, coordinates and decision."""
+    if scores is None or scores.empty:
+        notes.append("phase4_gem_scores.csv absent or empty; no gem register")
+        return pd.DataFrame(columns=GEM_COLUMNS)
+
+    gems = scores.copy()
+    gems["entity_id"] = gems["entity_id"].astype(str)
+    gems = gems.sort_values("gem_score", ascending=False, na_position="last").reset_index(drop=True)
+    gems["gem_rank"] = range(1, len(gems) + 1)
+
+    if gazetteer is not None and not gazetteer.empty:
+        geo = project(gazetteer, ["entity_id", "visibility_reason", "maps_place", "maps_review_count",
+                                  "wikidata_qid", "lat", "lng", "coord_source"])
+        geo["entity_id"] = geo["entity_id"].astype(str)
+        gems = gems.merge(geo, on="entity_id", how="left")
+    else:
+        notes.append("phase4_gazetteer.csv absent; gems carry no coordinates or visibility reason")
+
+    if queue is not None and not queue.empty:
+        decisions = project(queue, ["entity_id", "divisions", "state", "publishable", "decided_by",
+                                    "decided_at_utc", "reason"]).rename(columns={"reason": "decision_reason"})
+        decisions["entity_id"] = decisions["entity_id"].astype(str)
+        gems = gems.merge(decisions, on="entity_id", how="left")
+    gems = project(gems, GEM_COLUMNS)
+    gems["state"] = gems["state"].fillna("candidate")
+    gems["already_official"] = to_bool(gems["already_official"])
+    gems["publishable"] = to_bool(gems["publishable"]).fillna(0)
+
+    # An undocumented place has no coordinates of its own, which is what makes
+    # it undocumented. It is placed at the corpus place whose reviews mention it
+    # most, and labelled as such, rather than left off the map or given a point
+    # it does not have. Only V0: a documented place missing a point (Madhabpur
+    # Lake is on Wikidata, mentioned in a Mohamaya Lake review) would be pinned
+    # in the wrong district, so it stays unplaced instead.
+    missing = gems["lat"].isna() & (gems["visibility"] == "V0")
+    if missing.any() and not mentions.empty and "entity_id" in mentions and "lat" in places:
+        host = (mentions[["entity_id", "review_id"]].astype(str)
+                .merge(reviews[["review_id", "place_id"]].astype({"review_id": str}), on="review_id")
+                .merge(places[["place_id", "place_name", "lat", "lng"]].dropna(subset=["lat"]), on="place_id"))
+        top = (host.groupby(["entity_id", "place_name", "lat", "lng"]).size().rename("n").reset_index()
+               .sort_values(["entity_id", "n", "place_name"], ascending=[True, False, True])
+               .drop_duplicates("entity_id").set_index("entity_id"))
+        for index in gems.index[missing]:
+            entity_id = gems.at[index, "entity_id"]
+            if entity_id in top.index:
+                row = top.loc[entity_id]
+                gems.loc[index, ["lat", "lng", "coord_source", "near_place"]] = [
+                    float(row["lat"]), float(row["lng"]), "near_host_place", row["place_name"]]
+    unplaced = int(gems["lat"].isna().sum())
+    if unplaced:
+        names = ", ".join(gems.loc[gems["lat"].isna(), "canonical_name"].astype(str))
+        notes.append(f"gems: {unplaced} gem(s) have no coordinates, so the map cannot show them: {names}")
+    return gems
+
+
 def build_simple(df: pd.DataFrame | None, cols: list[str], name: str, notes: list[str]) -> pd.DataFrame:
     if df is None or df.empty:
         notes.append(f"{name} absent or empty")
@@ -1204,12 +1417,33 @@ def main() -> None:
             )
             mentions = mentions[~orphan]
 
+    gems = build_gems(
+        load_csv("phase4_gem_scores", notes), load_csv("phase4_gazetteer", notes),
+        load_csv("phase4_verification_queue", notes), mentions, reviews, places, notes,
+    )
+    place_attributes = build_simple(
+        load_csv("phase4_place_attributes", notes),
+        ["place_name", "district", "division", "entity_type", "entity_id", "name", "n_reviews",
+         "n_mentions", "first_year", "last_year", "n_recent_reviews", "example_review_id",
+         "example_sentence", "example_year"],
+        "phase4_place_attributes.csv", notes,
+    )
+    local_specialities = build_simple(
+        load_csv("phase4_local_specialities", notes),
+        ["entity_id", "name", "district", "division", "reviews_in_district", "reviews_total",
+         "share", "places", "example_sentence"],
+        "phase4_local_specialities.csv", notes,
+    )
+    gem_report = load_json("phase4_gem_score_report", notes) or {}
+    recency_window = int(gem_report.get("recency_window_years") or DEFAULT_RECENCY_WINDOW_YEARS)
+
     built_at = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
 
     DB_PATH.unlink(missing_ok=True)
     conn = sqlite3.connect(DB_PATH)
     try:
         conn.executescript(SCHEMA_SQL)
+        conn.executescript(freshness_views_sql(recency_window))
         row_counts = {
             "places": write_table(conn, "places", places),
             "topics": write_table(conn, "topics", topics),
@@ -1227,6 +1461,9 @@ def main() -> None:
             "entities": write_table(conn, "entities", entities),
             "entity_variants": write_table(conn, "entity_variants", entity_variants),
             "mentions": write_table(conn, "mentions", mentions),
+            "gems": write_table(conn, "gems", gems),
+            "place_attributes": write_table(conn, "place_attributes", place_attributes),
+            "local_specialities": write_table(conn, "local_specialities", local_specialities),
         }
 
         meta_rows = [
@@ -1236,6 +1473,7 @@ def main() -> None:
                 {k: (v.name if v.exists() else None) for k, v in INPUTS.items()}
             )),
             ("row_counts", json.dumps(row_counts)),
+            ("recency_window_years", str(recency_window)),
             ("phase7_statistical_tests", json.dumps(p7_tests) if p7_tests else ""),
             ("build_notes", json.dumps(notes)),
         ]

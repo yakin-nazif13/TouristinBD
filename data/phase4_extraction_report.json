@@ -1,26 +1,502 @@
 {
   "extractor": "gazetteer",
   "n_reviews": 14841,
-  "n_mentions": 2398,
-  "reviews_with_a_mention": 1454,
+  "n_mentions": 6938,
+  "reviews_with_a_mention": 3415,
   "by_entity_type": {
-    "ACCESS": 104,
-    "PLACE": 2004,
+    "ACCESS": 562,
+    "ACTIVITY": 2037,
+    "FOOD": 918,
+    "PLACE": 3131,
     "TIP": 290
   },
-  "distinct_surfaces": 441,
+  "distinct_surfaces": 713,
   "grounding": {
-    "candidates": 2398,
-    "kept": 2398,
+    "candidates": 6938,
+    "kept": 6938,
     "dropped": 0,
     "drop_rate": 0.0,
     "by_match_kind": {
-      "exact": 2398
+      "exact": 6938
     },
     "dropped_reasons": {},
     "dropped_examples": []
   },
   "notes": [
-    "gazetteer of 178 known names (corpus + geography + 3.1 anchors)"
+    "gazetteer of 178 known names (corpus + geography + 3.1 anchors)",
+    "134 reviewed Bangla spelling(s) of those names (place_names_bn.csv)",
+    "157 reviewed food / activity / transport spelling(s) (food_activity_lexicon.csv)"
+  ],
+  "bangla_script_mentions": 2178,
+  "concepts": [
+    {
+      "entity_type": "FOOD",
+      "concept": "Seafood",
+      "reviews": 101,
+      "mentions": 106,
+      "spellings": "sea food, seafood, seafood shack, সামুদ্রিক মাছ"
+    },
+    {
+      "entity_type": "FOOD",
+      "concept": "Guava",
+      "reviews": 94,
+      "mentions": 249,
+      "spellings": "guava, পেয়ারা, পেয়ারা মাখা"
+    },
+    {
+      "entity_type": "FOOD",
+      "concept": "Street food",
+      "reviews": 66,
+      "mentions": 70,
+      "spellings": "street food"
+    },
+    {
+      "entity_type": "FOOD",
+      "concept": "Fuchka",
+      "reviews": 42,
+      "mentions": 45,
+      "spellings": "fuchka, phuchka, ফুচকা"
+    },
+    {
+      "entity_type": "FOOD",
+      "concept": "Barbecue",
+      "reviews": 31,
+      "mentions": 33,
+      "spellings": "barbecue, bbq, বারবিকিউ"
+    },
+    {
+      "entity_type": "FOOD",
+      "concept": "Tea stalls",
+      "reviews": 31,
+      "mentions": 32,
+      "spellings": "tea stall, টং"
+    },
+    {
+      "entity_type": "FOOD",
+      "concept": "Green coconut (dab)",
+      "reviews": 29,
+      "mentions": 41,
+      "spellings": "coconut water, fresh coconut, green coconut, ডাব"
+    },
+    {
+      "entity_type": "FOOD",
+      "concept": "Mango",
+      "reviews": 29,
+      "mentions": 32,
+      "spellings": "mango, আমের"
+    },
+    {
+      "entity_type": "FOOD",
+      "concept": "Chotpoti",
+      "reviews": 28,
+      "mentions": 30,
+      "spellings": "chotpoti, চটপটি"
+    },
+    {
+      "entity_type": "FOOD",
+      "concept": "Fried fish",
+      "reviews": 22,
+      "mentions": 23,
+      "spellings": "fish fry, fried fish, ভাজা মাছ, মাছ ভাজা"
+    },
+    {
+      "entity_type": "FOOD",
+      "concept": "Dried fish (shutki)",
+      "reviews": 17,
+      "mentions": 23,
+      "spellings": "dried fish, shutki, শুঁটকি, শুটকি"
+    },
+    {
+      "entity_type": "FOOD",
+      "concept": "Jackfruit",
+      "reviews": 16,
+      "mentions": 20,
+      "spellings": "jackfruit, কাঁঠাল"
+    },
+    {
+      "entity_type": "FOOD",
+      "concept": "Banana",
+      "reviews": 14,
+      "mentions": 15,
+      "spellings": "banana"
+    },
+    {
+      "entity_type": "FOOD",
+      "concept": "Shrimp",
+      "reviews": 14,
+      "mentions": 14,
+      "spellings": "prawn, shrimp, চিংড়ি"
+    },
+    {
+      "entity_type": "FOOD",
+      "concept": "Bamboo chicken",
+      "reviews": 13,
+      "mentions": 14,
+      "spellings": "bamboo chicken, বাঁশ মুরগি, ব্যাম্বু চিকেন"
+    },
+    {
+      "entity_type": "FOOD",
+      "concept": "Coffee",
+      "reviews": 12,
+      "mentions": 14,
+      "spellings": "কফি"
+    },
+    {
+      "entity_type": "FOOD",
+      "concept": "Biryani",
+      "reviews": 11,
+      "mentions": 13,
+      "spellings": "biriyani, biryani, kacchi, বিরিয়ানি"
+    },
+    {
+      "entity_type": "FOOD",
+      "concept": "Jhal muri",
+      "reviews": 11,
+      "mentions": 11,
+      "spellings": "jhal muri, jhalmuri, ঝালমুড়ি"
+    },
+    {
+      "entity_type": "FOOD",
+      "concept": "Lobster",
+      "reviews": 11,
+      "mentions": 12,
+      "spellings": "lobster, লবস্টার"
+    },
+    {
+      "entity_type": "FOOD",
+      "concept": "Pickle",
+      "reviews": 11,
+      "mentions": 11,
+      "spellings": "pickle"
+    },
+    {
+      "entity_type": "FOOD",
+      "concept": "Kulfi",
+      "reviews": 10,
+      "mentions": 10,
+      "spellings": "kulfi, kulphi, কুলফি"
+    },
+    {
+      "entity_type": "FOOD",
+      "concept": "Crab fry",
+      "reviews": 9,
+      "mentions": 9,
+      "spellings": "crab fry, কাঁকড়া ফ্রাই, কাঁকড়া ভাজা"
+    },
+    {
+      "entity_type": "FOOD",
+      "concept": "Pineapple",
+      "reviews": 9,
+      "mentions": 9,
+      "spellings": "pineapple, আনারস"
+    },
+    {
+      "entity_type": "FOOD",
+      "concept": "Hilsa (ilish)",
+      "reviews": 6,
+      "mentions": 10,
+      "spellings": "hilsa, ইলিশ"
+    },
+    {
+      "entity_type": "FOOD",
+      "concept": "Papaya",
+      "reviews": 6,
+      "mentions": 6,
+      "spellings": "papaya, পেঁপে"
+    },
+    {
+      "entity_type": "FOOD",
+      "concept": "Roasted corn",
+      "reviews": 5,
+      "mentions": 7,
+      "spellings": "corn, ভুট্টা"
+    },
+    {
+      "entity_type": "FOOD",
+      "concept": "Bhorta",
+      "reviews": 4,
+      "mentions": 4,
+      "spellings": "ভর্তা"
+    },
+    {
+      "entity_type": "FOOD",
+      "concept": "Date palm juice",
+      "reviews": 4,
+      "mentions": 5,
+      "spellings": "date palm juice, khejurer rosh, খেজুরের রস"
+    },
+    {
+      "entity_type": "FOOD",
+      "concept": "Kabab",
+      "reviews": 4,
+      "mentions": 4,
+      "spellings": "kabab, kebab, কাবাব"
+    },
+    {
+      "entity_type": "FOOD",
+      "concept": "Kotkoti (Mahasthan sweet)",
+      "reviews": 4,
+      "mentions": 5,
+      "spellings": "kotkoti, কটকটি"
+    },
+    {
+      "entity_type": "FOOD",
+      "concept": "Rupchanda (pomfret)",
+      "reviews": 4,
+      "mentions": 6,
+      "spellings": "rupchanda, রূপচাঁদা"
+    },
+    {
+      "entity_type": "FOOD",
+      "concept": "Sugarcane juice",
+      "reviews": 4,
+      "mentions": 4,
+      "spellings": "sugarcane juice, আখের রস"
+    },
+    {
+      "entity_type": "FOOD",
+      "concept": "Doi (curd)",
+      "reviews": 3,
+      "mentions": 3,
+      "spellings": "দই, মহিষের দুধের দই"
+    },
+    {
+      "entity_type": "FOOD",
+      "concept": "Khichuri",
+      "reviews": 3,
+      "mentions": 3,
+      "spellings": "khichuri, খিচুড়ি"
+    },
+    {
+      "entity_type": "FOOD",
+      "concept": "Seven-layer tea",
+      "reviews": 3,
+      "mentions": 3,
+      "spellings": "seven layer tea, seven-layer tea"
+    },
+    {
+      "entity_type": "FOOD",
+      "concept": "Duck curry",
+      "reviews": 2,
+      "mentions": 2,
+      "spellings": "duck curry"
+    },
+    {
+      "entity_type": "FOOD",
+      "concept": "Ghol (buttermilk)",
+      "reviews": 2,
+      "mentions": 3,
+      "spellings": "ঘোল"
+    },
+    {
+      "entity_type": "FOOD",
+      "concept": "Honey",
+      "reviews": 2,
+      "mentions": 2,
+      "spellings": "honey"
+    },
+    {
+      "entity_type": "FOOD",
+      "concept": "Kachagolla",
+      "reviews": 2,
+      "mentions": 4,
+      "spellings": "kachagolla"
+    },
+    {
+      "entity_type": "FOOD",
+      "concept": "Paan",
+      "reviews": 2,
+      "mentions": 2,
+      "spellings": "paan, rongila pan"
+    },
+    {
+      "entity_type": "FOOD",
+      "concept": "Pitha",
+      "reviews": 2,
+      "mentions": 2,
+      "spellings": "পিঠা"
+    },
+    {
+      "entity_type": "FOOD",
+      "concept": "Badam cha",
+      "reviews": 1,
+      "mentions": 1,
+      "spellings": "badam cha"
+    },
+    {
+      "entity_type": "FOOD",
+      "concept": "Lemon sherbet",
+      "reviews": 1,
+      "mentions": 2,
+      "spellings": "লেবুর শরবত"
+    },
+    {
+      "entity_type": "FOOD",
+      "concept": "Loitta fish",
+      "reviews": 1,
+      "mentions": 1,
+      "spellings": "লইট্টা"
+    },
+    {
+      "entity_type": "FOOD",
+      "concept": "Mezbani",
+      "reviews": 1,
+      "mentions": 1,
+      "spellings": "মেজবানি"
+    },
+    {
+      "entity_type": "FOOD",
+      "concept": "Rasmalai",
+      "reviews": 1,
+      "mentions": 2,
+      "spellings": "রসমালাই"
+    },
+    {
+      "entity_type": "ACTIVITY",
+      "concept": "Picnic",
+      "reviews": 430,
+      "mentions": 514,
+      "spellings": "picnic, পিকনিক"
+    },
+    {
+      "entity_type": "ACTIVITY",
+      "concept": "Boat ride",
+      "reviews": 352,
+      "mentions": 403,
+      "spellings": "boat ride, boat trip, boating, নৌকা ভ্রমণ, নৌকা ভ্রমন, নৌকাভ্রমণ"
+    },
+    {
+      "entity_type": "ACTIVITY",
+      "concept": "Trekking and hiking",
+      "reviews": 309,
+      "mentions": 459,
+      "spellings": "hike, hiking, trek, trekking, ট্রেকিং, হাইকিং"
+    },
+    {
+      "entity_type": "ACTIVITY",
+      "concept": "Swimming",
+      "reviews": 151,
+      "mentions": 166,
+      "spellings": "swimming, সাঁতার"
+    },
+    {
+      "entity_type": "ACTIVITY",
+      "concept": "Kayaking",
+      "reviews": 82,
+      "mentions": 109,
+      "spellings": "kayak, kayaking, কায়াক, কায়াকিং"
+    },
+    {
+      "entity_type": "ACTIVITY",
+      "concept": "Speedboat ride",
+      "reviews": 70,
+      "mentions": 78,
+      "spellings": "speed boat, speedboat, স্পিড বোট, স্পিডবোট"
+    },
+    {
+      "entity_type": "ACTIVITY",
+      "concept": "Shopping",
+      "reviews": 57,
+      "mentions": 60,
+      "spellings": "shopping, কেনাকাটা"
+    },
+    {
+      "entity_type": "ACTIVITY",
+      "concept": "Camping",
+      "reviews": 52,
+      "mentions": 59,
+      "spellings": "camping, ক্যাম্পিং, তাঁবু"
+    },
+    {
+      "entity_type": "ACTIVITY",
+      "concept": "Sunset watching",
+      "reviews": 50,
+      "mentions": 50,
+      "spellings": "watch the sunset, watching the sunset, সূর্যাস্ত দেখা"
+    },
+    {
+      "entity_type": "ACTIVITY",
+      "concept": "Horse riding",
+      "reviews": 38,
+      "mentions": 39,
+      "spellings": "horse ride, horse riding"
+    },
+    {
+      "entity_type": "ACTIVITY",
+      "concept": "Bird watching",
+      "reviews": 28,
+      "mentions": 32,
+      "spellings": "bird watching, birdwatching, পাখি দেখা"
+    },
+    {
+      "entity_type": "ACTIVITY",
+      "concept": "Cycling",
+      "reviews": 17,
+      "mentions": 17,
+      "spellings": "bicycle, cycling"
+    },
+    {
+      "entity_type": "ACTIVITY",
+      "concept": "Parasailing",
+      "reviews": 14,
+      "mentions": 14,
+      "spellings": "parasailing, প্যারাসেইলিং"
+    },
+    {
+      "entity_type": "ACTIVITY",
+      "concept": "River cruise",
+      "reviews": 10,
+      "mentions": 11,
+      "spellings": "cruise"
+    },
+    {
+      "entity_type": "ACTIVITY",
+      "concept": "Bamboo raft ride",
+      "reviews": 9,
+      "mentions": 10,
+      "spellings": "bamboo raft, raft ride, বাঁশের ভেলা"
+    },
+    {
+      "entity_type": "ACTIVITY",
+      "concept": "Cable car",
+      "reviews": 8,
+      "mentions": 8,
+      "spellings": "cable car, ক্যাবল কার"
+    },
+    {
+      "entity_type": "ACTIVITY",
+      "concept": "Jet ski",
+      "reviews": 8,
+      "mentions": 8,
+      "spellings": "jet ski, জেট স্কি"
+    },
+    {
+      "entity_type": "ACCESS",
+      "concept": "CNG auto-rickshaw",
+      "reviews": 223,
+      "mentions": 294,
+      "spellings": "cng, সিএনজি"
+    },
+    {
+      "entity_type": "ACCESS",
+      "concept": "Engine boat (trawler)",
+      "reviews": 56,
+      "mentions": 86,
+      "spellings": "engine boat, trawler, ইঞ্জিন নৌকা, ট্রলার"
+    },
+    {
+      "entity_type": "ACCESS",
+      "concept": "Chander gari (jeep)",
+      "reviews": 31,
+      "mentions": 37,
+      "spellings": "chander gari, jeep ride, চাঁদের গাড়ি"
+    },
+    {
+      "entity_type": "ACCESS",
+      "concept": "Launch",
+      "reviews": 20,
+      "mentions": 41,
+      "spellings": "launch ghat, লঞ্চ"
+    }
   ]
 }

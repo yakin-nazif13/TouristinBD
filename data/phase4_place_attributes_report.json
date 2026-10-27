@@ -1,0 +1,22 @@
+{
+  "n_rows": 1064,
+  "n_places": 104,
+  "by_type": {
+    "ACCESS": 434,
+    "ACTIVITY": 1685,
+    "FOOD": 698,
+    "TIP": 288
+  },
+  "speciality_rule": {
+    "min_reviews": 3,
+    "min_share_in_one_district": 0.6
+  },
+  "n_local_specialities": 12,
+  "recency_window_years": 3,
+  "rows_without_recent_evidence": {
+    "ACCESS": 71,
+    "ACTIVITY": 63,
+    "FOOD": 93,
+    "TIP": 99
+  }
+}

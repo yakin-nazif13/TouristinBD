@@ -257,6 +257,69 @@ def test_only_discovered_entities() -> None:
           str(gazetteer[gazetteer["visibility"] == "unknown"]["name"].tolist()))
 
 
+def test_place_list() -> None:
+    print("\nour own Google Maps place list")
+    listed = {
+        "t badh": {"place": "T-Badh", "reviews": 7902, "lat": 24.36, "lng": 88.6},
+        "kantajew temple": {"place": "Kantajew Temple", "reviews": 4827, "lat": 25.79, "lng": 88.67},
+        "shashi lodge": {"place": "Shashi Lodge", "reviews": 66, "lat": 24.75, "lng": 90.4},
+        "china matir pahar": {"place": "China Matir Pahar", "reviews": 201, "lat": 25.1, "lng": 90.6},
+    }
+    check("names match whatever their case and hyphens", gz.core_name("t-badh") == gz.core_name("T-Badh"))
+    check("a kind-of-place word does not stop a match",
+          gz.core_name("Kolatoli Beach") == gz.core_name("Kolatoli"))
+
+    hit = gz.match_place_list(["T-badh"], listed, {})
+    check("an exact listed name matches", hit and hit["place"] == "T-Badh", str(hit))
+    level, reason = gz.raise_with_place_list("V0", "not found in OpenStreetMap or Wikidata", hit)
+    check("a listed place is never V0 (T-Badh, 7,902 Google reviews)", level == "V3", level)
+    check("and the reason names the listing", "T-Badh" in reason and "7902" in reason, reason)
+    check("100-999 Google reviews is V2", gz.maps_visibility(listed["china matir pahar"])[0] == "V2")
+    check("under 100 is V1", gz.maps_visibility(listed["shashi lodge"])[0] == "V1")
+    check("an unknown count is still on the map, so V1",
+          gz.maps_visibility({"place": "X", "reviews": None})[0] == "V1")
+    check("the place list never lowers a level",
+          gz.raise_with_place_list("V3", "well documented", listed["shashi lodge"])[0] == "V3")
+    check("no listing leaves the level alone",
+          gz.raise_with_place_list("V0", "absent", None) == ("V0", "absent"))
+
+    check("a misspelling is not matched on its own", gz.match_place_list(["Kantaji Temple"], listed, {}) is None)
+    accepted = {gz.core_name("Kantaji Temple"): "Kantajew Temple"}
+    check("an accepted misspelling matches",
+          (gz.match_place_list(["Kantaji Temple"], listed, accepted) or {}).get("place") == "Kantajew Temple")
+
+    existing = pd.DataFrame([{"variant": "Shoshi Lodge", "place": "Shashi Lodge", "similarity": 91.7,
+                              "decision": "reject", "reason": "test"}])
+    proposed = gz.propose_spellings(["Kantaji Temple", "Shoshi Lodge", "T-Badh", "Gangamati"], listed, existing)
+    by_variant = proposed.set_index("variant")
+    check("a near spelling is proposed as pending",
+          by_variant.loc["Kantaji Temple", "decision"] == "pending"
+          and by_variant.loc["Kantaji Temple", "place"] == "Kantajew Temple", str(proposed))
+    check("a recorded decision is kept", by_variant.loc["Shoshi Lodge", "decision"] == "reject")
+    check("an exact listed name is not proposed", "T-Badh" not in by_variant.index)
+    check("an unrelated name is not proposed", "Gangamati" not in by_variant.index)
+
+    gazetteer_path = REPO_ROOT / "data" / "phase4_gazetteer.csv"
+    if gazetteer_path.exists():
+        frame = pd.read_csv(gazetteer_path)
+        listed_v0 = frame[(frame["visibility"] == "V0") & frame["maps_place"].notna()]
+        check("in the real register, no place on our list is V0", listed_v0.empty,
+              str(listed_v0["name"].tolist()))
+        lowered = [r["name"] for _, r in frame.iterrows()
+                   if r["osm_wikidata_visibility"] in gz.VISIBILITY_LEVELS
+                   and gz.VISIBILITY_LEVELS.index(r["visibility"])
+                   < gz.VISIBILITY_LEVELS.index(r["osm_wikidata_visibility"])]
+        check("and no level was lowered", not lowered, str(lowered))
+        no_source = frame[frame["lat"].notna() & frame["coord_source"].isna()]
+        check("every coordinate says where it came from", no_source.empty, str(no_source["name"].tolist()))
+    spellings = REPO_ROOT / "data" / "place_spellings.csv"
+    if spellings.exists():
+        frame = pd.read_csv(spellings)
+        rejects = frame[frame["decision"] == "reject"]
+        check("place_spellings.csv: every reject says why",
+              rejects["reason"].fillna("").astype(str).str.strip().ne("").all())
+
+
 def main() -> None:
     print("Gazetteer and visibility tests (BUILD_PLAN 5.4)\n")
     test_unknown_is_never_v0()
@@ -266,6 +329,7 @@ def main() -> None:
     test_cache_hygiene()
     test_offline_never_touches_network()
     test_only_discovered_entities()
+    test_place_list()
     print(f"\n{len(PASSED)} passed, {len(FAILED)} failed")
     if FAILED:
         for f in FAILED:

@@ -1,0 +1,172 @@
+bangla,place,reviews,decision,reason
+আহসান মঞ্জিল,Ahsan Manzil,44,accept,
+আহ্সান মঞ্জিল,Ahsan Manzil,1,accept,
+আলুটিলা,Alutila,33,accept,
+বাগেরহাট,Bagerhat,72,accept,
+বালিয়াটি জমিদার বাড়ি,Baliati Jamidar Bari,33,accept,
+বালিয়াটি জমিদার বাড়ী,Baliati Jamidar Bari,3,accept,
+বলিয়াটি জমিদার বাড়ি,Baliati Jamidar Bari,1,accept,
+বান্দরবান,Bandarban,112,accept,
+বান্দরবন,Bandarban,19,accept,
+বান্দারবান,Bandarban,2,accept,
+ভিমরুলি,Bhimruli,13,accept,
+ভিমরুলী,Bhimruli,4,accept,
+ভীমরুলী,Bhimruli,2,accept,
+ভিমরুল,Bhimruli,1,reject,ordinary word: 'hornet'
+ভীমরুলি,Bhimruli,1,accept,
+বিজয়পুর লেক,Bijoypur Lake,5,accept,
+বিজয়পুর পাহাড়,Bijoypur Pahar,2,accept,
+বর্ষার,Birisiri,38,reject,ordinary word: 'of the monsoon'
+বিরিশিরি,Birisiri,10,accept,
+বর্ষের,Birisiri,1,reject,ordinary word: 'of the year'
+বর্ষোর,Birisiri,1,reject,"misspelt 'of the monsoon', not a place"
+বিরিশরির,Birisiri,1,accept,
+বিরিসিরি,Birisiri,1,accept,
+বিড়িসিড়ি,Birisiri,1,accept,
+বিসনাকান্দি,Bisnakandi,1,accept,
+বগা লেক,Boga Lake,15,accept,
+ভাগ লোককে,Boga Lake,1,reject,ordinary words: 'share' + 'people'
+বুদ্ধ ধাতু জাদি,Buddha Dhatu Jadi,13,accept,
+বৌদ্ধ ধাতু জাদি,Buddha Dhatu Jadi,2,accept,
+বৌদ্ধ ধাতু জাদী,Buddha Dhatu Jadi,2,accept,
+বৌদ্ধ ধাতু জদী,Buddha Dhatu Jadi,1,accept,
+চন্দ্রনাথ,Chandranath,30,accept,
+চীনা মাটির পাহাড়,China Matir Pahar,5,accept,
+চিনা মাটির পাহাড়,China Matir Pahar,4,accept,
+ছোট সোনা মসজিদ,Choto Sona Masjid,33,accept,
+ছোট শোনা মসজিদ,Choto Sona Masjid,1,accept,
+দেবতাখুম,Debotakhum,28,accept,
+দেবতাকুম,Debotakhum,3,accept,
+দুর্গা সাগর,Durga Sagar,6,accept,
+দূর্গা সাগর,Durga Sagar,4,accept,
+দুর্গ সাগর,Durga Sagar,1,accept,
+দুর্গাপুর,Durgapur,34,accept,
+দূর্গাপুর,Durgapur,9,accept,
+ফাতরার চর,Fatrar Chor,2,accept,
+ফিনলে টি এস্টেট,Finlay Tea Estate,5,accept,
+ফয়েস লেক,Foy's Lake,3,accept,
+ফয়স লেক,Foy's Lake,1,accept,
+গঙ্গামতি,Gangamati,4,accept,
+গঙ্গামাটি,Gangamati,2,accept,
+গ্যাং,Gazni,1,reject,ordinary word: 'gang'
+গুলিয়াখালী,Guliakhali,23,accept,
+গুলিয়াখালি,Guliakhali,11,accept,
+গুলিয়াখালি সি বীচ,Guliakhali Sea Beach,5,accept,
+গুলিয়াখালি সী বিচ,Guliakhali Sea Beach,4,accept,
+গুলিয়াখালি সি বিচ,Guliakhali Sea Beach,1,accept,
+গুলিয়াখালি সী বীচ,Guliakhali Sea Beach,1,accept,
+গুলিয়াখালী সি বিচ,Guliakhali Sea Beach,1,accept,
+গুলিয়াখালী সি বিচঃ,Guliakhali Sea Beach,1,accept,
+হাতিরঝিল লেক,Hatirjheel Lake,2,accept,
+হিরণ পয়েন্ট,Hiron Point,11,accept,
+হিরন পয়েন্টে,Hiron Point,1,accept,
+হীরণ পয়েন্ট,Hiron Point,1,accept,
+ইবাদ,I-Badh,1,reject,"fragment of 'ইবাদত' (worship), not a place"
+কপোত,Kaptai,5,reject,ordinary word: 'pigeon'
+কাপ্তাই,Kaptai,5,accept,
+কপাট,Kaptai,1,reject,ordinary word: 'door'
+কপোতি,Kaptai,1,reject,ordinary word: 'pigeon'
+কপোতী,Kaptai,1,reject,ordinary word: 'pigeon'
+কাঁপতো,Kaptai,1,reject,ordinary word: 'trembled'
+কাপ্তায়,Kaptai,1,accept,
+কাপ্তাই লেক,Kaptai Lake,1,accept,
+করমজল,Karamjal,28,accept,
+কাঁরামজল,Karamjal,1,accept,
+খাগড়াছড়ি,Khagrachari,95,accept,
+খাগরাছড়ি,Khagrachari,2,accept,
+খগড়াছড়ি,Khagrachari,1,accept,
+কলাতলী বিচ,Kolatoli Beach,9,accept,
+কলাতলি বিচ,Kolatoli Beach,3,accept,
+কলাতলি বীচ,Kolatoli Beach,2,accept,
+কলাতলী বীচেও,Kolatoli Beach,1,accept,
+কটকা,Kotka,9,accept,
+কটক,Kotka,2,reject,"only occurs inside 'কটকটি', the Mahasthangarh sweet (a FOOD)"
+কতটুকু,Kotka,2,reject,ordinary word: 'how much'
+কাটুক,Kotka,2,reject,ordinary word: 'let it cut'
+কথাকয়,Kotka,1,reject,ordinary words: 'speaks'
+কূয়াটিকে,Kotka,1,reject,ordinary word: 'the well'
+কোটকা,Kotka,1,accept,
+খাতকে,Kotka,1,reject,ordinary word: 'to the ledger'
+লোকাল,Lalakhal,47,reject,ordinary word: 'local'
+লালাখাল,Lalakhal,19,accept,
+লীলাখেলা,Lalakhal,2,reject,ordinary word: 'play'
+লোকালি,Lalakhal,1,reject,ordinary word: 'locally'
+লোভাছড়া,Lawachara,1,reject,"a different place (Lovachora, Kanaighat), not Lawachara"
+মাধবকুণ্ড,Madhabkunda,19,accept,
+মাধবকুন্ড,Madhabkunda,9,accept,
+মাধবপুর লেক,Madhabpur Lake,1,accept,
+মহামায়া লেক,Mohamaya Lake,22,accept,
+মহিমা লুকিয়ে,Mohamaya Lake,2,reject,ordinary words: 'glory hidden'
+মহমায়া লেকে,Mohamaya Lake,1,accept,
+মঙ্গল,Mongla,7,reject,"ordinary word: 'welfare / Tuesday', not Mongla (মোংলা)"
+মুক্তাগাছা,Muktagachha,3,accept,
+মুরাদপুর,Muradpur,11,accept,reviews say this is the local name of Guliakhali Sea Beach; whether the two are one register entity is a human call
+নাটোর রাজবাড়ি,Natore Rajbari,13,accept,
+নাটোর রাজবাড়ী,Natore Rajbari,12,accept,
+নেভাল সি বিচ,Naval Sea Beach,1,accept,
+নিঝুম দ্বীপ,Nijhum Dwip,25,accept,
+নীলাচল,Nilachal,30,accept,
+নীলগিরি,Nilgiri,13,accept,
+নিলগিরি,Nilgiri,1,accept,
+পদ্মা,Padma,84,accept,
+পদ্ম,Padma,7,reject,ordinary word: 'lotus'
+পিদাম,Padma,4,reject,not a word for the Padma; key collision
+পাহাড়পুর,Paharpur,48,accept,
+পাহারপুর,Paharpur,1,accept,
+পাশের,Pashur,36,reject,ordinary word: 'beside'
+পশুর,Pashur,11,reject,ambiguous: 'of an animal' and a mangrove tree as well as the Pashur river
+পসরা,Pashur,11,reject,ordinary word: 'wares'
+পাসের,Pashur,3,reject,ordinary word: 'of passing'
+পেশার,Pashur,2,reject,ordinary word: 'of a profession'
+পশরা,Pashur,1,reject,ordinary word: 'wares'
+পিপাষুর,Pashur,1,reject,ordinary word: 'thirsty'
+পিপাসুর,Pashur,1,reject,ordinary word: 'thirsty'
+পিপাসুরা,Pashur,1,reject,ordinary word: 'the thirsty'
+পতেঙ্গা সী বিচ,Patenga Sea Beach,3,accept,
+পতেংগা সী বীচ,Patenga Sea Beach,1,accept,
+পতেঙ্গা সি বিচ,Patenga Sea Beach,1,accept,
+পতেঙ্গা সী বীচ,Patenga Sea Beach,1,accept,
+পুঠিয়া রাজবাড়ী,Puthia Rajbari,23,accept,
+পুঠিয়া রাজবাড়ি,Puthia Rajbari,14,accept,
+রমনা পার্ক,Ramna Park,66,accept,
+রামসাগর,Ramsagar,29,accept,
+রাঙ্গামাটি,Rangamati,23,accept,
+রাঙ্গামটি,Rangamati,1,accept,
+রাতারগুল,Ratargul,44,accept,
+রতারগুল,Ratargul,1,accept,
+রাতারগোল,Ratargul,1,accept,
+সাদা মাটির পাহাড়,Sada Matir Pahar,13,accept,
+শাদা মাটির পাহাড়,Sada Matir Pahar,1,accept,
+সেন্ট মার্টিন,Saint Martin,14,accept,
+সেইন্ট মার্টিন,Saint Martin,2,accept,
+সেন্ট মারটিন,Saint Martin,2,accept,
+সাজেক ভেলি,Sajek Valley,1,accept,
+সর্দার বাড়ি,Sardar Bari,5,accept,
+সরদার বাড়ি,Sardar Bari,3,accept,
+শালবন বিহার,Shalban Bihar,38,accept,
+শ্রীপুর টি গার্ডেন,Shreepur Tea Garden,1,accept,
+সীতাকুণ্ড,Sitakunda,45,accept,
+সীতাকুন্ড,Sitakunda,9,accept,
+শীতাকুণ্ড,Sitakunda,1,accept,
+শীতাকুন্ড,Sitakunda,1,accept,
+সিতাকুন্ড,Sitakunda,1,accept,
+সোমপুর মহাবিহার,Somapura Mahavihara,18,accept,
+সোমপুর মহাবিহার পাহাড়পুর,Somapura Mahavihara (Paharpur),1,accept,
+শ্রীমঙ্গল,Sreemangal,31,accept,
+সুগন্ধা সি বিচ,Sugondha Sea Beach,4,accept,
+সুগন্ধা সী বিচ,Sugondha Sea Beach,1,accept,
+সুগন্ধা সী বীচ,Sugondha Sea Beach,1,accept,
+টিবাধ,T-Badh,1,accept,
+তব্দা,T-Badh,1,reject,ordinary word: 'stunned'
+টাঙ্গুয়ার হাওর,Tanguar Haor,19,accept,
+টাংগুয়ার হাওর,Tanguar Haor,8,accept,
+টাঙ্গুয়ার হাওড়,Tanguar Haor,4,accept,
+টাংগুয়ার হাওড়,Tanguar Haor,2,accept,
+টাঙ্গুর হাওর,Tanguar Haor,1,accept,
+টাঙ্গুয়ার হাওয়ের,Tanguar Haor,1,accept,
+তারা মসজিদ,Tara Masjid,35,accept,
+তৈরি মসজিদ,Tara Masjid,1,reject,"ordinary words: 'built mosque', not Tara Masjid"
+জয়নুল আবেদিন পার্ক,Zainul Abedin Park,8,accept,
+জয়নুল আবেদীন পার্ক,Zainul Abedin Park,7,accept,
+জয়নাল আবেদিন পার্ক,Zainul Abedin Park,2,accept,
+জয়নাল আবদিন পার্ক,Zainul Abedin Park,1,accept,

@@ -302,16 +302,18 @@ a question.
 ```
 .venv\Scripts\python.exe scripts\run_phase2_preprocessing.py
 .venv\Scripts\python.exe scripts\run_phase3_language_pipeline.py
+.venv\Scripts\python.exe scripts\mine_bangla_place_names.py   # new candidates arrive as `pending`; review them in data\place_names_bn.csv
 .venv\Scripts\python.exe scripts\extract_mentions.py --extractor gazetteer
 .venv\Scripts\python.exe scripts\resolve_entities.py --evaluate
-.venv\Scripts\python.exe scripts\build_gazetteer.py
+.venv\Scripts\python.exe scripts\build_gazetteer.py           # near-spellings of listed places arrive as `pending` in data\place_spellings.csv; after deciding, re-run resolve_entities and this
 .venv\Scripts\python.exe scripts\score_gems.py
+.venv\Scripts\python.exe scripts\place_attributes.py
 .venv\Scripts\python.exe scripts\analyze_audience.py
 .venv\Scripts\python.exe scripts\verification_queue.py --export-register
 .venv\Scripts\python.exe scripts\build_phase8_database.py
-.venv\Scripts\python.exe -m backend.main      # then open /app/ and the Discoveries tab
+.venv\Scripts\python.exe -m backend.main      # then open /app/ and the Discoveries tab; gem register at /api/gems, map data at /api/gems/map
 ```
-Tests: **974 across 20 suites**, all passing, about two minutes.
+Tests: **1,374 across 24 suites**, all passing (test_admin's file-permission check fails on Windows only), about three minutes.
 
 ## Next session, in priority order
 1. **Plan Phase 6's government dashboard** — the demo centrepiece, needs no new data,

@@ -60,10 +60,13 @@ from gem_schema import (  # noqa: E402
     ENTITY_TYPES,
     GroundingReport,
     ground,
+    has_bengali,
     is_generic,
     strip_article,
     strip_qualifier,
+    term_pattern,
 )
+from language_id import normalize_bangla  # noqa: E402
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 DATA_DIR = Path(os.environ.get("TOURISTINBD_DATA_DIR") or (REPO_ROOT / "data"))
@@ -71,6 +74,12 @@ DATA_DIR = Path(os.environ.get("TOURISTINBD_DATA_DIR") or (REPO_ROOT / "data"))
 IN_CORPUS = DATA_DIR / "processed_reviews.csv"
 IN_GEOGRAPHY = DATA_DIR / "place_geography.csv"
 IN_LANGUAGE = DATA_DIR / "phase3_language_labels.csv"
+# Bangla spellings of known places, mined from the corpus and reviewed
+# (scripts/mine_bangla_place_names.py). Only `accept` rows are used.
+IN_BANGLA_NAMES = DATA_DIR / "place_names_bn.csv"
+# Foods, activities and transport named in the reviews, each spelling checked
+# against real review text. Only `accept` rows are used.
+IN_LEXICON = DATA_DIR / "food_activity_lexicon.csv"
 OUT_MENTIONS = DATA_DIR / "phase4_mentions.csv"
 OUT_REPORT_MD = DATA_DIR / "phase4_extraction_report.md"
 OUT_REPORT_JSON = DATA_DIR / "phase4_extraction_report.json"
@@ -145,6 +154,31 @@ def load_gazetteer(corpus: pd.DataFrame) -> list[str]:
     return sorted(usable, key=lambda n: (-len(n), n))
 
 
+def _accepted(path: Path) -> pd.DataFrame:
+    """Rows of a reviewed list whose decision is `accept`."""
+    if not path.exists():
+        return pd.DataFrame()
+    frame = pd.read_csv(path)
+    return frame[frame["decision"].astype(str).str.strip() == "accept"]
+
+
+def load_bangla_names() -> dict[str, str]:
+    """Accepted Bangla spelling -> the English gazetteer name it stands for."""
+    frame = _accepted(IN_BANGLA_NAMES)
+    if frame.empty:
+        return {}
+    return dict(zip(frame["bangla"].astype(str), frame["place"].astype(str)))
+
+
+def load_lexicon() -> list[tuple[str, str]]:
+    """Accepted (surface, entity_type) pairs, longest surface first."""
+    frame = _accepted(IN_LEXICON)
+    if frame.empty:
+        return []
+    pairs = {(str(s), str(t).upper()) for s, t in zip(frame["surface"], frame["entity_type"])}
+    return sorted(pairs, key=lambda p: (-len(p[0]), p[0]))
+
+
 def _name_tokens(name: str) -> set[str]:
     """Lowercased word tokens of a place name, punctuation removed.
 
@@ -170,13 +204,23 @@ def _trim_to_word(text: str, start: int, end: int) -> str:
     return text[start:end].strip(" .,;:!?-")
 
 
-def extract_gazetteer(text: str, place_name: str, gazetteer: list[str]) -> list[dict]:
+def extract_gazetteer(text: str, place_name: str, gazetteer: list[str],
+                      aliases: dict[str, str] | None = None,
+                      lexicon: list[tuple[str, str]] | None = None) -> list[dict]:
     """Propose known names found in the text, except the review's own place.
 
     Excluding the review's own place is the point: a mention of Kuakata in a
     Kuakata review says nothing, while a mention of Fatrar Chor in one is the
     long-tail signal section 3.2 snowballs on.
+
+    `aliases` are Bangla spellings, each standing for an English name; the
+    own-place test uses the English name, so "বান্দরবান" in a review of
+    Bandarban is excluded exactly as "Bandarban" is. `lexicon` adds foods,
+    activities and transport, which are not excluded for the review's own place:
+    a Kuakata review naming the crab fry it ate is evidence about Kuakata.
     """
+    aliases = aliases or {}
+    names = sorted(set(gazetteer) | set(aliases), key=lambda n: (-len(n), n))
     # Every token of the review's own place, so a *short form* of it is
     # excluded too. Comparing whole strings is not enough: a review of
     # "Kuakata Beach" saying "Kuakata" was being counted as a secondary
@@ -188,12 +232,17 @@ def extract_gazetteer(text: str, place_name: str, gazetteer: list[str]) -> list[
     candidates: list[dict] = []
     claimed: list[tuple[int, int]] = []
 
-    for name in gazetteer:
-        name_tokens = _name_tokens(name)
+    for name in names:
+        name_tokens = _name_tokens(aliases.get(name, name))
         if name_tokens and own_tokens and name_tokens <= own_tokens:
             continue
-        # Word-boundary match so "Padma" does not fire inside "Padmasana".
-        pattern = re.compile(r"(?<![\w])" + re.escape(name) + r"(?![\w])", re.IGNORECASE)
+        # Word-boundary match so "Padma" does not fire inside "Padmasana". A
+        # Bangla name gets term_pattern's boundary, which also allows a case
+        # ending ("বান্দরবানের") and stops at a vowel sign.
+        if has_bengali(name):
+            pattern = term_pattern(name)
+        else:
+            pattern = re.compile(r"(?<![\w])" + re.escape(name) + r"(?![\w])", re.IGNORECASE)
         for found in pattern.finditer(text):
             span = (found.start(), found.end())
             # A longer name already covering this span wins (longest-first order).
@@ -206,6 +255,22 @@ def extract_gazetteer(text: str, place_name: str, gazetteer: list[str]) -> list[
             candidates.append({
                 "surface": text[found.start():found.end()],
                 "entity_type": "PLACE",
+                "start": found.start(),
+                "end": found.end(),
+            })
+
+    # Foods, activities and transport. A span already claimed by a place name is
+    # skipped, so "Bhimruli Floating Guava Market" stays one place rather than
+    # also yielding "guava"; a longer lexicon term likewise beats a shorter one.
+    for surface, entity_type in lexicon or []:
+        for found in term_pattern(surface).finditer(text):
+            span = (found.start(), found.end())
+            if any(s < span[1] and span[0] < e for s, e in claimed):
+                continue
+            claimed.append(span)
+            candidates.append({
+                "surface": text[found.start():found.end()],
+                "entity_type": entity_type,
                 "start": found.start(),
                 "end": found.end(),
             })
@@ -311,6 +376,29 @@ def text_for(row: pd.Series) -> str:
     return str(row.get("review_text_clean") or "")
 
 
+def concept_table(mentions: pd.DataFrame) -> pd.DataFrame:
+    """Lexicon mentions grouped by concept: reviews, mentions, spellings seen."""
+    frame = _accepted(IN_LEXICON)
+    if frame.empty or mentions.empty:
+        return pd.DataFrame()
+    # Normalised on both sides: a reviewer's Bangla may use the decomposed form
+    # of a letter that the lexicon stores composed.
+    concept_of = {(normalize_bangla(str(s)).lower(), str(t).upper()): str(c)
+                  for s, t, c in zip(frame["surface"], frame["entity_type"], frame["concept"])}
+    rows = mentions.assign(concept=[
+        concept_of.get((normalize_bangla(str(s)).lower(), str(t)))
+        for s, t in zip(mentions["surface"], mentions["entity_type"])
+    ]).dropna(subset=["concept"])
+    if rows.empty:
+        return pd.DataFrame()
+    table = rows.groupby(["entity_type", "concept"]).agg(
+        reviews=("review_id", "nunique"),
+        mentions=("review_id", "size"),
+        spellings=("surface", lambda s: ", ".join(sorted(set(s.astype(str).str.lower())))),
+    ).reset_index()
+    return table.sort_values(["entity_type", "reviews"], ascending=[False, False])
+
+
 def write_reports(mentions: pd.DataFrame, report: GroundingReport, extractor: str,
                   n_reviews: int, notes: list[str]) -> None:
     by_type = mentions["entity_type"].value_counts().to_dict() if not mentions.empty else {}
@@ -368,6 +456,34 @@ def write_reports(mentions: pd.DataFrame, report: GroundingReport, extractor: st
         lines += ["## Most-mentioned surfaces", "", "| surface | mentions |", "| --- | --- |"]
         lines += [f"| {k} | {v} |" for k, v in top.items()]
         lines.append("")
+
+        bangla = mentions[mentions["surface"].astype(str).map(has_bengali)]
+        payload["bangla_script_mentions"] = int(len(bangla))
+        lines += [
+            "## Mentions written in Bangla script",
+            "",
+            f"- **{len(bangla)}** mention(s) in {bangla['review_id'].nunique()} review(s), "
+            f"from the reviewed spellings in `{IN_BANGLA_NAMES.name}` and `{IN_LEXICON.name}`",
+            "",
+        ]
+
+        concepts = concept_table(mentions)
+        if not concepts.empty:
+            payload["concepts"] = concepts.to_dict(orient="records")
+            lines += [
+                "## Foods, activities and transport",
+                "",
+                "Every spelling below was found in real review text before it was added",
+                f"(`{IN_LEXICON.name}`, which also records each rejected spelling and why).",
+                "",
+                "| type | concept | reviews | mentions | spellings found |",
+                "| --- | --- | --- | --- | --- |",
+            ]
+            for _, row in concepts.iterrows():
+                lines.append(f"| {row['entity_type']} | {row['concept']} | {row['reviews']} | "
+                             f"{row['mentions']} | {row['spellings']} |")
+            lines.append("")
+        OUT_REPORT_JSON.write_text(json.dumps(payload, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
     if notes:
         lines += ["## Notes", ""] + [f"- {n}" for n in notes]
     OUT_REPORT_MD.write_text("\n".join(lines) + "\n", encoding="utf-8")
@@ -399,11 +515,18 @@ def main() -> int:
 
     client = model = provider = pipeline = None
     gazetteer: list[str] = []
+    aliases: dict[str, str] = {}
+    lexicon: list[tuple[str, str]] = []
 
     if args.extractor == "gazetteer":
         gazetteer = load_gazetteer(corpus)
+        aliases = load_bangla_names()
+        lexicon = load_lexicon()
         notes.append(f"gazetteer of {len(gazetteer)} known names (corpus + geography + 3.1 anchors)")
-        print(f"  gazetteer: {len(gazetteer)} names")
+        notes.append(f"{len(aliases)} reviewed Bangla spelling(s) of those names ({IN_BANGLA_NAMES.name})")
+        notes.append(f"{len(lexicon)} reviewed food / activity / transport spelling(s) ({IN_LEXICON.name})")
+        print(f"  gazetteer: {len(gazetteer)} names + {len(aliases)} Bangla spellings")
+        print(f"  lexicon: {len(lexicon)} food / activity / transport spellings")
     elif args.extractor == "gemini":
         # One call per review against a paid quota. Never silent.
         print(
@@ -437,7 +560,7 @@ def main() -> int:
         language = languages.get(review_id, str(row.get("detected_language") or ""))
 
         if args.extractor == "gazetteer":
-            candidates = extract_gazetteer(text, place_name, gazetteer)
+            candidates = extract_gazetteer(text, place_name, gazetteer, aliases, lexicon)
         elif args.extractor == "gemini":
             try:
                 candidates = extract_gemini(text, place_name, language, client, model, provider)

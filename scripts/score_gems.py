@@ -68,7 +68,9 @@ from pathlib import Path
 import pandas as pd
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from gem_schema import MIN_INDEPENDENT_MENTIONS, VISIBILITY_LEVELS  # noqa: E402
+from gem_schema import (  # noqa: E402
+    GEM_TYPES, MIN_INDEPENDENT_MENTIONS, RECENCY_WINDOW_YEARS, VISIBILITY_LEVELS,
+)
 from language_id import script_shares  # noqa: E402
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
@@ -108,11 +110,6 @@ MENTIONS_SATURATION = 10
 
 # V0 highest, as the plan specifies.
 HIDDEN_BY_VISIBILITY = {"V0": 1.0, "V1": 0.65, "V2": 0.30, "V3": 0.0}
-
-# "the last 2-3 years" (section 5.5). Three years, measured from the newest
-# review in the corpus rather than today's date, so the score does not drift
-# as the file ages on disk.
-RECENCY_WINDOW_YEARS = 3
 
 # Below this share of Latin letters, VADER's English lexicon says nothing
 # useful about a sentence.
@@ -294,6 +291,20 @@ def main() -> int:
         print(f"  ablated: {sorted(ablate)}")
     print(f"  candidate gate: {args.min_reviews}+ distinct reviews")
 
+    # Only places are gems. Foods, activities, transport and tips describe a
+    # place; ranked alongside places they took the top of the list ("Best Time
+    # to Visit" scored 0.95) because nothing official lists them, so they never
+    # had a visibility to be hidden from. They are reported, not scored.
+    skipped = entities[~entities["entity_type"].astype(str).str.upper().isin(GEM_TYPES)]
+    if not skipped.empty:
+        by_type = skipped["entity_type"].value_counts().to_dict()
+        notes.append(
+            f"{len(skipped)} non-place entit(ies) not scored "
+            f"({', '.join(f'{k} {v}' for k, v in sorted(by_type.items()))}); "
+            f"they are attributes of a place, see phase4_place_attributes.csv"
+        )
+    entities = entities[entities["entity_type"].astype(str).str.upper().isin(GEM_TYPES)]
+
     rows = []
     for _, entity in entities.iterrows():
         entity_id = str(entity["entity_id"])
@@ -360,10 +371,10 @@ def main() -> int:
         frame = frame.sort_values("gem_score", ascending=False, na_position="last")
 
         # A term with no spread contributes nothing but still carries weight.
-        # Reported rather than silently corrected: on this corpus `recency` is
-        # 1.0 for almost every candidate, because nearly all reviews fall
-        # inside the three-year window. That is a fact about the corpus, and
-        # dropping the term now would be tuning to it.
+        # Reported rather than silently corrected: on the first, small corpus
+        # `recency` was 1.0 for almost every candidate, because nearly all its
+        # reviews fell inside the window. That is a fact about a corpus, and
+        # dropping the term because of it would be tuning to it.
         for term in TERMS:
             column = frame[f"term_{term}"].dropna()
             if len(column) >= 3 and column.nunique() == 1:

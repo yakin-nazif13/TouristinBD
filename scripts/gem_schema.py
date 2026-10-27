@@ -38,6 +38,7 @@ import re
 import sys
 import unicodedata
 from dataclasses import dataclass, field
+from functools import lru_cache
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
@@ -46,6 +47,13 @@ from language_id import normalize_bangla, phonetic_key  # noqa: E402
 # --- vocabulary (section 5.1) --------------------------------------------
 
 ENTITY_TYPES = ["PLACE", "FOOD", "ACTIVITY", "ACCESS", "TIP"]
+
+# Only places are ranked as gems. The other types describe a place rather than
+# being one: "boat ride" or "best time to visit" mentioned across hundreds of
+# reviews is not a discovery, and scoring them put "Best Time to Visit" at the top
+# of the gem ranking. They are kept as attributes of the place a review is about.
+GEM_TYPES = ["PLACE"]
+ATTRIBUTE_TYPES = [t for t in ENTITY_TYPES if t not in GEM_TYPES]
 
 ENTITY_TYPE_HELP = {
     "PLACE": "a visitable location (beach stretch, temple, ghat, viewpoint)",
@@ -83,6 +91,12 @@ PUBLISHABLE_STATES = ["verified"]
 
 # Section 5.5: minimum independent mentions before anything is a candidate.
 MIN_INDEPENDENT_MENTIONS = 2
+
+# "the last 2-3 years" (section 5.5). Three years, measured from the newest
+# review in the corpus rather than today's date, so nothing drifts as the file
+# ages on disk. The gem score's recency term, the freshness of place attributes
+# and the database's freshness view all use this one window.
+RECENCY_WINDOW_YEARS = 3
 
 MATCH_KINDS = ["exact", "case", "whitespace", "normalized"]
 
@@ -385,6 +399,44 @@ def strip_article(name: str) -> str:
     squeezed = _squeeze(str(name or ""))
     stripped = re.sub(r"^the\s+", "", squeezed, flags=re.IGNORECASE)
     return stripped if stripped else squeezed
+
+
+# --- matching a known term inside review text ------------------------------
+
+# Case endings and particles that attach to the last word of a Bangla term
+# ("ইলিশের", "সাজেকে"). Normalised like the text, because "য়" can be typed as one
+# codepoint or as য + nukta. Longest first.
+BANGLA_SUFFIXES = sorted({normalize_bangla(s) for s in [
+    "গুলোতে", "গুলো", "দের", "তেও", "েরও", "য়ের", "য়েই", "ের", "এর", "েই", "কে",
+    "য়", "তে", "টা", "টি", "র", "ে", "ই", "ও",
+]}, key=lambda s: (-len(s), s))
+
+_BENGALI_CHAR = "ঀ-৿"
+
+
+def has_bengali(text: str) -> bool:
+    return bool(re.search(f"[{_BENGALI_CHAR}]", str(text or "")))
+
+
+@lru_cache(maxsize=None)
+def term_pattern(term: str) -> re.Pattern:
+    """A regex that finds `term` as a whole word; the match is the term only.
+
+    Bangla needs its own boundary. Python's \\w does not cover Bengali vowel signs,
+    so a plain word boundary lets "আম" (mango) match inside "আমি" (I). Here a
+    Bangla term may be followed only by one of BANGLA_SUFFIXES and then a
+    non-Bengali character, so "ইলিশের" matches "ইলিশ" and "আমি" does not match
+    "আম". An English term may take a plural "s"/"es". The ending is checked by
+    lookahead and left out of the match, so the stored surface is the term as the
+    reviewer wrote it.
+    """
+    escaped = re.escape(normalize_bangla(term) if has_bengali(term) else term)
+    if has_bengali(term):
+        endings = "|".join(re.escape(s) for s in BANGLA_SUFFIXES)
+        return re.compile(
+            rf"(?<![{_BENGALI_CHAR}\w]){escaped}(?=(?:{endings})?(?![{_BENGALI_CHAR}\w]))"
+        )
+    return re.compile(rf"(?<![\w]){escaped}(?=(?:e?s)?(?![\w]))", re.IGNORECASE)
 
 
 def ascii_fold(text: str) -> str:

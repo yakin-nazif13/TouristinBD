@@ -1,6 +1,6 @@
 {
-  "schema_version": 2,
-  "built_at_utc": "2026-10-23T17:23:23Z",
+  "schema_version": 3,
+  "built_at_utc": "2026-10-27T00:00:47Z",
   "database": "touristinbd.db",
   "row_counts": {
     "places": 116,
@@ -16,15 +16,20 @@
     "sensitivity_metrics": 5,
     "sensitivity_mappings": 154,
     "review_language": 14841,
-    "entities": 467,
-    "entity_variants": 537,
-    "mentions": 2398
+    "entities": 527,
+    "entity_variants": 809,
+    "mentions": 6938,
+    "gems": 54,
+    "place_attributes": 1064,
+    "local_specialities": 12
   },
   "views": [
     "v_city_preference_rollup",
     "v_city_stats",
     "v_dataset_overview",
     "v_entity_evidence",
+    "v_entity_freshness",
+    "v_gems",
     "v_language_mix",
     "v_mention_evidence",
     "v_place_stats",
@@ -37,6 +42,7 @@
   ],
   "notes": [
     "22 near-tied topic(s) are also mapped to their runner-up preference",
-    "phase5 manual review sample: 0/50 pairs carry a human_label"
+    "phase5 manual review sample: 0/50 pairs carry a human_label",
+    "gems: 1 gem(s) have no coordinates, so the map cannot show them: Madhabpur Lake"
   ]
 }

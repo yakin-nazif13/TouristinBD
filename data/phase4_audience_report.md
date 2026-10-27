@@ -24,52 +24,54 @@ confident-looking split that means nothing.
 
 | group | domestic | foreign | domestic share | foreign share | comparable |
 | --- | --- | --- | --- | --- | --- |
-| PLACE | 94 | 0 | 86.2% | 0.0% | no |
-| TIP | 11 | 1 | 10.1% | 100.0% | no |
-| ACCESS | 4 | 0 | 3.7% | 0.0% | no |
+| PLACE | 1215 | 0 | 51.1% | 0.0% | no |
+| ACTIVITY | 536 | 4 | 22.6% | 57.1% | no |
+| FOOD | 338 | 2 | 14.2% | 28.6% | no |
+| ACCESS | 277 | 0 | 11.7% | 0.0% | no |
+| TIP | 11 | 1 | 0.5% | 14.3% | no |
 
 ## By division
 
 | group | domestic | foreign | domestic share | foreign share | comparable |
 | --- | --- | --- | --- | --- | --- |
-| Chattogram | 36 | 1 | 33.0% | 100.0% | no |
-| Khulna | 21 | 0 | 19.3% | 0.0% | no |
-| Rajshahi | 20 | 0 | 18.4% | 0.0% | no |
-| Sylhet | 16 | 0 | 14.7% | 0.0% | no |
-| Mymensingh | 10 | 0 | 9.2% | 0.0% | no |
-| Dhaka | 4 | 0 | 3.7% | 0.0% | no |
-| Rangpur | 2 | 0 | 1.8% | 0.0% | no |
-| Barishal | 0 | 0 | 0.0% | 0.0% | no |
+| Chattogram | 1119 | 5 | 47.1% | 71.4% | yes |
+| Sylhet | 333 | 2 | 14.0% | 28.6% | no |
+| Khulna | 223 | 0 | 9.4% | 0.0% | no |
+| Barishal | 218 | 0 | 9.2% | 0.0% | no |
+| Rajshahi | 173 | 0 | 7.3% | 0.0% | no |
+| Mymensingh | 122 | 0 | 5.1% | 0.0% | no |
+| Rangpur | 96 | 0 | 4.0% | 0.0% | no |
+| Dhaka | 93 | 0 | 3.9% | 0.0% | no |
 
 ## By visibility
 
 | group | domestic | foreign | domestic share | foreign share | comparable |
 | --- | --- | --- | --- | --- | --- |
-| V3 | 60 | 0 | 55.0% | 0.0% | no |
-| V2 | 15 | 0 | 13.8% | 0.0% | no |
-| unknown | 15 | 1 | 13.8% | 100.0% | no |
-| V0 | 10 | 0 | 9.2% | 0.0% | no |
-| V1 | 9 | 0 | 8.3% | 0.0% | no |
+| unknown | 1162 | 7 | 48.9% | 100.0% | yes |
+| V3 | 893 | 0 | 37.6% | 0.0% | no |
+| V2 | 246 | 0 | 10.3% | 0.0% | no |
+| V1 | 61 | 0 | 2.6% | 0.0% | no |
+| V0 | 15 | 0 | 0.6% | 0.0% | no |
 
 ## By entity
 
 | group | domestic | foreign | domestic share | foreign share | comparable |
 | --- | --- | --- | --- | --- | --- |
-| Padma | 13 | 0 | 11.9% | 0.0% | no |
-| Bagerhat | 12 | 0 | 11.0% | 0.0% | no |
-| Bandarban | 11 | 0 | 10.1% | 0.0% | no |
-| Mahasthangarh | 7 | 0 | 6.4% | 0.0% | no |
-| Cox's Bazar | 7 | 0 | 6.4% | 0.0% | no |
-| Shoshi Lodge | 6 | 0 | 5.5% | 0.0% | no |
-| Paharpur | 5 | 0 | 4.6% | 0.0% | no |
-| Kantaji Temple | 4 | 0 | 3.7% | 0.0% | no |
-| Durgapur | 4 | 0 | 3.7% | 0.0% | no |
-| Best Time to Visit | 4 | 0 | 3.7% | 0.0% | no |
-| Sreemangal | 3 | 0 | 2.8% | 0.0% | no |
-| Bisnakandi | 3 | 0 | 2.8% | 0.0% | no |
-| Jaflong | 3 | 0 | 2.8% | 0.0% | no |
-| Rangamati | 2 | 0 | 1.8% | 0.0% | no |
-| Sitakunda | 2 | 0 | 1.8% | 0.0% | no |
+| Bandarban | 262 | 0 | 11.0% | 0.0% | no |
+| CNG auto-rickshaw | 160 | 0 | 6.7% | 0.0% | no |
+| Picnic | 154 | 0 | 6.5% | 0.0% | no |
+| Sitakunda | 149 | 0 | 6.3% | 0.0% | no |
+| Padma | 139 | 0 | 5.9% | 0.0% | no |
+| Bagerhat | 133 | 0 | 5.6% | 0.0% | no |
+| Guava | 124 | 0 | 5.2% | 0.0% | no |
+| Trekking and hiking | 100 | 0 | 4.2% | 0.0% | no |
+| Khagrachari | 90 | 0 | 3.8% | 0.0% | no |
+| Boat ride | 72 | 1 | 3.0% | 14.3% | no |
+| Sreemangal | 71 | 0 | 3.0% | 0.0% | no |
+| Engine boat (trawler) | 64 | 0 | 2.7% | 0.0% | no |
+| Durgapur | 60 | 0 | 2.5% | 0.0% | no |
+| Lalakhal | 54 | 0 | 2.3% | 0.0% | no |
+| Swimming | 50 | 3 | 2.1% | 42.9% | no |
 
 ## What this does and does not establish
 
@@ -84,9 +86,5 @@ p-value that means nothing.
 - reviewer_is_local_guide is deliberately not used: it is Google's contribution-volume badge, not a residency signal, and 274 of the 300 reviews that carry it are True — a proxy that says yes to nine in ten reviewers cannot separate two audiences
 - 4641/14841 reviews could be labelled (31.3%); user_location is supplied by Booking.com but not by Google Maps
 - no entity_type group has at least 5 mentions from both audiences, so no comparison is reported for it
-- no division group has at least 5 mentions from both audiences, so no comparison is reported for it
-- no visibility group has at least 5 mentions from both audiences, so no comparison is reported for it
 - no entity group has at least 5 mentions from both audiences, so no comparison is reported for it
-- 2288 of 2398 mentions sit in reviews that cannot be labelled. user_location comes from Booking.com, whose reviews are about hotels and rarely name another place, while almost every mention comes from a Google Maps review, which supplies no location. The source that identifies the reviewer is not the source that carries the evidence.
-- On this corpus the locals-versus-visitors question cannot be answered: every cell is too small on at least one side. This is a coverage limit, not a null result.
-- Worth flagging: section 5.6 cannot be answered via reviewer location without conflicting with section 10, which keeps personal-data output off when scraping. Google Maps reviewer location is exactly the field that ethics stance excludes. The route that does not conflict is language — Bangla or Banglish text implies a domestic reviewer and needs no personal data at all — which becomes usable once the YouTube pass (section 3.3a) brings real Banglish into the corpus. Today the corpus has 5 such reviews.
+- 4554 of 6938 mentions sit in reviews that cannot be labelled. user_location comes from Booking.com, whose reviews are about hotels and rarely name another place, while almost every mention comes from a Google Maps review, which supplies no location. The source that identifies the reviewer is not the source that carries the evidence.

@@ -8,15 +8,42 @@
   "labelled_share": 0.3127,
   "min_cell": 5,
   "excluded_proxy": "reviewer_is_local_guide",
-  "any_comparable_group": false,
+  "any_comparable_group": true,
   "comparisons": {
     "entity_type": [
       {
         "group": "PLACE",
-        "domestic_mentions": 94,
+        "domestic_mentions": 1215,
         "foreign_mentions": 0,
-        "unknown_mentions": 1910,
-        "domestic_share": 0.8624,
+        "unknown_mentions": 1916,
+        "domestic_share": 0.5111,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "ACTIVITY",
+        "domestic_mentions": 536,
+        "foreign_mentions": 4,
+        "unknown_mentions": 1497,
+        "domestic_share": 0.2255,
+        "foreign_share": 0.5714,
+        "comparable": false
+      },
+      {
+        "group": "FOOD",
+        "domestic_mentions": 338,
+        "foreign_mentions": 2,
+        "unknown_mentions": 578,
+        "domestic_share": 0.1422,
+        "foreign_share": 0.2857,
+        "comparable": false
+      },
+      {
+        "group": "ACCESS",
+        "domestic_mentions": 277,
+        "foreign_mentions": 0,
+        "unknown_mentions": 285,
+        "domestic_share": 0.1165,
         "foreign_share": 0.0,
         "comparable": false
       },
@@ -25,175 +52,508 @@
         "domestic_mentions": 11,
         "foreign_mentions": 1,
         "unknown_mentions": 278,
-        "domestic_share": 0.1009,
-        "foreign_share": 1.0,
-        "comparable": false
-      },
-      {
-        "group": "ACCESS",
-        "domestic_mentions": 4,
-        "foreign_mentions": 0,
-        "unknown_mentions": 100,
-        "domestic_share": 0.0367,
-        "foreign_share": 0.0,
+        "domestic_share": 0.0046,
+        "foreign_share": 0.1429,
         "comparable": false
       }
     ],
     "division": [
       {
         "group": "Chattogram",
-        "domestic_mentions": 36,
-        "foreign_mentions": 1,
-        "unknown_mentions": 1150,
-        "domestic_share": 0.3303,
-        "foreign_share": 1.0,
+        "domestic_mentions": 1119,
+        "foreign_mentions": 5,
+        "unknown_mentions": 2222,
+        "domestic_share": 0.4708,
+        "foreign_share": 0.7143,
+        "comparable": true
+      },
+      {
+        "group": "Sylhet",
+        "domestic_mentions": 333,
+        "foreign_mentions": 2,
+        "unknown_mentions": 707,
+        "domestic_share": 0.1401,
+        "foreign_share": 0.2857,
         "comparable": false
       },
       {
         "group": "Khulna",
-        "domestic_mentions": 21,
+        "domestic_mentions": 223,
         "foreign_mentions": 0,
-        "unknown_mentions": 212,
-        "domestic_share": 0.1927,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "Rajshahi",
-        "domestic_mentions": 20,
-        "foreign_mentions": 0,
-        "unknown_mentions": 276,
-        "domestic_share": 0.1835,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "Sylhet",
-        "domestic_mentions": 16,
-        "foreign_mentions": 0,
-        "unknown_mentions": 345,
-        "domestic_share": 0.1468,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "Mymensingh",
-        "domestic_mentions": 10,
-        "foreign_mentions": 0,
-        "unknown_mentions": 50,
-        "domestic_share": 0.0917,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "Dhaka",
-        "domestic_mentions": 4,
-        "foreign_mentions": 0,
-        "unknown_mentions": 163,
-        "domestic_share": 0.0367,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "Rangpur",
-        "domestic_mentions": 2,
-        "foreign_mentions": 0,
-        "unknown_mentions": 26,
-        "domestic_share": 0.0183,
+        "unknown_mentions": 281,
+        "domestic_share": 0.0938,
         "foreign_share": 0.0,
         "comparable": false
       },
       {
         "group": "Barishal",
-        "domestic_mentions": 0,
+        "domestic_mentions": 218,
         "foreign_mentions": 0,
-        "unknown_mentions": 66,
-        "domestic_share": 0.0,
+        "unknown_mentions": 277,
+        "domestic_share": 0.0917,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "Rajshahi",
+        "domestic_mentions": 173,
+        "foreign_mentions": 0,
+        "unknown_mentions": 455,
+        "domestic_share": 0.0728,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "Mymensingh",
+        "domestic_mentions": 122,
+        "foreign_mentions": 0,
+        "unknown_mentions": 96,
+        "domestic_share": 0.0513,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "Rangpur",
+        "domestic_mentions": 96,
+        "foreign_mentions": 0,
+        "unknown_mentions": 192,
+        "domestic_share": 0.0404,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "Dhaka",
+        "domestic_mentions": 93,
+        "foreign_mentions": 0,
+        "unknown_mentions": 324,
+        "domestic_share": 0.0391,
         "foreign_share": 0.0,
         "comparable": false
       }
     ],
     "visibility": [
       {
+        "group": "unknown",
+        "domestic_mentions": 1162,
+        "foreign_mentions": 7,
+        "unknown_mentions": 2638,
+        "domestic_share": 0.4889,
+        "foreign_share": 1.0,
+        "comparable": true
+      },
+      {
         "group": "V3",
-        "domestic_mentions": 60,
+        "domestic_mentions": 893,
         "foreign_mentions": 0,
-        "unknown_mentions": 1395,
-        "domestic_share": 0.5505,
+        "unknown_mentions": 1561,
+        "domestic_share": 0.3757,
         "foreign_share": 0.0,
         "comparable": false
       },
       {
         "group": "V2",
-        "domestic_mentions": 15,
+        "domestic_mentions": 246,
         "foreign_mentions": 0,
-        "unknown_mentions": 337,
-        "domestic_share": 0.1376,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "unknown",
-        "domestic_mentions": 15,
-        "foreign_mentions": 1,
-        "unknown_mentions": 378,
-        "domestic_share": 0.1376,
-        "foreign_share": 1.0,
-        "comparable": false
-      },
-      {
-        "group": "V0",
-        "domestic_mentions": 10,
-        "foreign_mentions": 0,
-        "unknown_mentions": 108,
-        "domestic_share": 0.0917,
+        "unknown_mentions": 302,
+        "domestic_share": 0.1035,
         "foreign_share": 0.0,
         "comparable": false
       },
       {
         "group": "V1",
-        "domestic_mentions": 9,
+        "domestic_mentions": 61,
         "foreign_mentions": 0,
-        "unknown_mentions": 70,
-        "domestic_share": 0.0826,
+        "unknown_mentions": 44,
+        "domestic_share": 0.0257,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "V0",
+        "domestic_mentions": 15,
+        "foreign_mentions": 0,
+        "unknown_mentions": 9,
+        "domestic_share": 0.0063,
         "foreign_share": 0.0,
         "comparable": false
       }
     ],
     "entity": [
       {
-        "group": "Padma",
-        "domestic_mentions": 13,
+        "group": "Bandarban",
+        "domestic_mentions": 262,
         "foreign_mentions": 0,
-        "unknown_mentions": 181,
-        "domestic_share": 0.1193,
+        "unknown_mentions": 402,
+        "domestic_share": 0.1102,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "CNG auto-rickshaw",
+        "domestic_mentions": 160,
+        "foreign_mentions": 0,
+        "unknown_mentions": 134,
+        "domestic_share": 0.0673,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "Picnic",
+        "domestic_mentions": 154,
+        "foreign_mentions": 0,
+        "unknown_mentions": 360,
+        "domestic_share": 0.0648,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "Sitakunda",
+        "domestic_mentions": 149,
+        "foreign_mentions": 0,
+        "unknown_mentions": 89,
+        "domestic_share": 0.0627,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "Padma",
+        "domestic_mentions": 139,
+        "foreign_mentions": 0,
+        "unknown_mentions": 183,
+        "domestic_share": 0.0585,
         "foreign_share": 0.0,
         "comparable": false
       },
       {
         "group": "Bagerhat",
+        "domestic_mentions": 133,
+        "foreign_mentions": 0,
+        "unknown_mentions": 86,
+        "domestic_share": 0.056,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "Guava",
+        "domestic_mentions": 124,
+        "foreign_mentions": 0,
+        "unknown_mentions": 125,
+        "domestic_share": 0.0522,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "Trekking and hiking",
+        "domestic_mentions": 100,
+        "foreign_mentions": 0,
+        "unknown_mentions": 359,
+        "domestic_share": 0.0421,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "Khagrachari",
+        "domestic_mentions": 90,
+        "foreign_mentions": 0,
+        "unknown_mentions": 65,
+        "domestic_share": 0.0379,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "Boat ride",
+        "domestic_mentions": 72,
+        "foreign_mentions": 1,
+        "unknown_mentions": 330,
+        "domestic_share": 0.0303,
+        "foreign_share": 0.1429,
+        "comparable": false
+      },
+      {
+        "group": "Sreemangal",
+        "domestic_mentions": 71,
+        "foreign_mentions": 0,
+        "unknown_mentions": 106,
+        "domestic_share": 0.0299,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "Engine boat (trawler)",
+        "domestic_mentions": 64,
+        "foreign_mentions": 0,
+        "unknown_mentions": 22,
+        "domestic_share": 0.0269,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "Durgapur",
+        "domestic_mentions": 60,
+        "foreign_mentions": 0,
+        "unknown_mentions": 28,
+        "domestic_share": 0.0252,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "Lalakhal",
+        "domestic_mentions": 54,
+        "foreign_mentions": 0,
+        "unknown_mentions": 47,
+        "domestic_share": 0.0227,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "Swimming",
+        "domestic_mentions": 50,
+        "foreign_mentions": 3,
+        "unknown_mentions": 113,
+        "domestic_share": 0.021,
+        "foreign_share": 0.4286,
+        "comparable": false
+      },
+      {
+        "group": "Birisiri",
+        "domestic_mentions": 43,
+        "foreign_mentions": 0,
+        "unknown_mentions": 5,
+        "domestic_share": 0.0181,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "Rangamati",
+        "domestic_mentions": 40,
+        "foreign_mentions": 0,
+        "unknown_mentions": 64,
+        "domestic_share": 0.0168,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "Launch",
+        "domestic_mentions": 39,
+        "foreign_mentions": 0,
+        "unknown_mentions": 2,
+        "domestic_share": 0.0164,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "Speedboat ride",
+        "domestic_mentions": 34,
+        "foreign_mentions": 0,
+        "unknown_mentions": 44,
+        "domestic_share": 0.0143,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "Kayaking",
+        "domestic_mentions": 27,
+        "foreign_mentions": 0,
+        "unknown_mentions": 82,
+        "domestic_share": 0.0114,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "Sunset watching",
+        "domestic_mentions": 24,
+        "foreign_mentions": 0,
+        "unknown_mentions": 26,
+        "domestic_share": 0.0101,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "Camping",
+        "domestic_mentions": 23,
+        "foreign_mentions": 0,
+        "unknown_mentions": 36,
+        "domestic_share": 0.0097,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "Green coconut (dab)",
+        "domestic_mentions": 22,
+        "foreign_mentions": 0,
+        "unknown_mentions": 19,
+        "domestic_share": 0.0093,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "Shopping",
+        "domestic_mentions": 20,
+        "foreign_mentions": 0,
+        "unknown_mentions": 40,
+        "domestic_share": 0.0084,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "Seafood",
+        "domestic_mentions": 17,
+        "foreign_mentions": 0,
+        "unknown_mentions": 89,
+        "domestic_share": 0.0072,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "Dried fish (shutki)",
+        "domestic_mentions": 16,
+        "foreign_mentions": 0,
+        "unknown_mentions": 7,
+        "domestic_share": 0.0067,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "Jackfruit",
+        "domestic_mentions": 16,
+        "foreign_mentions": 0,
+        "unknown_mentions": 4,
+        "domestic_share": 0.0067,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "Coffee",
+        "domestic_mentions": 14,
+        "foreign_mentions": 0,
+        "unknown_mentions": 0,
+        "domestic_share": 0.0059,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "Fuchka",
+        "domestic_mentions": 14,
+        "foreign_mentions": 0,
+        "unknown_mentions": 31,
+        "domestic_share": 0.0059,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "Bird watching",
+        "domestic_mentions": 13,
+        "foreign_mentions": 0,
+        "unknown_mentions": 19,
+        "domestic_share": 0.0055,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "Gangamati",
+        "domestic_mentions": 13,
+        "foreign_mentions": 0,
+        "unknown_mentions": 7,
+        "domestic_share": 0.0055,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "Chotpoti",
         "domestic_mentions": 12,
         "foreign_mentions": 0,
-        "unknown_mentions": 85,
-        "domestic_share": 0.1101,
+        "unknown_mentions": 18,
+        "domestic_share": 0.005,
         "foreign_share": 0.0,
         "comparable": false
       },
       {
-        "group": "Bandarban",
+        "group": "Muradpur",
         "domestic_mentions": 11,
         "foreign_mentions": 0,
-        "unknown_mentions": 400,
-        "domestic_share": 0.1009,
+        "unknown_mentions": 17,
+        "domestic_share": 0.0046,
         "foreign_share": 0.0,
         "comparable": false
       },
       {
-        "group": "Mahasthangarh",
+        "group": "Paharpur",
+        "domestic_mentions": 11,
+        "foreign_mentions": 0,
+        "unknown_mentions": 14,
+        "domestic_share": 0.0046,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "Ratargul",
+        "domestic_mentions": 10,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0042,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "Chander gari (jeep)",
+        "domestic_mentions": 10,
+        "foreign_mentions": 0,
+        "unknown_mentions": 27,
+        "domestic_share": 0.0042,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "Barbecue",
+        "domestic_mentions": 10,
+        "foreign_mentions": 2,
+        "unknown_mentions": 21,
+        "domestic_share": 0.0042,
+        "foreign_share": 0.2857,
+        "comparable": false
+      },
+      {
+        "group": "Alutila",
+        "domestic_mentions": 10,
+        "foreign_mentions": 0,
+        "unknown_mentions": 9,
+        "domestic_share": 0.0042,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "Sardar Bari",
+        "domestic_mentions": 9,
+        "foreign_mentions": 0,
+        "unknown_mentions": 18,
+        "domestic_share": 0.0038,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "Hilsa (ilish)",
+        "domestic_mentions": 9,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0038,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "Kolatoli Beach",
+        "domestic_mentions": 8,
+        "foreign_mentions": 0,
+        "unknown_mentions": 5,
+        "domestic_share": 0.0034,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "Shrimp",
         "domestic_mentions": 7,
         "foreign_mentions": 0,
-        "unknown_mentions": 73,
-        "domestic_share": 0.0642,
+        "unknown_mentions": 7,
+        "domestic_share": 0.0029,
         "foreign_share": 0.0,
         "comparable": false
       },
@@ -202,43 +562,178 @@
         "domestic_mentions": 7,
         "foreign_mentions": 0,
         "unknown_mentions": 275,
-        "domestic_share": 0.0642,
+        "domestic_share": 0.0029,
         "foreign_share": 0.0,
         "comparable": false
       },
       {
-        "group": "Shoshi Lodge",
+        "group": "Mahasthangarh",
+        "domestic_mentions": 7,
+        "foreign_mentions": 0,
+        "unknown_mentions": 73,
+        "domestic_share": 0.0029,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "Kaptai",
+        "domestic_mentions": 7,
+        "foreign_mentions": 0,
+        "unknown_mentions": 13,
+        "domestic_share": 0.0029,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "Ahsan Manzil",
+        "domestic_mentions": 7,
+        "foreign_mentions": 0,
+        "unknown_mentions": 5,
+        "domestic_share": 0.0029,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "Shashi Lodge",
         "domestic_mentions": 6,
         "foreign_mentions": 0,
         "unknown_mentions": 7,
-        "domestic_share": 0.055,
+        "domestic_share": 0.0025,
         "foreign_share": 0.0,
         "comparable": false
       },
       {
-        "group": "Paharpur",
+        "group": "Lobster",
+        "domestic_mentions": 6,
+        "foreign_mentions": 0,
+        "unknown_mentions": 6,
+        "domestic_share": 0.0025,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "Bichnakandi Tourist Spot",
+        "domestic_mentions": 6,
+        "foreign_mentions": 0,
+        "unknown_mentions": 61,
+        "domestic_share": 0.0025,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "Biryani",
         "domestic_mentions": 5,
         "foreign_mentions": 0,
-        "unknown_mentions": 14,
-        "domestic_share": 0.0459,
+        "unknown_mentions": 8,
+        "domestic_share": 0.0021,
         "foreign_share": 0.0,
         "comparable": false
       },
       {
-        "group": "Kantaji Temple",
-        "domestic_mentions": 4,
+        "group": "Chandranath",
+        "domestic_mentions": 5,
         "foreign_mentions": 0,
-        "unknown_mentions": 17,
-        "domestic_share": 0.0367,
+        "unknown_mentions": 3,
+        "domestic_share": 0.0021,
         "foreign_share": 0.0,
         "comparable": false
       },
       {
-        "group": "Durgapur",
+        "group": "Rupchanda (pomfret)",
+        "domestic_mentions": 5,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0021,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "Cable car",
+        "domestic_mentions": 5,
+        "foreign_mentions": 0,
+        "unknown_mentions": 3,
+        "domestic_share": 0.0021,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "Nilgiri",
+        "domestic_mentions": 5,
+        "foreign_mentions": 0,
+        "unknown_mentions": 8,
+        "domestic_share": 0.0021,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "Fried fish",
+        "domestic_mentions": 5,
+        "foreign_mentions": 0,
+        "unknown_mentions": 18,
+        "domestic_share": 0.0021,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "Parasailing",
         "domestic_mentions": 4,
         "foreign_mentions": 0,
-        "unknown_mentions": 28,
-        "domestic_share": 0.0367,
+        "unknown_mentions": 10,
+        "domestic_share": 0.0017,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "Bamboo chicken",
+        "domestic_mentions": 4,
+        "foreign_mentions": 0,
+        "unknown_mentions": 10,
+        "domestic_share": 0.0017,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "Pineapple",
+        "domestic_mentions": 4,
+        "foreign_mentions": 0,
+        "unknown_mentions": 5,
+        "domestic_share": 0.0017,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "China Matir Pahar",
+        "domestic_mentions": 4,
+        "foreign_mentions": 0,
+        "unknown_mentions": 5,
+        "domestic_share": 0.0017,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "Kantajew Temple",
+        "domestic_mentions": 4,
+        "foreign_mentions": 0,
+        "unknown_mentions": 20,
+        "domestic_share": 0.0017,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "Crab fry",
+        "domestic_mentions": 4,
+        "foreign_mentions": 0,
+        "unknown_mentions": 5,
+        "domestic_share": 0.0017,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "Bhorta",
+        "domestic_mentions": 4,
+        "foreign_mentions": 0,
+        "unknown_mentions": 0,
+        "domestic_share": 0.0017,
         "foreign_share": 0.0,
         "comparable": false
       },
@@ -247,25 +742,124 @@
         "domestic_mentions": 4,
         "foreign_mentions": 0,
         "unknown_mentions": 28,
-        "domestic_share": 0.0367,
+        "domestic_share": 0.0017,
         "foreign_share": 0.0,
         "comparable": false
       },
       {
-        "group": "Sreemangal",
+        "group": "Kotkoti (Mahasthan sweet)",
         "domestic_mentions": 3,
         "foreign_mentions": 0,
-        "unknown_mentions": 106,
-        "domestic_share": 0.0275,
+        "unknown_mentions": 2,
+        "domestic_share": 0.0013,
         "foreign_share": 0.0,
         "comparable": false
       },
       {
-        "group": "Bisnakandi",
+        "group": "Ghol (buttermilk)",
         "domestic_mentions": 3,
         "foreign_mentions": 0,
-        "unknown_mentions": 61,
-        "domestic_share": 0.0275,
+        "unknown_mentions": 0,
+        "domestic_share": 0.0013,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "Kotka",
+        "domestic_mentions": 3,
+        "foreign_mentions": 0,
+        "unknown_mentions": 3,
+        "domestic_share": 0.0013,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "Horse riding",
+        "domestic_mentions": 3,
+        "foreign_mentions": 0,
+        "unknown_mentions": 36,
+        "domestic_share": 0.0013,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "Muktagachha",
+        "domestic_mentions": 3,
+        "foreign_mentions": 0,
+        "unknown_mentions": 0,
+        "domestic_share": 0.0013,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "Mohamaya Lake",
+        "domestic_mentions": 3,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0013,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "Jet ski",
+        "domestic_mentions": 3,
+        "foreign_mentions": 0,
+        "unknown_mentions": 5,
+        "domestic_share": 0.0013,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "Doi (curd)",
+        "domestic_mentions": 3,
+        "foreign_mentions": 0,
+        "unknown_mentions": 0,
+        "domestic_share": 0.0013,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "Tea stalls",
+        "domestic_mentions": 3,
+        "foreign_mentions": 0,
+        "unknown_mentions": 29,
+        "domestic_share": 0.0013,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "Saint Martin",
+        "domestic_mentions": 3,
+        "foreign_mentions": 0,
+        "unknown_mentions": 29,
+        "domestic_share": 0.0013,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "Sada Matir Pahar",
+        "domestic_mentions": 3,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0013,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "Tanguar Haor",
+        "domestic_mentions": 3,
+        "foreign_mentions": 0,
+        "unknown_mentions": 0,
+        "domestic_share": 0.0013,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "Kulfi",
+        "domestic_mentions": 3,
+        "foreign_mentions": 0,
+        "unknown_mentions": 7,
+        "domestic_share": 0.0013,
         "foreign_share": 0.0,
         "comparable": false
       },
@@ -274,196 +868,178 @@
         "domestic_mentions": 3,
         "foreign_mentions": 0,
         "unknown_mentions": 21,
-        "domestic_share": 0.0275,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "Rangamati",
-        "domestic_mentions": 2,
-        "foreign_mentions": 0,
-        "unknown_mentions": 64,
-        "domestic_share": 0.0183,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "Sitakunda",
-        "domestic_mentions": 2,
-        "foreign_mentions": 0,
-        "unknown_mentions": 89,
-        "domestic_share": 0.0183,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "I-Badh",
-        "domestic_mentions": 1,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0092,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "Hiron Point",
-        "domestic_mentions": 1,
-        "foreign_mentions": 0,
-        "unknown_mentions": 2,
-        "domestic_share": 0.0092,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "Guliyakhali",
-        "domestic_mentions": 1,
-        "foreign_mentions": 0,
-        "unknown_mentions": 7,
-        "domestic_share": 0.0092,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "best time to visit R",
-        "domestic_mentions": 1,
-        "foreign_mentions": 0,
-        "unknown_mentions": 0,
-        "domestic_share": 0.0092,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "Khagrachari",
-        "domestic_mentions": 1,
-        "foreign_mentions": 0,
-        "unknown_mentions": 65,
-        "domestic_share": 0.0092,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "bargaining",
-        "domestic_mentions": 1,
-        "foreign_mentions": 0,
-        "unknown_mentions": 2,
-        "domestic_share": 0.0092,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "take a boat or another vehicle to reach",
-        "domestic_mentions": 1,
-        "foreign_mentions": 0,
-        "unknown_mentions": 0,
-        "domestic_share": 0.0092,
+        "domestic_share": 0.0013,
         "foreign_share": 0.0,
         "comparable": false
       },
       {
         "group": "Madhabpur Lake",
-        "domestic_mentions": 1,
+        "domestic_mentions": 3,
         "foreign_mentions": 0,
         "unknown_mentions": 2,
-        "domestic_share": 0.0092,
+        "domestic_share": 0.0013,
         "foreign_share": 0.0,
         "comparable": false
       },
       {
-        "group": "take a boat ride to the Padma chars and",
-        "domestic_mentions": 1,
+        "group": "Mango",
+        "domestic_mentions": 3,
+        "foreign_mentions": 0,
+        "unknown_mentions": 29,
+        "domestic_share": 0.0013,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "Lemon sherbet",
+        "domestic_mentions": 2,
         "foreign_mentions": 0,
         "unknown_mentions": 0,
-        "domestic_share": 0.0092,
+        "domestic_share": 0.0008,
         "foreign_share": 0.0,
         "comparable": false
       },
       {
-        "group": "China Matir Pahar",
-        "domestic_mentions": 1,
-        "foreign_mentions": 0,
-        "unknown_mentions": 5,
-        "domestic_share": 0.0092,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "Nilgiri",
-        "domestic_mentions": 1,
-        "foreign_mentions": 0,
-        "unknown_mentions": 8,
-        "domestic_share": 0.0092,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "go early in the morning to",
-        "domestic_mentions": 1,
-        "foreign_mentions": 0,
-        "unknown_mentions": 2,
-        "domestic_share": 0.0092,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "Mongla",
-        "domestic_mentions": 1,
-        "foreign_mentions": 0,
-        "unknown_mentions": 38,
-        "domestic_share": 0.0092,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "Best time to visit this place is during Rainy",
-        "domestic_mentions": 1,
+        "group": "Pitha",
+        "domestic_mentions": 2,
         "foreign_mentions": 0,
         "unknown_mentions": 0,
-        "domestic_share": 0.0092,
+        "domestic_share": 0.0008,
         "foreign_share": 0.0,
         "comparable": false
       },
       {
-        "group": "best time to visit Paharpur is between October",
-        "domestic_mentions": 1,
-        "foreign_mentions": 0,
-        "unknown_mentions": 0,
-        "domestic_share": 0.0092,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "best time to visit is during the rainy season",
-        "domestic_mentions": 1,
-        "foreign_mentions": 0,
-        "unknown_mentions": 2,
-        "domestic_share": 0.0092,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "Panam City",
-        "domestic_mentions": 1,
-        "foreign_mentions": 0,
-        "unknown_mentions": 7,
-        "domestic_share": 0.0092,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "Take a train from Dhaka to Khulna Railway",
-        "domestic_mentions": 1,
-        "foreign_mentions": 0,
-        "unknown_mentions": 0,
-        "domestic_share": 0.0092,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "boat from Mongla",
-        "domestic_mentions": 1,
+        "group": "Fatrar Chor",
+        "domestic_mentions": 2,
         "foreign_mentions": 0,
         "unknown_mentions": 1,
-        "domestic_share": 0.0092,
+        "domestic_share": 0.0008,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "Nilachal",
+        "domestic_mentions": 2,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0008,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "Roasted corn",
+        "domestic_mentions": 2,
+        "foreign_mentions": 0,
+        "unknown_mentions": 5,
+        "domestic_share": 0.0008,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "Bamboo raft ride",
+        "domestic_mentions": 2,
+        "foreign_mentions": 0,
+        "unknown_mentions": 8,
+        "domestic_share": 0.0008,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "Rasmalai",
+        "domestic_mentions": 2,
+        "foreign_mentions": 0,
+        "unknown_mentions": 0,
+        "domestic_share": 0.0008,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "River cruise",
+        "domestic_mentions": 2,
+        "foreign_mentions": 0,
+        "unknown_mentions": 9,
+        "domestic_share": 0.0008,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "Bijoypur Lake",
+        "domestic_mentions": 2,
+        "foreign_mentions": 0,
+        "unknown_mentions": 0,
+        "domestic_share": 0.0008,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "Guliakhali Sea Beach",
+        "domestic_mentions": 2,
+        "foreign_mentions": 0,
+        "unknown_mentions": 7,
+        "domestic_share": 0.0008,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "Madhabkunda",
+        "domestic_mentions": 2,
+        "foreign_mentions": 0,
+        "unknown_mentions": 0,
+        "domestic_share": 0.0008,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "Date palm juice",
+        "domestic_mentions": 2,
+        "foreign_mentions": 0,
+        "unknown_mentions": 3,
+        "domestic_share": 0.0008,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "Jhal muri",
+        "domestic_mentions": 2,
+        "foreign_mentions": 0,
+        "unknown_mentions": 9,
+        "domestic_share": 0.0008,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "Kabab",
+        "domestic_mentions": 2,
+        "foreign_mentions": 0,
+        "unknown_mentions": 2,
+        "domestic_share": 0.0008,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "Karamjal",
+        "domestic_mentions": 2,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0008,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "Khichuri",
+        "domestic_mentions": 2,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0008,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "Sugarcane juice",
+        "domestic_mentions": 1,
+        "foreign_mentions": 0,
+        "unknown_mentions": 3,
+        "domestic_share": 0.0004,
         "foreign_share": 0.0,
         "comparable": false
       },
@@ -472,7 +1048,61 @@
         "domestic_mentions": 1,
         "foreign_mentions": 0,
         "unknown_mentions": 43,
-        "domestic_share": 0.0092,
+        "domestic_share": 0.0004,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "Take a train from Dhaka to Khulna Railway",
+        "domestic_mentions": 1,
+        "foreign_mentions": 0,
+        "unknown_mentions": 0,
+        "domestic_share": 0.0004,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "Boga Lake",
+        "domestic_mentions": 1,
+        "foreign_mentions": 0,
+        "unknown_mentions": 3,
+        "domestic_share": 0.0004,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "Ramsagar",
+        "domestic_mentions": 1,
+        "foreign_mentions": 0,
+        "unknown_mentions": 0,
+        "domestic_share": 0.0004,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "bargaining",
+        "domestic_mentions": 1,
+        "foreign_mentions": 0,
+        "unknown_mentions": 2,
+        "domestic_share": 0.0004,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "Best time to visit this place is during Rainy",
+        "domestic_mentions": 1,
+        "foreign_mentions": 0,
+        "unknown_mentions": 0,
+        "domestic_share": 0.0004,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "Banana",
+        "domestic_mentions": 1,
+        "foreign_mentions": 0,
+        "unknown_mentions": 14,
+        "domestic_share": 0.0004,
         "foreign_share": 0.0,
         "comparable": false
       },
@@ -481,7 +1111,25 @@
         "domestic_mentions": 1,
         "foreign_mentions": 0,
         "unknown_mentions": 91,
-        "domestic_share": 0.0092,
+        "domestic_share": 0.0004,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "Hiron Point",
+        "domestic_mentions": 1,
+        "foreign_mentions": 0,
+        "unknown_mentions": 2,
+        "domestic_share": 0.0004,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "Pickle",
+        "domestic_mentions": 1,
+        "foreign_mentions": 0,
+        "unknown_mentions": 10,
+        "domestic_share": 0.0004,
         "foreign_share": 0.0,
         "comparable": false
       },
@@ -490,21 +1138,2316 @@
         "domestic_mentions": 1,
         "foreign_mentions": 0,
         "unknown_mentions": 0,
-        "domestic_share": 0.0092,
+        "domestic_share": 0.0004,
         "foreign_share": 0.0,
         "comparable": false
       },
       {
-        "group": "Alutila cave",
+        "group": "take a boat or another vehicle to reach",
         "domestic_mentions": 1,
         "foreign_mentions": 0,
-        "unknown_mentions": 3,
-        "domestic_share": 0.0092,
+        "unknown_mentions": 0,
+        "domestic_share": 0.0004,
         "foreign_share": 0.0,
         "comparable": false
       },
       {
-        "group": "carry torches to find their way",
+        "group": "I-Badh",
+        "domestic_mentions": 1,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0004,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "Panam City",
+        "domestic_mentions": 1,
+        "foreign_mentions": 0,
+        "unknown_mentions": 7,
+        "domestic_share": 0.0004,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "Loitta fish",
+        "domestic_mentions": 1,
+        "foreign_mentions": 0,
+        "unknown_mentions": 0,
+        "domestic_share": 0.0004,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "Mezbani",
+        "domestic_mentions": 1,
+        "foreign_mentions": 0,
+        "unknown_mentions": 0,
+        "domestic_share": 0.0004,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "Mongla",
+        "domestic_mentions": 1,
+        "foreign_mentions": 0,
+        "unknown_mentions": 38,
+        "domestic_share": 0.0004,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "Papaya",
+        "domestic_mentions": 1,
+        "foreign_mentions": 0,
+        "unknown_mentions": 5,
+        "domestic_share": 0.0004,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "best time to visit Paharpur is between October",
+        "domestic_mentions": 1,
+        "foreign_mentions": 0,
+        "unknown_mentions": 0,
+        "domestic_share": 0.0004,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "best time to visit R",
+        "domestic_mentions": 1,
+        "foreign_mentions": 0,
+        "unknown_mentions": 0,
+        "domestic_share": 0.0004,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "best time to visit is during the rainy season",
+        "domestic_mentions": 1,
+        "foreign_mentions": 0,
+        "unknown_mentions": 2,
+        "domestic_share": 0.0004,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "boat from Mongla",
+        "domestic_mentions": 1,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0004,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "go early in the morning to",
+        "domestic_mentions": 1,
+        "foreign_mentions": 0,
+        "unknown_mentions": 2,
+        "domestic_share": 0.0004,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "take a boat ride to the Padma chars and",
+        "domestic_mentions": 1,
+        "foreign_mentions": 0,
+        "unknown_mentions": 0,
+        "domestic_share": 0.0004,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "go in Winter otherwise it",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "go in the morning",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "go in the morning there",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "go in winter",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "go in winter or during migration",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "patenga sea beach",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "take a CNG",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 2,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "take a CNG from Sitakunda or Mirsharai",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "take a CNG or Auto to reach the",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "take a CNG or auto from there",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "take a CNG to reach the basement of",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "take a CNG to travel from Chapai",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "take a boat",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "take a rickshaw",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "Cycling",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 17,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "Best time is the evening time till 8PM",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "Kachagolla",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 4,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "Kuakata Sea Beach",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 3,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "Go early in the day to avoid",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "visit in winter season",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 2,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "visit in winter when the weather is",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "BEST Time to visit here is in Winter season",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "take a boat and go to inside of the lake",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "take a boat and go to the waterfall side",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "take a boat around the bends of these",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "take a boat ride",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 2,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "take a boat ride before sunset",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "take a boat ride during flow tide",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "take a boat ride into the sea with the",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "Best time to visit this place is during winter",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 2,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "Best time to visit this place is rainy season",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "Best time to visit this waterfall is June",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "Bhimruli",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "Bus from Chittagong or Dhaka to",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "Bus from new market or train station",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "Best time is April to October as the flow",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "Go early or before sunset to",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "Go in the morning to beat the crowd",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "Hiron Point (Nilkamal)",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "Honey",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 2,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "Chor Bijoy",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "Carry a parasol to walk around",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "Carry a small pack with you for",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "Carry a stick for support",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "Carry all your plastic waste and",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "Carry at least two photocopies of",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "Carry drinking water and foods",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "Carry insect repellent and be",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "Carry some water and light snacks",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "Carry water but don't litter",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "Carry your umbrella and water and a",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "Pashur",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 11,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "Lalbagh Fort",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 5,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "Lawachara National Park",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 2,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "Take a boat ride on the Padma River to",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "Take a boat ride on the Piain River",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "Puthia",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 3,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "Ramna park",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "Sajek Valley",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 4,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "Seven-layer tea",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 3,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "Nafakhum Waterfall",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "Natore Rajbari",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "Paan",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 2,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "Duck curry",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 2,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "Fokirhat",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "Foy's lake",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "Carry Umbrella if it is sunny day or",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "Best time to visit from 4",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "Best time to visit in the rainy season",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "Best time to visit is during cultural fairs or",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "Best time to visit is during or just after the",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "Best time to visit is early morning or late",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "Best time to visit is the winter season November",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "Best time to visit it is afternonn of winter",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "take a boat to reach the main beach",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "take a boat to roam on the Padma River",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "Somapura Mahavihara",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "Street food",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 70,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "T-badh",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 5,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "Take a CNG or Auto",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 2,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "Bargaining",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "Bargaining at stalls",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "Best Time to Visit Early morning or late",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "Best Time to Visit July",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "Best Time to Visit Monsoon",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "Best Time to Visit Winter",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 2,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "take a rickshaw or van inside to visit the",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "bargain",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 6,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "Best time to visit I think in rainy season",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "Best time to visit Late afternoon to sunset",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "Best time to visit Rainy season",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "Best time to visit The dry season",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "Best time to visit after 5",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "Best time to visit at sunset time",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "Best time to visit during rainy season to see it",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "Take a bus",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "Take a bus from Gulistan",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "Take a bus from Khagrachari or local",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "Take a bus from Sylhet's Kadamtali bus",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "Tetulia",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "Varendra Research Museum",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 2,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "Visit Early morning or late",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "Visit early in the morning on a",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "Visit early in the morning to",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "Visit early morning",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 2,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "Best time to visit there is August",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "Bargain politely",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "Bargain the price with them",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "bargain about the boat fair from",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "bargain all you can while",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "bargain and bring it down to",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "bargain and it costs around 700",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "bargain and settle the price",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "bargain as sellers claim price",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "bargain at all the nearby shops",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "bargain before buying sea food",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "bargain before having any",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "bargain before hiring boat as",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "bargain before taking the ride",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "bargain before you take any boat",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "bargain beforehand",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "bargain for a reasonable price",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "bargain for each good you buy",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "bargain for low price",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "bargain for prices usually they",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "bargain for seafood",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "bargain for the accommodation",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "bargain for the boat price",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "bargain for the lowest price",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "bargain for this",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "bargain hard for fair deals",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "bargain if you really interested",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "bargain lot for reasonable price",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "bargain prices before motorcycle",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "bargain souvenirs",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "bargain to fix the boat",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "bargain to rent a boat or buy",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "bargain with boatman",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "bargain with everyone",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "bargain with the boatman",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "bargain with the local shop",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "bargain with the pilot of the",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "bargain with the vendors",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "bargain with them",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "bargain with them much",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "bargaining and drama",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "bargaining before buying",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "bargaining is essential to get",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "bargaining skills mostly",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "bargaining with guide and",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "best time is December to mid January for",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "best time to visit Bichanakandi is from June to",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "best time to visit Guliakhali Sea Beach is from",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "best time to visit Jaflong is during the monsoon",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "best time to visit Jaflong is from November to",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "best time to visit Kuakata is during the cooler",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "best time to visit Lalakhal is during the rainy",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "go early morning",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 2,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "take a bus to Sharupkathi then take auto",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "best time to visit Ratargul",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "best time to visit Ratargul is in rainy season",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "best time to visit Sajek",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "best time to visit Sajek is during the winter",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "best time to visit for pleasant weather is from",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "best time to visit from October to February",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "best time to visit here is January",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "best time to visit in Winter",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "best time to visit is any day without weekends",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "best time to visit is between February to April",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "best time to visit is between November and March",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "best time to visit is definitely during the",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "best time to visit is during the dry season",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 2,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "best time to visit is during the monsoon or just",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "best time to visit is during the monsoon season",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 3,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "Badam cha",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "best time to visit is during the spring or fall",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "best time to visit is during the winter months",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 3,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "best time to visit is from November to March",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "best time to visit is in the afternoon but you",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "best time to visit is in the morning or late",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "best time to visit such kind of places",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "best time to visit the floating market is",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "best time to visit the markets is the months",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "best time to visit the monastery complex is in",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "best time to visit there",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "best time to visit this park is winter",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "best time to visit this place",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 6,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "best time to visit this place during the rainy",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "best time to visit this place in early morning",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "best time to visit this place in the June to",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "best time to visit this place is from August to",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "best time to visit this place is in the evening",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "best time to visit this place is in the morning",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "best time to visit this place to feel the real",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "best time to visit this swamp forest",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "best time to visiting there",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "boat from Bangabir point avoid stressfull",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "boat from Khulna or Mongla",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "take a rickshaw it will cost 30tk or walk on",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "boat from Mongla Ferry Ghat",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "boat from Tahirpur to Tagerhat",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "boat from Thanchi",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "boat from ferry ghat",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "boat from ghat which costs 750 and entry",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "boat from here",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "boat from kaptai station",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "boat from remakri towards Nafakhum may",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "boat from the reserve bazaar and visit it",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "bus From Dhaka",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "bus from Barisal",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 3,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "bus from Chittagong to Comilla",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "bus from Cox's Bazar",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "bus from Dhaka and reach to Shaturia",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "bus from Dhaka heading towards Rajshahi",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "bus from Dhaka or Chittagong",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "bus from Dhaka to Bagerhat",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "bus from Dhaka to Fakirapul or Saidabad",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "bus from Dhaka to Kurigram",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "bus from Dhaka to Shunamgonj",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "bus from Gulistan",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 2,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "bus from Gulisthan to Mograpara",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "bus from Khagrachari or local jeep",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "bus from Mohakhali in Dhaka towards",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "bus from Nathullabad bus terminal or opt",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "bus from Rajshahi",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "bus from Sobhanighat in Sylhet city",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "bus from Sylhet city to Hadarpar",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "bus from Sylhet's Kadamtali bus station",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "bus from any part of the country",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "bus from dhaka",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "bus from natore or rajshahi city",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "bus from srimongol to kamalganj",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "bus from the main city of Bandarban",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "bus from there to Dhaka",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "carry a bamboo stick",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "carry a reliable flashlight or",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "carry a swimming suits",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "carry a torch light and be careful",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "carry a torch or it is also okay",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "carry a water bottle with you",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "carry away the goods purchased from",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "carry bags",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "carry bananas or other food",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "carry boats on the far side of the",
         "domestic_mentions": 0,
         "foreign_mentions": 0,
         "unknown_mentions": 1,
@@ -531,24 +3474,6 @@
         "comparable": false
       },
       {
-        "group": "carry boats on the far side of the",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "carry small bottle of water",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
         "group": "carry drinking water and some snacks",
         "domestic_mentions": 0,
         "foreign_mentions": 0,
@@ -559,33 +3484,6 @@
       },
       {
         "group": "carry enough water and be physically",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "carry the stories of a thousand",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "carry some salt or lime",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "carry snacks",
         "domestic_mentions": 0,
         "foreign_mentions": 0,
         "unknown_mentions": 1,
@@ -612,15 +3510,6 @@
         "comparable": false
       },
       {
-        "group": "carry forward the escort",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
         "group": "carry first aid kit cause God forbid",
         "domestic_mentions": 0,
         "foreign_mentions": 0,
@@ -630,7 +3519,34 @@
         "comparable": false
       },
       {
-        "group": "carry out an extensive excavation in",
+        "group": "carry flare to enter the cave",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "carry food",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 3,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "carry food then monkeys will follow",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "carry foods with You",
         "domestic_mentions": 0,
         "foreign_mentions": 0,
         "unknown_mentions": 1,
@@ -640,6 +3556,24 @@
       },
       {
         "group": "carry for a long time",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "carry forward the escort",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "carry high price shoes or Sleepers",
         "domestic_mentions": 0,
         "foreign_mentions": 0,
         "unknown_mentions": 1,
@@ -693,25 +3627,7 @@
         "comparable": false
       },
       {
-        "group": "carry foods with You",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "carry high price shoes or Sleepers",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "carry food then monkeys will follow",
+        "group": "carry out an extensive excavation in",
         "domestic_mentions": 0,
         "foreign_mentions": 0,
         "unknown_mentions": 1,
@@ -724,15 +3640,6 @@
         "domestic_mentions": 0,
         "foreign_mentions": 0,
         "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "carry food",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 3,
         "domestic_share": 0.0,
         "foreign_share": 0.0,
         "comparable": false
@@ -765,7 +3672,7 @@
         "comparable": false
       },
       {
-        "group": "carry flare to enter the cave",
+        "group": "carry small bottle of water",
         "domestic_mentions": 0,
         "foreign_mentions": 0,
         "unknown_mentions": 1,
@@ -774,7 +3681,7 @@
         "comparable": false
       },
       {
-        "group": "carry a swimming suits",
+        "group": "carry snacks",
         "domestic_mentions": 0,
         "foreign_mentions": 0,
         "unknown_mentions": 1,
@@ -783,7 +3690,7 @@
         "comparable": false
       },
       {
-        "group": "carry bananas or other food",
+        "group": "carry some salt or lime",
         "domestic_mentions": 0,
         "foreign_mentions": 0,
         "unknown_mentions": 1,
@@ -792,7 +3699,7 @@
         "comparable": false
       },
       {
-        "group": "boat from kaptai station",
+        "group": "carry the stories of a thousand",
         "domestic_mentions": 0,
         "foreign_mentions": 0,
         "unknown_mentions": 1,
@@ -801,421 +3708,7 @@
         "comparable": false
       },
       {
-        "group": "bus from Dhaka to Bagerhat",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "bus from Dhaka or Chittagong",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "bus from Dhaka heading towards Rajshahi",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "bus from Dhaka and reach to Shaturia",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "bus from Cox's Bazar",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "bus from Chittagong to Comilla",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "bus from Barisal",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 3,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "bus From Dhaka",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "boat from the reserve bazaar and visit it",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "boat from remakri towards Nafakhum may",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "boat from here",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "carry bags",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "boat from ghat which costs 750 and entry",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "boat from ferry ghat",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "boat from Thanchi",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "boat from Tahirpur to Tagerhat",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "boat from Mongla Ferry Ghat",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "boat from Khulna or Mongla",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "boat from Bangabir point avoid stressfull",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "best time to visiting there",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "best time to visit this swamp forest",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "best time to visit this place to feel the real",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "bus from Dhaka to Fakirapul or Saidabad",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "bus from Dhaka to Kurigram",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "bus from Dhaka to Shunamgonj",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "bus from Gulistan",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 2,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "carry away the goods purchased from",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "carry a water bottle with you",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "carry a torch or it is also okay",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "carry a torch light and be careful",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "carry water and cap or umbrella",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "carry a reliable flashlight or",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "carry a bamboo stick",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "bus from there to Dhaka",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "bus from the main city of Bandarban",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "bus from srimongol to kamalganj",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "bus from natore or rajshahi city",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "bus from dhaka",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "bus from any part of the country",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "bus from Sylhet's Kadamtali bus station",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "bus from Sylhet city to Hadarpar",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "bus from Sobhanighat in Sylhet city",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "bus from Rajshahi",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "bus from Nathullabad bus terminal or opt",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "bus from Mohakhali in Dhaka towards",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "bus from Khagrachari or local jeep",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "bus from Gulisthan to Mograpara",
+        "group": "carry torches to find their way",
         "domestic_mentions": 0,
         "foreign_mentions": 0,
         "unknown_mentions": 1,
@@ -1233,7 +3726,7 @@
         "comparable": false
       },
       {
-        "group": "engine boat from kaptai boat station",
+        "group": "carry water and cap or umbrella",
         "domestic_mentions": 0,
         "foreign_mentions": 0,
         "unknown_mentions": 1,
@@ -1251,393 +3744,6 @@
         "comparable": false
       },
       {
-        "group": "take a boat to reach the main beach",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "take a bus or a CNG to Kacchaptali",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "take a bus from Nathullabad bus terminal",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "take a bus from Dhaka to Kurigram",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "take a bus from Dhaka to Fakirapul or",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "take a bus from Dhaka to Bagerhat",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "take a bus from Dhaka and reach to",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "take a boat to travel and roam around the",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "take a boat to roam on the Padma River",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "take a boat ride to the precise Zero",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "take a bus to Badalgachi and then a CNG",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "take a boat ride to see the other",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "take a boat ride to enjoy the view and",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "take a boat ride to Bichanakandi",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "take a boat ride through the calm waters",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "take a boat ride there",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "take a boat ride on the curved water",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "take a boat ride into the sea with the",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "take a boat ride during flow tide",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "take a bus or an auto",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "take a bus to Sharupkathi then take auto",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "take a boat ride",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 2,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "visit early in the morning when",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "visit in winter when the weather is",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "visit in winter season",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 2,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "visit in winter only",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "visit in winter",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 3,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "visit in the morning or late afternoon",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "visit in Winter",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "visit early to avoid crowds",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "visit early morning like 10 am",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "visit early in the morning or",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 5,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "take a cng or battery operated riksha",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "visit early in the morning for",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "visit early in the morning and",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "visit early in the morning",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 2,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "varendra museum",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "take a rickshaw or van inside to visit the",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "take a rickshaw it will cost 30tk or walk on",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "take a rickshaw directly to Panam Nagar",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "take a rickshaw",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "take a boat ride before sunset",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "take a boat around the bends of these",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
         "group": "carry with me",
         "domestic_mentions": 0,
         "foreign_mentions": 0,
@@ -1647,151 +3753,7 @@
         "comparable": false
       },
       {
-        "group": "engine boat from Parzatan Corporation",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "go early in the evening",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "go early",
-        "domestic_mentions": 0,
-        "foreign_mentions": 1,
-        "unknown_mentions": 2,
-        "domestic_share": 0.0,
-        "foreign_share": 1.0,
-        "comparable": false
-      },
-      {
-        "group": "get off at Surma Bridge before entering",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "get off at Sitakunda Bazar",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "get off at Mograpara and take an auto and",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "get off at Fokirhat Bazar and take a CNG",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "engine boat from the Mongla Ferry Ghat through",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "best time to visit this place is in the evening",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "engine boat from Mongla",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "go early in the morning and",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "cox's bazar Beach",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "carry your trash back",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "carry your own water",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "carry your own food",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "carry your own drinking water with",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "carry your food as there are no",
+        "group": "carry you up",
         "domestic_mentions": 0,
         "foreign_mentions": 0,
         "unknown_mentions": 1,
@@ -1809,7 +3771,142 @@
         "comparable": false
       },
       {
-        "group": "carry you up",
+        "group": "carry your food as there are no",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "carry your own drinking water with",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "carry your own food",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "carry your own water",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "carry your trash back",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "cox's bazar Beach",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "engine boat from Mongla",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "engine boat from Parzatan Corporation",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "engine boat from kaptai boat station",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "engine boat from the Mongla Ferry Ghat through",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "get off at Fokirhat Bazar and take a CNG",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "get off at Mograpara and take an auto and",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "get off at Sitakunda Bazar",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "get off at Surma Bridge before entering",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "go early",
+        "domestic_mentions": 0,
+        "foreign_mentions": 1,
+        "unknown_mentions": 2,
+        "domestic_share": 0.0,
+        "foreign_share": 0.1429,
+        "comparable": false
+      },
+      {
+        "group": "go early in the evening",
         "domestic_mentions": 0,
         "foreign_mentions": 0,
         "unknown_mentions": 1,
@@ -1827,6 +3924,15 @@
         "comparable": false
       },
       {
+        "group": "go early in the morning and",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
         "group": "go early in the morning or",
         "domestic_mentions": 0,
         "foreign_mentions": 0,
@@ -1836,7 +3942,7 @@
         "comparable": false
       },
       {
-        "group": "take a boat and go to the waterfall side",
+        "group": "take a boat ride on the curved water",
         "domestic_mentions": 0,
         "foreign_mentions": 0,
         "unknown_mentions": 1,
@@ -1845,7 +3951,25 @@
         "comparable": false
       },
       {
-        "group": "take a CNG",
+        "group": "take a rickshaw directly to Panam Nagar",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "visit in winter you can take a walk",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 1,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "visit early in the morning",
         "domestic_mentions": 0,
         "foreign_mentions": 0,
         "unknown_mentions": 2,
@@ -1854,7 +3978,7 @@
         "comparable": false
       },
       {
-        "group": "take a boat and go to inside of the lake",
+        "group": "visit early in the morning and",
         "domestic_mentions": 0,
         "foreign_mentions": 0,
         "unknown_mentions": 1,
@@ -1863,7 +3987,7 @@
         "comparable": false
       },
       {
-        "group": "take a boat across the lake to reach a",
+        "group": "visit early in the morning for",
         "domestic_mentions": 0,
         "foreign_mentions": 0,
         "unknown_mentions": 1,
@@ -1872,7 +3996,16 @@
         "comparable": false
       },
       {
-        "group": "take a boat",
+        "group": "visit early in the morning or",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 5,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "visit early in the morning when",
         "domestic_mentions": 0,
         "foreign_mentions": 0,
         "unknown_mentions": 1,
@@ -1881,7 +4014,7 @@
         "comparable": false
       },
       {
-        "group": "take a CNG to travel from Chapai",
+        "group": "visit early morning like 10 am",
         "domestic_mentions": 0,
         "foreign_mentions": 0,
         "unknown_mentions": 1,
@@ -1890,7 +4023,7 @@
         "comparable": false
       },
       {
-        "group": "take a CNG to reach the basement of",
+        "group": "visit early to avoid crowds",
         "domestic_mentions": 0,
         "foreign_mentions": 0,
         "unknown_mentions": 1,
@@ -1899,7 +4032,7 @@
         "comparable": false
       },
       {
-        "group": "take a CNG or auto from there",
+        "group": "visit in Winter",
         "domestic_mentions": 0,
         "foreign_mentions": 0,
         "unknown_mentions": 1,
@@ -1908,7 +4041,7 @@
         "comparable": false
       },
       {
-        "group": "take a CNG or Auto to reach the",
+        "group": "visit in the morning or late afternoon",
         "domestic_mentions": 0,
         "foreign_mentions": 0,
         "unknown_mentions": 1,
@@ -1917,7 +4050,16 @@
         "comparable": false
       },
       {
-        "group": "take a CNG from Sitakunda or Mirsharai",
+        "group": "visit in winter",
+        "domestic_mentions": 0,
+        "foreign_mentions": 0,
+        "unknown_mentions": 3,
+        "domestic_share": 0.0,
+        "foreign_share": 0.0,
+        "comparable": false
+      },
+      {
+        "group": "visit in winter only",
         "domestic_mentions": 0,
         "foreign_mentions": 0,
         "unknown_mentions": 1,
@@ -1926,79 +4068,7 @@
         "comparable": false
       },
       {
-        "group": "ratargul",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "go early morning",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 2,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "patenga sea beach",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "mohamaya lake",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "go in winter or during migration",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "go in winter",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "go in the morning there",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "go in the morning",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "go in Winter otherwise it",
+        "group": "take a boat ride to see the other",
         "domestic_mentions": 0,
         "foreign_mentions": 0,
         "unknown_mentions": 1,
@@ -2016,7 +4086,7 @@
         "comparable": false
       },
       {
-        "group": "best time to visit this place is in the morning",
+        "group": "take a boat across the lake to reach a",
         "domestic_mentions": 0,
         "foreign_mentions": 0,
         "unknown_mentions": 1,
@@ -2025,1447 +4095,16 @@
         "comparable": false
       },
       {
-        "group": "Ahsan Manzil",
+        "group": "take a cng or battery operated riksha",
         "domestic_mentions": 0,
         "foreign_mentions": 0,
-        "unknown_mentions": 5,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "best time to visit this place is from August to",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "Go in the morning to beat the crowd",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "Lalakhal",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 47,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "Kuakata Sea Beach",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 3,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "Kotka",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 3,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "Kolatoli Beach",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 5,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "Karamjal",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "Kaptai lake",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 13,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "Kantajew Temple",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 3,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "Hiron Point (Nilkamal)",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "Go early or before sunset to",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "Lawachara National Park",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 2,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "Go early in the day to avoid",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "Gangamati",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 7,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "Foy's lake",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "Fokirhat",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "Fatrar Chor",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "Chor Bijoy",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "Chandranath",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 3,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "Carry your umbrella and water and a",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "Lalbagh Fort",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 5,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "Muradpur",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 17,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "Carry some water and light snacks",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "Sardar Bari",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 17,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "Take a bus from Khagrachari or local",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "Take a bus from Gulistan",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "Take a bus",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "Take a boat ride on the Piain River",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "Take a boat ride on the Padma River to",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "Take a CNG or Auto",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 2,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "T-badh",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 5,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "Somapura Mahavihara",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "Sajek Valley",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 4,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "Nafakhum Waterfall",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "Saint martin",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "Saint Martin",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 28,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "SADA MATIR PAHAR",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "Ramna park",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "Puthia",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 3,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "Pashur",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 11,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "Nilachal",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "Natore Rajbari",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "Carry water but don't litter",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "Carry insect repellent and be",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "best time to visit this place in the June to",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "Best time is April to October as the flow",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "Best time to visit during rainy season to see it",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "Best time to visit at sunset time",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "Best time to visit after 5",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "Best time to visit The dry season",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "Best time to visit Rainy season",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "Best time to visit Late afternoon to sunset",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "Best time to visit I think in rainy season",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "Best time is the evening time till 8PM",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "Best Time to Visit Winter",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 2,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "Best time to visit in the rainy season",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "Best Time to Visit Monsoon",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "Best Time to Visit July",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "Best Time to Visit Early morning or late",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "Bargaining at stalls",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "Bargaining",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "Bargain the price with them",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "Bargain politely",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "BEST Time to visit here is in Winter season",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "Best time to visit from 4",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "Best time to visit is during cultural fairs or",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "Carry drinking water and foods",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "Boga Lake",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 3,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "Carry at least two photocopies of",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "Carry all your plastic waste and",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "Carry a stick for support",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "Carry a small pack with you for",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "Carry a parasol to walk around",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "Carry Umbrella if it is sunny day or",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "Bus from new market or train station",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "Bus from Chittagong or Dhaka to",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "Birisiri",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 5,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "Best time to visit is during or just after the",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "Bhimruli",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "Best time to visit this waterfall is June",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "Best time to visit this place is rainy season",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "Best time to visit this place is during winter",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 2,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "Best time to visit there is August",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "Best time to visit it is afternonn of winter",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "Best time to visit is the winter season November",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "Best time to visit is early morning or late",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "Take a bus from Sylhet's Kadamtali bus",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "Tetulia",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "Varendra Research Museum",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 2,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "best time to visit Lalakhal is during the rainy",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "best time to visit in Winter",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "best time to visit here is January",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "best time to visit from October to February",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "best time to visit for pleasant weather is from",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "best time to visit Sajek is during the winter",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "best time to visit Sajek",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "best time to visit Ratargul is in rainy season",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "best time to visit Ratargul",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "best time to visit Kuakata is during the cooler",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "best time to visit is between February to April",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "best time to visit Jaflong is from November to",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "best time to visit Jaflong is during the monsoon",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "best time to visit Guliakhali Sea Beach is from",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "best time to visit Bichanakandi is from June to",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "best time is December to mid January for",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "bargaining with guide and",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "bargaining skills mostly",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "bargaining is essential to get",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "best time to visit is any day without weekends",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "best time to visit is between November and March",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "Visit Early morning or late",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "best time to visit such kind of places",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "best time to visit this place in early morning",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "best time to visit this place during the rainy",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "best time to visit this place",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 6,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "best time to visit this park is winter",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "best time to visit there",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "best time to visit the monastery complex is in",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "best time to visit the markets is the months",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "best time to visit the floating market is",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "best time to visit is in the morning or late",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "best time to visit is definitely during the",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "best time to visit is in the afternoon but you",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "best time to visit is from November to March",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "best time to visit is during the winter months",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 3,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "best time to visit is during the spring or fall",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "Alutila",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 6,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "best time to visit is during the monsoon season",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 3,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "best time to visit is during the monsoon or just",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "best time to visit is during the dry season",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 2,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "bargaining before buying",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "bargaining and drama",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "bargain with them much",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "bargain as sellers claim price",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "bargain for a reasonable price",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "bargain beforehand",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "bargain before you take any boat",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "bargain before taking the ride",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "bargain before hiring boat as",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "bargain before having any",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "bargain before buying sea food",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "bargain at all the nearby shops",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "bargain and settle the price",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "bargain with them",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "bargain and it costs around 700",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "bargain and bring it down to",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "bargain all you can while",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "bargain about the boat fair from",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "bargain",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 6,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "Visit early morning",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 2,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "Visit early in the morning to",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "Visit early in the morning on a",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "bargain for each good you buy",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "bargain for low price",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "bargain for prices usually they",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "bargain for seafood",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "bargain with the vendors",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "bargain with the pilot of the",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
-        "unknown_mentions": 1,
-        "domestic_share": 0.0,
-        "foreign_share": 0.0,
-        "comparable": false
-      },
-      {
-        "group": "bargain with the local shop",
-        "domestic_mentions": 0,
-        "foreign_mentions": 0,
         "unknown_mentions": 1,
         "domestic_share": 0.0,
         "foreign_share": 0.0,
         "comparable": false
       },
       {
-        "group": "bargain with the boatman",
+        "group": "take a boat ride there",
         "domestic_mentions": 0,
         "foreign_mentions": 0,
         "unknown_mentions": 1,
@@ -3474,7 +4113,7 @@
         "comparable": false
       },
       {
-        "group": "bargain with everyone",
+        "group": "take a boat ride through the calm waters",
         "domestic_mentions": 0,
         "foreign_mentions": 0,
         "unknown_mentions": 1,
@@ -3483,7 +4122,7 @@
         "comparable": false
       },
       {
-        "group": "bargain with boatman",
+        "group": "take a boat ride to Bichanakandi",
         "domestic_mentions": 0,
         "foreign_mentions": 0,
         "unknown_mentions": 1,
@@ -3492,7 +4131,7 @@
         "comparable": false
       },
       {
-        "group": "bargain to rent a boat or buy",
+        "group": "take a boat ride to enjoy the view and",
         "domestic_mentions": 0,
         "foreign_mentions": 0,
         "unknown_mentions": 1,
@@ -3501,7 +4140,7 @@
         "comparable": false
       },
       {
-        "group": "bargain to fix the boat",
+        "group": "varendra museum",
         "domestic_mentions": 0,
         "foreign_mentions": 0,
         "unknown_mentions": 1,
@@ -3510,7 +4149,7 @@
         "comparable": false
       },
       {
-        "group": "bargain souvenirs",
+        "group": "take a boat to travel and roam around the",
         "domestic_mentions": 0,
         "foreign_mentions": 0,
         "unknown_mentions": 1,
@@ -3519,7 +4158,7 @@
         "comparable": false
       },
       {
-        "group": "bargain prices before motorcycle",
+        "group": "take a bus from Dhaka and reach to",
         "domestic_mentions": 0,
         "foreign_mentions": 0,
         "unknown_mentions": 1,
@@ -3528,7 +4167,7 @@
         "comparable": false
       },
       {
-        "group": "bargain lot for reasonable price",
+        "group": "take a bus from Dhaka to Bagerhat",
         "domestic_mentions": 0,
         "foreign_mentions": 0,
         "unknown_mentions": 1,
@@ -3537,7 +4176,7 @@
         "comparable": false
       },
       {
-        "group": "bargain if you really interested",
+        "group": "take a bus from Dhaka to Fakirapul or",
         "domestic_mentions": 0,
         "foreign_mentions": 0,
         "unknown_mentions": 1,
@@ -3546,7 +4185,7 @@
         "comparable": false
       },
       {
-        "group": "bargain hard for fair deals",
+        "group": "take a bus from Dhaka to Kurigram",
         "domestic_mentions": 0,
         "foreign_mentions": 0,
         "unknown_mentions": 1,
@@ -3555,7 +4194,7 @@
         "comparable": false
       },
       {
-        "group": "bargain for this",
+        "group": "take a bus from Nathullabad bus terminal",
         "domestic_mentions": 0,
         "foreign_mentions": 0,
         "unknown_mentions": 1,
@@ -3564,7 +4203,7 @@
         "comparable": false
       },
       {
-        "group": "bargain for the lowest price",
+        "group": "take a bus or a CNG to Kacchaptali",
         "domestic_mentions": 0,
         "foreign_mentions": 0,
         "unknown_mentions": 1,
@@ -3573,7 +4212,7 @@
         "comparable": false
       },
       {
-        "group": "bargain for the boat price",
+        "group": "take a bus or an auto",
         "domestic_mentions": 0,
         "foreign_mentions": 0,
         "unknown_mentions": 1,
@@ -3582,7 +4221,7 @@
         "comparable": false
       },
       {
-        "group": "bargain for the accommodation",
+        "group": "take a bus to Badalgachi and then a CNG",
         "domestic_mentions": 0,
         "foreign_mentions": 0,
         "unknown_mentions": 1,
@@ -3591,7 +4230,7 @@
         "comparable": false
       },
       {
-        "group": "visit in winter you can take a walk",
+        "group": "take a boat ride to the precise Zero",
         "domestic_mentions": 0,
         "foreign_mentions": 0,
         "unknown_mentions": 1,
@@ -3605,11 +4244,7 @@
     "reviewer_is_local_guide is deliberately not used: it is Google's contribution-volume badge, not a residency signal, and 274 of the 300 reviews that carry it are True \u2014 a proxy that says yes to nine in ten reviewers cannot separate two audiences",
     "4641/14841 reviews could be labelled (31.3%); user_location is supplied by Booking.com but not by Google Maps",
     "no entity_type group has at least 5 mentions from both audiences, so no comparison is reported for it",
-    "no division group has at least 5 mentions from both audiences, so no comparison is reported for it",
-    "no visibility group has at least 5 mentions from both audiences, so no comparison is reported for it",
     "no entity group has at least 5 mentions from both audiences, so no comparison is reported for it",
-    "2288 of 2398 mentions sit in reviews that cannot be labelled. user_location comes from Booking.com, whose reviews are about hotels and rarely name another place, while almost every mention comes from a Google Maps review, which supplies no location. The source that identifies the reviewer is not the source that carries the evidence.",
-    "On this corpus the locals-versus-visitors question cannot be answered: every cell is too small on at least one side. This is a coverage limit, not a null result.",
-    "Worth flagging: section 5.6 cannot be answered via reviewer location without conflicting with section 10, which keeps personal-data output off when scraping. Google Maps reviewer location is exactly the field that ethics stance excludes. The route that does not conflict is language \u2014 Bangla or Banglish text implies a domestic reviewer and needs no personal data at all \u2014 which becomes usable once the YouTube pass (section 3.3a) brings real Banglish into the corpus. Today the corpus has 5 such reviews."
+    "4554 of 6938 mentions sit in reviews that cannot be labelled. user_location comes from Booking.com, whose reviews are about hotels and rarely name another place, while almost every mention comes from a Google Maps review, which supplies no location. The source that identifies the reviewer is not the source that carries the evidence."
   ]
 }

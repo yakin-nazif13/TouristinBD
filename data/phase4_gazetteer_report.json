@@ -1,21 +1,30 @@
 {
-  "n_entities": 68,
+  "n_entities": 70,
   "by_visibility": {
-    "V2": 25,
-    "V3": 17,
-    "V1": 14,
-    "V0": 12
+    "V3": 42,
+    "V2": 18,
+    "V1": 7,
+    "V0": 3
   },
-  "with_coordinates": 46,
+  "with_coordinates": 65,
+  "coordinates_by_source": {
+    "openstreetmap": 47,
+    "google_maps_place_list": 18
+  },
+  "raised_by_place_list": 31,
+  "spellings_pending": 0,
   "thresholds": {
     "V3_sitelinks": 20,
     "V3_importance": 0.35,
     "V2_sitelinks": 5,
-    "V2_importance": 0.1
+    "V2_importance": 0.1,
+    "maps_V3_reviews": 1000,
+    "maps_V2_reviews": 100
   },
   "sources": [
     "nominatim.openstreetmap.org",
-    "wikidata.org"
+    "wikidata.org",
+    "data/place_names.csv (Google Maps)"
   ],
   "offline": false
 }

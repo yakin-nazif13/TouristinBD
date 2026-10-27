@@ -1,7 +1,7 @@
 # Phase 8 — Database Build Report
 
-- Built (UTC): 2026-10-23T17:23:23Z
-- Database: `data/touristinbd.db` (schema version 2)
+- Built (UTC): 2026-10-27T00:00:47Z
+- Database: `data/touristinbd.db` (schema version 3)
 
 ## Row counts
 
@@ -20,9 +20,12 @@
 | sensitivity_metrics | 5 |
 | sensitivity_mappings | 154 |
 | review_language | 14841 |
-| entities | 467 |
-| entity_variants | 537 |
-| mentions | 2398 |
+| entities | 527 |
+| entity_variants | 809 |
+| mentions | 6938 |
+| gems | 54 |
+| place_attributes | 1064 |
+| local_specialities | 12 |
 
 ## Views
 
@@ -30,6 +33,8 @@
 - `v_city_stats`
 - `v_dataset_overview`
 - `v_entity_evidence`
+- `v_entity_freshness`
+- `v_gems`
 - `v_language_mix`
 - `v_mention_evidence`
 - `v_place_stats`
@@ -44,3 +49,4 @@
 
 - 22 near-tied topic(s) are also mapped to their runner-up preference
 - phase5 manual review sample: 0/50 pairs carry a human_label
+- gems: 1 gem(s) have no coordinates, so the map cannot show them: Madhabpur Lake

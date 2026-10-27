@@ -258,20 +258,37 @@ def test_corpus_evaluation() -> None:
     # The invariant that matters more than the score: nothing served as a
     # discovery may be a review talking about its own subject. 224 of 440
     # mentions were self-mentions before this was enforced.
+    #
+    # Discoveries are places, so the rule is about PLACE mentions. A food or
+    # activity in a review of its own place is wanted ("guava" in a review of the
+    # Bhimruli Floating Guava Market is what the market sells). A Bangla place
+    # name is checked through the English name it stands for, so "বান্দরবান" in
+    # a review of Bandarban counts as the self-mention it is.
     hosts = dict(zip(corpus["review_id"].astype(str), corpus["place_name"].astype(str)))
+    bangla_names = {}
+    bangla_path = REPO_ROOT / "data" / "place_names_bn.csv"
+    if bangla_path.exists():
+        names = pd.read_csv(bangla_path)
+        names = names[names["decision"] == "accept"]
+        bangla_names = dict(zip(names["bangla"].astype(str), names["place"].astype(str)))
 
     def tokens(name: str) -> set:
         import re as _re
         return {t for t in _re.sub(r"[^\w\s]", " ", str(name or "").lower()).split() if t}
 
-    self_mentions = [
-        row for _, row in mentions.iterrows()
-        if tokens(row["surface"]) and tokens(hosts.get(str(row["review_id"]), ""))
-        and tokens(row["surface"]) <= tokens(hosts.get(str(row["review_id"]), ""))
-    ]
-    check("no mention is the review's own place", not self_mentions,
+    places = mentions[mentions["entity_type"] == "PLACE"]
+    self_mentions = []
+    for _, row in places.iterrows():
+        surface = bangla_names.get(str(row["surface"]), str(row["surface"]))
+        own = tokens(hosts.get(str(row["review_id"]), ""))
+        if tokens(surface) and own and tokens(surface) <= own:
+            self_mentions.append(row)
+    check("no place mention is the review's own place", not self_mentions,
           f"{len(self_mentions)} self-mention(s), e.g. "
           f"{self_mentions[0]['surface'] if self_mentions else ''}")
+    check("Bangla place mentions are present and checked",
+          places["surface"].astype(str).isin(bangla_names).any(),
+          "no PLACE mention uses a reviewed Bangla spelling")
 
     # The specific merges section 5.3 asks for, checked individually so a
     # regression names itself rather than moving an aggregate.

@@ -54,7 +54,7 @@ import pandas as pd
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from gem_schema import strip_qualifier  # noqa: E402
-from language_id import phonetic_key  # noqa: E402
+from language_id import normalize_bangla, phonetic_key  # noqa: E402
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 DATA_DIR = Path(os.environ.get("TOURISTINBD_DATA_DIR") or (REPO_ROOT / "data"))
@@ -63,6 +63,9 @@ IN_MENTIONS = DATA_DIR / "phase4_mentions.csv"
 IN_CORPUS = DATA_DIR / "processed_reviews.csv"
 IN_GEOGRAPHY = DATA_DIR / "place_geography.csv"
 IN_GOLD = DATA_DIR / "entity_resolution_gold.csv"
+IN_LEXICON = DATA_DIR / "food_activity_lexicon.csv"
+IN_BANGLA_NAMES = DATA_DIR / "place_names_bn.csv"
+IN_PLACE_SPELLINGS = DATA_DIR / "place_spellings.csv"   # written by build_gazetteer.py
 OUT_ENTITIES = DATA_DIR / "phase4_entities.csv"
 OUT_VARIANTS = DATA_DIR / "phase4_entity_variants.csv"
 OUT_REPORT_MD = DATA_DIR / "phase4_resolution_report.md"
@@ -223,9 +226,44 @@ class UnionFind:
         return dict(out)
 
 
+def load_equivalents() -> dict[tuple[str, str], str]:
+    """Reviewed spellings -> the name they stand for, keyed by (type, spelling).
+
+    Three reviewed lists say outright that spellings are one thing: the food /
+    activity lexicon ("ফুচকা" is Fuchka, "নৌকা ভ্রমণ" is Boat ride), the
+    Bangla place names ("বান্দরবান" is Bandarban) and the misspellings of listed
+    places ("Kantaji Temple" is Kantajew Temple). A person decided these, so they
+    are applied as given rather than re-derived from similarity scores, which
+    cannot see that "boat ride" and "নৌকা ভ্রমণ" mean the same thing.
+    """
+    out: dict[tuple[str, str], str] = {}
+    for path, surface_col, target_col, type_col in (
+        (IN_LEXICON, "surface", "concept", "entity_type"),
+        (IN_BANGLA_NAMES, "bangla", "place", None),
+        (IN_PLACE_SPELLINGS, "variant", "place", None),
+    ):
+        if not path.exists():
+            continue
+        frame = pd.read_csv(path)
+        frame = frame[frame["decision"].astype(str).str.strip() == "accept"]
+        for _, row in frame.iterrows():
+            entity_type = str(row[type_col]).upper() if type_col else "PLACE"
+            out[(entity_type, _equivalence_key(row[surface_col]))] = str(row[target_col])
+    return out
+
+
+def _equivalence_key(surface) -> str:
+    return normalize_bangla(str(surface)).lower()
+
+
 def build_surface_groups(mentions: pd.DataFrame, geography: pd.DataFrame | None,
-                         corpus: pd.DataFrame | None) -> dict[str, dict]:
-    """One record per distinct surface form, with its geographic footprint."""
+                         corpus: pd.DataFrame | None,
+                         equivalents: dict[tuple[str, str], str] | None = None) -> dict[str, dict]:
+    """One record per distinct surface form, with its geographic footprint.
+
+    `target` is the name a reviewed list says the surface stands for, or None.
+    """
+    equivalents = equivalents or {}
     district_of: dict[str, str] = {}
     division_of: dict[str, str] = {}
     if geography is not None:
@@ -242,11 +280,13 @@ def build_surface_groups(mentions: pd.DataFrame, geography: pd.DataFrame | None,
     groups: dict[str, dict] = {}
     for _, row in mentions.iterrows():
         surface = str(row["surface"])
+        entity_type = str(row["entity_type"])
         record = groups.setdefault(surface, {
             "surface": surface,
-            "entity_type": str(row["entity_type"]),
+            "entity_type": entity_type,
             "normalized": strip_qualifier(surface).lower(),
             "phonetic": str(row.get("phonetic_key") or phonetic_key(surface)),
+            "target": equivalents.get((entity_type, _equivalence_key(surface))),
             "mentions": 0,
             "review_ids": set(),
             "districts": set(),
@@ -288,6 +328,7 @@ def build_surface_groups(mentions: pd.DataFrame, geography: pd.DataFrame | None,
             "entity_type": "PLACE",
             "normalized": strip_qualifier(place).lower(),
             "phonetic": phonetic_key(place),
+            "target": None,
             "mentions": 0,
             "review_ids": set(),
             "districts": set(),
@@ -308,6 +349,24 @@ def resolve(groups: dict[str, dict], embeddings=None, threshold: float = MERGE_T
     union = UnionFind(surfaces)
     pairs: list[dict] = []
 
+    # Reviewed equivalences first: spellings a person tied to one name are one
+    # entity, whatever the similarity signals say. The English name itself joins
+    # them when it is in the pool, so "বান্দরবান" lands with "Bandarban".
+    by_target: dict[tuple[str, str], list[str]] = defaultdict(list)
+    for surface, record in groups.items():
+        target = record.get("target")
+        if target:
+            by_target[(record["entity_type"], target.lower())].append(surface)
+    for surface, record in groups.items():
+        key = (record["entity_type"], surface.lower())
+        if key in by_target and surface not in by_target[key]:
+            by_target[key].append(surface)
+    for members in by_target.values():
+        for other in members[1:]:
+            union.union(members[0], other)
+            pairs.append({"surface_a": members[0], "surface_b": other,
+                          "score": 1.0, "signal_reviewed": 1.0})
+
     for i, left in enumerate(surfaces):
         for right in surfaces[i + 1:]:
             a, b = groups[left], groups[right]
@@ -321,7 +380,9 @@ def resolve(groups: dict[str, dict], embeddings=None, threshold: float = MERGE_T
                 pairs.append({
                     "surface_a": left, "surface_b": right,
                     "score": round(score, 4),
-                    **{f"signal_{k}": round(v, 4) for k, v in signals.items()},
+                    # A cross-script pair leaves string and containment as None
+                    # (not applicable), which is recorded as such.
+                    **{f"signal_{k}": (None if v is None else round(v, 4)) for k, v in signals.items()},
                 })
     return union.groups(), pairs
 
@@ -493,6 +554,16 @@ def write_reports(clusters: dict, groups: dict[str, dict], pairs: list[dict],
         # than "Saint Martin".
         ranked = sorted(members, key=lambda s: (-groups[s]["mentions"], -len(s), s))
         canonical = ranked[0]
+        # Where a reviewed list names the thing ("Fuchka", "Bandarban"), that
+        # name is used, so the register reads in one language and the gazetteer
+        # lookup searches for the English name even when Bangla spellings
+        # outnumber it. The most-mentioned target wins if there are several.
+        targets: dict[str, int] = defaultdict(int)
+        for member in members:
+            if groups[member].get("target"):
+                targets[groups[member]["target"]] += groups[member]["mentions"]
+        display = (sorted(targets.items(), key=lambda kv: (-kv[1], kv[0]))[0][0]
+                   if targets else canonical)
         reviews = set()
         districts, divisions, languages = set(), set(), set()
         mentions = 0
@@ -512,7 +583,7 @@ def write_reports(clusters: dict, groups: dict[str, dict], pairs: list[dict],
             })
         entity_rows.append({
             "entity_id": entity_id,
-            "canonical_name": canonical,
+            "canonical_name": display,
             "entity_type": groups[canonical]["entity_type"],
             "n_variants": len(members),
             "n_mentions": mentions,
@@ -644,8 +715,9 @@ def main() -> int:
     notes.append("embedding signal unavailable (needs torch); phonetic + string + geography only")
 
     print(f"Phase 4 — resolving {len(mentions)} mention(s)")
-    groups = build_surface_groups(mentions, geography, corpus)
-    print(f"  distinct surfaces: {len(groups)}")
+    equivalents = load_equivalents()
+    groups = build_surface_groups(mentions, geography, corpus, equivalents)
+    print(f"  distinct surfaces: {len(groups)}  ({len(equivalents)} reviewed equivalence(s) loaded)")
 
     clusters, pairs = resolve(groups, embeddings=None, threshold=args.threshold)
     print(f"  entities: {len(clusters)}  (merged {len(groups) - len(clusters)} surface(s))")

@@ -27,6 +27,7 @@ from backend.routers import (
     chat,
     discovery,
     entities,
+    gems,
     itinerary,
     meta,
     places,
@@ -60,6 +61,7 @@ app = FastAPI(
         {"name": "analytics", "description": "Aggregates equivalent to the Phase 7 tables."},
         {"name": "research", "description": "Phase 5 validation and Phase 6 sensitivity."},
         {"name": "discovery", "description": "Search, preference ranking, place comparison."},
+        {"name": "gems", "description": "Hidden-gem register, map points, what each place offers, and how fresh the evidence is."},
         {"name": "itinerary", "description": "Day-by-day trip planning on review evidence."},
         {"name": "chat", "description": "Retrieval-based chatbot built on the discovery endpoints."},
         {"name": "admin", "description": "Owner-only: sign in, approve or reject visitor reviews, add them to the dataset."},
@@ -115,6 +117,7 @@ app.include_router(analytics.router)
 app.include_router(research.router)
 app.include_router(discovery.router)
 app.include_router(entities.router)
+app.include_router(gems.router)
 app.include_router(itinerary.router)
 app.include_router(chat.router)
 app.include_router(submissions.router)

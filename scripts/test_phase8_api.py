@@ -53,6 +53,91 @@ def _secondary_mapping() -> pd.DataFrame:
     return pd.DataFrame(columns=["topic_id", "preference_id"])
 
 
+def test_gems() -> None:
+    """The gem register, the map and place cards (BUILD_PLAN 5.4-5.7)."""
+    print("\ngems")
+    code, body = get("/api/gems", limit=500)
+    check("/api/gems returns 200", code == 200, str(code))
+    if code != 200:
+        return
+    gems = body["gems"]
+    check("there are gem candidates", body["total"] > 0 and gems, str(body["total"]))
+    ranks = [g["gem_rank"] for g in gems]
+    scores = [g["gem_score"] for g in gems if g["gem_score"] is not None]
+    check("gems are served best first", ranks == sorted(ranks) and scores == sorted(scores, reverse=True))
+    check("the recency window is stated", body["recency"]["window_years"] and body["recency"]["recent_since"],
+          str(body["recency"]))
+    check("every gem says how fresh its evidence is",
+          all(g["freshness"] in ("recent", "old") for g in gems))
+    check("old means no recent review, and is flagged for confirmation",
+          all((g["freshness"] == "old") == (g["n_recent_reviews"] == 0) == bool(g["needs_recent_confirmation"])
+              for g in gems))
+
+    # Bangladesh's bounding box, roughly: a point outside it is a wrong match.
+    placed = [g for g in gems if g["lat"] is not None]
+    check("every map point is inside Bangladesh",
+          all(20.5 <= g["lat"] <= 26.7 and 88.0 <= g["lng"] <= 92.7 for g in placed),
+          str([g["canonical_name"] for g in placed if not 20.5 <= g["lat"] <= 26.7][:3]))
+    check("every map point says where it came from",
+          all(g["coord_source"] in ("openstreetmap", "google_maps_place_list", "near_host_place")
+              for g in placed))
+    near = [g for g in placed if g["coord_source"] == "near_host_place"]
+    check("only an undocumented (V0) place is placed near its host place",
+          all(g["visibility"] == "V0" and g["near_place"] for g in near),
+          str([(g["canonical_name"], g["visibility"]) for g in near]))
+    listed_v0 = [g["canonical_name"] for g in gems if g["visibility"] == "V0" and g["maps_place"]]
+    check("no gem on our own Google Maps list is called undocumented", not listed_v0, str(listed_v0))
+
+    code, hidden = get("/api/gems", hidden_only="true", limit=500)
+    check("hidden_only leaves out well-known places",
+          code == 200 and all(not g["already_official"] for g in hidden["gems"])
+          and hidden["total"] < body["total"], str(code))
+    code, v0 = get("/api/gems", visibility="V0")
+    check("the visibility filter works", code == 200 and all(g["visibility"] == "V0" for g in v0["gems"]))
+    code, _ = get("/api/gems", freshness="stale")
+    check("an unknown freshness is rejected", code == 422, str(code))
+
+    code, fc = get("/api/gems/map")
+    check("/api/gems/map is GeoJSON", code == 200 and fc["type"] == "FeatureCollection", str(code))
+    if code == 200:
+        layers = {f["properties"]["layer"] for f in fc["features"]}
+        check("the map has gem and place layers", layers == {"gem", "place"}, str(layers))
+        first = fc["features"][0]["geometry"]["coordinates"]
+        check("GeoJSON coordinates are [lng, lat]", 88.0 <= first[0] <= 92.7 and 20.5 <= first[1] <= 26.7,
+              str(first))
+        mapped = sum(1 for f in fc["features"] if f["properties"]["layer"] == "gem")
+        check("every gem is either on the map or listed as unmapped",
+              mapped + len(fc["unmapped_gems"]) == body["total"], f"{mapped} + {len(fc['unmapped_gems'])}")
+
+    top = gems[0]
+    code, detail = get(f"/api/gems/{top['entity_id']}", evidence_limit=5)
+    check("a gem opens to its evidence", code == 200 and detail["evidence"], str(code))
+    if code == 200:
+        dates = [e["review_date"] for e in detail["evidence"] if e["review_date"]]
+        check("evidence is newest first", dates == sorted(dates, reverse=True))
+        check("and says which places' reviews it came from", detail["found_in_places"])
+    code, _ = get("/api/gems/E-NOPE")
+    check("an unknown gem is a 404", code == 404, str(code))
+
+    code, card = get("/api/place-attributes", place="Kuakata Sea Beach")
+    check("a place card returns what the place offers", code == 200 and card["attributes"], str(code))
+    if code == 200:
+        rows = [r for group in card["attributes"].values() for r in group]
+        check("every attribute carries a review sentence", all(r["example_sentence"] for r in rows))
+        check("only transport and tips with no recent review are stale",
+              all(r["stale"] == (r["entity_type"] in ("ACCESS", "TIP") and not r["n_recent_reviews"]) for r in rows))
+    code, recent = get("/api/place-attributes", place="Kuakata Sea Beach", recent_only="true")
+    check("recent_only drops attributes with no recent review",
+          code == 200 and all(r["n_recent_reviews"] > 0 for g in recent["attributes"].values() for r in g))
+    code, _ = get("/api/place-attributes", place="Nowhere At All")
+    check("an unknown place card is a 404", code == 404, str(code))
+
+    code, spec = get("/api/local-specialities")
+    check("local specialities are served with their places",
+          code == 200 and spec["total"] > 0 and all(isinstance(s["places"], list) for s in spec["specialities"]),
+          str(code))
+
+
 def main() -> None:
     print("Phase 8 — API smoke tests\n")
 
@@ -456,6 +541,8 @@ def main() -> None:
     )
     code, _ = get("/api/compare", places="Lalbagh Fort")
     check("compare rejects a single place", code == 400, str(code))
+
+    test_gems()
 
     # ---- docs ------------------------------------------------------------
     print("\ndocs")

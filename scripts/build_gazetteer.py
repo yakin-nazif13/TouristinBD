@@ -34,17 +34,26 @@ costs nothing and needs no network, which is what makes the pipeline
 reproducible and lets CI run `--offline`.
 
 Why sitelinks and importance rather than review counts: the plan's V1/V2 wording
-refers to Google Maps review counts, which we have for the 27 corpus places but
-not for an extracted entity that has no Maps page of its own. Wikidata sitelink
-count and Nominatim's importance score are the closest free, documented
-proxies, and the thresholds below were chosen by probing known and unknown
-places rather than guessed:
+refers to Google Maps review counts, which an extracted entity with no Maps page
+of its own does not have. Wikidata sitelink count and Nominatim's importance
+score are the closest free, documented proxies, and the thresholds below were
+chosen by probing known and unknown places rather than guessed:
 
     Lalbagh Fort           OSM importance 0.41, 30 sitelinks   -> V3
     Kuakata                OSM importance 0.16,  9 sitelinks   -> V2
     Saint Martin's Island  absent from OSM,     15 sitelinks   -> V2
-    Guliakhali Sea Beach   absent from both                    -> V0
     Fatrar Chor            absent from both                    -> V0
+
+But many extracted places *do* have a Maps page: they are on our own place list
+(data/place_names.csv), with the Google review count recorded at import. A place
+there is on a map by definition, so it is never V0. Without this, T-Badh (7,902
+Google reviews) ranked as an undocumented gem because OpenStreetMap spells it
+differently. The place list can only raise a level, never lower one, so it can
+remove a false discovery but never create one.
+
+A misspelling of a listed place ("Kantaji Temple" for Kantajew Temple) is not
+matched automatically. Near matches are proposed in data/place_spellings.csv and
+only an `accept` row is used, as with the Bangla names.
 
 Run:
     .venv/bin/python scripts/build_gazetteer.py            # queries + caches
@@ -57,6 +66,7 @@ import argparse
 import json
 import os
 import random
+import re
 import sys
 import time
 import urllib.error
@@ -75,6 +85,9 @@ DATA_DIR = Path(os.environ.get("TOURISTINBD_DATA_DIR") or (REPO_ROOT / "data"))
 
 IN_ENTITIES = DATA_DIR / "phase4_entities.csv"
 IN_GEOGRAPHY = DATA_DIR / "place_geography.csv"
+IN_VARIANTS = DATA_DIR / "phase4_entity_variants.csv"
+IN_PLACE_LIST = DATA_DIR / "place_names.csv"
+SPELLINGS = DATA_DIR / "place_spellings.csv"
 CACHE = DATA_DIR / "gazetteer_cache.json"
 OUT_CSV = DATA_DIR / "phase4_gazetteer.csv"
 OUT_REPORT_MD = DATA_DIR / "phase4_gazetteer_report.md"
@@ -103,6 +116,19 @@ V3_SITELINKS = 20
 V3_IMPORTANCE = 0.35
 V2_SITELINKS = 5
 V2_IMPORTANCE = 0.10
+
+# Google Maps review counts for places on our own list: round order-of-magnitude
+# boundaries, stated rather than fitted.
+MAPS_V3_REVIEWS = 1000
+MAPS_V2_REVIEWS = 100
+
+# How alike a name must be to a listed place's to be proposed as a spelling of
+# it (rapidfuzz ratio, 0-100). A proposal only; a person accepts or rejects.
+SPELLING_MIN_SIMILARITY = 80
+
+# Words that say what kind of place it is, not which one: "Kolatoli Beach" and
+# "Kolatoli" are the same place, "Nilachal Tourist Center" and "Nilachal" too.
+GENERIC_WORDS = {"tourist", "spot", "sea", "beach", "center", "centre", "area"}
 
 UNKNOWN = "unknown"
 
@@ -244,6 +270,114 @@ def assign_visibility(record: dict) -> tuple[str, str]:
     return UNKNOWN, f"absent from {consulted}, but the other source was unreachable"
 
 
+def core_name(name: str) -> str:
+    """The form names are matched against the place list in: "T-Badh" = "t-badh"."""
+    text = strip_article(str(name or "")).lower().replace("'", "").replace("’", "")
+    words = re.sub(r"[^\w\s]", " ", text).split()
+    return " ".join(w for w in words if w not in GENERIC_WORDS)
+
+
+def load_place_list(path: Path = IN_PLACE_LIST) -> dict[str, dict]:
+    """core name -> the listed place, its Google review count and coordinates.
+
+    A place's own names (final, list and alias) are entered first, then the
+    shorter forms query_forms derives from them, so a derived "Sundarbans" from
+    "Sundarbans (Karamjal Wildlife Centre)" can never displace the list's own
+    "The Sundarbans".
+    """
+    if not path.exists():
+        return {}
+    frame = pd.read_csv(path)
+    out: dict[str, dict] = {}
+    derived: list[tuple[str, dict]] = []
+    for _, row in frame.iterrows():
+        reviews = pd.to_numeric(row.get("google_review_count"), errors="coerce")
+        record = {
+            "place": str(row["canonical_name"]),
+            "reviews": None if pd.isna(reviews) else int(reviews),
+            "lat": row.get("lat"), "lng": row.get("lng"),
+        }
+        own = [row.get("canonical_name"), row.get("list_name")]
+        if pd.notna(row.get("aliases")):
+            own += str(row["aliases"]).split("|")
+        own = [str(n) for n in own if pd.notna(n) and str(n).strip()]
+        for name in own:
+            out.setdefault(core_name(name), record)
+            derived += [(core_name(form), record) for form in query_forms(name)]
+    for key, record in derived:
+        out.setdefault(key, record)
+    out.pop("", None)
+    return out
+
+
+def load_spellings(path: Path = SPELLINGS) -> dict[str, str]:
+    """Accepted misspelling -> listed place it names."""
+    if not path.exists():
+        return {}
+    frame = pd.read_csv(path)
+    frame = frame[frame["decision"].astype(str).str.strip().str.lower() == "accept"]
+    return {core_name(v): str(p) for v, p in zip(frame["variant"], frame["place"])}
+
+
+def match_place_list(names: list[str], place_list: dict[str, dict],
+                     spellings: dict[str, str]) -> dict | None:
+    """The listed place these names refer to, or None. Names in priority order."""
+    for name in names:
+        key = core_name(name)
+        if key in spellings:
+            hit = place_list.get(core_name(spellings[key]))
+            if hit:
+                return hit
+        if key in place_list:
+            return place_list[key]
+    return None
+
+
+def maps_visibility(hit: dict) -> tuple[str, str]:
+    """(level, reason) from a listed place's Google review count."""
+    reviews = hit.get("reviews")
+    where = f"on our Google Maps place list as {hit['place']!r}"
+    if reviews is None:
+        return "V1", f"{where} (review count not recorded)"
+    level = ("V3" if reviews >= MAPS_V3_REVIEWS
+             else "V2" if reviews >= MAPS_V2_REVIEWS else "V1")
+    return level, f"{where} with {reviews} Google review(s)"
+
+
+def raise_with_place_list(level: str, reason: str, hit: dict | None) -> tuple[str, str]:
+    """The higher of the OSM/Wikidata level and the place-list level."""
+    if hit is None:
+        return level, reason
+    maps_level, maps_reason = maps_visibility(hit)
+    if level == UNKNOWN or VISIBILITY_LEVELS.index(maps_level) > VISIBILITY_LEVELS.index(level):
+        return maps_level, maps_reason
+    return level, reason
+
+
+def propose_spellings(names: list[str], place_list: dict[str, dict],
+                      existing: pd.DataFrame | None) -> pd.DataFrame:
+    """Near matches to listed places, for a person to accept or reject.
+
+    A recorded decision is never overwritten; a new proposal starts pending.
+    """
+    from rapidfuzz import fuzz, process
+
+    columns = ["variant", "place", "similarity", "decision", "reason"]
+    rows = [] if existing is None else existing[columns].to_dict("records")
+    known = {core_name(r["variant"]) for r in rows}
+    keys = list(place_list)
+    for name in names:
+        key = core_name(name)
+        if not name.isascii() or not key or key in place_list or key in known:
+            continue
+        best = process.extractOne(key, keys, scorer=fuzz.ratio)
+        if best and best[1] >= SPELLING_MIN_SIMILARITY:
+            rows.append({"variant": name, "place": place_list[best[0]]["place"],
+                         "similarity": round(best[1], 1), "decision": "pending", "reason": ""})
+            known.add(key)
+    return pd.DataFrame(rows, columns=columns).sort_values(["place", "variant"]).reset_index(drop=True)
+
+
 def load_cache() -> dict:
     """The cache, with incomplete records dropped so they are retried.
 
@@ -365,6 +499,7 @@ OUTPUT_COLUMNS = [
     "osm_found", "osm_category", "osm_type", "osm_importance", "osm_display_name",
     "wikidata_found", "wikidata_qid", "wikidata_label", "wikidata_sitelinks",
     "lat", "lng", "osm_status", "wikidata_status",
+    "osm_wikidata_visibility", "maps_place", "maps_review_count", "coord_source",
 ]
 
 
@@ -411,22 +546,43 @@ def main() -> int:
         estimate = sum(1 for n in places["canonical_name"].astype(str) if n not in cache)
         print(f"  {estimate} to look up, about {estimate * 3.2:.0f}s at the rate limits")
 
+    # Every spelling resolution put in an entity is a name it may be listed under.
+    names_of: dict[str, list[str]] = {}
+    if IN_VARIANTS.exists():
+        variants = pd.read_csv(IN_VARIANTS).sort_values("mentions", ascending=False)
+        for entity_id, surface in zip(variants["entity_id"].astype(str), variants["surface"].astype(str)):
+            names_of.setdefault(entity_id, []).append(surface)
+    place_list = load_place_list()
+    spellings = load_spellings()
+    print(f"  place list: {len(place_list)} name form(s); {len(spellings)} accepted spelling(s)")
+
     rows = []
     for _, entity in places.iterrows():
         name = str(entity["canonical_name"])
         # Query the fuller official form when resolution found one: "Kuakata
         # Beach" is likelier to be on a map than a bare "Kuakata".
         record = lookup(name, cache, args.offline)
-        level, reason = assign_visibility(record)
-        rows.append({
+        base_level, base_reason = assign_visibility(record)
+        hit = match_place_list([name, *names_of.get(str(entity["entity_id"]), [])], place_list, spellings)
+        level, reason = raise_with_place_list(base_level, base_reason, hit)
+        row = {
             "entity_id": entity["entity_id"],
             "name": name,
             "visibility": level,
             "visibility_reason": reason,
             **{k: record.get(k) for k in OUTPUT_COLUMNS if k not in
                ("entity_id", "name", "visibility", "visibility_reason")},
-        })
-        print(f"    {level:<7} {name}")
+            "osm_wikidata_visibility": base_level,
+            "maps_place": hit["place"] if hit else None,
+            "maps_review_count": hit["reviews"] if hit else None,
+            "coord_source": "openstreetmap" if pd.notna(record.get("lat")) else None,
+        }
+        # The map needs a point. OSM's is kept when there is one; otherwise the
+        # listed place's own Google Maps coordinates.
+        if row["coord_source"] is None and hit and pd.notna(hit["lat"]):
+            row.update(lat=float(hit["lat"]), lng=float(hit["lng"]), coord_source="google_maps_place_list")
+        rows.append(row)
+        print(f"    {level:<7} {name}" + (f"  (was {base_level})" if level != base_level else ""))
 
     if not args.offline:
         save_cache(cache)
@@ -435,17 +591,30 @@ def main() -> int:
     OUT_CSV.parent.mkdir(parents=True, exist_ok=True)
     frame.to_csv(OUT_CSV, index=False)
 
+    existing = pd.read_csv(SPELLINGS) if SPELLINGS.exists() else None
+    all_names = [n for _, e in places.iterrows()
+                 for n in [str(e["canonical_name"]), *names_of.get(str(e["entity_id"]), [])]]
+    proposals = propose_spellings(all_names, place_list, existing)
+    proposals.to_csv(SPELLINGS, index=False, encoding="utf-8")
+    pending = int((proposals["decision"] == "pending").sum())
+    print(f"  {SPELLINGS.name}: {len(proposals)} spelling(s), {pending} awaiting a decision")
+
     counts = frame["visibility"].value_counts().to_dict()
     with_coords = int(frame["lat"].notna().sum())
+    raised = frame[frame["visibility"] != frame["osm_wikidata_visibility"]]
     payload = {
         "n_entities": int(len(frame)),
         "by_visibility": {k: int(v) for k, v in counts.items()},
         "with_coordinates": with_coords,
+        "coordinates_by_source": {k: int(v) for k, v in frame["coord_source"].value_counts().items()},
+        "raised_by_place_list": int(len(raised)),
+        "spellings_pending": pending,
         "thresholds": {
             "V3_sitelinks": V3_SITELINKS, "V3_importance": V3_IMPORTANCE,
             "V2_sitelinks": V2_SITELINKS, "V2_importance": V2_IMPORTANCE,
+            "maps_V3_reviews": MAPS_V3_REVIEWS, "maps_V2_reviews": MAPS_V2_REVIEWS,
         },
-        "sources": ["nominatim.openstreetmap.org", "wikidata.org"],
+        "sources": ["nominatim.openstreetmap.org", "wikidata.org", "data/place_names.csv (Google Maps)"],
         "offline": args.offline,
     }
     OUT_REPORT_JSON.write_text(json.dumps(payload, indent=2) + "\n", encoding="utf-8")
@@ -482,12 +651,30 @@ def main() -> int:
             "neither OpenStreetMap nor Wikidata.", "",
         ]
         lines += [f"- **{row['name']}**" for _, row in v0.iterrows()]
+    if not raised.empty:
+        lines += [
+            "", "## Raised by our own place list", "",
+            "Found on our Google Maps place list, so on a map whatever OpenStreetMap",
+            "and Wikidata say. Only ever raised, never lowered.", "",
+            "| entity | OSM / Wikidata | now | listed as | Google reviews |",
+            "| --- | --- | --- | --- | --- |",
+        ]
+        lines += [
+            f"| {r['name']} | {r['osm_wikidata_visibility']} | {r['visibility']} | "
+            f"{r['maps_place']} | {'' if pd.isna(r['maps_review_count']) else int(r['maps_review_count'])} |"
+            for _, r in raised.iterrows()
+        ]
+    if pending:
+        lines += ["", f"**{pending} spelling(s) in `{SPELLINGS.name}` await a decision.** "
+                  "Until accepted they are not used."]
     lines += [
         "", "## Thresholds", "",
         f"- V3: {V3_SITELINKS}+ Wikidata sitelinks, or OSM importance >= {V3_IMPORTANCE}",
         f"- V2: {V2_SITELINKS}+ sitelinks, or OSM importance >= {V2_IMPORTANCE}",
         "- V1: present in either source, below those",
         "- V0: absent from both, both having been successfully consulted",
+        f"- On our place list: V3 at {MAPS_V3_REVIEWS}+ Google reviews, V2 at "
+        f"{MAPS_V2_REVIEWS}+, otherwise V1 — never V0",
         "",
         "Chosen by probing known and unknown places, not assumed. The plan's V1/V2",
         "wording refers to Google Maps review counts, which an extracted entity",

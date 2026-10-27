@@ -64,6 +64,11 @@ jobs:
       - name: Phase 4 — entity resolution (BUILD_PLAN 5.3)
         run: python scripts/test_resolve_entities.py
 
+      # Bangla word boundaries, Bangla self-mentions, and the reviewed
+      # food / activity and Bangla place-name lists.
+      - name: Phase 4 — entity typing and Bangla names (BUILD_PLAN 5.1, 5.2)
+        run: python scripts/test_entity_typing.py
+
       # Network-free: every gazetteer test either calls a pure function or
       # stubs the HTTP layer, so CI never hits Nominatim or Wikidata.
       - name: Phase 4 — gazetteer and visibility (BUILD_PLAN 5.4)
