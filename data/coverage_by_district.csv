@@ -1,0 +1,65 @@
+district,division,places,reviews,recent_reviews,bangla_share,mentions,gem_candidates,status,place_names
+Barguna,Barishal,0,0,0,,0,0,no data,
+Bhola,Barishal,0,0,0,,0,0,no data,
+Brahmanbaria,Chattogram,0,0,0,,0,0,no data,
+Chandpur,Chattogram,0,0,0,,0,0,no data,
+Feni,Chattogram,0,0,0,,0,0,no data,
+Lakshmipur,Chattogram,0,0,0,,0,0,no data,
+Faridpur,Dhaka,0,0,0,,0,0,no data,
+Gopalganj,Dhaka,0,0,0,,0,0,no data,
+Kishoreganj,Dhaka,0,0,0,,0,0,no data,
+Madaripur,Dhaka,0,0,0,,0,0,no data,
+Munshiganj,Dhaka,0,0,0,,0,0,no data,
+Narsingdi,Dhaka,0,0,0,,0,0,no data,
+Rajbari,Dhaka,0,0,0,,0,0,no data,
+Shariatpur,Dhaka,0,0,0,,0,0,no data,
+Tangail,Dhaka,0,0,0,,0,0,no data,
+Chuadanga,Khulna,0,0,0,,0,0,no data,
+Jhenaidah,Khulna,0,0,0,,0,0,no data,
+Magura,Khulna,0,0,0,,0,0,no data,
+Narail,Khulna,0,0,0,,0,0,no data,
+Satkhira,Khulna,0,0,0,,0,0,no data,
+Jamalpur,Mymensingh,0,0,0,,0,0,no data,
+Sherpur,Mymensingh,0,0,0,,0,0,no data,
+Joypurhat,Rajshahi,0,0,0,,0,0,no data,
+Pabna,Rajshahi,0,0,0,,0,0,no data,
+Sirajganj,Rajshahi,0,0,0,,0,0,no data,
+Gaibandha,Rangpur,0,0,0,,0,0,no data,
+Kurigram,Rangpur,0,0,0,,0,0,no data,
+Lalmonirhat,Rangpur,0,0,0,,0,0,no data,
+Nilphamari,Rangpur,0,0,0,,0,0,no data,
+Panchagarh,Rangpur,0,0,0,,0,0,no data,
+Thakurgaon,Rangpur,0,0,0,,0,0,no data,
+Habiganj,Sylhet,0,0,0,,0,0,no data,
+Pirojpur,Barishal,1,32,10,0.25,7,0,thin,Baithakata Floating Market
+Noakhali,Chattogram,1,162,15,0.296,47,3,thin,Nijhum Dwip
+Jashore,Khulna,1,165,51,0.291,9,0,thin,Michael Madhusudan Datta Memorial (Sagardari)
+Jhalokati,Barishal,1,168,34,0.31,298,3,thin,Bhimruli Floating Guava Market
+Meherpur,Khulna,1,168,56,0.28,20,0,thin,Mujibnagar Monument Complex
+Sunamganj,Sylhet,1,168,89,0.298,72,5,thin,Tanguar Haor
+Chapainawabganj,Rajshahi,1,169,99,0.314,10,1,thin,Choto Sona Masjid
+Naogaon,Rajshahi,1,169,111,0.302,23,2,thin,Somapura Mahavihara (Paharpur)
+Natore,Rajshahi,1,169,82,0.296,34,1,thin,Natore Rajbari
+Cumilla,Chattogram,1,170,98,0.329,36,1,thin,Shalban Bihar
+Gazipur,Dhaka,1,170,89,0.306,75,0,thin,Bhawal National Park
+Manikganj,Dhaka,1,170,82,0.306,17,1,thin,Baliati Jamidar Bari
+Kushtia,Khulna,1,170,103,0.288,85,2,thin,Shilaidaha Rabindra Kuthibari
+Mymensingh,Mymensingh,2,200,108,0.31,56,2,covered,Shashi Lodge|Zainul Abedin Park
+Barishal,Barishal,2,214,101,0.276,54,0,covered,Durga Sagar|Guthia Baitul Aman Jame Mosque
+Bogura,Rajshahi,2,223,149,0.278,126,3,covered,Mahasthan Archaeological Museum|Mahasthangarh Tourism Park
+Khulna,Khulna,2,315,64,0.248,103,7,covered,Hiron Point (Nilkamal)|The Sundarbans
+Netrokona,Mymensingh,4,329,158,0.401,165,8,covered,Bijoypur Lake|Bijoypur Pahar (border hill)|China Matir Pahar|Sada Matir Pahar (White Clay Hills)
+Narayanganj,Dhaka,2,338,181,0.296,196,3,covered,Bangladesh Folk Art & Crafts Foundation (Sonargaon)|Panam City
+Rangpur,Rangpur,2,339,194,0.295,114,2,covered,Tajhat Palace|Vinno Jogot Amusement Park
+Rangamati,Chattogram,3,364,155,0.305,325,7,covered,Kaptai Lake|Sajek Valley|Shuvolong Waterfalls
+Patuakhali,Barishal,4,367,184,0.341,148,8,covered,Jhau Bon Kuakata|Kuakata Sea Beach|Mangrove Forest Kuakata|Sunset Point Kuakata
+Bagerhat,Khulna,3,438,325,0.381,390,8,covered,Kotka Sea Beach|Sixty Dome Mosque|Sundarbans (Karamjal Wildlife Centre)
+Dinajpur,Rangpur,3,507,228,0.292,177,2,covered,Kantajew Temple|Ramsagar National Park|Shopnopuri Artificial Amusement Park
+Khagrachari,Chattogram,5,558,232,0.285,224,5,covered,Alutila Cave|Khagrachari HDCH Park|Mayung Kopal (Stairs to Heaven)|New Zealand Para|Risang Waterfall
+Moulvibazar,Sylhet,6,746,397,0.268,407,12,covered,Finlay Tea Estate|Hum Hum Waterfall|Lawachara National Park|Madhabkunda Waterfall|Noor Jahan Tea Garden|Srimangal Tea Garden
+Rajshahi,Rajshahi,6,857,512,0.284,468,8,covered,I-Badh|Padma Garden Footbridge|Puthia Rajbari|Rajshahi Central Park & Zoo|T-Badh|Varendra Research Museum
+Bandarban,Chattogram,6,981,455,0.29,938,10,covered,Boga Lake|Buddha Dhatu Jadi (Golden Temple)|Debotakhum|Nafakhum Waterfall|Nilachal Tourist Center|Nilgiri
+Cox's Bazar,Chattogram,11,1252,702,0.339,1077,6,covered,Cox's Bazar Beach|Darianagar Nature & Tourism Center|Himchari Fountain and Hill|Kolatoli Beach|Kollol Hotel|Laboni Point Sea Beach|Royal Pearl Suites|Saint Martin's Island West Beach|Saint Martins Island|Sea Cox Hotel|Sugondha Sea Beach
+Dhaka,Dhaka,10,1254,866,0.327,129,3,covered,Ahsan Manzil Museum|Civic Inn|Green Edge Hotel|Gulshan Society Lake Park|Hatirjheel Lake|Lalbagh Fort|National Botanical Garden|Ramna Park|Tara Masjid (Star Mosque)|West Park Inn
+Chattogram,Chattogram,14,1666,711,0.274,1069,20,covered,Chandranath Hill|Ethnological Museum|Foy's Lake|Foy's Lake Resort|Guliakhali Sea Beach|Hatir Banglow|Heritage Hotel Chittagong|Hillview Park & Cafe|Hoque Tower International|Khoiyachara Waterfalls|Mini Bangladesh (Shadhinata Complex)|Mohamaya Lake|Naval Sea Beach|Patenga Sea Beach
+Sylhet,Sylhet,16,1843,853,0.271,610,6,covered,Adventure World Family Tourism Park|Ali Amjad's Clock|Bichnakandi Tourist Spot|Dibir Haor Shapla Bil|Hazrat Shahjalal Mazar Sharif|Jaflong Zero Point|Lala Khal Zero Point|Museum of Rajas' (Hason Raja Museum)|Noorjahan Grand Hotel|Osmani Museum|Ratargul Swamp Forest|Shreepur Tea Garden|Sreepur (Rangpani) Zero Point|Sylhet Paradise Inn|The Crystal Rose Hotel|Tilagor Eco Park

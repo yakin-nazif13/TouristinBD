@@ -3,15 +3,15 @@
   "n_places": 104,
   "by_type": {
     "ACCESS": 434,
-    "ACTIVITY": 1685,
-    "FOOD": 698,
+    "ACTIVITY": 1687,
+    "FOOD": 699,
     "TIP": 288
   },
   "speciality_rule": {
     "min_reviews": 3,
     "min_share_in_one_district": 0.6
   },
-  "n_local_specialities": 12,
+  "n_local_specialities": 13,
   "recency_window_years": 3,
   "rows_without_recent_evidence": {
     "ACCESS": 71,

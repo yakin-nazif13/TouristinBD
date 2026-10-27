@@ -151,6 +151,95 @@ def gem_map(
     }
 
 
+def _coordinates(conn: sqlite3.Connection) -> dict[str, tuple[float, float]]:
+    """Name (case-folded) -> (lat, lng), from reviewed places and placed gems."""
+    points: dict[str, tuple[float, float]] = {}
+    for row in db.rows(conn, "SELECT place_name AS name, lat, lng FROM places WHERE lat IS NOT NULL"):
+        points[row["name"].casefold()] = (row["lat"], row["lng"])
+    for row in db.rows(conn, "SELECT canonical_name AS name, lat, lng FROM gems WHERE lat IS NOT NULL"):
+        points.setdefault(row["name"].casefold(), (row["lat"], row["lng"]))
+    return points
+
+
+# Declared before /gems/{entity_id}, which would otherwise take "connections"
+# as an entity id.
+@router.get("/gems/connections")
+def gem_connections(
+    conn: sqlite3.Connection = Depends(db.get_conn),
+    place: str | None = Query(None, description="Only links touching this place (any case)"),
+    lesser_known_only: bool = Query(False, description="Only links with a V0-V2 gem at one end"),
+    min_reviews: int = Query(2, ge=1),
+    limit: int = Query(200, ge=1, le=1000),
+) -> dict:
+    """Places talked about together, strongest first, with map coordinates where
+    both ends have them. Each link carries a sentence from a real review."""
+    where, params = ["n_reviews >= ?"], [min_reviews]
+    if place:
+        where.append("(LOWER(place_a) = LOWER(?) OR LOWER(place_b) = LOWER(?))")
+        params += [place, place]
+    links = db.rows(
+        conn,
+        "SELECT place_a, place_b, n_reviews, n_found_in, n_together, example_review_id, example_sentence "
+        f"FROM place_connections WHERE {' AND '.join(where)} ORDER BY n_reviews DESC, place_a, place_b",
+        params,
+    )
+    lesser = {r["canonical_name"].casefold(): r["visibility"] for r in db.rows(
+        conn, "SELECT canonical_name, visibility FROM gems WHERE visibility IN ('V0', 'V1', 'V2')")}
+    points = _coordinates(conn)
+    out = []
+    for link in links:
+        gem_end = next((e for e in (link["place_a"], link["place_b"]) if e.casefold() in lesser), None)
+        if lesser_known_only and gem_end is None:
+            continue
+        a, b = points.get(link["place_a"].casefold()), points.get(link["place_b"].casefold())
+        out.append({
+            **link,
+            "lesser_known_place": gem_end,
+            "lesser_known_visibility": lesser.get(gem_end.casefold()) if gem_end else None,
+            "a_lat": a[0] if a else None, "a_lng": a[1] if a else None,
+            "b_lat": b[0] if b else None, "b_lng": b[1] if b else None,
+        })
+        if len(out) >= limit:
+            break
+    return {"total": len(out), "connections": out}
+
+
+@router.get("/coverage")
+def district_coverage(
+    conn: sqlite3.Connection = Depends(db.get_conn),
+    status: str | None = Query(None, pattern="^(no data|thin|covered)$"),
+    division: str | None = None,
+) -> dict:
+    """All 64 districts with how much data each has: the engine's blind spots."""
+    where, params = [], []
+    if status:
+        where.append("status = ?")
+        params.append(status)
+    if division:
+        where.append("LOWER(division) = LOWER(?)")
+        params.append(division)
+    clause = (" WHERE " + " AND ".join(where)) if where else ""
+    rows = db.rows(
+        conn,
+        "SELECT district, division, places, reviews, recent_reviews, bangla_share, mentions, "
+        f"gem_candidates, status, place_names FROM district_coverage{clause} "
+        "ORDER BY CASE status WHEN 'no data' THEN 0 WHEN 'thin' THEN 1 ELSE 2 END, reviews, division, district",
+        params,
+    )
+    for row in rows:
+        row["place_names"] = [p for p in str(row["place_names"] or "").split("|") if p]
+    summary = {s: db.scalar(conn, "SELECT COUNT(*) FROM district_coverage WHERE status = ?", [s]) or 0
+               for s in ("no data", "thin", "covered")}
+    by_division = db.rows(
+        conn,
+        "SELECT division, COUNT(*) AS districts, "
+        "SUM(status = 'no data') AS no_data, SUM(status = 'thin') AS thin, "
+        "SUM(status = 'covered') AS covered, SUM(reviews) AS reviews "
+        "FROM district_coverage GROUP BY division ORDER BY no_data DESC, division",
+    )
+    return {"total": len(rows), "summary": summary, "by_division": by_division, "districts": rows}
+
+
 @router.get("/gems/{entity_id}")
 def gem_detail(
     entity_id: str,
@@ -257,3 +346,30 @@ def list_local_specialities(
     for row in rows:
         row["places"] = [p for p in str(row["places"] or "").split("|") if p]
     return {"total": len(rows), "specialities": rows}
+
+
+@router.get("/offers/{entity_id}")
+def where_offered(
+    entity_id: str,
+    conn: sqlite3.Connection = Depends(db.get_conn),
+) -> dict:
+    """The places whose reviews mention a food, activity or transport mode, most
+    reviewed first, each with a sentence from one of those reviews."""
+    entity = db.one(conn, "SELECT entity_id, canonical_name, entity_type FROM entities "
+                          "WHERE LOWER(entity_id) = LOWER(?)", [entity_id])
+    if entity is None:
+        raise HTTPException(status_code=404, detail=f"no entity {entity_id!r}")
+    places = db.rows(
+        conn,
+        "SELECT place_name, district, division, n_reviews, last_year, n_recent_reviews, "
+        "       example_sentence, example_year "
+        "FROM place_attributes WHERE LOWER(entity_id) = LOWER(?) "
+        "ORDER BY n_reviews DESC, place_name ASC",
+        [entity_id],
+    )
+    speciality = db.one(conn, "SELECT district, reviews_in_district, reviews_total "
+                              "FROM local_specialities WHERE LOWER(entity_id) = LOWER(?)", [entity_id])
+    spellings = [r["surface"] for r in db.rows(
+        conn, "SELECT surface FROM entity_variants WHERE LOWER(entity_id) = LOWER(?) "
+              "ORDER BY mentions DESC", [entity_id])]
+    return {**entity, "spellings": spellings, "local_speciality": speciality, "places": places}

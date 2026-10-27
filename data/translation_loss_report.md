@@ -5,14 +5,14 @@ translation of the same review. The sample is every review Google Maps returned
 in both versions, so nothing else differs.
 
 - Bangla-script reviews compared: **285**
-- Of the places, foods, activities and transport named in the original, the translation still names **50%** (95% interval 40%–60%, bootstrap over reviews)
-- Even if every respelled name were recovered by fuzzy matching, at most **75%** would survive
-- Places alone: **24 of 53** survive (45%)
+- Of the places, foods, activities and transport named in the original, the translation still names **69%** (95% interval 60%–77%, bootstrap over reviews)
+- Even if every respelled name were recovered by fuzzy matching, at most **83%** would survive
+- Places alone: **58 of 84** survive (69%)
 - Banglish reviews: **10**; Google kept the meaning of **0 of 10** judged
 
 | type | in original | in translation | kept | lost | only in translation | retention (95% CI) |
 | --- | --- | --- | --- | --- | --- | --- |
-| PLACE | 53 | 73 | 24 | 29 | 49 | 45% (33%–58%) |
+| PLACE | 84 | 73 | 58 | 26 | 15 | 69% (59%–78%) |
 | FOOD | 1 | 1 | 0 | 1 | 1 | 0% (0%–0%) |
 | ACTIVITY | 9 | 10 | 7 | 2 | 3 | 78% (44%–100%) |
 | ACCESS | 5 | 4 | 3 | 2 | 1 | 60% (20%–100%) |
@@ -24,10 +24,10 @@ known they already are (gazetteer visibility, V0 = on no map, V3 = famous).
 
 | | little known (V0-V1) | known (V2-V3) | share little known |
 | --- | --- | --- | --- |
-| lost in translation | 9 | 16 | 36% |
-| missing from our Bangla lists | 6 | 26 | 19% |
+| lost in translation | 9 | 13 | 41% |
+| missing from our Bangla lists | 0 | 8 | 0% |
 
-Fisher exact test, two-sided: p = 0.225. At this sample size the difference could be chance; it is a direction to test on more data, not a result.
+Fisher exact test, two-sided: p = 0.067. At this sample size the difference could be chance; it is a direction to test on more data, not a result.
 
 ## Lost in translation
 
@@ -48,7 +48,6 @@ Fisher exact test, two-sided: p = 0.225. At this sample size the difference coul
 | china matir pahar | translated_or_dropped | … গিয়েছিলাম। এটি বাংলাদেশের একমাত্র চিনা মাটির পাহাড়। ভালোই লেগেছে। | I went for a walk. This is the only Chinese clay hill in Bangladesh. I… |
 | bijoypur pahar | translated_or_dropped | বিজয়পুর পাহাড়ের সেরা ভিউ এইটি ♥ | This is the best view of Vijaypur hills ♥ |
 | shreepur tea garden | respelled | শ্রীপুর টি গার্ডেনের এই পয়েন্ট বৃষ্টিকালিন সময়ে এক অপরূপ সৌন্দর্য ধারন… | This point in Sreepur Tea Garden has a unique beauty during the rainy … |
-| sreemangal | respelled | …শিল্প বিস্তারের অংশ হিসেবে সিলেট ও শ্রীমঙ্গল অঞ্চলে বড় আকারে চা–বাগান … | The largest tea estate in Bangladesh is Finlay Tea Estate. Finlay Tea … |
 | finlay tea estate | respelled | …র্বোচ্চ চা উৎপাদনকারী প্রতিষ্ঠান " ফিনলে টি এস্টেট" । এদের প্রায় ১৭ টি… | The highest tea producing company in Bangladesh is "Finley Tea Estate"… |
 
 ## Found only in the translation — gaps in our own Bangla lists
@@ -59,23 +58,15 @@ yet. Each is a candidate to add.
 
 | concept | type | reviews |
 | --- | --- | --- |
-| sundarbans | PLACE | 11 |
-| kuakata | PLACE | 6 |
-| shashi lodge | PLACE | 6 |
-| jaflong | PLACE | 4 |
-| khagrachari | PLACE | 4 |
 | ali amjad's clock | PLACE | 4 |
-| srimangal | PLACE | 3 |
-| mongla | PLACE | 2 |
-| mini bangladesh | PLACE | 2 |
-| mahasthangarh | PLACE | 2 |
+| khagrachari | PLACE | 4 |
+| kuakata | PLACE | 3 |
 | kuakata sea beach | PLACE | 2 |
-| cng auto-rickshaw | ACCESS | 1 |
 | banana | FOOD | 1 |
+| cng auto-rickshaw | ACCESS | 1 |
 | cycling | ACTIVITY | 1 |
-| cox's bazar | PLACE | 1 |
 | mahasthan archaeological museum | PLACE | 1 |
-| new zealand para | PLACE | 1 |
+| mahasthangarh | PLACE | 1 |
 | speedboat ride | ACTIVITY | 1 |
 | trekking and hiking | ACTIVITY | 1 |
 

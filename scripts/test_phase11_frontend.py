@@ -276,6 +276,31 @@ def test_place_cards() -> None:
         check("every speciality chip opens a card that names the speciality", True)
 
 
+def test_connections_and_coverage() -> None:
+    print("\nfrontend — connections and blind spots")
+    check("the map can draw links", 'id="mapShowLinks"' in HTML and "LINK_LAYER" in HTML)
+    check("the map tab has the blind-spot panel", 'id="coverageBox"' in HTML)
+    check("tab links ignore case (#Map works)", "toLowerCase()" in HTML.split("function showTabFromHash")[1][:300])
+    check("every searchable kind the API returns is handled by the page",
+          all(f"{k}:" in HTML.split("const SEARCH_ACTIONS")[1][:400] for k in ("place", "review", "food", "gem")))
+    check("search results reach onclick through data attributes", "openSearchHit(this.dataset)" in HTML)
+    check("matched words are highlighted", "function highlight(" in HTML and "<mark>" in HTML)
+    hit = next(h for h in client.get("/api/search?q=bamboo chicken").json() if h["kind"] == "review")
+    check("a review hit carries the place the page opens", hit.get("place"), str(hit))
+    offers = client.get(f"/api/offers/{next(h for h in client.get('/api/search?q=kulfi').json() if h['kind'] == 'food')['id']}").json()
+    for field in ("canonical_name", "spellings", "local_speciality", "places"):
+        check(f"where-to-find has {field}", field in offers, str(sorted(offers)))
+    link = client.get("/api/gems/connections?lesser_known_only=true").json()["connections"][0]
+    for field in ("place_a", "place_b", "n_reviews", "example_sentence", "lesser_known_visibility",
+                  "a_lat", "a_lng", "b_lat", "b_lng"):
+        check(f"map link has {field}", field in link, str(sorted(link)))
+    cov = client.get("/api/coverage").json()
+    for field in ("summary", "by_division", "districts"):
+        check(f"coverage has {field}", field in cov, str(sorted(cov)))
+    for field in ("district", "status", "reviews", "places", "place_names"):
+        check(f"coverage district has {field}", field in cov["districts"][0], "missing")
+
+
 def main() -> None:
     print("Phase 11 — frontend/API contract tests")
     health = client.get("/health").json()
@@ -290,6 +315,7 @@ def main() -> None:
     test_render_contracts()
     test_gem_map()
     test_place_cards()
+    test_connections_and_coverage()
 
     print(f"\n{len(PASSED)} passed, {len(FAILED)} failed")
     if FAILED:

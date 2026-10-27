@@ -1,6 +1,7 @@
 entity_id,name,district,division,reviews_in_district,reviews_total,share,places,example_sentence
 E0477,Guava,Jhalokati,Barishal,80,94,0.851,Bhimruli Floating Guava Market,"Vimruli Vashoman Peyara Bazar, located in Barishal, is a unique floating guava market that thrives on the water."
 E0520,Seafood,Cox's Bazar,Chattogram,68,101,0.673,Sugondha Sea Beach|Kolatoli Beach|Cox's Bazar Beach|Saint Martin's Island West Beach|Laboni Point Sea Beach|Saint Martins Island|Himchari Fountain and Hill,"It offers golden sands, clear water, and fun activities like horse rides, jet-skiing, and great seafood from beach stalls."
+E0502,Green coconut (dab),Cox's Bazar,Chattogram,18,30,0.6,Laboni Point Sea Beach|Saint Martin's Island West Beach|Sugondha Sea Beach|Kolatoli Beach,"You'll find everything here: · Food: Fresh coconuts, fuchka, grilled corn, and seafood shacks are everywhere."
 E0484,Bamboo chicken,Rangamati,Chattogram,12,13,0.923,Sajek Valley,"Local dishes like bamboo chicken and traditional hill food are popular, though prices are slightly higher than usual."
 E0523,Dried fish (shutki),Cox's Bazar,Chattogram,12,17,0.706,Sugondha Sea Beach|Kolatoli Beach|Laboni Point Sea Beach|Saint Martin's Island West Beach|Saint Martins Island,"​The Burmese Market: Just a short walk away, you can find local pearls, hand-woven fabrics, and unique dried fish (shutki)."
 E0481,Kulfi,Kushtia,Khulna,10,10,1.0,Shilaidaha Rabindra Kuthibari,"Ate Kushtia's famous Kulfi Malai here, which in one word is amazing to eat, incomparable taste."

@@ -1,33 +1,33 @@
 {
   "extractor": "gazetteer",
   "n_reviews": 14841,
-  "n_mentions": 6938,
-  "reviews_with_a_mention": 3415,
+  "n_mentions": 7509,
+  "reviews_with_a_mention": 3597,
   "by_entity_type": {
     "ACCESS": 562,
-    "ACTIVITY": 2037,
-    "FOOD": 918,
-    "PLACE": 3131,
+    "ACTIVITY": 2040,
+    "FOOD": 919,
+    "PLACE": 3698,
     "TIP": 290
   },
-  "distinct_surfaces": 713,
+  "distinct_surfaces": 725,
   "grounding": {
-    "candidates": 6938,
-    "kept": 6938,
+    "candidates": 7509,
+    "kept": 7509,
     "dropped": 0,
     "drop_rate": 0.0,
     "by_match_kind": {
-      "exact": 6938
+      "exact": 7509
     },
     "dropped_reasons": {},
     "dropped_examples": []
   },
   "notes": [
     "gazetteer of 178 known names (corpus + geography + 3.1 anchors)",
-    "134 reviewed Bangla spelling(s) of those names (place_names_bn.csv)",
+    "153 reviewed Bangla spelling(s) of those names (place_names_bn.csv)",
     "157 reviewed food / activity / transport spelling(s) (food_activity_lexicon.csv)"
   ],
-  "bangla_script_mentions": 2178,
+  "bangla_script_mentions": 2749,
   "concepts": [
     {
       "entity_type": "FOOD",
@@ -74,8 +74,8 @@
     {
       "entity_type": "FOOD",
       "concept": "Green coconut (dab)",
-      "reviews": 29,
-      "mentions": 41,
+      "reviews": 30,
+      "mentions": 42,
       "spellings": "coconut water, fresh coconut, green coconut, ডাব"
     },
     {
@@ -361,8 +361,8 @@
     {
       "entity_type": "ACTIVITY",
       "concept": "Boat ride",
-      "reviews": 352,
-      "mentions": 403,
+      "reviews": 353,
+      "mentions": 404,
       "spellings": "boat ride, boat trip, boating, নৌকা ভ্রমণ, নৌকা ভ্রমন, নৌকাভ্রমণ"
     },
     {
@@ -383,7 +383,7 @@
       "entity_type": "ACTIVITY",
       "concept": "Kayaking",
       "reviews": 82,
-      "mentions": 109,
+      "mentions": 110,
       "spellings": "kayak, kayaking, কায়াক, কায়াকিং"
     },
     {
@@ -459,8 +459,8 @@
     {
       "entity_type": "ACTIVITY",
       "concept": "Cable car",
-      "reviews": 8,
-      "mentions": 8,
+      "reviews": 9,
+      "mentions": 9,
       "spellings": "cable car, ক্যাবল কার"
     },
     {

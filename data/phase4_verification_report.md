@@ -40,18 +40,18 @@ cannot be audited.
 | Pashur | 0.75 | V1 | 10 | Chattogram|Khulna |
 | Fatrar Chor | 0.69 | V0 | 3 | Barishal |
 | Nilgiri | 0.68 | V2 | 10 | Chattogram |
+| Mongla | 0.68 | V2 | 52 | Khulna |
 | Lalakhal | 0.68 | V2 | 38 | Sylhet |
-| Mongla | 0.67 | V2 | 30 | Khulna |
+| Mahasthangarh | 0.66 | V2 | 51 | Rajshahi |
 | Sitakunda | 0.66 | V2 | 106 | Chattogram|Sylhet |
-| Mahasthangarh | 0.65 | V2 | 36 | Rajshahi |
 | Kaptai | 0.65 | V2 | 19 | Chattogram|Sylhet |
 | Muradpur | 0.64 | V2 | 24 | Chattogram |
 | Sada Matir Pahar | 0.63 | V1 | 4 | Mymensingh |
+| Shashi Lodge | 0.63 | V1 | 5 | Mymensingh |
 | Ahsan Manzil | 0.62 | V3 | 10 | Chattogram|Dhaka|Rangpur |
-| Shashi Lodge | 0.61 | V1 | 4 | Mymensingh |
-| Sundarbans | 0.60 | V3 | 33 | Barishal|Chattogram|Khulna|Mymensingh|Sylhet |
+| Sundarbans | 0.60 | V3 | 87 | Barishal|Chattogram|Khulna|Mymensingh|Rangpur|Sylhet |
 | Padma | 0.59 | V3 | 206 | Barishal|Chattogram|Khulna|Rajshahi|Sylhet |
 | Kolatoli Beach | 0.59 | V3 | 11 | Chattogram |
 | China Matir Pahar | 0.59 | V2 | 8 | Mymensingh |
-| Sonargaon | 0.59 | V3 | 50 | Dhaka |
+| Jaflong | 0.59 | V3 | 45 | Mymensingh|Sylhet |
 

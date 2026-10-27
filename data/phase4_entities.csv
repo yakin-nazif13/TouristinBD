@@ -1,37 +1,38 @@
 entity_id,canonical_name,entity_type,n_variants,n_mentions,n_reviews,districts,divisions,languages
 E0003,Bandarban,PLACE,5,664,365,Bandarban|Chattogram|Cox's Bazar|Khagrachari|Moulvibazar|Rangamati,Chattogram|Sylhet,bn|bn-latn|en|mixed|other
+E0012,Cox's Bazar,PLACE,8,593,343,Bagerhat|Bandarban|Chattogram|Cox's Bazar|Moulvibazar|Naogaon|Netrokona|Noakhali|Patuakhali|Rajshahi|Rangamati,Barishal|Chattogram|Khulna|Mymensingh|Rajshahi|Sylhet,bn|en|mixed
 E0517,Picnic,ACTIVITY,4,514,430,Bagerhat|Bandarban|Barishal|Bogura|Chapainawabganj|Chattogram|Cox's Bazar|Cumilla|Dhaka|Dinajpur|Gazipur|Jashore|Jhalokati|Khagrachari|Khulna|Kushtia|Manikganj|Meherpur|Moulvibazar|Mymensingh|Naogaon|Narayanganj|Natore|Netrokona|Rajshahi|Rangamati|Rangpur|Sylhet,Barishal|Chattogram|Dhaka|Khulna|Mymensingh|Rajshahi|Rangpur|Sylhet,bn|bn-latn|en|mixed
 E0503,Trekking and hiking,ACTIVITY,10,459,309,Bagerhat|Bandarban|Chattogram|Cox's Bazar|Dhaka|Dinajpur|Gazipur|Khagrachari|Khulna|Moulvibazar|Naogaon|Netrokona|Patuakhali|Rajshahi|Rangamati|Sylhet,Barishal|Chattogram|Dhaka|Khulna|Mymensingh|Rajshahi|Rangpur|Sylhet,bn|en|mixed
-E0490,Boat ride,ACTIVITY,11,403,352,Bagerhat|Bandarban|Barishal|Chattogram|Cox's Bazar|Dhaka|Dinajpur|Gazipur|Jashore|Jhalokati|Khagrachari|Khulna|Mymensingh|Narayanganj|Netrokona|Noakhali|Patuakhali|Pirojpur|Rajshahi|Rangamati|Rangpur|Sunamganj|Sylhet,Barishal|Chattogram|Dhaka|Khulna|Mymensingh|Rajshahi|Rangpur|Sylhet,bn|bn-latn|en|mixed
+E0490,Boat ride,ACTIVITY,11,404,353,Bagerhat|Bandarban|Barishal|Chattogram|Cox's Bazar|Dhaka|Dinajpur|Gazipur|Jashore|Jhalokati|Khagrachari|Khulna|Mymensingh|Narayanganj|Netrokona|Noakhali|Patuakhali|Pirojpur|Rajshahi|Rangamati|Rangpur|Sunamganj|Sylhet,Barishal|Chattogram|Dhaka|Khulna|Mymensingh|Rajshahi|Rangpur|Sylhet,bn|bn-latn|en|mixed
 E0137,Padma,PLACE,4,322,206,Bagerhat|Cox's Bazar|Jhalokati|Khulna|Kushtia|Patuakhali|Rajshahi|Sunamganj,Barishal|Chattogram|Khulna|Rajshahi|Sylhet,bn|en|mixed
 E0495,CNG auto-rickshaw,ACCESS,3,294,223,Bagerhat|Bandarban|Barishal|Bogura|Chapainawabganj|Chattogram|Cox's Bazar|Cumilla|Dhaka|Dinajpur|Khagrachari|Kushtia|Manikganj|Meherpur|Moulvibazar|Naogaon|Narayanganj|Netrokona|Noakhali|Rajshahi|Rangamati|Rangpur|Sunamganj|Sylhet,Barishal|Chattogram|Dhaka|Khulna|Mymensingh|Rajshahi|Rangpur|Sylhet,bn|en|mixed
-E0012,Cox's Bazar,PLACE,7,282,181,Bandarban|Chattogram|Cox's Bazar|Moulvibazar|Netrokona|Noakhali|Patuakhali,Barishal|Chattogram|Mymensingh|Sylhet,bn|en|mixed
 E0477,Guava,FOOD,4,249,94,Chattogram|Dhaka|Jhalokati|Khagrachari|Rajshahi,Barishal|Chattogram|Dhaka|Rajshahi,bn|en|mixed
 E0044,Sitakunda,PLACE,7,238,106,Chattogram|Moulvibazar|Sylhet,Chattogram|Sylhet,bn|en|mixed
 E0002,Bagerhat,PLACE,2,219,132,Bagerhat|Bandarban|Chapainawabganj|Khulna,Chattogram|Khulna|Rajshahi,bn|en|mixed
 E0048,Sreemangal,PLACE,6,177,101,Moulvibazar|Patuakhali|Sunamganj,Barishal|Sylhet,bn|en|mixed
 E0526,Swimming,ACTIVITY,3,166,151,Bagerhat|Bandarban|Barishal|Chattogram|Cox's Bazar|Dhaka|Dinajpur|Khagrachari|Khulna|Kushtia|Moulvibazar|Natore|Netrokona|Noakhali|Patuakhali|Rajshahi|Rangamati|Rangpur|Sunamganj|Sylhet,Barishal|Chattogram|Dhaka|Khulna|Mymensingh|Rajshahi|Rangpur|Sylhet,bn|en|mixed
+E0037,Rangamati,PLACE,6,159,87,Bandarban|Chattogram|Moulvibazar|Rangamati,Chattogram|Sylhet,bn|en|mixed|other
 E0111,Khagrachari,PLACE,6,155,79,Bandarban|Chattogram|Khagrachari|Rangamati,Chattogram,bn|en|mixed
-E0509,Kayaking,ACTIVITY,6,109,82,Bandarban|Barishal|Chattogram|Netrokona|Rangamati|Sylhet,Barishal|Chattogram|Mymensingh|Sylhet,bn|en
+E0050,Sundarbans,PLACE,3,116,87,Bagerhat|Chattogram|Jhalokati|Khulna|Kushtia|Moulvibazar|Netrokona|Noakhali|Patuakhali|Rangpur|Sunamganj|Sylhet,Barishal|Chattogram|Khulna|Mymensingh|Rangpur|Sylhet,bn|en|mixed
+E0219,Mahasthangarh,PLACE,5,111,51,Bogura|Naogaon|Rajshahi,Rajshahi,bn|en|mixed
+E0509,Kayaking,ACTIVITY,6,110,82,Bandarban|Barishal|Chattogram|Netrokona|Rangamati|Sylhet,Barishal|Chattogram|Mymensingh|Sylhet,bn|en
 E0520,Seafood,FOOD,7,106,101,Chattogram|Cox's Bazar|Patuakhali|Rajshahi,Barishal|Chattogram|Rajshahi,bn|en|mixed
-E0037,Rangamati,PLACE,4,104,75,Bandarban|Chattogram|Moulvibazar|Rangamati,Chattogram|Sylhet,bn|en|mixed|other
 E0218,Lalakhal,PLACE,3,101,38,Moulvibazar|Sylhet,Sylhet,bn|en
 E0047,Sonargaon,PLACE,1,92,50,Narayanganj,Dhaka,en|mixed
 E0211,Durgapur,PLACE,4,88,63,Chattogram|Netrokona,Chattogram|Mymensingh,bn|en|mixed
 E0528,Engine boat (trawler),ACCESS,5,86,56,Bagerhat|Bandarban|Chattogram|Cox's Bazar|Dinajpur|Jhalokati|Khulna|Moulvibazar|Noakhali|Patuakhali|Pirojpur|Rajshahi|Rangamati|Sunamganj|Sylhet,Barishal|Chattogram|Khulna|Rajshahi|Rangpur|Sylhet,bn|en
-E0219,Mahasthangarh,PLACE,2,80,36,Bogura|Rajshahi,Rajshahi,bn|en|mixed
+E0031,Mongla,PLACE,4,79,52,Bagerhat|Khulna,Khulna,bn|en|mixed
 E0524,Speedboat ride,ACTIVITY,6,78,70,Bagerhat|Chattogram|Cox's Bazar|Dhaka|Dinajpur|Kushtia|Patuakhali|Rajshahi|Rangamati|Rangpur|Sunamganj|Sylhet,Barishal|Chattogram|Dhaka|Khulna|Rajshahi|Rangpur|Sylhet,bn|en|mixed
 E0483,Street food,FOOD,4,70,66,Chattogram|Cox's Bazar|Cumilla|Dhaka|Dinajpur|Mymensingh|Rajshahi|Sylhet,Chattogram|Dhaka|Mymensingh|Rajshahi|Rangpur|Sylhet,en
 E0087,Bichnakandi Tourist Spot,PLACE,4,67,29,Moulvibazar|Sylhet,Sylhet,bn|en|mixed|other
+E0024,Jaflong,PLACE,4,63,45,Moulvibazar|Netrokona|Sylhet,Mymensingh|Sylhet,bn|en|mixed
 E0522,Shopping,ACTIVITY,3,60,57,Bandarban|Chattogram|Cox's Bazar|Dhaka|Dinajpur|Khagrachari|Kushtia|Narayanganj|Natore|Netrokona|Patuakhali|Rangpur|Sylhet,Barishal|Chattogram|Dhaka|Khulna|Mymensingh|Rajshahi|Rangpur|Sylhet,bn|en
 E0492,Camping,ACTIVITY,4,59,52,Bandarban|Chattogram|Cox's Bazar|Dinajpur|Jashore|Netrokona|Noakhali|Rangamati|Sunamganj,Chattogram|Khulna|Mymensingh|Rangpur|Sylhet,bn|en|mixed
 E0529,Sunset watching,ACTIVITY,4,50,50,Bagerhat|Bandarban|Barishal|Chattogram|Cox's Bazar|Dinajpur|Patuakhali|Rajshahi|Rangamati,Barishal|Chattogram|Khulna|Rajshahi|Rangpur,bn|en
 E0197,Birisiri,PLACE,5,48,16,Netrokona,Mymensingh,bn|en|mixed
 E0501,Fuchka,FOOD,4,45,42,Chattogram|Cox's Bazar|Dhaka|Dinajpur|Mymensingh|Rajshahi,Chattogram|Dhaka|Mymensingh|Rajshahi|Rangpur,bn|bn-latn|en|mixed
-E0050,Sundarbans,PLACE,2,44,33,Bagerhat|Chattogram|Khulna|Netrokona|Noakhali|Patuakhali|Sunamganj|Sylhet,Barishal|Chattogram|Khulna|Mymensingh|Sylhet,en|mixed
-E0502,Green coconut (dab),FOOD,5,41,29,Bandarban|Chattogram|Cox's Bazar|Dhaka|Khagrachari|Kushtia|Narayanganj|Patuakhali,Barishal|Chattogram|Dhaka|Khulna,bn|en|mixed
+E0502,Green coconut (dab),FOOD,5,42,30,Bandarban|Chattogram|Cox's Bazar|Dhaka|Khagrachari|Kushtia|Narayanganj|Patuakhali,Barishal|Chattogram|Dhaka|Khulna,bn|en|mixed
 E0541,Launch,ACCESS,2,41,20,Bagerhat|Barishal|Cox's Bazar|Jhalokati|Khulna|Noakhali|Patuakhali|Pirojpur|Rangpur,Barishal|Chattogram|Khulna|Rangpur,bn|en
-E0031,Mongla,PLACE,2,39,30,Bagerhat|Khulna,Khulna,en|mixed
 E0505,Horse riding,ACTIVITY,4,39,38,Chattogram|Cox's Bazar|Gazipur|Khagrachari|Natore|Patuakhali|Sylhet,Barishal|Chattogram|Dhaka|Rajshahi|Sylhet,en|mixed
 E0493,Chander gari (jeep),ACCESS,5,37,31,Bandarban|Cox's Bazar|Khagrachari|Moulvibazar|Noakhali|Rangamati,Chattogram|Sylhet,bn|en|mixed
 E0487,Barbecue,FOOD,5,33,31,Bandarban|Chattogram|Cox's Bazar|Netrokona|Patuakhali|Rangamati|Rangpur|Sunamganj,Barishal|Chattogram|Mymensingh|Rangpur|Sylhet,bn|en|mixed
@@ -44,7 +45,6 @@ E0494,Chotpoti,FOOD,3,30,28,Chattogram|Cox's Bazar|Dinajpur|Jhalokati|Mymensingh
 E0073,Muradpur,PLACE,3,28,24,Chattogram,Chattogram,bn|en
 E0042,Sardar Bari,PLACE,5,27,20,Narayanganj,Dhaka,bn|en
 E0221,Paharpur,PLACE,2,25,20,Bogura|Chattogram|Cumilla|Rajshahi,Chattogram|Rajshahi,bn|en|mixed
-E0024,Jaflong,PLACE,3,24,21,Moulvibazar|Netrokona|Sylhet,Mymensingh|Sylhet,en|mixed
 E0110,Kantajew Temple,PLACE,3,24,19,Chattogram|Dinajpur|Rajshahi,Chattogram|Rajshahi|Rangpur,bn|en|mixed
 E0500,Fried fish,FOOD,5,23,22,Chattogram|Cox's Bazar|Patuakhali|Rajshahi,Barishal|Chattogram|Rajshahi,bn|en|mixed
 E0523,Dried fish (shutki),FOOD,5,23,17,Chattogram|Cox's Bazar|Patuakhali,Barishal|Chattogram,bn|en
@@ -52,7 +52,9 @@ E0016,Gangamati,PLACE,3,20,12,Bagerhat|Patuakhali,Barishal|Khulna,bn|en
 E0025,Kaptai,PLACE,6,20,19,Bandarban|Chattogram|Rangamati|Sunamganj,Chattogram|Sylhet,bn|en|other
 E0506,Jackfruit,FOOD,2,20,16,Barishal|Chattogram|Gazipur|Khagrachari|Kushtia|Moulvibazar|Rangpur|Sylhet,Barishal|Chattogram|Dhaka|Khulna|Rangpur|Sylhet,bn|en|mixed
 E0081,Alutila,PLACE,5,19,14,Khagrachari|Rangamati,Chattogram,bn|en
+E0115,Kuakata,PLACE,4,19,6,Bagerhat|Chattogram|Cox's Bazar|Patuakhali,Barishal|Chattogram|Khulna,bn|en
 E0488,Cycling,ACTIVITY,2,17,17,Chattogram|Cox's Bazar|Dhaka|Dinajpur|Gazipur,Chattogram|Dhaka|Rangpur,en
+E0148,Shashi Lodge,PLACE,3,16,5,Mymensingh,Mymensingh,bn|en
 E0486,Banana,FOOD,1,15,14,Bagerhat|Bandarban|Chattogram|Cox's Bazar|Gazipur|Jhalokati|Khagrachari|Kushtia|Moulvibazar|Rangamati,Barishal|Chattogram|Dhaka|Khulna|Sylhet,en|mixed
 E0484,Bamboo chicken,FOOD,5,14,13,Bandarban|Rangamati,Chattogram,bn|en
 E0515,Parasailing,ACTIVITY,3,14,14,Cox's Bazar|Patuakhali,Barishal|Chattogram,bn|en
@@ -60,7 +62,6 @@ E0519,Shrimp,FOOD,3,14,14,Chattogram|Cox's Bazar|Jhalokati|Noakhali|Patuakhali|S
 E0530,Coffee,FOOD,1,14,12,Bandarban|Chattogram|Cox's Bazar|Dhaka|Natore|Rangpur,Chattogram|Dhaka|Rajshahi|Rangpur,bn
 E0033,Nilgiri,PLACE,3,13,10,Bandarban|Chattogram|Khagrachari,Chattogram,bn|en|mixed
 E0113,Kolatoli Beach,PLACE,6,13,11,Cox's Bazar,Chattogram,bn|en
-E0148,Shashi Lodge,PLACE,2,13,4,Mymensingh,Mymensingh,bn|en
 E0475,Biryani,FOOD,5,13,11,Bandarban|Cumilla|Dhaka|Jhalokati|Mymensingh|Narayanganj|Natore|Rangamati|Sylhet,Barishal|Chattogram|Dhaka|Mymensingh|Rajshahi|Sylhet,bn|en
 E0001,Ahsan Manzil,PLACE,3,12,10,Chattogram|Dhaka|Rangpur,Chattogram|Dhaka|Rangpur,bn|en
 E0512,Lobster,FOOD,3,12,11,Chattogram|Cox's Bazar|Patuakhali|Rajshahi,Barishal|Chattogram|Rajshahi,bn|en
@@ -75,10 +76,10 @@ E0504,Hilsa (ilish),FOOD,2,10,6,Cox's Bazar|Dhaka|Noakhali|Patuakhali,Barishal|C
 E0020,Guliakhali Sea Beach,PLACE,4,9,7,Chattogram,Chattogram,bn|en|mixed
 E0091,China Matir Pahar,PLACE,4,9,8,Netrokona,Mymensingh,bn|en
 E0476,Crab fry,FOOD,5,9,9,Chattogram|Cox's Bazar|Patuakhali|Rajshahi,Barishal|Chattogram|Rajshahi,bn|en
+E0491,Cable car,ACTIVITY,2,9,9,Dinajpur|Rangpur,Rangpur,bn|en|mixed
 E0518,Pineapple,FOOD,2,9,9,Bandarban|Moulvibazar|Rangamati,Chattogram|Sylhet,bn|en
 E0009,Chandranath,PLACE,3,8,8,Chattogram,Chattogram,bn|en
 E0035,Panam City,PLACE,3,8,8,Narayanganj,Dhaka,bn|en
-E0491,Cable car,ACTIVITY,2,8,8,Dinajpur|Rangpur,Rangpur,bn|en|mixed
 E0507,Jet ski,ACTIVITY,2,8,8,Cox's Bazar|Patuakhali,Barishal|Chattogram,bn|en
 E0496,Roasted corn,FOOD,2,7,5,Bandarban|Cox's Bazar|Khagrachari|Rajshahi,Chattogram|Rajshahi,bn|en
 E0062,best time to visit this place,TIP,1,6,6,Cumilla|Khagrachari|Naogaon|Netrokona|Noakhali|Sylhet,Chattogram|Mymensingh|Rajshahi|Sylhet,en
@@ -104,7 +105,6 @@ E0007,carry water,TIP,2,3,3,Chattogram|Narayanganj,Chattogram|Dhaka,en
 E0013,Fatrar Chor,PLACE,2,3,3,Patuakhali,Barishal,bn|en
 E0017,go early,TIP,2,3,3,Chattogram|Cox's Bazar|Moulvibazar,Chattogram|Sylhet,en
 E0032,Nilachal,PLACE,3,3,3,Bandarban|Manikganj,Chattogram|Dhaka,bn|en
-E0115,Kuakata Sea Beach,PLACE,3,3,3,Chattogram|Cox's Bazar|Patuakhali,Barishal|Chattogram,en
 E0159,Tanguar Haor,PLACE,3,3,1,Moulvibazar|Sunamganj,Sylhet,bn
 E0214,Hiron Point,PLACE,3,3,3,Khulna,Khulna,bn-latn|en
 E0216,Karamjal,PLACE,2,3,3,Khulna,Khulna,bn|en

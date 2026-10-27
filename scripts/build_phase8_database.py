@@ -38,7 +38,8 @@ OUT_REPORT_JSON = DATA_DIR / "phase8_build_report.json"
 # Bumped when the DB schema changes so the API can refuse a stale database.
 # 2 adds the Phase 4 entity layer: mentions, entities and entity_variants.
 # 3 adds the gem register (gems, place_attributes, local_specialities), place
-# coordinates and the evidence-freshness views.
+# coordinates and the evidence-freshness views; place_connections and
+# district_coverage are additive tables within it.
 # backend/db.py's EXPECTED_SCHEMA_VERSION must be bumped with it, or the API
 # refuses to serve a database it does not understand — which is the intended
 # behaviour, not something to work around.
@@ -74,6 +75,8 @@ INPUTS = {
     "phase4_verification_queue": DATA_DIR / "phase4_verification_queue.csv",
     "phase4_place_attributes": DATA_DIR / "phase4_place_attributes.csv",
     "phase4_local_specialities": DATA_DIR / "phase4_local_specialities.csv",
+    "phase4_place_connections": DATA_DIR / "phase4_place_connections.csv",
+    "coverage_by_district": DATA_DIR / "coverage_by_district.csv",
     "phase6_metrics": DATA_DIR / "phase6_sensitivity_metrics.csv",
     "phase6_mappings": DATA_DIR / "phase6_sensitivity_mappings.csv",
     "phase7_statistical_tests": DATA_DIR / "phase7_statistical_tests.json",
@@ -454,6 +457,32 @@ CREATE TABLE place_attributes (
 );
 
 CREATE INDEX idx_attributes_place ON place_attributes(place_name);
+
+-- Places talked about together: one inside a review of the other, or both in
+-- one review. Each link carries a real sentence.
+CREATE TABLE place_connections (
+    place_a            TEXT,
+    place_b            TEXT,
+    n_reviews          INTEGER,
+    n_found_in         INTEGER,
+    n_together         INTEGER,
+    example_review_id  TEXT,
+    example_sentence   TEXT
+);
+
+-- All 64 districts, including those with no reviewed place: the blind spots.
+CREATE TABLE district_coverage (
+    district           TEXT PRIMARY KEY,
+    division           TEXT,
+    places             INTEGER,
+    reviews            INTEGER,
+    recent_reviews     INTEGER,
+    bangla_share       REAL,
+    mentions           INTEGER,
+    gem_candidates     INTEGER,
+    status             TEXT,           -- no data | thin | covered
+    place_names        TEXT
+);
 
 CREATE TABLE local_specialities (
     entity_id           TEXT,
@@ -1436,6 +1465,18 @@ def main() -> None:
          "share", "places", "example_sentence"],
         "phase4_local_specialities.csv", notes,
     )
+    place_connections = build_simple(
+        load_csv("phase4_place_connections", notes),
+        ["place_a", "place_b", "n_reviews", "n_found_in", "n_together", "example_review_id",
+         "example_sentence"],
+        "phase4_place_connections.csv", notes,
+    )
+    district_coverage = build_simple(
+        load_csv("coverage_by_district", notes),
+        ["district", "division", "places", "reviews", "recent_reviews", "bangla_share", "mentions",
+         "gem_candidates", "status", "place_names"],
+        "coverage_by_district.csv", notes,
+    )
     gem_report = load_json("phase4_gem_score_report", notes) or {}
     # Small research results travel in metadata, like the Phase 7 tests: they
     # are one document each, not tables anyone queries.
@@ -1474,6 +1515,8 @@ def main() -> None:
             "gems": write_table(conn, "gems", gems),
             "place_attributes": write_table(conn, "place_attributes", place_attributes),
             "local_specialities": write_table(conn, "local_specialities", local_specialities),
+            "place_connections": write_table(conn, "place_connections", place_connections),
+            "district_coverage": write_table(conn, "district_coverage", district_coverage),
         }
 
         meta_rows = [

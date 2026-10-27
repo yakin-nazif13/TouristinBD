@@ -3,15 +3,15 @@
   "n_banglish_pairs": 10,
   "by_type": {
     "PLACE": {
-      "in_original": 53,
+      "in_original": 84,
       "in_translation": 73,
-      "kept": 24,
-      "lost": 29,
-      "only_in_translation": 49,
-      "retention": 0.4528301886792453,
+      "kept": 58,
+      "lost": 26,
+      "only_in_translation": 15,
+      "retention": 0.6904761904761905,
       "retention_95ci": [
-        0.3269230769230769,
-        0.5769230769230769
+        0.5903614457831325,
+        0.782051282051282
       ]
     },
     "FOOD": {
@@ -51,45 +51,44 @@
       ]
     }
   },
-  "overall_retention": 0.5,
+  "overall_retention": 0.6868686868686869,
   "overall_retention_95ci": [
-    0.4,
-    0.6
+    0.6,
+    0.7692307692307693
   ],
-  "retention_if_respelled_recovered": 0.75,
+  "retention_if_respelled_recovered": 0.8282828282828283,
   "secondary_mentions": {
-    "in_original": 45,
-    "lost": 16,
-    "retention": 0.6444444444444445
+    "in_original": 65,
+    "lost": 13,
+    "retention": 0.8
   },
   "loss_reasons": {
     "lost_translated_or_dropped": 17,
-    "lost_respelled": 17
+    "lost_respelled": 14
   },
   "visibility_contrast": {
     "lost_in_translation": {
       "by_visibility": {
-        "V3": 12,
+        "V3": 9,
         "V1": 9,
         "V2": 4,
         "not checked": 4
       },
       "little_known": 9,
-      "rated": 25,
-      "little_known_share": 0.36
+      "rated": 22,
+      "little_known_share": 0.4090909090909091
     },
     "missing_from_bangla_lists": {
       "by_visibility": {
-        "V3": 22,
-        "not checked": 17,
-        "V1": 6,
-        "V2": 4
+        "not checked": 7,
+        "V3": 7,
+        "V2": 1
       },
-      "little_known": 6,
-      "rated": 32,
-      "little_known_share": 0.1875
+      "little_known": 0,
+      "rated": 8,
+      "little_known_share": 0.0
     },
-    "fisher_p_two_sided": 0.2251534741062669
+    "fisher_p_two_sided": 0.06654365125129742
   },
   "banglish_judgements": {
     "meaning_lost": 8,

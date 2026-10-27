@@ -177,11 +177,12 @@ class Recommendation(BaseModel):
 
 
 class SearchHit(BaseModel):
-    kind: str = Field(description="place | city | preference | topic | review")
+    kind: str = Field(description="place | city | food | activity | transport | gem | preference | topic | review")
     id: str
     label: str
     detail: str | None = None
     score: float | None = None
+    place: str | None = Field(None, description="The place a review or gem hit leads to, when there is one")
 
 
 # --- Phase 10: itinerary builder -------------------------------------------

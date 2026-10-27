@@ -1241,5 +1241,24 @@
     "wikidata_sitelinks": 3,
     "wikidata_matched_form": "Shashi Lodge",
     "wikidata_status": "ok"
+  },
+  "Kuakata": {
+    "name": "Kuakata",
+    "osm_found": true,
+    "osm_display_name": "কুয়াকাটা, কলাপাড়া উপজেলা, পটুয়াখালী জেলা, বরিশাল বিভাগ, 8652, বাংলাদেশ",
+    "osm_category": "place",
+    "osm_type": "town",
+    "osm_importance": 0.16,
+    "lat": 21.8190461,
+    "lng": 90.1203518,
+    "osm_matched_form": "Kuakata",
+    "osm_status": "ok",
+    "wikidata_found": true,
+    "wikidata_qid": "Q6440964",
+    "wikidata_label": "Kuakata",
+    "wikidata_description": "Town in Barisal Division, Bangladesh",
+    "wikidata_sitelinks": 9,
+    "wikidata_matched_form": "Kuakata",
+    "wikidata_status": "ok"
   }
 }

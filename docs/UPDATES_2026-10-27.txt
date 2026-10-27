@@ -283,15 +283,15 @@ translation. This part measures why, on our own data.
    - Program: scripts/translation_loss.py. Full write-up:
      data/translation_loss_report.md. Every pair: data/translation_loss_pairs.csv.
 
-17. Results
-   - Of what the original names, the translation still names 50%
-     (95% interval 40-60%, bootstrap over reviews).
-   - Places: 24 of 53 survive translation (45%).
+17. Results (after the Bangla name list was completed in Part 6)
+   - Of what the original names, the translation still names 69%
+     (95% interval 60-77%, bootstrap over reviews). Nearly a third is lost.
+   - Places: 58 of 84 survive translation (69%).
        কটকা              -> "Katka"           (the map knows it as Kotka)
        সাদা মাটির পাহাড়    -> "the white clay hills"
        বিজয়পুর            -> "Vijaypur"        (the map knows Bijoypur)
        চিনা মাটির পাহাড়    -> "Chinese clay hill"
-   - Even if every respelled name were recovered by fuzzy matching, at most 75%
+   - Even if every respelled name were recovered by fuzzy matching, at most 83%
      would survive. The rest were turned into descriptions or dropped.
    - Banglish: Google kept the meaning of 0 of 10. Examples:
        "sei gorom" ("so hot")                 -> "six o'clock"
@@ -301,18 +301,20 @@ translation. This part measures why, on our own data.
                                                   long time..." (fuchka gone)
      The 10 judgements are in data/banglish_translation_check.csv, each with a
      reason, and can be changed there. (One person's judgement.)
+   - Why the number moved: the first run (50%) was partly measuring gaps in
+     our own Bangla name list. Once সুন্দরবন, কুয়াকাটা, জাফলং and 16 others
+     were added (Part 6), more places were found in the originals and the
+     comparison became fairer. 69% is the better estimate; both are recorded.
 
 18. It cuts both ways, and the report says so
-   - Our Bangla name list still misses 49 place mentions that the translation
-     catches. সুন্দরবন (Sundarbans, 11 times), কুয়াকাটা, জাফলং are not on it
-     yet. That is a gap in our own resources, listed as candidates to add.
-   - Which side misses what: of the places translation lost, 36% were little
-     known (V0-V1); of the places our Bangla list missed, 19%. So translation
-     tends to destroy the local names the gem engine is looking for, while our
-     gaps are mostly famous places that are easy to add.
-   - Honest status: Fisher exact test p = 0.225. On 285 reviews this is a
-     direction, not a proven result. More Bangla data (e.g. YouTube comments)
-     is what would settle it.
+   - Our Bangla name list still misses 15 place mentions that the translation
+     catches (it missed 49 before Part 6). All 15 are well-known places.
+   - Which side misses what: of the places translation lost, 41% were little
+     known (V0-V1); of the places our Bangla list missed, 0%. Translation tends
+     to destroy exactly the local names the gem engine is looking for.
+   - Honest status: Fisher exact test p = 0.066. Close, but not below 0.05 on
+     285 reviews: a strong direction, not yet a proven result. More Bangla
+     data (e.g. YouTube comments) is what would settle it.
 
 19. Where to see it
    - Website: Overview tab, "Lost in translation" panel
@@ -320,7 +322,82 @@ translation. This part measures why, on our own data.
    - API: /api/research/translation-loss.
    - 27 new tests (data pairing, cross-script fairness, the Fisher test checked
      against a textbook value, reproducible bootstrap, recorded judgements never
-     overwritten) plus 4 API checks. 1,470 tests in 25 suites now.
+     overwritten) plus 4 API checks.
+
+
+Part 6 - Places talked about together, blind spots, and more Bangla names
+-------------------------------------------------------------------------
+
+20. More Bangla place names (data/place_names_bn.csv: 134 -> 153 accepted)
+   - The name finder matched by sound, and missed names whose English spelling
+     has letters Bangla does not write: Sundarbans vs সুন্দরবন (the plural s),
+     Jaflong vs জাফলং, Mahasthangarh vs মহাস্থানগড়. It now also compares a
+     looser version of the sound (used only for finding names, so the
+     name-merging score, F1 0.966, is unchanged).
+   - A second source: in reviews Google gave in two versions, the English
+     translation says which place the Bangla review is about. That is how
+     কুয়াকাটা (Kuakata) and কক্সবাজার (Cox's Bazar) were found.
+   - 47 new candidates were checked against real sentences: 19 accepted, 28
+     rejected with a reason, e.g. মান্নানলাল is Mannanlal Roy (a person, not
+     Mongla), "সময়ও লাগে" means "it also takes time", "কয়েকটি" means "several".
+     শশী লজ (Shashi Lodge) was added by hand from a review.
+   - Word endings added so names are found inside sentences: সহ ("with"),
+     ঃ typed as a colon, and কেও ("…too").
+   - Effect: mentions 6,938 -> 7,509 (+571), all still traced to exact text.
+
+21. Places talked about together (data/phase4_place_connections_report.md)
+   - 167 links between 104 places: a place mentioned inside a review of
+     another, or two places named in the same review, each in at least 2
+     reviews, each with a real sentence.
+   - The links that lead to lesser-known places are the gem engine's idea made
+     visible: Gangamati in 8 Kuakata reviews and beside the Sundarbans in 7;
+     Birisiri with Bijoypur Lake (13); Muradpur with Guliakhali (24, "locals
+     call this beach Muradpur beach").
+   - On the website: the Gem map draws these links as purple lines, and a
+     gem's evidence lists what it is "talked about together with".
+
+22. A false gem caught: Pashur (rank #4)
+   - The links showed "trees like Shundari, Pashur, Kewra, Golpata". পশুর is
+     a Sundarbans mangrove tree as well as a river. 5 of Pashur's 10 reviews
+     mean the tree. Not fixed silently: this is exactly what the human
+     verification queue is for, and it should be rejected or split there.
+
+23. Blind spots: where the engine cannot see (data/coverage_report.md)
+   - 32 of Bangladesh's 64 districts have no reviewed place at all; 13 more
+     are thin (under 100 reviews or one place); 19 are covered.
+   - Worst divisions: Dhaka (9 of 13 districts empty), Rangpur (6 of 8),
+     Khulna (5 of 10).
+   - This is the case for the next collection round (YouTube, more places):
+     a district with no data is not a district without gems.
+   - On the website: a "Blind spots" panel under the Gem map, every district
+     coloured no data / thin / covered.
+   - New list: data/bd_districts.csv (all 64 districts and their divisions).
+
+24. Small fix: links like /app/#Map now work as well as /app/#map.
+   - 31 new tests (connections, coverage, wider name mining), 8 API checks and
+     24 website checks.
+
+25. Search fixed (reported: "bamboo chicken" in Explore showed nothing useful)
+   - Case was never the problem: "bamboo chicken" and "BAMBOO CHICKEN" always
+     gave the same results. The real problems were:
+       * search did not know about foods, activities or gems at all;
+       * each review was shown by its first sentence, so the matched words
+         were usually not visible;
+       * review results could not be clicked;
+       * a real Bangla bug: the letter য় (and ড়, ঢ়) can be stored two ways
+         in Unicode, and reviews use both. Typing কুয়াকাটা found 19 or 30
+         reviews depending on the keyboard; it now finds all 47.
+   - Now: foods, activities, transport and gems are searchable by any spelling
+     (English, Banglish or Bangla); words match in any order; matched words
+     are highlighted in a snippet around them; every result opens something:
+     a place card, the place a review is about, the gem on the map, or for a
+     food, every place whose reviews mention it with a real sentence
+     ("Bamboo chicken - a local speciality of Rangamati - Sajek Valley,
+     Boga Lake").
+   - Screenshots: docs/screenshots/2026-10-27_before_search_bamboo_chicken.png
+     and 2026-10-27_after_search_bamboo_chicken.png.
+   - 21 new checks. 1,554 tests in 26 suites now.
+   - Screenshot: docs/screenshots/2026-10-27_after_connections_and_blind_spots.png
 
 
 WHAT IS STILL OPEN

@@ -24,54 +24,54 @@ confident-looking split that means nothing.
 
 | group | domestic | foreign | domestic share | foreign share | comparable |
 | --- | --- | --- | --- | --- | --- |
-| PLACE | 1215 | 0 | 51.1% | 0.0% | no |
-| ACTIVITY | 536 | 4 | 22.6% | 57.1% | no |
-| FOOD | 338 | 2 | 14.2% | 28.6% | no |
-| ACCESS | 277 | 0 | 11.7% | 0.0% | no |
-| TIP | 11 | 1 | 0.5% | 14.3% | no |
+| PLACE | 1782 | 0 | 60.5% | 0.0% | no |
+| ACTIVITY | 539 | 4 | 18.3% | 57.1% | no |
+| FOOD | 339 | 2 | 11.5% | 28.6% | no |
+| ACCESS | 277 | 0 | 9.4% | 0.0% | no |
+| TIP | 11 | 1 | 0.4% | 14.3% | no |
 
 ## By division
 
 | group | domestic | foreign | domestic share | foreign share | comparable |
 | --- | --- | --- | --- | --- | --- |
-| Chattogram | 1119 | 5 | 47.1% | 71.4% | yes |
-| Sylhet | 333 | 2 | 14.0% | 28.6% | no |
-| Khulna | 223 | 0 | 9.4% | 0.0% | no |
-| Barishal | 218 | 0 | 9.2% | 0.0% | no |
-| Rajshahi | 173 | 0 | 7.3% | 0.0% | no |
-| Mymensingh | 122 | 0 | 5.1% | 0.0% | no |
-| Rangpur | 96 | 0 | 4.0% | 0.0% | no |
-| Dhaka | 93 | 0 | 3.9% | 0.0% | no |
+| Chattogram | 1489 | 5 | 50.5% | 71.4% | yes |
+| Sylhet | 380 | 2 | 12.9% | 28.6% | no |
+| Khulna | 326 | 0 | 11.1% | 0.0% | no |
+| Barishal | 230 | 0 | 7.8% | 0.0% | no |
+| Rajshahi | 206 | 0 | 7.0% | 0.0% | no |
+| Mymensingh | 125 | 0 | 4.2% | 0.0% | no |
+| Rangpur | 99 | 0 | 3.4% | 0.0% | no |
+| Dhaka | 93 | 0 | 3.1% | 0.0% | no |
 
 ## By visibility
 
 | group | domestic | foreign | domestic share | foreign share | comparable |
 | --- | --- | --- | --- | --- | --- |
-| unknown | 1162 | 7 | 48.9% | 100.0% | yes |
-| V3 | 893 | 0 | 37.6% | 0.0% | no |
-| V2 | 246 | 0 | 10.3% | 0.0% | no |
-| V1 | 61 | 0 | 2.6% | 0.0% | no |
-| V0 | 15 | 0 | 0.6% | 0.0% | no |
+| V3 | 1386 | 0 | 47.0% | 0.0% | no |
+| unknown | 1166 | 7 | 39.6% | 100.0% | yes |
+| V2 | 317 | 0 | 10.8% | 0.0% | no |
+| V1 | 64 | 0 | 2.2% | 0.0% | no |
+| V0 | 15 | 0 | 0.5% | 0.0% | no |
 
 ## By entity
 
 | group | domestic | foreign | domestic share | foreign share | comparable |
 | --- | --- | --- | --- | --- | --- |
-| Bandarban | 262 | 0 | 11.0% | 0.0% | no |
-| CNG auto-rickshaw | 160 | 0 | 6.7% | 0.0% | no |
-| Picnic | 154 | 0 | 6.5% | 0.0% | no |
-| Sitakunda | 149 | 0 | 6.3% | 0.0% | no |
-| Padma | 139 | 0 | 5.9% | 0.0% | no |
-| Bagerhat | 133 | 0 | 5.6% | 0.0% | no |
-| Guava | 124 | 0 | 5.2% | 0.0% | no |
-| Trekking and hiking | 100 | 0 | 4.2% | 0.0% | no |
-| Khagrachari | 90 | 0 | 3.8% | 0.0% | no |
-| Boat ride | 72 | 1 | 3.0% | 14.3% | no |
-| Sreemangal | 71 | 0 | 3.0% | 0.0% | no |
-| Engine boat (trawler) | 64 | 0 | 2.7% | 0.0% | no |
-| Durgapur | 60 | 0 | 2.5% | 0.0% | no |
-| Lalakhal | 54 | 0 | 2.3% | 0.0% | no |
-| Swimming | 50 | 3 | 2.1% | 42.9% | no |
+| Cox's Bazar | 318 | 0 | 10.8% | 0.0% | no |
+| Bandarban | 262 | 0 | 8.9% | 0.0% | no |
+| CNG auto-rickshaw | 160 | 0 | 5.4% | 0.0% | no |
+| Picnic | 154 | 0 | 5.2% | 0.0% | no |
+| Sitakunda | 149 | 0 | 5.1% | 0.0% | no |
+| Padma | 139 | 0 | 4.7% | 0.0% | no |
+| Bagerhat | 133 | 0 | 4.5% | 0.0% | no |
+| Guava | 124 | 0 | 4.2% | 0.0% | no |
+| Trekking and hiking | 100 | 0 | 3.4% | 0.0% | no |
+| Rangamati | 95 | 0 | 3.2% | 0.0% | no |
+| Khagrachari | 90 | 0 | 3.0% | 0.0% | no |
+| Sundarbans | 73 | 0 | 2.5% | 0.0% | no |
+| Boat ride | 73 | 1 | 2.5% | 14.3% | no |
+| Sreemangal | 71 | 0 | 2.4% | 0.0% | no |
+| Engine boat (trawler) | 64 | 0 | 2.2% | 0.0% | no |
 
 ## What this does and does not establish
 
@@ -87,4 +87,4 @@ p-value that means nothing.
 - 4641/14841 reviews could be labelled (31.3%); user_location is supplied by Booking.com but not by Google Maps
 - no entity_type group has at least 5 mentions from both audiences, so no comparison is reported for it
 - no entity group has at least 5 mentions from both audiences, so no comparison is reported for it
-- 4554 of 6938 mentions sit in reviews that cannot be labelled. user_location comes from Booking.com, whose reviews are about hotels and rarely name another place, while almost every mention comes from a Google Maps review, which supplies no location. The source that identifies the reviewer is not the source that carries the evidence.
+- 4554 of 7509 mentions sit in reviews that cannot be labelled. user_location comes from Booking.com, whose reviews are about hotels and rarely name another place, while almost every mention comes from a Google Maps review, which supplies no location. The source that identifies the reviewer is not the source that carries the evidence.

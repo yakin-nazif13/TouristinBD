@@ -17,7 +17,7 @@ Every row in `phase4_place_attributes.csv` carries a sentence from a real review
 | Fuchka | 42 | 10 |
 | Barbecue | 31 | 16 |
 | Tea stalls | 31 | 20 |
-| Green coconut (dab) | 29 | 13 |
+| Green coconut (dab) | 30 | 13 |
 | Mango | 29 | 10 |
 | Chotpoti | 28 | 12 |
 | Fried fish | 22 | 9 |
@@ -32,7 +32,7 @@ Every row in `phase4_place_attributes.csv` carries a sentence from a real review
 | name | reviews | places |
 | --- | --- | --- |
 | Picnic | 430 | 57 |
-| Boat ride | 352 | 50 |
+| Boat ride | 353 | 50 |
 | Trekking and hiking | 309 | 37 |
 | Swimming | 151 | 45 |
 | Kayaking | 82 | 7 |
@@ -76,6 +76,7 @@ which foods pass. A food reviewed everywhere is not anywhere's speciality.
 | --- | --- | --- | --- | --- |
 | Guava | Jhalokati | 80 / 94 | Bhimruli Floating Guava Market | Vimruli Vashoman Peyara Bazar, located in Barishal, is a unique floating guava market that thrives on the water. |
 | Seafood | Cox's Bazar | 68 / 101 | Sugondha Sea Beach, Kolatoli Beach, Cox's Bazar Beach, Saint Martin's Island West Beach, Laboni Point Sea Beach, Saint Martins Island, Himchari Fountain and Hill | It offers golden sands, clear water, and fun activities like horse rides, jet-skiing, and great seafood from beach stalls. |
+| Green coconut (dab) | Cox's Bazar | 18 / 30 | Laboni Point Sea Beach, Saint Martin's Island West Beach, Sugondha Sea Beach, Kolatoli Beach | You'll find everything here: · Food: Fresh coconuts, fuchka, grilled corn, and seafood shacks are everywhere. |
 | Bamboo chicken | Rangamati | 12 / 13 | Sajek Valley | Local dishes like bamboo chicken and traditional hill food are popular, though prices are slightly higher than usual. |
 | Dried fish (shutki) | Cox's Bazar | 12 / 17 | Sugondha Sea Beach, Kolatoli Beach, Laboni Point Sea Beach, Saint Martin's Island West Beach, Saint Martins Island | ​The Burmese Market: Just a short walk away, you can find local pearls, hand-woven fabrics, and unique dried fish (shutki). |
 | Kulfi | Kushtia | 10 / 10 | Shilaidaha Rabindra Kuthibari | Ate Kushtia's famous Kulfi Malai here, which in one word is amazing to eat, incomparable taste. |

@@ -32,8 +32,8 @@
     "V0": 2
   },
   "notes": [
-    "`distinct` computed lexically (TF-IDF) for 6938 mention(s)",
+    "`distinct` computed lexically (TF-IDF) for 7509 mention(s)",
     "381 non-place entit(ies) not scored (ACCESS 101, ACTIVITY 17, FOOD 46, TIP 217); they are attributes of a place, see phase4_place_attributes.csv",
-    "35 candidate(s) are already official (V3), and the highest of them (Ahsan Manzil, 0.62) outranks 6 candidate(s) that are not \u2014 `mentions` saturates for a much-reviewed famous place. Use already_official to filter the register; the weights were not retuned after seeing this."
+    "35 candidate(s) are already official (V3), and the highest of them (Ahsan Manzil, 0.62) outranks 5 candidate(s) that are not \u2014 `mentions` saturates for a much-reviewed famous place. Use already_official to filter the register; the weights were not retuned after seeing this."
   ]
 }

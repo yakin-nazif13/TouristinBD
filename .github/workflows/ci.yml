@@ -74,6 +74,9 @@ jobs:
       - name: Phase 4 — translation loss (BUILD_PLAN 4.4)
         run: python scripts/test_translation_loss.py
 
+      - name: Phase 4 — place connections, district coverage, wider name mining
+        run: python scripts/test_connections_coverage.py
+
       # Network-free: every gazetteer test either calls a pure function or
       # stubs the HTTP layer, so CI never hits Nominatim or Wikidata.
       - name: Phase 4 — gazetteer and visibility (BUILD_PLAN 5.4)

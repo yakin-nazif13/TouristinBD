@@ -53,7 +53,7 @@ from rapidfuzz import fuzz
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import extract_mentions as em  # noqa: E402
-from language_id import script_shares  # noqa: E402
+from language_id import phonetic_key, script_shares  # noqa: E402
 from resolve_entities import _equivalence_key, load_equivalents  # noqa: E402
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
@@ -113,6 +113,9 @@ class ConceptFinder:
         self.lexicon = lexicon
         self.equivalents = equivalents
         self.lexicon_keys = {(t, _equivalence_key(s)) for s, t in lexicon}
+        self.name_for_sound: dict[str, str] = {}
+        for name in sorted({n.lower() for n in [*gazetteer, *aliases.values()]}):
+            self.name_for_sound.setdefault(phonetic_key(name), name)
 
     def find(self, text: str, own_place: str = "") -> dict[tuple[str, str], str]:
         """(type, concept) -> the surface it was found as."""
@@ -129,7 +132,14 @@ class ConceptFinder:
                 continue
             target = (self.equivalents.get((entity_type, key))
                       or self.aliases.get(surface) or surface)
-            found.setdefault((entity_type, str(target).strip().lower()), surface)
+            concept = str(target).strip().lower()
+            # Two English spellings of one place ("Sreemangal" from the Bangla
+            # list, "Srimangal" in a translation) are one concept: places are
+            # identified by their sound, and named by the first spelling of it
+            # in sorted order, so both versions of a review agree on the name.
+            if entity_type == "PLACE":
+                concept = self.name_for_sound.setdefault(phonetic_key(concept), concept)
+            found.setdefault((entity_type, concept), surface)
         return found
 
 

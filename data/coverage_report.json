@@ -1,0 +1,17 @@
+{
+  "n_districts": 64,
+  "by_status": {
+    "no data": 32,
+    "covered": 19,
+    "thin": 13
+  },
+  "thin_reviews": 100,
+  "reviews_in_top_3_districts": 4763,
+  "top_3_districts": [
+    "Sylhet",
+    "Chattogram",
+    "Dhaka"
+  ],
+  "total_reviews_placed": 14841,
+  "top_3_share": 0.321
+}

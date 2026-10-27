@@ -75,8 +75,9 @@ def list_reviews(
     cmp("v.review_date", ">=", date_from)
     cmp("v.review_date", "<=", date_to)
     if q:
-        where.append("r.review_text_clean LIKE ? ESCAPE '\\'")
-        params.append(db.like_term(q))
+        clause, terms = db.like_any("r.review_text_clean", q)
+        where.append(clause)
+        params.extend(terms)
 
     clause = f"WHERE {' AND '.join(where)}" if where else ""
     order_sql = f"ORDER BY {SORT_COLUMNS[sort]} {order.upper()}, v.review_id ASC"

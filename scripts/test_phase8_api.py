@@ -132,6 +132,54 @@ def test_gems() -> None:
     code, _ = get("/api/place-attributes", place="Nowhere At All")
     check("an unknown place card is a 404", code == 404, str(code))
 
+    print("\nsearch")
+    labels = lambda body: {(h["kind"], h["label"]) for h in body}
+    variants = [get("/api/search", q=q, limit_per_kind=50)[1] for q in ("bamboo chicken", "BAMBOO CHICKEN", "Bamboo Chicken")]
+    check("search ignores case", labels(variants[0]) == labels(variants[1]) == labels(variants[2]))
+    check("search finds a food as a food", ("food", "Bamboo chicken") in labels(variants[0]), str(labels(variants[0]))[:200])
+    check("search matches words in any order",
+          ("food", "Bamboo chicken") in labels(get("/api/search", q="chicken bamboo")[1]))
+    check("a review hit says which place it is about",
+          all(h["place"] for h in variants[0] if h["kind"] == "review"))
+    check("a review snippet shows the matched words",
+          all("bamboo" in h["detail"].lower() for h in variants[0] if h["kind"] == "review"))
+    one_char = "\u0995\u09c1\u09df\u09be\u0995\u09be\u099f\u09be"
+    two_char = "\u0995\u09c1\u09af\u09bc\u09be\u0995\u09be\u099f\u09be"
+    a, b = get("/api/search", q=one_char, limit_per_kind=50)[1], get("/api/search", q=two_char, limit_per_kind=50)[1]
+    check("both Unicode spellings of a Bangla letter find the same results", labels(a) == labels(b))
+    check("a Bangla place name finds the place", any(h["kind"] == "place" and "Kuakata" in h["label"] for h in a))
+    code_a, ra = get("/api/reviews", q=one_char)
+    code_b, rb = get("/api/reviews", q=two_char)
+    check("the reviews filter treats both spellings alike", ra["total"] == rb["total"] > 0, f"{ra['total']} vs {rb['total']}")
+    check("search finds a gem by name", ("gem", "Gangamati") in labels(get("/api/search", q="gangamati")[1]))
+    food = next(h for h in variants[0] if h["kind"] == "food")
+    code, offers = get(f"/api/offers/{food['id']}")
+    check("a food leads to the places that offer it",
+          code == 200 and offers["places"] and all(p["example_sentence"] for p in offers["places"]), str(code))
+    check("and says when it is a local speciality", offers.get("local_speciality") is not None)
+    code, _ = get("/api/offers/E-NOPE")
+    check("an unknown food is a 404", code == 404, str(code))
+
+    code, links = get("/api/gems/connections", place="gangamati")
+    check("connections are found whatever the case of the place name",
+          code == 200 and links["total"] > 0, str(code))
+    if code == 200:
+        check("every connection touches the asked place",
+              all("gangamati" in (l["place_a"] + l["place_b"]).lower() for l in links["connections"]))
+    code, lesser = get("/api/gems/connections", lesser_known_only="true")
+    check("lesser-known links all have a V0-V2 end",
+          code == 200 and all(l["lesser_known_visibility"] in ("V0", "V1", "V2") for l in lesser["connections"]))
+    code, _ = get("/api/gems/E0016")
+    check("/api/gems/connections does not swallow /api/gems/{id}", code == 200, str(code))
+
+    code, cov = get("/api/coverage")
+    check("coverage lists all 64 districts", code == 200 and cov["total"] == 64, str(code))
+    if code == 200:
+        check("coverage statuses add up to 64", sum(cov["summary"].values()) == 64, str(cov["summary"]))
+        check("districts with no data come first", cov["districts"][0]["status"] == "no data")
+    code, part = get("/api/coverage", division="SYLHET")
+    check("the coverage division filter ignores case", code == 200 and part["total"] == 4, str(code))
+
     code, spec = get("/api/local-specialities")
     check("local specialities are served with their places",
           code == 200 and spec["total"] > 0 and all(isinstance(s["places"], list) for s in spec["specialities"]),

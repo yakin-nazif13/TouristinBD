@@ -31,23 +31,73 @@ W_PREF_COVERAGE = 0.30
 W_RATING = 0.25
 
 
+SEARCH_KINDS = "place,city,food,activity,transport,gem,preference,topic,review"
+
+# The entity layer's types, under the names a visitor would search for.
+THING_KINDS = {"food": "FOOD", "activity": "ACTIVITY", "transport": "ACCESS"}
+
+def _like(column: str, text: str) -> tuple[str, list[str]]:
+    """`column` contains `text`, whatever its case or Bangla spelling form."""
+    return db.like_any(column, text)
+
+
+def _like_all(column: str, words: list[str]) -> tuple[str, list[str]]:
+    """`column` contains every one of `words`, in any order."""
+    parts = [_like(column, w) for w in words]
+    return "(" + " AND ".join(p[0] for p in parts) + ")", [x for p in parts for x in p[1]]
+
+
+def _snippet(text: str, words: list[str], width: int = 220) -> str:
+    """A window of `text` around the first matched word, rather than its start.
+
+    A long review that mentions bamboo chicken in its fifth paragraph would
+    otherwise be shown by its first sentence, and the match would be invisible.
+    """
+    text = " ".join(str(text or "").split())
+    lowered = text.lower()
+    found = [lowered.find(f.lower()) for w in words for f in db.spelling_forms(w)]
+    at = min((i for i in found if i >= 0), default=0)
+    start = max(0, at - width // 3)
+    piece = text[start:start + width]
+    return ("…" if start else "") + piece + ("…" if start + width < len(text) else "")
+
+
 def _search_impl(
     conn: sqlite3.Connection,
     q: str,
-    kinds: str = "place,city,preference,topic,review",
+    kinds: str = SEARCH_KINDS,
     limit_per_kind: int = 5,
 ) -> list[SearchHit]:
+    """One query across every kind of thing the site knows about.
+
+    Case never matters, either Unicode spelling of a Bangla letter is found,
+    and a several-word query matches its words in any order, so "chicken
+    bamboo" finds "bamboo chicken".
+    """
     wanted = {k.strip().lower() for k in kinds.split(",") if k.strip()}
-    term = db.like_term(q)
+    words = [w for w in q.split() if len(w) >= 2] or [q]
     hits: list[SearchHit] = []
+    surface, surface_params = _like("v.surface", q)
 
     if "place" in wanted:
+        # A place can also be found by a Bangla or variant spelling reviewers
+        # used ("কুয়াকাটা" finds Kuakata Sea Beach): the spelling resolves to a
+        # place entity, whose name is then looked for in the place names.
+        aliases = [r["canonical_name"] for r in db.rows(
+            conn,
+            "SELECT DISTINCT e.canonical_name FROM entities e JOIN entity_variants v "
+            f"ON v.entity_id = e.entity_id WHERE e.entity_type = 'PLACE' AND {surface} LIMIT 5",
+            surface_params,
+        )]
+        name, name_params = _like_all("place_name", words)
+        city, city_params = _like("city", q)
+        alias_clause = "".join(" OR place_name LIKE ? ESCAPE '\\'" for _ in aliases)
         for r in db.rows(
             conn,
             "SELECT place_id, place_name, city, category, review_count, avg_review_rating "
-            "FROM v_place_stats WHERE place_name LIKE ? ESCAPE '\\' OR city LIKE ? ESCAPE '\\' "
+            f"FROM v_place_stats WHERE {name} OR {city}{alias_clause} "
             "ORDER BY review_count DESC LIMIT ?",
-            (term, term, limit_per_kind),
+            [*name_params, *city_params, *[db.like_term(a) for a in aliases], limit_per_kind],
         ):
             hits.append(
                 SearchHit(
@@ -57,16 +107,19 @@ def _search_impl(
                     detail=f"{r['city'] or 'unknown city'} · {r['category'] or '—'} · "
                     f"{r['review_count']} reviews · avg {r['avg_review_rating']}",
                     score=float(r["review_count"] or 0),
+                    place=r["place_name"],
                 )
             )
 
     if "city" in wanted:
+        city, city_params = _like("city", q)
+        district, district_params = _like("district", q)
         for r in db.rows(
             conn,
             "SELECT city, district, division, place_count, review_count, avg_review_rating "
-            "FROM v_city_stats WHERE city LIKE ? ESCAPE '\\' OR district LIKE ? ESCAPE '\\' "
+            f"FROM v_city_stats WHERE {city} OR {district} "
             "ORDER BY review_count DESC LIMIT ?",
-            (term, term, limit_per_kind),
+            [*city_params, *district_params, limit_per_kind],
         ):
             hits.append(
                 SearchHit(
@@ -79,17 +132,66 @@ def _search_impl(
                 )
             )
 
+    # Foods, activities and transport, by any spelling reviewers used
+    # ("bamboo chicken", "ব্যাম্বু চিকেন"), each leading to the places that offer it.
+    thing_name, thing_params = _like_all("e.canonical_name", words)
+    for kind, entity_type in THING_KINDS.items():
+        if kind not in wanted:
+            continue
+        for r in db.rows(
+            conn,
+            "SELECT e.entity_id, e.canonical_name, "
+            "  (SELECT COUNT(DISTINCT pa.place_name) FROM place_attributes pa WHERE pa.entity_id = e.entity_id) AS n_places, "
+            "  (SELECT COALESCE(SUM(pa.n_reviews), 0) FROM place_attributes pa WHERE pa.entity_id = e.entity_id) AS n_reviews "
+            f"FROM entities e WHERE e.entity_type = ? AND ({thing_name} OR EXISTS ("
+            f"  SELECT 1 FROM entity_variants v WHERE v.entity_id = e.entity_id AND {surface})) "
+            "ORDER BY n_reviews DESC LIMIT ?",
+            [entity_type, *thing_params, *surface_params, limit_per_kind],
+        ):
+            if not r["n_places"]:
+                continue
+            speciality = db.one(conn, "SELECT district FROM local_specialities WHERE entity_id = ?",
+                                (r["entity_id"],))
+            hits.append(SearchHit(
+                kind=kind,
+                id=r["entity_id"],
+                label=r["canonical_name"],
+                detail=f"mentioned in {r['n_reviews']} review(s) of {r['n_places']} place(s)"
+                + (f" · a local speciality of {speciality['district']}" if speciality else ""),
+                score=float(r["n_reviews"] or 0),
+            ))
+
+    if "gem" in wanted:
+        gem_name, gem_params = _like_all("g.canonical_name", words)
+        for r in db.rows(
+            conn,
+            "SELECT g.entity_id, g.canonical_name, g.gem_rank, g.gem_score, g.visibility, g.n_reviews "
+            f"FROM gems g WHERE {gem_name} OR EXISTS ("
+            f"  SELECT 1 FROM entity_variants v WHERE v.entity_id = g.entity_id AND {surface}) "
+            "ORDER BY g.gem_rank LIMIT ?",
+            [*gem_params, *surface_params, limit_per_kind],
+        ):
+            hits.append(SearchHit(
+                kind="gem",
+                id=r["entity_id"],
+                label=r["canonical_name"],
+                detail=f"gem #{r['gem_rank']} · score {r['gem_score']:.2f} · {r['visibility']} · "
+                f"{r['n_reviews']} independent review(s)",
+                score=float(r["gem_score"] or 0),
+            ))
+
     if "preference" in wanted:
+        label, label_params = _like("p.preference_label", q)
+        description, description_params = _like("p.preference_description", q)
+        subcategory, subcategory_params = _like("p.subcategory", q)
         for r in db.rows(
             conn,
             "SELECT p.preference_id, p.preference_label, p.preference_description, "
             "p.preference_type, f.review_count FROM preferences p "
             "JOIN v_preference_frequency f ON f.preference_id = p.preference_id "
-            "WHERE p.preference_label LIKE ? ESCAPE '\\' "
-            "OR p.preference_description LIKE ? ESCAPE '\\' "
-            "OR p.subcategory LIKE ? ESCAPE '\\' "
+            f"WHERE {label} OR {description} OR {subcategory} "
             "ORDER BY f.review_count DESC LIMIT ?",
-            (term, term, term, limit_per_kind),
+            [*label_params, *description_params, *subcategory_params, limit_per_kind],
         ):
             hits.append(
                 SearchHit(
@@ -102,13 +204,15 @@ def _search_impl(
             )
 
     if "topic" in wanted:
+        label, label_params = _like("interpreted_label", q)
+        keywords, keyword_params = _like("top_keywords", q)
+        interpretation, interpretation_params = _like("interpretation", q)
         for r in db.rows(
             conn,
             "SELECT topic_id, interpreted_label, top_keywords, review_count FROM topics "
-            "WHERE interpreted_label LIKE ? ESCAPE '\\' OR top_keywords LIKE ? ESCAPE '\\' "
-            "OR interpretation LIKE ? ESCAPE '\\' "
+            f"WHERE {label} OR {keywords} OR {interpretation} "
             "ORDER BY review_count DESC LIMIT ?",
-            (term, term, term, limit_per_kind),
+            [*label_params, *keyword_params, *interpretation_params, limit_per_kind],
         ):
             hits.append(
                 SearchHit(
@@ -121,22 +225,26 @@ def _search_impl(
             )
 
     if "review" in wanted:
+        every_word, word_params = _like_all("r.review_text_clean", words)
+        phrase, phrase_params = _like("r.review_text_clean", q)
+        # The exact phrase first, then the shortest: a short review that names
+        # the term is about it; a 3,000-character essay may mention it once.
         for r in db.rows(
             conn,
             "SELECT r.review_id, r.review_text_clean, r.review_rating, p.place_name "
             "FROM reviews r LEFT JOIN places p ON p.place_id = r.place_id "
-            "WHERE r.review_text_clean LIKE ? ESCAPE '\\' "
-            "ORDER BY r.review_rating DESC, r.text_length DESC LIMIT ?",
-            (term, limit_per_kind),
+            f"WHERE {every_word} "
+            f"ORDER BY {phrase} DESC, r.review_rating DESC, r.text_length ASC LIMIT ?",
+            [*word_params, *phrase_params, limit_per_kind],
         ):
-            text = (r["review_text_clean"] or "").strip()
             hits.append(
                 SearchHit(
                     kind="review",
                     id=r["review_id"],
                     label=f"{r['place_name']} · {r['review_rating']}★",
-                    detail=text[:220] + ("…" if len(text) > 220 else ""),
+                    detail=_snippet(r["review_text_clean"], words),
                     score=float(r["review_rating"] or 0),
+                    place=r["place_name"],
                 )
             )
 
@@ -148,7 +256,7 @@ def search(
     q: str = Query(..., min_length=2, description="Free-text query"),
     conn: sqlite3.Connection = Depends(db.get_conn),
     kinds: str = Query(
-        "place,city,preference,topic,review",
+        SEARCH_KINDS,
         description="Comma-separated entity kinds to search",
     ),
     limit_per_kind: int = Query(5, ge=1, le=50),

@@ -124,3 +124,27 @@ def paginate(
         "returned": len(items),
         "items": items,
     }
+
+
+# Bangla letters Unicode can store two ways: as one character, or as a base
+# letter plus a nukta dot. A keyboard sends one form and reviews contain both
+# (30 reviews write কুয়াকাটা one way, 19 the other), so text search tries each.
+_NUKTA_FORMS = [("\u09df", "\u09af\u09bc"), ("\u09dc", "\u09a1\u09bc"), ("\u09dd", "\u09a2\u09bc")]
+
+
+def spelling_forms(text: str) -> list[str]:
+    """`text` as typed, with every nukta letter composed, and decomposed."""
+    composed = decomposed = text
+    for single, pair in _NUKTA_FORMS:
+        composed = composed.replace(pair, single)
+        decomposed = decomposed.replace(single, pair)
+    return list(dict.fromkeys([text, composed, decomposed]))
+
+
+def like_any(column: str, text: str) -> tuple[str, list[str]]:
+    """SQL saying `column` contains `text` in any of its spellings, and its
+    parameters. Case never matters: SQLite's LIKE ignores case for Latin
+    letters, and Bangla has none."""
+    forms = spelling_forms(text)
+    clause = " OR ".join(f"{column} LIKE ? ESCAPE '\\'" for _ in forms)
+    return f"({clause})", [like_term(f) for f in forms]

@@ -1,39 +1,40 @@
 entity_id,canonical_name,entity_type,gem_score,visibility,n_reviews,n_mentions,state,publishable,decided_by,decided_at_utc,reason,divisions,n_evidence,example_evidence,example_found_in
-E0016,Gangamati,PLACE,0.9083,V0,12,20,candidate,False,,,,Barishal|Khulna,20,"* গঙ্গামতির চর: এটি কুয়াকাটার পূর্বে অবস্থিত একটি সুন্দর চর, যেখানে বিভিন্ন প্রজাতির পাখি দেখা যায়।",Kotka Sea Beach
+E0016,Gangamati,PLACE,0.9084,V0,12,20,candidate,False,,,,Barishal|Khulna,20,"* গঙ্গামতির চর: এটি কুয়াকাটার পূর্বে অবস্থিত একটি সুন্দর চর, যেখানে বিভিন্ন প্রজাতির পাখি দেখা যায়।",Kotka Sea Beach
 E0042,Sardar Bari,PLACE,0.7982,V1,20,27,candidate,False,,,,Dhaka,27,The Sardar bari is really awsome.,Bangladesh Folk Art & Crafts Foundation (Sonargaon)
-E0197,Birisiri,PLACE,0.7518,V1,16,48,candidate,False,,,,Mymensingh,48,"সাদা মাটির পাহাড়, বা ""শাদা মাটির পাহাড়,"" বাংলাদেশের নেত্রকোনা জেলার বিরিশিরি অঞ্চলে অবস্থিত একটি অত্যন্ত সুন্দর প্রাকৃতিক স্থান।",Sada Matir Pahar (White Clay Hills)
-E0036,Pashur,PLACE,0.749,V1,10,11,candidate,False,,,,Chattogram|Khulna,11,"Besides, you'll find trees like Shundari, Pashur, Kewra, Golpata, Gajar and a number of unknown vegetations found specifically in the Sundarbans.",Sundarbans (Karamjal Wildlife Centre)
+E0197,Birisiri,PLACE,0.7519,V1,16,48,candidate,False,,,,Mymensingh,48,"সাদা মাটির পাহাড়, বা ""শাদা মাটির পাহাড়,"" বাংলাদেশের নেত্রকোনা জেলার বিরিশিরি অঞ্চলে অবস্থিত একটি অত্যন্ত সুন্দর প্রাকৃতিক স্থান।",Sada Matir Pahar (White Clay Hills)
+E0036,Pashur,PLACE,0.7489,V1,10,11,candidate,False,,,,Chattogram|Khulna,11,"Besides, you'll find trees like Shundari, Pashur, Kewra, Golpata, Gajar and a number of unknown vegetations found specifically in the Sundarbans.",Sundarbans (Karamjal Wildlife Centre)
 E0013,Fatrar Chor,PLACE,0.694,V0,3,3,candidate,False,,,,Barishal,3,​ফাতরার চর: এটি সুন্দরবনের একটি অংশ।,Kuakata Sea Beach
 E0033,Nilgiri,PLACE,0.6806,V2,10,13,candidate,False,,,,Chattogram,13,I love this place more in comparing to Nilgiri.,Nilachal Tourist Center
-E0218,Lalakhal,PLACE,0.6767,V2,38,101,candidate,False,,,,Sylhet,101,"Same can be told for Jaflong, Lalakhal, the entire Manipur estate in India, San Andreas Fault etc.",Bichnakandi Tourist Spot
-E0031,Mongla,PLACE,0.6688,V2,30,39,candidate,False,,,,Khulna,39,"Karamjal: Karamjal is located in the Sundarbans, just 8 km from Mongla.",Sundarbans (Karamjal Wildlife Centre)
+E0031,Mongla,PLACE,0.6781,V2,52,79,candidate,False,,,,Khulna,79,"Karamjal: Karamjal is located in the Sundarbans, just 8 km from Mongla.",Sundarbans (Karamjal Wildlife Centre)
+E0218,Lalakhal,PLACE,0.6768,V2,38,101,candidate,False,,,,Sylhet,101,"Same can be told for Jaflong, Lalakhal, the entire Manipur estate in India, San Andreas Fault etc.",Bichnakandi Tourist Spot
+E0219,Mahasthangarh,PLACE,0.6603,V2,51,111,candidate,False,,,,Rajshahi,111,"Mahasthangarh Museum, Bogura Mahasthangarh Museum is a wonderful place to explore the rich history and heritage of the Barendra region of Bangladesh.",Mahasthan Archaeological Museum
 E0044,Sitakunda,PLACE,0.6595,V2,106,238,candidate,False,,,,Chattogram|Sylhet,238,The Moha Maya Lake and Moha Maya Irrigation Project was initiated to solve the water crisis and water logging at Mirersawri and Sitakunda area in Chittagong by preserving the rain water during rainy s,Mohamaya Lake
-E0219,Mahasthangarh,PLACE,0.6549,V2,36,80,candidate,False,,,,Rajshahi,80,"Mahasthangarh Museum, Bogura Mahasthangarh Museum is a wonderful place to explore the rich history and heritage of the Barendra region of Bangladesh.",Mahasthan Archaeological Museum
 E0025,Kaptai,PLACE,0.647,V2,19,20,candidate,False,,,,Chattogram|Sylhet,20,It is the second largest man made lake in Bangladesh after Kaptai Lake.,Mohamaya Lake
-E0073,Muradpur,PLACE,0.6397,V2,24,28,candidate,False,,,,Chattogram,28,"Locally, it is known as Muradpur Beach.",Guliakhali Sea Beach
+E0073,Muradpur,PLACE,0.6398,V2,24,28,candidate,False,,,,Chattogram,28,"Locally, it is known as Muradpur Beach.",Guliakhali Sea Beach
 E0144,Sada Matir Pahar,PLACE,0.632,V1,4,4,candidate,False,,,,Mymensingh,4,"It is also called ""SADA MATIR PAHAR"".",Bijoypur Lake
+E0148,Shashi Lodge,PLACE,0.6262,V1,5,16,candidate,False,,,,Mymensingh,16,Shoshi Lodge Shoshi Lodge is a royal mansion located in the district town of Mymensingh.,Shashi Lodge
 E0001,Ahsan Manzil,PLACE,0.6216,V3,10,12,candidate,False,,,,Chattogram|Dhaka|Rangpur,12,"It has four floors and looks similar to Ahsan Manzil in Dhaka, with a design influenced by Mughal architecture.",Tajhat Palace
-E0148,Shashi Lodge,PLACE,0.6113,V1,4,13,candidate,False,,,,Mymensingh,13,Shoshi Lodge Shoshi Lodge is a royal mansion located in the district town of Mymensingh.,Shashi Lodge
-E0050,Sundarbans,PLACE,0.6027,V3,33,44,candidate,False,,,,Barishal|Chattogram|Khulna|Mymensingh|Sylhet,44,"Conservation Challenges: * Salinity: Being near the Sundarbans, the greatest threat to the mosque is salt efflorescence from the soil, which degrades the ancient brickwork.",Sixty Dome Mosque
+E0050,Sundarbans,PLACE,0.5961,V3,87,116,candidate,False,,,,Barishal|Chattogram|Khulna|Mymensingh|Rangpur|Sylhet,116,"Conservation Challenges: * Salinity: Being near the Sundarbans, the greatest threat to the mosque is salt efflorescence from the soil, which degrades the ancient brickwork.",Sixty Dome Mosque
 E0137,Padma,PLACE,0.5903,V3,206,322,candidate,False,,,,Barishal|Chattogram|Khulna|Rajshahi|Sylhet,322,"The Sundarbans, a UNESCO World Heritage Site, is a mesmerizing mangrove forest located in the delta region of the Padma, Meghna, and Brahmaputra river basins.",Sundarbans (Karamjal Wildlife Centre)
-E0113,Kolatoli Beach,PLACE,0.5888,V3,11,13,candidate,False,,,,Chattogram,13,It's in between kolatoli beach and Laboni point beach.,Sugondha Sea Beach
+E0113,Kolatoli Beach,PLACE,0.5889,V3,11,13,candidate,False,,,,Chattogram,13,It's in between kolatoli beach and Laboni point beach.,Sugondha Sea Beach
 E0091,China Matir Pahar,PLACE,0.5878,V2,8,9,candidate,False,,,,Mymensingh,9,"Bijoypur, in Durgapur Upazila, is famous for its unique white clay hills (China Matir Pahar).",Bijoypur Lake
-E0047,Sonargaon,PLACE,0.5863,V3,50,92,candidate,False,,,,Dhaka,92,"Panam City(PanamNagar) is a 13th century one lane ancient setlement, declined in 17th century due to relocation of capital from Sonargaon.",Panam City
+E0024,Jaflong,PLACE,0.5875,V3,45,63,candidate,False,,,,Mymensingh|Sylhet,63,"Around 2006/2007, we went to Jaflong with our friends during the month of Ramadan.",Bijoypur Lake
+E0047,Sonargaon,PLACE,0.5862,V3,50,92,candidate,False,,,,Dhaka,92,"Panam City(PanamNagar) is a 13th century one lane ancient setlement, declined in 17th century due to relocation of capital from Sonargaon.",Panam City
 E0048,Sreemangal,PLACE,0.584,V3,101,177,candidate,False,,,,Barishal|Sylhet,177,"There are several places to visit here (Beach, lemon garden, gongamati forest, kaura chara, red crabs beach, zhao forest, Sreemangal Buddhist Temple, Misripara Buddist Temple, Water Well (Kua in Banga",Kuakata Sea Beach
 E0040,Saint Martin,PLACE,0.5837,V3,21,32,candidate,False,,,,Barishal|Chattogram,32,The prices are reasonable as well (much pocket friendly than Cox's & Saint martin's).,Kuakata Sea Beach
-E0024,Jaflong,PLACE,0.5833,V3,21,24,candidate,False,,,,Mymensingh|Sylhet,24,"Around 2006/2007, we went to Jaflong with our friends during the month of Ramadan.",Bijoypur Lake
 E0002,Bagerhat,PLACE,0.5814,V3,132,219,candidate,False,,,,Chattogram|Khulna|Rajshahi,219,Architecturally it's design similar to Bagerhat sat gombuj Masjid but it a build of stone.,Choto Sona Masjid
 E0111,Khagrachari,PLACE,0.5751,V3,79,155,candidate,False,,,,Chattogram,155,I think it is useless to be born in Bangladesh if you have not seen the beauty of Bandarban and Khagrachari.,Nilachal Tourist Center
-E0012,Cox's Bazar,PLACE,0.5708,V3,181,282,candidate,False,,,,Barishal|Chattogram|Mymensingh|Sylhet,282,"Compared to Cox's Bazar, I believe Kuakata is still highly underrated.",Kuakata Sea Beach
+E0012,Cox's Bazar,PLACE,0.5741,V3,343,593,candidate,False,,,,Barishal|Chattogram|Khulna|Mymensingh|Rajshahi|Sylhet,593,"সৈকতটা একেবারেই ফাঁকা, কক্সবাজার বা কুয়াকাটার মতো ভিড় নেই।",Kotka Sea Beach
 E0211,Durgapur,PLACE,0.5662,V3,63,88,candidate,False,,,,Chattogram|Mymensingh,88,Mahamaya Lake consists of an artificial lake of 11 square kilometers built at the foot of the hill two kilometers east of Thakurdighi Bazar in Durgapur Union No.,Mohamaya Lake
-E0037,Rangamati,PLACE,0.5585,V3,75,104,candidate,False,,,,Chattogram|Sylhet,104,Its view is similar to Kaptai lake of Rangamati.,Mohamaya Lake
-E0003,Bandarban,PLACE,0.5577,V3,365,664,candidate,False,,,,Chattogram|Sylhet,664,Nilachal is quite a good place to visit at Bandarban.,Nilachal Tourist Center
-E0110,Kantajew Temple,PLACE,0.5567,V3,19,24,candidate,False,,,,Chattogram|Rajshahi|Rangpur,24,"Kantanagar Temple, commonly known as Kantaji Temple or Kantajew Temple ( কান্তজিউ মন্দির) at Kantanagar, Dinajpur, Bangladesh.",Kantajew Temple
+E0037,Rangamati,PLACE,0.5622,V3,87,159,candidate,False,,,,Chattogram|Sylhet,159,Its view is similar to Kaptai lake of Rangamati.,Mohamaya Lake
+E0003,Bandarban,PLACE,0.5576,V3,365,664,candidate,False,,,,Chattogram|Sylhet,664,Nilachal is quite a good place to visit at Bandarban.,Nilachal Tourist Center
+E0110,Kantajew Temple,PLACE,0.5566,V3,19,24,candidate,False,,,,Chattogram|Rajshahi|Rangpur,24,"Kantanagar Temple, commonly known as Kantaji Temple or Kantajew Temple ( কান্তজিউ মন্দির) at Kantanagar, Dinajpur, Bangladesh.",Kantajew Temple
 E0087,Bichnakandi Tourist Spot,PLACE,0.5537,V3,29,67,candidate,False,,,,Sylhet,67,"Bisnakandi, conveniently situated near Sylhet on the India-Bangladesh, is a combination of green hills, clouds, a variety of stones and crystal-clear waters flowing from the north-eastern Meghalaya Mo",Bichnakandi Tourist Spot
 E0221,Paharpur,PLACE,0.5445,V3,20,25,candidate,False,,,,Chattogram|Rajshahi,25,"And the place not only had artifacts from Mahasthangar also from Paharpur, and other places of Northern Bangladesh.",Mahasthan Archaeological Museum
 E0081,Alutila,PLACE,0.5413,V3,14,19,candidate,False,,,,Chattogram,19,"The risang waterfall is located in the Matiranga Upazila of Khagrachari District and it is 9 km far from the Khagrachari Sadar, 7 km from the Parjatan Motel and 2 km far from the Alutila.",Risang Waterfall
-E0009,Chandranath,PLACE,0.5407,V3,8,8,candidate,False,,,,Chattogram,8,If you are planning to go on Chandranath temple then you can add this beach in your list.,Guliakhali Sea Beach
+E0009,Chandranath,PLACE,0.5408,V3,8,8,candidate,False,,,,Chattogram,8,If you are planning to go on Chandranath temple then you can add this beach in your list.,Guliakhali Sea Beach
 E0038,Ratargul,PLACE,0.5269,V3,9,11,candidate,False,,,,Barishal|Dhaka|Sylhet,11,It is more enjoyable than ratargul sylhet,Bhimruli Floating Guava Market
+E0115,Kuakata,PLACE,0.5225,V3,6,19,candidate,False,,,,Barishal|Chattogram|Khulna,19,"সৈকতটা একেবারেই ফাঁকা, কক্সবাজার বা কুয়াকাটার মতো ভিড় নেই।",Kotka Sea Beach
 E0030,Madhabpur Lake,PLACE,0.5167,V2,4,5,candidate,False,,,,Chattogram|Sylhet,5,"It’s also conveniently located on the way to Madhabpur Lake, making it a perfect stop for travelers.",Noor Jahan Tea Garden
 E0535,Muktagachha,PLACE,0.5059,V2,3,3,candidate,False,,,,Mymensingh,3,ঊনবিংশ শতকে মুক্তাগাছার জমিদার মহারাজ সূর্যকান্ত আচার্য চৌধুরী দৃষ্টিনন্দন প্রাসাদ নির্মাণ করেন।,Shashi Lodge
 E0006,Boga Lake,PLACE,0.4851,V3,4,4,candidate,False,,,,Chattogram,4,"The center provides basic amenities for travelers, and nearby attractions like the Nafakhum Waterfall and Boga Lake make it a perfect spot to start your Bandarban adventure.",Nilgiri
@@ -41,14 +42,13 @@ E0035,Panam City,PLACE,0.4737,V3,8,8,candidate,False,,,,Dhaka,8,"In terms of att
 E0020,Guliakhali Sea Beach,PLACE,0.4715,V3,7,9,candidate,False,,,,Chattogram,9,Feni to Sitakund - 80 TK Local Bus Sitakund Bazar to Guliyakhali Sea beach - 150 to CNG ( 30 tk per person),Guliakhali Sea Beach
 E0028,Lalbagh Fort,PLACE,0.4373,V3,5,5,candidate,False,,,,Chattogram|Dhaka,5,Its location in Old Dhaka also makes it easy to visit along with nearby attractions like Lalbagh Fort and the Star Mosque.,Ahsan Manzil Museum
 E0114,Kotka,PLACE,0.4273,V3,5,6,candidate,False,,,,Khulna,6,"Places to visit: • Kotka Beach and Jamtala Beach: Famous for its beauty, where you can often spot spotted deer and sometimes Royal Bengal Tigers.",The Sundarbans
-E0115,Kuakata Sea Beach,PLACE,0.4171,V3,3,3,candidate,False,,,,Barishal|Chattogram,3,"Additionally, Kuakata (where both sunrise and sunset can be viewed), Saint Martin's Island, and Patenga are among the other popular sea beaches.",Kolatoli Beach
-E0214,Hiron Point,PLACE,0.4012,V2,3,3,candidate,False,,,,Khulna,3,Hiron Point Nilkomol eco-tourism spot is UNESCO declared world heritage site.,The Sundarbans
+E0214,Hiron Point,PLACE,0.4011,V2,3,3,candidate,False,,,,Khulna,3,Hiron Point Nilkomol eco-tourism spot is UNESCO declared world heritage site.,The Sundarbans
 E0216,Karamjal,PLACE,0.3974,V3,3,3,candidate,False,,,,Khulna,3,"• Karamjal: A forest station and popular tourist spot, it is home to a crocodile breeding centre where baby crocodiles are kept before being released into the forest.",The Sundarbans
 E0146,Sajek Valley,PLACE,0.3965,V3,4,4,candidate,False,,,,Chattogram,4,Lucky I got awesome weather in this journey as like Sajek Valley.,Chandranath Hill
 E0163,Varendra Research Museum,PLACE,0.3945,V3,2,2,candidate,False,,,,Rajshahi,2,Go to varendra research museum in rajshahi.,Mahasthan Archaeological Museum
 E0157,T-badh,PLACE,0.3924,V3,4,5,candidate,False,,,,Rajshahi,5,I-Badh Rajshahi (often called “I Badh” or “T-Badh”) is one of the most popular riverside spots in Rajshahi.,I-Badh
 E0029,Lawachara National Park,PLACE,0.3889,V3,2,2,candidate,False,,,,Sylhet,2,"Sreemangal is a nice, peaceful tourist spot for tea garden views and Lawachara, but it’s not as 'mind-blowing' as social media makes it out to be.",Noor Jahan Tea Garden
-E0126,Mohamaya Lake,PLACE,0.3883,V3,4,4,candidate,False,,,,Chattogram,4,You can watch mohamaya lake and also napittechora falls.,Khoiyachara Waterfalls
+E0126,Mohamaya Lake,PLACE,0.3884,V3,4,4,candidate,False,,,,Chattogram,4,You can watch mohamaya lake and also napittechora falls.,Khoiyachara Waterfalls
 E0222,Puthia,PLACE,0.3778,V2,3,3,candidate,False,,,,Rajshahi|Rangpur,3,It is believed that the Govinda temple in Puthia and this temple was built at the same time.,Kantajew Temple
 E0088,Bijoypur Lake,PLACE,0.3647,V3,2,2,candidate,False,,,,Mymensingh,2,বিজয়পুর লেক এবং সিরামিক হিল-ই এখানের মূল আকর্ষণ।,Sada Matir Pahar (White Clay Hills)
 E0032,Nilachal,PLACE,0.359,V3,3,3,candidate,False,,,,Chattogram|Dhaka,3,"Personally I didn't like it much, I didn't find much difference between it and Nilachal, but the entry fee here is 100 rupees per person, which is too much, and another 50 rupees for bike parking, whi",Nilgiri

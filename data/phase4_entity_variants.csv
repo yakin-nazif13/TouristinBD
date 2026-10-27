@@ -70,13 +70,6 @@ E0210,Carry your umbrella and water and a,1,cr yr umbrl and btr and a,True
 E0010,Chor Bijoy,1,cr bj,True
 E0092,Choto Sona Masjid,0,ct sn msjd,True
 E0011,Civic Inn,0,cbc in,True
-E0012,Cox's Bazar,238,cks bjr,True
-E0012,cox's bazar,8,cks bjr,False
-E0012,Cox's Bazar beach,9,cks bjr bc,False
-E0012,Cox's Bazar Beach,3,cks bjr bc,False
-E0012,Cox's bazar,18,cks bjr,False
-E0012,cox's Bazar,5,cks bjr,False
-E0012,Cox'S Bazar,1,cks bjr,False
 E0476,Crab Fry,1,crb fr,False
 E0476,crab fry,3,crb fr,True
 E0476,Crab fry,1,crb fr,False
@@ -122,9 +115,6 @@ E0023,Hoque Tower International,0,hk tbr intrntnl,True
 E0107,Hum Hum Waterfall,0,hm hm btrfl,True
 E0108,I-Badh,1,ibd,True
 E0108,i-badh,1,ibd,False
-E0024,Jaflong,18,jflng,True
-E0024,jaflong,5,jflng,False
-E0024,Jaflong Zero Point,1,jflng jr pnt,False
 E0109,Jhau Bon Kuakata,0,j bn kt,True
 E0479,Kachagolla,1,kcgl,False
 E0479,kachagolla,3,kcgl,True
@@ -135,9 +125,6 @@ E0480,Khichuri,1,kcr,False
 E0480,খিচুড়ি,2,kcr,True
 E0112,Khoiyachara Waterfalls,0,kcr btrfls,True
 E0026,Kollol Hotel,0,kl htl,True
-E0115,Kuakata,1,kt,False
-E0115,Kuakata Sea Beach,1,kt s bc,True
-E0115,Kuakata sea beach,1,kt s bc,False
 E0481,Kulfi,6,klf,True
 E0481,Kulphi,1,klf,False
 E0481,কুলফি,3,klf,False
@@ -147,15 +134,11 @@ E0028,Lalbagh Fort,5,lbg frt,True
 E0029,Lawachara,1,lbcr,False
 E0029,Lawachara National Park,1,lbcr ntnl prk,True
 E0120,Mahasthan Archaeological Museum,0,mhstn arclgcl msm,True
-E0219,Mahasthangarh,79,mhstngrh,True
-E0219,mahasthangarh,1,mhstngrh,False
 E0121,Mahasthangarh Tourism Park,0,mhstngrh trsm prk,True
 E0122,Mangrove Forest Kuakata,0,mngrb frst kt,True
 E0123,Mayung Kopal (Stairs to Heaven),0,mng kpl strs t hbn,True
 E0124,Michael Madhusudan Datta Memorial (Sagardari),0,mcl mdsdn dt mrl sgrdr,True
 E0125,Mini Bangladesh (Shadhinata Complex),0,mn bnglds sdnt cmplks,True
-E0031,Mongla,36,mngl,True
-E0031,mongla,3,mngl,False
 E0127,Mujibnagar Monument Complex,0,mjbngr mnmnt cmplks,True
 E0128,Museum of Rajas' (Hason Raja Museum),0,msm of rjs hsn rj msm,True
 E0129,Nafakhum Waterfall,1,nfkm btrfl,True
@@ -194,6 +177,7 @@ E0147,Shalban Bihar,0,slbn bhr,True
 E0149,Shilaidaha Rabindra Kuthibari,0,sldh rbndr ktbr,True
 E0150,Shopnopuri Artificial Amusement Park,0,spnpr artfcl amsmnt prk,True
 E0148,Shoshi Lodge,13,s ldg,True
+E0148,শশী লজ,3,s lj,False
 E0148,Shashi Lodge,0,s ldg,False
 E0151,Shreepur Tea Garden,0,srpr t grdn,True
 E0152,Shuvolong Waterfalls,0,sblng btrfls,True
@@ -207,8 +191,6 @@ E0483,street food,63,strt fd,True
 E0483,Street Food,2,strt fd,False
 E0483,street Food,1,strt fd,False
 E0155,Sugondha Sea Beach,0,sgnd s bc,True
-E0050,Sundarbans,43,sndrbns,True
-E0050,sundarbans,1,sndrbns,False
 E0051,Sundarbans (Karamjal Wildlife Centre),0,sndrbns krmjl bldlf cntr,True
 E0156,Sunset Point Kuakata,0,snst pnt kt,True
 E0052,Sylhet Paradise Inn,0,slht prds in,True
@@ -373,7 +355,7 @@ E0490,Boat Ride,6,bt rd,False
 E0490,Boat trip,1,bt trp,False
 E0490,boat Ride,1,bt rd,False
 E0490,নৌকাভ্রমণ,15,nkbrmn,False
-E0490,নৌকা ভ্রমন,8,nk brmn,False
+E0490,নৌকা ভ্রমন,9,nk brmn,False
 E0331,bus From Dhaka,1,bs frm dk,True
 E0332,bus from Barisal,3,bs frm brsl,True
 E0333,bus from Chittagong to Comilla,1,bs frm ctgng t cml,True
@@ -401,7 +383,7 @@ E0353,bus from srimongol to kamalganj,1,bs frm srmngl t kmlgnj,True
 E0354,bus from the main city of Bandarban,1,bs frm t mn ct of bndrbn,True
 E0355,bus from there to Dhaka,1,bs frm tr t dk,True
 E0491,cable car,5,cbl cr,True
-E0491,ক্যাবল কার,3,kjbl kr,False
+E0491,ক্যাবল কার,4,kjbl kr,False
 E0492,camping,29,cmpng,True
 E0492,Camping,8,cmpng,False
 E0492,ক্যাম্পিং,15,kjmpn,False
@@ -512,7 +494,7 @@ E0502,green coconut,6,grn cnt,False
 E0502,fresh coconut,5,frs cnt,False
 E0502,coconut water,7,cnt btr,False
 E0502,Fresh coconut,1,frs cnt,False
-E0502,ডাব,22,db,True
+E0502,ডাব,23,db,True
 E0503,hike,50,hk,False
 E0503,hiking,101,hkng,False
 E0503,trekking,119,trkng,True
@@ -541,7 +523,7 @@ E0509,kayaking,56,kng,True
 E0509,kayak,7,k,False
 E0509,Kayaking,19,kng,False
 E0509,Kayak,1,k,False
-E0509,কায়াকিং,25,kn,False
+E0509,কায়াকিং,26,kn,False
 E0509,কায়াক,1,k,False
 E0510,kebab,1,kb,False
 E0510,Kabab,1,kb,True
@@ -672,6 +654,14 @@ E0529,Watching the sunset,2,btcng t snst,False
 E0001,Ahsan Manzil,5,ahsn mnjl,False
 E0001,আহসান মঞ্জিল,7,ahsn mnjl,True
 E0001,Ahsan Manzil Museum,0,ahsn mnjl msm,False
+E0012,কক্সবাজার,311,ksbjr,True
+E0012,Cox's Bazar,238,cks bjr,False
+E0012,cox's bazar,8,cks bjr,False
+E0012,Cox's Bazar beach,9,cks bjr bc,False
+E0012,Cox's Bazar Beach,3,cks bjr bc,False
+E0012,Cox's bazar,18,cks bjr,False
+E0012,cox's Bazar,5,cks bjr,False
+E0012,Cox'S Bazar,1,cks bjr,False
 E0530,কফি,14,kf,True
 E0216,Karamjal,1,krmjl,False
 E0216,করমজল,2,krmjl,True
@@ -687,6 +677,10 @@ E0025,Kaptai,4,kpt,False
 E0025,কাপ্তাই,5,kpt,False
 E0025,কাপ্তায়,1,kpt,False
 E0025,কাপ্তাই লেক,1,kpt lk,False
+E0115,কুয়াকাটা,16,kt,True
+E0115,Kuakata,1,kt,False
+E0115,Kuakata Sea Beach,1,kt s bc,False
+E0115,Kuakata sea beach,1,kt s bc,False
 E0114,Kotka,3,ktk,True
 E0114,কোটকা,1,ktk,False
 E0114,কটকা,2,ktk,False
@@ -708,6 +702,10 @@ E0091,China Matir Pahar,5,cn mtr phr,True
 E0091,চিনা মাটির পাহাড়,2,cn mtr phr,False
 E0091,চীনা মাটির পাহাড়,1,cn mtr phr,False
 E0091,China Matir pahar,1,cn mtr phr,False
+E0024,Jaflong,18,jflng,False
+E0024,jaflong,5,jflng,False
+E0024,Jaflong Zero Point,1,jflng jr pnt,False
+E0024,জাফলং,39,jfln,True
 E0159,টাংগুয়ার হাওর,1,tngr hr,False
 E0159,টাংগুয়ার হাওড়,2,tngr hr,True
 E0159,Tanguar Haor,0,tngr hr,False
@@ -751,9 +749,18 @@ E0087,bisnakandi,4,bsnknd,False
 E0087,বিসনাকান্দি,3,bsnknd,False
 E0087,Bichnakandi Tourist Spot,0,bcnknd trst spt,False
 E0533,ভর্তা,4,brt,True
+E0031,Mongla,36,mngl,True
+E0031,mongla,3,mngl,False
+E0031,মংলা,21,mnl,False
+E0031,মোংলা,19,mnl,False
 E0126,mohamaya lake,1,mhm lk,False
 E0126,মহামায়া লেক,3,mhm lk,True
 E0126,Mohamaya Lake,0,mhm lk,False
+E0219,Mahasthangarh,79,mhstngrh,True
+E0219,mahasthangarh,1,mhstngrh,False
+E0219,মহাস্থানগড়,29,mhstngr,False
+E0219,মহাস্তানগড়,1,mhstngr,False
+E0219,মাহাস্থানগড়,1,mhstngr,False
 E0534,মহিষের দুধের দই,1,mhsr dr d,False
 E0534,দই,2,d,True
 E0119,মাধবকুণ্ড,2,mdbknd,True
@@ -770,7 +777,9 @@ E0537,রসমালাই,2,rsml,True
 E0037,Rangamati,63,rngmt,True
 E0037,rangamati,3,rngmt,False
 E0037,রাঙ্গামাটি,37,rngmt,False
+E0037,রাঙামাটি,54,rnmt,False
 E0037,রাঙ্গামটি,1,rngmt,False
+E0037,রাঙ্ামাটি,1,rnmt,False
 E0038,ratargul,1,rtrgl,False
 E0038,রাতারগুল,10,rtrgl,True
 E0038,Ratargul Swamp Forest,0,rtrgl sbmp frst,False
@@ -805,6 +814,9 @@ E0044,সীতাকুন্ড,17,stknd,False
 E0044,সিতাকুন্ড,2,stknd,False
 E0044,শীতাকুন্ড,1,stknd,False
 E0044,শীতাকুণ্ড,1,stknd,False
+E0050,Sundarbans,43,sndrbns,False
+E0050,সুন্দরবন,72,sndrbn,True
+E0050,sundarbans,1,sndrbns,False
 E0040,Saint martin,1,snt mrtn,False
 E0040,Saint Martin,28,snt mrtn,True
 E0040,সেন্ট মার্টিন,3,snt mrtn,False

@@ -301,6 +301,10 @@
   .result-list{margin-top:18px;display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px;}
   .result{background:rgba(255,255,255,0.03);border:1px solid var(--line);border-radius:16px;padding:16px;cursor:pointer;transition:border-color .15s ease, transform .15s ease;}
   .result:hover{border-color:var(--accent);transform:translateY(-2px);}
+  .result.static{cursor:default;}
+  .result.static:hover{transform:none;border-color:var(--line);}
+  .result .hint{color:var(--accent);margin-top:8px;}
+  .result mark{background:rgba(245,165,36,0.35);color:inherit;border-radius:3px;padding:0 1px;}
   .result .title{font-weight:600;font-size:0.96rem;font-family:'Sora',sans-serif;}
   .result .sub{font-size:0.8rem;color:var(--text-dim);margin-top:5px;}
   .kind-badge{font-family:'IBM Plex Mono',monospace;font-size:0.6rem;background:var(--bg-deep);color:var(--leaf);padding:3px 8px;border-radius:20px;margin-right:7px;text-transform:uppercase;}
@@ -324,6 +328,12 @@
   .map-legend{display:flex;gap:16px;flex-wrap:wrap;margin-top:12px;font-size:0.8rem;color:var(--text-dim);align-items:center;}
   .map-legend .dot{display:inline-block;width:12px;height:12px;border-radius:50%;margin-right:6px;vertical-align:-1px;border:2px solid rgba(0,0,0,0.25);}
   .map-legend .dot.ring{background:transparent !important;border:2px dashed var(--text-dim);}
+  .map-legend .line-key{display:inline-block;width:22px;height:0;border-top:3px solid #6B4EDB;margin-right:6px;vertical-align:3px;opacity:0.7;}
+  .coverage-grid{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px;}
+  .coverage-chip{font-size:0.78rem;padding:4px 10px;border-radius:14px;border:1px solid var(--line);}
+  .coverage-chip.no-data{background:rgba(217,59,98,0.10);border-color:rgba(217,59,98,0.35);}
+  .coverage-chip.thin{background:rgba(185,106,14,0.10);border-color:rgba(185,106,14,0.35);}
+  .coverage-chip.covered{background:rgba(12,154,115,0.10);border-color:rgba(12,154,115,0.35);}
   .map-legend .dot.place{width:8px;height:8px;background:var(--text-dim);}
   .vis-filter{display:flex;gap:8px;flex-wrap:wrap;}
   .vis-filter label{flex-direction:row !important;align-items:center;gap:6px !important;background:rgba(255,255,255,0.03);border:1px solid var(--line);border-radius:20px;padding:7px 12px;cursor:pointer;}
@@ -642,6 +652,7 @@
       </div>
       <label class="check"><input type="checkbox" id="mapShowPlaces" checked> Reviewed places</label>
       <label class="check"><input type="checkbox" id="mapRecentOnly"> Recent evidence only</label>
+      <label class="check"><input type="checkbox" id="mapShowLinks" checked> Links to lesser-known places</label>
     </div>
     <div class="map-frame"><div id="gemMap" role="region" aria-label="Map of hidden-gem candidates"></div></div>
     <div class="map-legend" id="mapLegend">
@@ -651,10 +662,12 @@
       <span><span class="dot" style="background:#8B96AD"></span>V3 famous</span>
       <span><span class="dot ring"></span>approximate point</span>
       <span><span class="dot place"></span>reviewed place</span>
+      <span><span class="line-key"></span>talked about together</span>
       <span>bigger = higher gem score</span>
     </div>
     <p class="muted small" id="mapUnmapped"></p>
     <div id="mapDetail"></div>
+    <div id="coverageBox"></div>
   </section>
 
   <!-- SHARE A REVIEW (visitor uploads) -->
@@ -842,7 +855,8 @@ function showTab(name){
 // /app/#map/E0016 opens it on one gem's evidence, and
 // /app/#explore/Kuakata Sea Beach opens a place card.
 function showTabFromHash(){
-  const [name, ref] = location.hash.replace('#', '').split('/');
+  const [tab, ref] = location.hash.replace('#', '').split('/');
+  const name = (tab || '').toLowerCase();
   if(!TABS.includes(name)) return;
   showTab(name);
   if(name === 'map' && ref) showGemDetail(decodeURIComponent(ref));
@@ -1306,11 +1320,81 @@ async function runSearch(){
       out.innerHTML = '<p class="muted" style="margin-top:14px;">Nothing in the corpus matches that yet.</p>';
       return;
     }
-    out.innerHTML = `<div class="result-list">${hits.map(h => `
-      <div class="result" ${h.kind === 'place' ? `onclick="openPlace('${h.id}')"` : ''}>
-        <div class="title"><span class="kind-badge">${escapeHtml(h.kind)}</span>${escapeHtml(h.label)}</div>
-        <div class="sub">${escapeHtml(h.detail || '')}</div>
-      </div>`).join('')}</div>`;
+    const words = query.split(/\s+/).filter(w => w.length >= 2);
+    out.innerHTML = `<div class="result-list">${hits.map(h => {
+      const action = SEARCH_ACTIONS[h.kind];
+      return `
+      <div class="result${action ? '' : ' static'}" ${action ? `role="button" tabindex="0"
+          data-kind="${escapeHtml(h.kind)}" data-id="${escapeHtml(h.id)}" data-place="${escapeHtml(h.place || '')}"
+          onclick="openSearchHit(this.dataset)" onkeydown="if(event.key === 'Enter') openSearchHit(this.dataset)"` : ''}>
+        <div class="title"><span class="kind-badge">${escapeHtml(h.kind)}</span>${highlight(h.label, words)}</div>
+        <div class="sub">${highlight(h.detail || '', words)}</div>
+        ${action ? `<div class="sub hint">${escapeHtml(action)} →</div>` : ''}
+      </div>`;
+    }).join('')}</div>`;
+  }catch(err){
+    out.innerHTML = `<p class="error">${escapeHtml(err.message)}</p>`;
+  }
+}
+
+// What clicking each kind of result does, and the hint shown for it.
+const SEARCH_ACTIONS = {
+  place: 'Open the place card', review: 'Open the place it is about',
+  food: 'Where to find it', activity: 'Where to do it', transport: 'Where it is used',
+  gem: 'Show on the gem map',
+};
+
+// The query's words marked in an already-escaped string. Matching ignores case
+// and either Unicode form of a Bangla nukta letter, as the search itself does.
+function highlight(text, words){
+  let html = escapeHtml(text);
+  const forms = new Set();
+  words.forEach(w => {
+    forms.add(w);
+    forms.add(w.replace(/য়/g, 'য়').replace(/ড়/g, 'ড়').replace(/ঢ়/g, 'ঢ়'));
+    forms.add(w.replace(/য়/g, 'য়').replace(/ড়/g, 'ড়').replace(/ঢ়/g, 'ঢ়'));
+  });
+  [...forms].map(f => escapeHtml(f).replace(/[.*+?^${}()|[\]\\]/g, '\\$&')).filter(Boolean).forEach(pattern => {
+    html = html.replace(new RegExp(`(${pattern})(?![^<]*>)`, 'gi'), '<mark>$1</mark>');
+  });
+  return html;
+}
+
+function openSearchHit(hit){
+  if(hit.kind === 'place') return openPlace(hit.id);
+  if(hit.kind === 'review' && hit.place) return openPlace(hit.place);
+  if(hit.kind === 'gem') { location.hash = 'map/' + encodeURIComponent(hit.id); return; }
+  if(['food', 'activity', 'transport'].includes(hit.kind)) return showWhereOffered(hit.id);
+}
+
+// A food, activity or transport mode: every place whose reviews mention it,
+// with a sentence from one of those reviews. Each place opens its card.
+async function showWhereOffered(entityId){
+  const out = document.getElementById('placeDetail');
+  out.innerHTML = '<p class="loading">Finding where…</p>';
+  try{
+    const data = await api(`/api/offers/${encodeURIComponent(entityId)}`);
+    const special = data.local_speciality
+      ? `<div class="speciality">🍽 A local speciality of <strong>${escapeHtml(data.local_speciality.district)}</strong>
+         — ${escapeHtml(data.local_speciality.reviews_in_district)} of ${escapeHtml(data.local_speciality.reviews_total)}
+         reviews that mention it are from there</div>` : '';
+    const rows = data.places.map(p => `
+      <div class="offer">
+        <div class="offer-head">
+          <button class="link-btn" data-place="${escapeHtml(p.place_name)}" onclick="openPlace(this.dataset.place)">${escapeHtml(p.place_name)}</button>
+          <span class="muted small">${escapeHtml(p.n_reviews)} review(s)${p.district ? ' · ' + escapeHtml(p.district) : ''}${p.last_year ? ' · last ' + escapeHtml(p.last_year) : ''}</span>
+        </div>
+        <div class="quote">“${escapeHtml(p.example_sentence)}” <span class="muted small">— ${escapeHtml(p.example_year || '')}</span></div>
+      </div>`).join('');
+    out.innerHTML = `
+      <div class="card" style="margin-top:18px;">
+        <h3>${escapeHtml(data.canonical_name)} <span class="mono small">${escapeHtml(data.entity_type)}</span></h3>
+        <p class="muted small">Spellings reviewers used: ${data.spellings.map(escapeHtml).join(', ')}</p>
+        ${special}
+        <p class="muted small" style="margin:12px 0 6px;">Places whose reviews mention it (click one for its card):</p>
+        ${rows || '<p class="muted small">No place yet.</p>'}
+      </div>`;
+    out.scrollIntoView({behavior: 'smooth', block: 'nearest'});
   }catch(err){
     out.innerHTML = `<p class="error">${escapeHtml(err.message)}</p>`;
   }
@@ -1551,7 +1635,8 @@ const COORD_LABELS = {
   google_maps_place_list: 'point from our Google Maps place list',
   near_host_place: 'approximate point',
 };
-let GEM_MAP = null, GEM_LAYER = null, PLACE_LAYER = null, MAP_DATA = null, MAP_FITTED = false;
+let GEM_MAP = null, GEM_LAYER = null, PLACE_LAYER = null, LINK_LAYER = null, MAP_DATA = null, MAP_FITTED = false;
+let MAP_LINKS = [];
 
 function gemBadges(g){
   const vis = g.visibility || 'unknown';
@@ -1584,8 +1669,13 @@ async function loadGemMap(){
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
   }).addTo(GEM_MAP);
   PLACE_LAYER = L.layerGroup().addTo(GEM_MAP);
+  LINK_LAYER = L.layerGroup().addTo(GEM_MAP);  // under the points, so a click finds the point
   GEM_LAYER = L.layerGroup().addTo(GEM_MAP);   // added last so gems sit above places
-  document.querySelectorAll('#mapVisFilter input, #mapShowPlaces, #mapRecentOnly')
+  // Links are optional context: if they fail to load, the map still works.
+  try{ MAP_LINKS = (await api('/api/gems/connections' + qs({lesser_known_only: true}))).connections; }
+  catch(err){ MAP_LINKS = []; }
+  loadCoverage();
+  document.querySelectorAll('#mapVisFilter input, #mapShowPlaces, #mapRecentOnly, #mapShowLinks')
     .forEach(input => input.addEventListener('change', renderGemMap));
 
   const unmapped = MAP_DATA.unmapped_gems || [];
@@ -1601,6 +1691,22 @@ function renderGemMap(){
   const showPlaces = document.getElementById('mapShowPlaces').checked;
   const recentOnly = document.getElementById('mapRecentOnly').checked;
   GEM_LAYER.clearLayers();
+  LINK_LAYER.clearLayers();
+  if(document.getElementById('mapShowLinks').checked){
+    const strongest = Math.max(1, ...MAP_LINKS.map(l => l.n_reviews));
+    MAP_LINKS.forEach(link => {
+      if(link.a_lat === null || link.b_lat === null) return;
+      // An approximate point sits on its host place: a link between them has no length to draw.
+      if(link.a_lat === link.b_lat && link.a_lng === link.b_lng) return;
+      if(!levels.has(link.lesser_known_visibility)) return;
+      L.polyline([[link.a_lat, link.a_lng], [link.b_lat, link.b_lng]], {
+        color: '#6B4EDB', weight: 1.5 + 5 * link.n_reviews / strongest, opacity: 0.45,
+      }).bindPopup(`<strong>${escapeHtml(link.place_a)}</strong> ↔ <strong>${escapeHtml(link.place_b)}</strong><br>
+          talked about together in ${escapeHtml(link.n_reviews)} review(s)<br>
+          <div class="quote" style="margin-top:6px;">“${escapeHtml(link.example_sentence)}”</div>`)
+        .addTo(LINK_LAYER);
+    });
+  }
   PLACE_LAYER.clearLayers();
 
   const features = MAP_DATA.features || [];
@@ -1686,6 +1792,38 @@ function openGem(entityId){
   else location.hash = target;
 }
 
+// Blind spots: every district, with how much data the engine has there.
+async function loadCoverage(){
+  const box = document.getElementById('coverageBox');
+  let data;
+  try{ data = await api('/api/coverage'); }catch(err){ box.innerHTML = ''; return; }
+  const chip = d => `<span class="coverage-chip ${escapeHtml(d.status.replace(' ', '-'))}"
+      title="${escapeHtml(d.reviews)} reviews · ${escapeHtml(d.places)} place(s)${d.place_names.length ? ': ' + escapeHtml(d.place_names.join(', ')) : ''}">${escapeHtml(d.district)}</span>`;
+  const rows = data.by_division.map(r => `
+    <tr><td>${escapeHtml(r.division)}</td><td>${escapeHtml(r.districts)}</td><td>${escapeHtml(r.no_data)}</td>
+        <td>${escapeHtml(r.thin)}</td><td>${escapeHtml(r.covered)}</td><td>${escapeHtml(r.reviews)}</td></tr>`).join('');
+  const byStatus = s => data.districts.filter(d => d.status === s).map(chip).join('');
+  box.innerHTML = `
+    <div class="card" style="margin-top:22px;">
+      <h3>Blind spots — where the engine cannot see yet</h3>
+      <p class="muted small">
+        Gems can only be found where people have written reviews. <strong>${escapeHtml(data.summary['no data'])}
+        of 64 districts</strong> have no reviewed place at all, and ${escapeHtml(data.summary.thin)} more are thin
+        (under 100 reviews or a single place). These are where the next collection round should go.
+        Hover a district for its numbers.
+      </p>
+      <div class="table-scroll">
+        <table class="compare-table">
+          <tr><th>Division</th><th>Districts</th><th>No data</th><th>Thin</th><th>Covered</th><th>Reviews</th></tr>
+          ${rows}
+        </table>
+      </div>
+      <p class="muted small" style="margin:14px 0 0;">No data:</p><div class="coverage-grid">${byStatus('no data')}</div>
+      <p class="muted small" style="margin:12px 0 0;">Thin:</p><div class="coverage-grid">${byStatus('thin')}</div>
+      <p class="muted small" style="margin:12px 0 0;">Covered:</p><div class="coverage-grid">${byStatus('covered')}</div>
+    </div>`;
+}
+
 async function showGemDetail(entityId){
   const out = document.getElementById('mapDetail');
   out.innerHTML = '<p class="muted">Loading evidence…</p>';
@@ -1714,6 +1852,12 @@ async function showGemDetail(entityId){
           · <span class="mono">${escapeHtml(m.language || '')}</span>
         </div>
       </div>`).join('');
+    let linked = [];
+    try{ linked = (await api('/api/gems/connections' + qs({place: g.canonical_name}))).connections; }catch(err){}
+    const together = linked.map(l => {
+      const other = l.place_a.toLowerCase() === g.canonical_name.toLowerCase() ? l.place_b : l.place_a;
+      return `<span class="tag-pill" title="${escapeHtml(l.example_sentence)}">${escapeHtml(other)} · ${escapeHtml(l.n_reviews)}</span>`;
+    }).join('');
     const foundIn = detail.found_in_places.map(p =>
       `<span class="tag-pill">${escapeHtml(p.place_name)} · ${escapeHtml(p.n_reviews)}</span>`).join('');
     const spellings = detail.variants.map(v =>
@@ -1730,6 +1874,7 @@ async function showGemDetail(entityId){
         <p class="muted small" style="margin-bottom:6px;">How the score is made (five fixed parts):</p>
         ${terms}
         ${foundIn ? `<p class="muted small" style="margin:14px 0 4px;">Mentioned in reviews of:</p>${foundIn}` : ''}
+        ${together ? `<p class="muted small" style="margin:14px 0 4px;">Talked about together with (reviews):</p>${together}` : ''}
         ${spellings ? `<p class="muted small" style="margin:14px 0 4px;">Spellings seen:</p>${spellings}` : ''}
         <p class="muted small" style="margin:14px 0 6px;">Evidence — the reviewers' own sentences, newest first:</p>
         ${quotes || '<p class="muted small">No evidence rows.</p>'}

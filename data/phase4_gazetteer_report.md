@@ -37,6 +37,7 @@ and Wikidata say. Only ever raised, never lowered.
 | Jaflong | V2 | V3 | Jaflong Zero Point | 5402 |
 | Kantajew Temple | V2 | V3 | Kantajew Temple | 4827 |
 | Alutila | V2 | V3 | Alutila Cave | 5418 |
+| Kuakata | V2 | V3 | Kuakata Sea Beach | 6898 |
 | Nilgiri | V1 | V2 | Nilgiri | 600 |
 | Kolatoli Beach | V1 | V3 | Kolatoli Beach | 4676 |
 | Ratargul | V2 | V3 | Ratargul Swamp Forest | 7366 |
@@ -50,7 +51,6 @@ and Wikidata say. Only ever raised, never lowered.
 | Sada Matir Pahar | V0 | V1 | Sada Matir Pahar (White Clay Hills) | 91 |
 | Sajek Valley | V2 | V3 | Sajek Valley | 15776 |
 | Nilachal | V1 | V3 | Nilachal Tourist Center | 6651 |
-| Kuakata Sea Beach | V2 | V3 | Kuakata Sea Beach | 6898 |
 | Tanguar Haor | V2 | V3 | Tanguar Haor | 5300 |
 | Hiron Point | V1 | V2 | Hiron Point (Nilkamal) | 539 |
 | Karamjal | V0 | V3 | Sundarbans (Karamjal Wildlife Centre) | 2382 |

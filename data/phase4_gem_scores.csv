@@ -1,55 +1,55 @@
 entity_id,canonical_name,entity_type,gem_score,n_reviews,n_mentions,n_sources,n_years,visibility,already_official,term_mentions,term_sentiment,term_hidden,term_distinct,term_recency,terms_used,n_sentiment_sentences,sentiment_method,distinct_method
-E0016,Gangamati,PLACE,0.9083,12,20,1,5,V0,False,1.0,0.6608,1.0,0.8943,0.75,distinct|hidden|mentions|recency|sentiment,7,vader-en,tfidf-lexical
-E0042,Sardar Bari,PLACE,0.7982,20,27,1,6,V1,False,1.0,0.6807,0.65,0.874,0.7,distinct|hidden|mentions|recency|sentiment,18,vader-en,tfidf-lexical
-E0197,Birisiri,PLACE,0.7518,16,48,1,7,V1,False,1.0,0.677,0.65,0.9103,0.1875,distinct|hidden|mentions|recency|sentiment,5,vader-en,tfidf-lexical
-E0036,Pashur,PLACE,0.749,10,11,1,6,V1,False,1.0,0.5612,0.65,0.8652,0.4,distinct|hidden|mentions|recency|sentiment,11,vader-en,tfidf-lexical
-E0013,Fatrar Chor,PLACE,0.694,3,3,1,2,V0,False,0.3,0.5,1.0,0.86,1.0,distinct|hidden|mentions|recency|sentiment,1,vader-en,tfidf-lexical
-E0033,Nilgiri,PLACE,0.6806,10,13,1,6,V2,False,1.0,0.672,0.3,0.9318,0.5,distinct|hidden|mentions|recency|sentiment,9,vader-en,tfidf-lexical
-E0218,Lalakhal,PLACE,0.6767,38,101,1,9,V2,False,1.0,0.7032,0.3,0.8751,0.5,distinct|hidden|mentions|recency|sentiment,47,vader-en,tfidf-lexical
-E0031,Mongla,PLACE,0.6688,30,39,1,8,V2,False,1.0,0.5882,0.3,0.8483,0.6333,distinct|hidden|mentions|recency|sentiment,39,vader-en,tfidf-lexical
-E0044,Sitakunda,PLACE,0.6595,106,238,1,9,V2,False,1.0,0.592,0.3,0.8462,0.5377,distinct|hidden|mentions|recency|sentiment,90,vader-en,tfidf-lexical
-E0219,Mahasthangarh,PLACE,0.6549,36,80,1,10,V2,False,1.0,0.6053,0.3,0.7902,0.5556,distinct|hidden|mentions|recency|sentiment,79,vader-en,tfidf-lexical
-E0025,Kaptai,PLACE,0.647,19,20,1,8,V2,False,1.0,0.6925,0.3,0.8455,0.2632,distinct|hidden|mentions|recency|sentiment,13,vader-en,tfidf-lexical
-E0073,Muradpur,PLACE,0.6397,24,28,1,7,V2,False,1.0,0.5448,0.3,0.7586,0.5417,distinct|hidden|mentions|recency|sentiment,17,vader-en,tfidf-lexical
-E0144,Sada Matir Pahar,PLACE,0.632,4,4,1,3,V1,False,0.4,0.5,0.65,0.9465,1.0,distinct|hidden|mentions|recency|sentiment,1,vader-en,tfidf-lexical
+E0016,Gangamati,PLACE,0.9084,12,20,1,5,V0,False,1.0,0.6608,1.0,0.8952,0.75,distinct|hidden|mentions|recency|sentiment,7,vader-en,tfidf-lexical
+E0042,Sardar Bari,PLACE,0.7982,20,27,1,6,V1,False,1.0,0.6807,0.65,0.8741,0.7,distinct|hidden|mentions|recency|sentiment,18,vader-en,tfidf-lexical
+E0197,Birisiri,PLACE,0.7519,16,48,1,7,V1,False,1.0,0.677,0.65,0.9106,0.1875,distinct|hidden|mentions|recency|sentiment,5,vader-en,tfidf-lexical
+E0036,Pashur,PLACE,0.7489,10,11,1,6,V1,False,1.0,0.5612,0.65,0.8649,0.4,distinct|hidden|mentions|recency|sentiment,11,vader-en,tfidf-lexical
+E0013,Fatrar Chor,PLACE,0.694,3,3,1,2,V0,False,0.3,0.5,1.0,0.8603,1.0,distinct|hidden|mentions|recency|sentiment,1,vader-en,tfidf-lexical
+E0033,Nilgiri,PLACE,0.6806,10,13,1,6,V2,False,1.0,0.672,0.3,0.9317,0.5,distinct|hidden|mentions|recency|sentiment,9,vader-en,tfidf-lexical
+E0031,Mongla,PLACE,0.6781,52,79,1,8,V2,False,1.0,0.5882,0.3,0.8584,0.7115,distinct|hidden|mentions|recency|sentiment,39,vader-en,tfidf-lexical
+E0218,Lalakhal,PLACE,0.6768,38,101,1,9,V2,False,1.0,0.7032,0.3,0.8752,0.5,distinct|hidden|mentions|recency|sentiment,47,vader-en,tfidf-lexical
+E0219,Mahasthangarh,PLACE,0.6603,51,111,1,10,V2,False,1.0,0.6053,0.3,0.7917,0.6078,distinct|hidden|mentions|recency|sentiment,79,vader-en,tfidf-lexical
+E0044,Sitakunda,PLACE,0.6595,106,238,1,9,V2,False,1.0,0.592,0.3,0.8465,0.5377,distinct|hidden|mentions|recency|sentiment,90,vader-en,tfidf-lexical
+E0025,Kaptai,PLACE,0.647,19,20,1,8,V2,False,1.0,0.6925,0.3,0.8453,0.2632,distinct|hidden|mentions|recency|sentiment,13,vader-en,tfidf-lexical
+E0073,Muradpur,PLACE,0.6398,24,28,1,7,V2,False,1.0,0.5448,0.3,0.7593,0.5417,distinct|hidden|mentions|recency|sentiment,17,vader-en,tfidf-lexical
+E0144,Sada Matir Pahar,PLACE,0.632,4,4,1,3,V1,False,0.4,0.5,0.65,0.9469,1.0,distinct|hidden|mentions|recency|sentiment,1,vader-en,tfidf-lexical
+E0148,Shashi Lodge,PLACE,0.6262,5,16,1,2,V1,False,0.5,0.5428,0.65,0.7988,0.8,distinct|hidden|mentions|recency|sentiment,7,vader-en,tfidf-lexical
 E0001,Ahsan Manzil,PLACE,0.6216,10,12,1,3,V3,True,1.0,0.6328,0.0,0.9114,0.9,distinct|hidden|mentions|recency|sentiment,5,vader-en,tfidf-lexical
-E0148,Shashi Lodge,PLACE,0.6113,4,13,1,1,V1,False,0.4,0.5428,0.65,0.7658,1.0,distinct|hidden|mentions|recency|sentiment,7,vader-en,tfidf-lexical
-E0050,Sundarbans,PLACE,0.6027,33,44,1,7,V3,True,1.0,0.6623,0.0,0.8303,0.7879,distinct|hidden|mentions|recency|sentiment,44,vader-en,tfidf-lexical
-E0137,Padma,PLACE,0.5903,206,322,1,10,V3,True,1.0,0.7289,0.0,0.7856,0.6311,distinct|hidden|mentions|recency|sentiment,194,vader-en,tfidf-lexical
-E0113,Kolatoli Beach,PLACE,0.5888,11,13,1,7,V3,True,1.0,0.7234,0.0,0.8385,0.5455,distinct|hidden|mentions|recency|sentiment,5,vader-en,tfidf-lexical
-E0091,China Matir Pahar,PLACE,0.5878,8,9,1,6,V2,False,0.8,0.5586,0.3,0.8265,0.5,distinct|hidden|mentions|recency|sentiment,5,vader-en,tfidf-lexical
-E0047,Sonargaon,PLACE,0.5863,50,92,1,5,V3,True,1.0,0.6003,0.0,0.7215,0.88,distinct|hidden|mentions|recency|sentiment,92,vader-en,tfidf-lexical
-E0048,Sreemangal,PLACE,0.584,101,177,1,11,V3,True,1.0,0.6677,0.0,0.8228,0.604,distinct|hidden|mentions|recency|sentiment,109,vader-en,tfidf-lexical
+E0050,Sundarbans,PLACE,0.5961,87,116,1,10,V3,True,1.0,0.6623,0.0,0.8824,0.6437,distinct|hidden|mentions|recency|sentiment,44,vader-en,tfidf-lexical
+E0137,Padma,PLACE,0.5903,206,322,1,10,V3,True,1.0,0.7289,0.0,0.7855,0.6311,distinct|hidden|mentions|recency|sentiment,194,vader-en,tfidf-lexical
+E0113,Kolatoli Beach,PLACE,0.5889,11,13,1,7,V3,True,1.0,0.7234,0.0,0.8391,0.5455,distinct|hidden|mentions|recency|sentiment,5,vader-en,tfidf-lexical
+E0091,China Matir Pahar,PLACE,0.5878,8,9,1,6,V2,False,0.8,0.5586,0.3,0.8266,0.5,distinct|hidden|mentions|recency|sentiment,5,vader-en,tfidf-lexical
+E0024,Jaflong,PLACE,0.5875,45,63,1,8,V3,True,1.0,0.6192,0.0,0.8827,0.6222,distinct|hidden|mentions|recency|sentiment,24,vader-en,tfidf-lexical
+E0047,Sonargaon,PLACE,0.5862,50,92,1,5,V3,True,1.0,0.6003,0.0,0.7212,0.88,distinct|hidden|mentions|recency|sentiment,92,vader-en,tfidf-lexical
+E0048,Sreemangal,PLACE,0.584,101,177,1,11,V3,True,1.0,0.6677,0.0,0.8227,0.604,distinct|hidden|mentions|recency|sentiment,109,vader-en,tfidf-lexical
 E0040,Saint Martin,PLACE,0.5837,21,32,1,8,V3,True,1.0,0.7792,0.0,0.604,0.7619,distinct|hidden|mentions|recency|sentiment,29,vader-en,tfidf-lexical
-E0024,Jaflong,PLACE,0.5833,21,24,1,7,V3,True,1.0,0.6192,0.0,0.8569,0.619,distinct|hidden|mentions|recency|sentiment,24,vader-en,tfidf-lexical
-E0002,Bagerhat,PLACE,0.5814,132,219,1,9,V3,True,1.0,0.6273,0.0,0.7538,0.7424,distinct|hidden|mentions|recency|sentiment,96,vader-en,tfidf-lexical
-E0111,Khagrachari,PLACE,0.5751,79,155,1,10,V3,True,1.0,0.6498,0.0,0.8384,0.519,distinct|hidden|mentions|recency|sentiment,66,vader-en,tfidf-lexical
-E0012,Cox's Bazar,PLACE,0.5708,181,282,1,11,V3,True,1.0,0.6893,0.0,0.7183,0.5967,distinct|hidden|mentions|recency|sentiment,280,vader-en,tfidf-lexical
-E0211,Durgapur,PLACE,0.5662,63,88,1,10,V3,True,1.0,0.613,0.0,0.8866,0.4127,distinct|hidden|mentions|recency|sentiment,30,vader-en,tfidf-lexical
-E0037,Rangamati,PLACE,0.5585,75,104,1,10,V3,True,1.0,0.6702,0.0,0.813,0.36,distinct|hidden|mentions|recency|sentiment,65,vader-en,tfidf-lexical
-E0003,Bandarban,PLACE,0.5577,365,664,1,12,V3,True,1.0,0.6542,0.0,0.7787,0.4274,distinct|hidden|mentions|recency|sentiment,409,vader-en,tfidf-lexical
-E0110,Kantajew Temple,PLACE,0.5567,19,24,1,8,V3,True,1.0,0.6747,0.0,0.6858,0.5263,distinct|hidden|mentions|recency|sentiment,23,vader-en,tfidf-lexical
-E0087,Bichnakandi Tourist Spot,PLACE,0.5537,29,67,1,8,V3,True,1.0,0.6447,0.0,0.8398,0.3103,distinct|hidden|mentions|recency|sentiment,62,vader-en,tfidf-lexical
-E0221,Paharpur,PLACE,0.5445,20,25,1,8,V3,True,1.0,0.4692,0.0,0.8276,0.5,distinct|hidden|mentions|recency|sentiment,19,vader-en,tfidf-lexical
-E0081,Alutila,PLACE,0.5413,14,19,1,10,V3,True,1.0,0.6221,0.0,0.844,0.2143,distinct|hidden|mentions|recency|sentiment,9,vader-en,tfidf-lexical
-E0009,Chandranath,PLACE,0.5407,8,8,1,5,V3,True,0.8,0.5929,0.0,0.9119,0.75,distinct|hidden|mentions|recency|sentiment,3,vader-en,tfidf-lexical
+E0002,Bagerhat,PLACE,0.5814,132,219,1,9,V3,True,1.0,0.6273,0.0,0.7536,0.7424,distinct|hidden|mentions|recency|sentiment,96,vader-en,tfidf-lexical
+E0111,Khagrachari,PLACE,0.5751,79,155,1,10,V3,True,1.0,0.6498,0.0,0.8385,0.519,distinct|hidden|mentions|recency|sentiment,66,vader-en,tfidf-lexical
+E0012,Cox's Bazar,PLACE,0.5741,343,593,1,11,V3,True,1.0,0.6893,0.0,0.7593,0.5685,distinct|hidden|mentions|recency|sentiment,280,vader-en,tfidf-lexical
+E0211,Durgapur,PLACE,0.5662,63,88,1,10,V3,True,1.0,0.613,0.0,0.8867,0.4127,distinct|hidden|mentions|recency|sentiment,30,vader-en,tfidf-lexical
+E0037,Rangamati,PLACE,0.5622,87,159,1,10,V3,True,1.0,0.6702,0.0,0.8328,0.3678,distinct|hidden|mentions|recency|sentiment,65,vader-en,tfidf-lexical
+E0003,Bandarban,PLACE,0.5576,365,664,1,12,V3,True,1.0,0.6542,0.0,0.7785,0.4274,distinct|hidden|mentions|recency|sentiment,409,vader-en,tfidf-lexical
+E0110,Kantajew Temple,PLACE,0.5566,19,24,1,8,V3,True,1.0,0.6747,0.0,0.6854,0.5263,distinct|hidden|mentions|recency|sentiment,23,vader-en,tfidf-lexical
+E0087,Bichnakandi Tourist Spot,PLACE,0.5537,29,67,1,8,V3,True,1.0,0.6447,0.0,0.8396,0.3103,distinct|hidden|mentions|recency|sentiment,62,vader-en,tfidf-lexical
+E0221,Paharpur,PLACE,0.5445,20,25,1,8,V3,True,1.0,0.4692,0.0,0.8275,0.5,distinct|hidden|mentions|recency|sentiment,19,vader-en,tfidf-lexical
+E0081,Alutila,PLACE,0.5413,14,19,1,10,V3,True,1.0,0.6221,0.0,0.8439,0.2143,distinct|hidden|mentions|recency|sentiment,9,vader-en,tfidf-lexical
+E0009,Chandranath,PLACE,0.5408,8,8,1,5,V3,True,0.8,0.5929,0.0,0.9122,0.75,distinct|hidden|mentions|recency|sentiment,3,vader-en,tfidf-lexical
 E0038,Ratargul,PLACE,0.5269,9,11,1,6,V3,True,0.9,0.7464,0.0,0.8922,0.1111,distinct|hidden|mentions|recency|sentiment,1,vader-en,tfidf-lexical
-E0030,Madhabpur Lake,PLACE,0.5167,4,5,1,4,V2,False,0.4,0.6555,0.3,0.889,0.75,distinct|hidden|mentions|recency|sentiment,3,vader-en,tfidf-lexical
+E0115,Kuakata,PLACE,0.5225,6,19,1,3,V3,True,0.6,0.7764,0.0,0.9513,0.8333,distinct|hidden|mentions|recency|sentiment,3,vader-en,tfidf-lexical
+E0030,Madhabpur Lake,PLACE,0.5167,4,5,1,4,V2,False,0.4,0.6555,0.3,0.8891,0.75,distinct|hidden|mentions|recency|sentiment,3,vader-en,tfidf-lexical
 E0535,Muktagachha,PLACE,0.5059,3,3,1,1,V2,False,0.3,,0.3,1.0,1.0,distinct|hidden|mentions|recency,0,unavailable,tfidf-lexical
 E0006,Boga Lake,PLACE,0.4851,4,4,1,2,V3,True,0.4,0.8595,0.0,0.908,1.0,distinct|hidden|mentions|recency|sentiment,3,vader-en,tfidf-lexical
-E0035,Panam City,PLACE,0.4737,8,8,1,5,V3,True,0.8,0.5805,0.0,0.8942,0.125,distinct|hidden|mentions|recency|sentiment,8,vader-en,tfidf-lexical
-E0020,Guliakhali Sea Beach,PLACE,0.4715,7,9,1,5,V3,True,0.7,0.5375,0.0,0.825,0.5714,distinct|hidden|mentions|recency|sentiment,8,vader-en,tfidf-lexical
-E0028,Lalbagh Fort,PLACE,0.4373,5,5,1,4,V3,True,0.5,0.6279,0.0,0.8876,0.6,distinct|hidden|mentions|recency|sentiment,5,vader-en,tfidf-lexical
-E0114,Kotka,PLACE,0.4273,5,6,1,3,V3,True,0.5,0.6711,0.0,0.9112,0.4,distinct|hidden|mentions|recency|sentiment,3,vader-en,tfidf-lexical
-E0115,Kuakata Sea Beach,PLACE,0.4171,3,3,1,2,V3,True,0.3,0.7764,0.0,0.7374,1.0,distinct|hidden|mentions|recency|sentiment,3,vader-en,tfidf-lexical
-E0214,Hiron Point,PLACE,0.4012,3,3,1,2,V2,False,0.3,0.5734,0.3,0.9012,0.0,distinct|hidden|mentions|recency|sentiment,3,vader-en,tfidf-lexical
-E0216,Karamjal,PLACE,0.3974,3,3,1,2,V3,True,0.3,0.7107,0.0,0.8942,0.6667,distinct|hidden|mentions|recency|sentiment,1,vader-en,tfidf-lexical
+E0035,Panam City,PLACE,0.4737,8,8,1,5,V3,True,0.8,0.5805,0.0,0.894,0.125,distinct|hidden|mentions|recency|sentiment,8,vader-en,tfidf-lexical
+E0020,Guliakhali Sea Beach,PLACE,0.4715,7,9,1,5,V3,True,0.7,0.5375,0.0,0.8247,0.5714,distinct|hidden|mentions|recency|sentiment,8,vader-en,tfidf-lexical
+E0028,Lalbagh Fort,PLACE,0.4373,5,5,1,4,V3,True,0.5,0.6279,0.0,0.8875,0.6,distinct|hidden|mentions|recency|sentiment,5,vader-en,tfidf-lexical
+E0114,Kotka,PLACE,0.4273,5,6,1,3,V3,True,0.5,0.6711,0.0,0.9108,0.4,distinct|hidden|mentions|recency|sentiment,3,vader-en,tfidf-lexical
+E0214,Hiron Point,PLACE,0.4011,3,3,1,2,V2,False,0.3,0.5734,0.3,0.9009,0.0,distinct|hidden|mentions|recency|sentiment,3,vader-en,tfidf-lexical
+E0216,Karamjal,PLACE,0.3974,3,3,1,2,V3,True,0.3,0.7107,0.0,0.8938,0.6667,distinct|hidden|mentions|recency|sentiment,1,vader-en,tfidf-lexical
 E0146,Sajek Valley,PLACE,0.3965,4,4,1,3,V3,True,0.4,0.7519,0.0,0.9246,0.25,distinct|hidden|mentions|recency|sentiment,4,vader-en,tfidf-lexical
-E0163,Varendra Research Museum,PLACE,0.3945,2,2,1,1,V3,True,0.2,0.6929,0.0,0.8703,1.0,distinct|hidden|mentions|recency|sentiment,2,vader-en,tfidf-lexical
-E0157,T-badh,PLACE,0.3924,4,5,1,4,V3,True,0.4,0.7311,0.0,0.7515,0.5,distinct|hidden|mentions|recency|sentiment,5,vader-en,tfidf-lexical
-E0029,Lawachara National Park,PLACE,0.3889,2,2,1,2,V3,True,0.2,0.7577,0.0,0.7682,1.0,distinct|hidden|mentions|recency|sentiment,2,vader-en,tfidf-lexical
-E0126,Mohamaya Lake,PLACE,0.3883,4,4,1,3,V3,True,0.4,0.5,0.0,0.9556,0.5,distinct|hidden|mentions|recency|sentiment,1,vader-en,tfidf-lexical
-E0222,Puthia,PLACE,0.3778,3,3,1,2,V2,False,0.3,0.5,0.3,0.8185,0.0,distinct|hidden|mentions|recency|sentiment,3,vader-en,tfidf-lexical
+E0163,Varendra Research Museum,PLACE,0.3945,2,2,1,1,V3,True,0.2,0.6929,0.0,0.8701,1.0,distinct|hidden|mentions|recency|sentiment,2,vader-en,tfidf-lexical
+E0157,T-badh,PLACE,0.3924,4,5,1,4,V3,True,0.4,0.7311,0.0,0.7514,0.5,distinct|hidden|mentions|recency|sentiment,5,vader-en,tfidf-lexical
+E0029,Lawachara National Park,PLACE,0.3889,2,2,1,2,V3,True,0.2,0.7577,0.0,0.768,1.0,distinct|hidden|mentions|recency|sentiment,2,vader-en,tfidf-lexical
+E0126,Mohamaya Lake,PLACE,0.3884,4,4,1,3,V3,True,0.4,0.5,0.0,0.9562,0.5,distinct|hidden|mentions|recency|sentiment,1,vader-en,tfidf-lexical
+E0222,Puthia,PLACE,0.3778,3,3,1,2,V2,False,0.3,0.5,0.3,0.8183,0.0,distinct|hidden|mentions|recency|sentiment,3,vader-en,tfidf-lexical
 E0088,Bijoypur Lake,PLACE,0.3647,2,2,1,2,V3,True,0.2,,0.0,1.0,1.0,distinct|hidden|mentions|recency,0,unavailable,tfidf-lexical
 E0032,Nilachal,PLACE,0.359,3,3,1,3,V3,True,0.3,0.429,0.0,0.92,0.6667,distinct|hidden|mentions|recency|sentiment,1,vader-en,tfidf-lexical
-E0108,I-Badh,PLACE,0.2436,2,2,1,1,V3,True,0.2,0.3422,0.0,0.882,0.0,distinct|hidden|mentions|recency|sentiment,2,vader-en,tfidf-lexical
+E0108,I-Badh,PLACE,0.2436,2,2,1,1,V3,True,0.2,0.3422,0.0,0.8819,0.0,distinct|hidden|mentions|recency|sentiment,2,vader-en,tfidf-lexical

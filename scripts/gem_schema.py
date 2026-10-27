@@ -407,8 +407,11 @@ def strip_article(name: str) -> str:
 # ("ইলিশের", "সাজেকে"). Normalised like the text, because "য়" can be typed as one
 # codepoint or as য + nukta. Longest first.
 BANGLA_SUFFIXES = sorted({normalize_bangla(s) for s in [
-    "গুলোতে", "গুলো", "দের", "তেও", "েরও", "য়ের", "য়েই", "ের", "এর", "েই", "কে",
+    "গুলোতে", "গুলো", "দের", "তেও", "েরও", "কেও", "য়ের", "য়েই", "ের", "এর", "েই", "কে",
     "য়", "তে", "টা", "টি", "র", "ে", "ই", "ও",
+    # "with" ("আহসান মঞ্জিলসহ"), and the visarga reviewers type as a colon
+    # ("রামসাগরঃ").
+    "সহ", "ঃ",
 ]}, key=lambda s: (-len(s), s))
 
 _BENGALI_CHAR = "ঀ-৿"

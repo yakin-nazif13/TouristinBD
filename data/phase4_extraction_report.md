@@ -4,28 +4,28 @@ Extractor: **gazetteer**. Section 5.2's grounding rule is applied to every
 candidate: a surface form that cannot be located in the review is dropped.
 
 - Reviews processed: **14841**
-- Grounded mentions: **6938**
-- Reviews with at least one: 3415
-- Distinct surface forms: 713
+- Grounded mentions: **7509**
+- Reviews with at least one: 3597
+- Distinct surface forms: 725
 
 ## Grounding
 
-- Candidates proposed: 6938
-- Kept: 6938
+- Candidates proposed: 7509
+- Kept: 7509
 - Dropped: 0 (**0.0%**)
 
 | match kind | mentions |
 | --- | --- |
-| exact | 6938 |
+| exact | 7509 |
 
 ## By entity type
 
 | type | mentions |
 | --- | --- |
 | ACCESS | 562 |
-| ACTIVITY | 2037 |
-| FOOD | 918 |
-| PLACE | 3131 |
+| ACTIVITY | 2040 |
+| FOOD | 919 |
+| PLACE | 3698 |
 | TIP | 290 |
 
 ## Most-mentioned surfaces
@@ -34,6 +34,7 @@ candidate: a surface form that cannot be located in the review is dropped.
 | --- | --- |
 | Bandarban | 383 |
 | picnic | 348 |
+| কক্সবাজার | 311 |
 | Cox's Bazar | 238 |
 | boat ride | 218 |
 | বান্দরবান | 217 |
@@ -51,11 +52,10 @@ candidate: a surface form that cannot be located in the review is dropped.
 | Bagerhat | 97 |
 | guava | 96 |
 | Sonargaon | 92 |
-| খাগড়াছড়ি | 86 |
 
 ## Mentions written in Bangla script
 
-- **2178** mention(s) in 943 review(s), from the reviewed spellings in `place_names_bn.csv` and `food_activity_lexicon.csv`
+- **2749** mention(s) in 1136 review(s), from the reviewed spellings in `place_names_bn.csv` and `food_activity_lexicon.csv`
 
 ## Foods, activities and transport
 
@@ -70,7 +70,7 @@ Every spelling below was found in real review text before it was added
 | FOOD | Fuchka | 42 | 45 | fuchka, phuchka, ফুচকা |
 | FOOD | Barbecue | 31 | 33 | barbecue, bbq, বারবিকিউ |
 | FOOD | Tea stalls | 31 | 32 | tea stall, টং |
-| FOOD | Green coconut (dab) | 29 | 41 | coconut water, fresh coconut, green coconut, ডাব |
+| FOOD | Green coconut (dab) | 30 | 42 | coconut water, fresh coconut, green coconut, ডাব |
 | FOOD | Mango | 29 | 32 | mango, আমের |
 | FOOD | Chotpoti | 28 | 30 | chotpoti, চটপটি |
 | FOOD | Fried fish | 22 | 23 | fish fry, fried fish, ভাজা মাছ, মাছ ভাজা |
@@ -111,10 +111,10 @@ Every spelling below was found in real review text before it was added
 | FOOD | Mezbani | 1 | 1 | মেজবানি |
 | FOOD | Rasmalai | 1 | 2 | রসমালাই |
 | ACTIVITY | Picnic | 430 | 514 | picnic, পিকনিক |
-| ACTIVITY | Boat ride | 352 | 403 | boat ride, boat trip, boating, নৌকা ভ্রমণ, নৌকা ভ্রমন, নৌকাভ্রমণ |
+| ACTIVITY | Boat ride | 353 | 404 | boat ride, boat trip, boating, নৌকা ভ্রমণ, নৌকা ভ্রমন, নৌকাভ্রমণ |
 | ACTIVITY | Trekking and hiking | 309 | 459 | hike, hiking, trek, trekking, ট্রেকিং, হাইকিং |
 | ACTIVITY | Swimming | 151 | 166 | swimming, সাঁতার |
-| ACTIVITY | Kayaking | 82 | 109 | kayak, kayaking, কায়াক, কায়াকিং |
+| ACTIVITY | Kayaking | 82 | 110 | kayak, kayaking, কায়াক, কায়াকিং |
 | ACTIVITY | Speedboat ride | 70 | 78 | speed boat, speedboat, স্পিড বোট, স্পিডবোট |
 | ACTIVITY | Shopping | 57 | 60 | shopping, কেনাকাটা |
 | ACTIVITY | Camping | 52 | 59 | camping, ক্যাম্পিং, তাঁবু |
@@ -125,7 +125,7 @@ Every spelling below was found in real review text before it was added
 | ACTIVITY | Parasailing | 14 | 14 | parasailing, প্যারাসেইলিং |
 | ACTIVITY | River cruise | 10 | 11 | cruise |
 | ACTIVITY | Bamboo raft ride | 9 | 10 | bamboo raft, raft ride, বাঁশের ভেলা |
-| ACTIVITY | Cable car | 8 | 8 | cable car, ক্যাবল কার |
+| ACTIVITY | Cable car | 9 | 9 | cable car, ক্যাবল কার |
 | ACTIVITY | Jet ski | 8 | 8 | jet ski, জেট স্কি |
 | ACCESS | CNG auto-rickshaw | 223 | 294 | cng, সিএনজি |
 | ACCESS | Engine boat (trawler) | 56 | 86 | engine boat, trawler, ইঞ্জিন নৌকা, ট্রলার |
@@ -135,5 +135,5 @@ Every spelling below was found in real review text before it was added
 ## Notes
 
 - gazetteer of 178 known names (corpus + geography + 3.1 anchors)
-- 134 reviewed Bangla spelling(s) of those names (place_names_bn.csv)
+- 153 reviewed Bangla spelling(s) of those names (place_names_bn.csv)
 - 157 reviewed food / activity / transport spelling(s) (food_activity_lexicon.csv)

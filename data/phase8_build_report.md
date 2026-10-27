@@ -1,6 +1,6 @@
 # Phase 8 — Database Build Report
 
-- Built (UTC): 2026-10-27T01:04:32Z
+- Built (UTC): 2026-10-27T01:38:40Z
 - Database: `data/touristinbd.db` (schema version 3)
 
 ## Row counts
@@ -21,11 +21,13 @@
 | sensitivity_mappings | 154 |
 | review_language | 14841 |
 | entities | 527 |
-| entity_variants | 809 |
-| mentions | 6938 |
+| entity_variants | 821 |
+| mentions | 7509 |
 | gems | 54 |
 | place_attributes | 1064 |
-| local_specialities | 12 |
+| local_specialities | 13 |
+| place_connections | 167 |
+| district_coverage | 64 |
 
 ## Views
 
