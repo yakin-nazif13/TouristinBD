@@ -493,6 +493,7 @@
     </p>
     <div class="stat-grid" id="statGrid"></div>
     <div class="split" id="overviewCards"></div>
+    <div id="translationLoss"></div>
     <p class="muted small" id="buildMeta" style="margin-top:18px;"></p>
   </section>
 
@@ -950,6 +951,78 @@ async function loadOverview(){
   }catch(err){
     grid.innerHTML = `<p class="error">Could not load the overview: ${escapeHtml(err.message)}</p>`;
   }
+  loadTranslationLoss();
+}
+
+/* ---------------------- lost in translation ---------------------- *
+ * Why the engine reads the reviewer's own words: the same extractor run
+ * over a review and over Google's English translation of it. Both sides
+ * of the result are shown, including what our own Bangla lists miss, and
+ * the significance test is reported whatever it says.
+ * ----------------------------------------------------------------- */
+const JUDGEMENT_LABELS = {meaning_kept: 'meaning kept', meaning_lost: 'meaning lost',
+                          untranslated: 'left untranslated', pending: 'not judged yet'};
+
+async function loadTranslationLoss(){
+  const box = document.getElementById('translationLoss');
+  let data;
+  try{ data = await api('/api/research/translation-loss'); }catch(err){ box.innerHTML = ''; return; }
+  if(!data.available){ box.innerHTML = ''; return; }
+
+  const places = data.by_type.PLACE;
+  const ci = data.overall_retention_95ci;
+  const contrast = data.visibility_contrast;
+  const lost = contrast.lost_in_translation, gap = contrast.missing_from_bangla_lists;
+  const p = contrast.fisher_p_two_sided;
+  const stats = [
+    [pct(data.overall_retention), 'survive translation'],
+    [`${places.kept} / ${places.in_original}`, 'places survive'],
+    [pct(data.retention_if_respelled_recovered), 'best case, respellings fixed'],
+    [`${data.banglish_meaning_kept} / ${data.banglish_judged}`, 'banglish meanings kept'],
+  ].map(([value, label]) =>
+    `<div class="stat"><div class="value">${escapeHtml(value)}</div><div class="label">${escapeHtml(label)}</div></div>`
+  ).join('');
+  const pairs = (data.banglish_pairs || []).slice(0, 8).map(r => `
+    <tr>
+      <td>${escapeHtml(r.original.length > 110 ? r.original.slice(0, 110) + '…' : r.original)}</td>
+      <td>${escapeHtml(r.google_translation.length > 110 ? r.google_translation.slice(0, 110) + '…' : r.google_translation)}</td>
+      <td class="small" title="${escapeHtml(r.reason || '')}">${escapeHtml(JUDGEMENT_LABELS[r.judgement] || r.judgement)}</td>
+    </tr>`).join('');
+
+  box.innerHTML = `
+    <div class="card" style="margin-top:22px;">
+      <h3>Lost in translation — why the engine reads the original</h3>
+      <p class="muted small">
+        Google Maps gave ${escapeHtml(data.n_bangla_script_pairs)} Bangla reviews in two versions: the
+        reviewer's words and Google's English translation. The same extractor was run over both.
+        Of the places, foods, activities and transport the original names, the translation still
+        names ${pct(data.overall_retention)}${ci ? ` (95% interval ${pct(ci[0])}–${pct(ci[1])})` : ''}.
+        কটকা becomes "Katka", সাদা মাটির পাহাড় becomes "the white clay hills", and the map can no
+        longer find them.
+      </p>
+      <div class="stat-grid">${stats}</div>
+      <p class="muted small" style="margin-top:14px;">
+        It cuts both ways: our Bangla name list still misses ${escapeHtml(places.only_in_translation)} place
+        mentions the translation catches (সুন্দরবন, Sundarbans, is not on it yet).
+        Of the places translation lost, ${pct(lost.little_known_share)} were little known (V0–V1);
+        of those our list missed, ${pct(gap.little_known_share)}.
+        ${p === null || p === undefined ? '' : (p < 0.05
+          ? `The difference is significant (Fisher exact p = ${num(p, 3)}).`
+          : `Fisher exact p = ${num(p, 3)}: a direction to test on more data, not yet a result.`)}
+      </p>
+      <h3 style="margin-top:18px;">Banglish through Google Translate</h3>
+      <div class="table-scroll">
+        <table class="compare-table">
+          <tr><th>The reviewer wrote</th><th>Google's English</th><th>Judgement</th></tr>
+          ${pairs}
+        </table>
+      </div>
+      <p class="muted small" style="margin-top:10px;">
+        Every pair and the reason for each judgement are in
+        <span class="mono">data/banglish_translation_check.csv</span>; the full write-up is
+        <span class="mono">data/translation_loss_report.md</span>.
+      </p>
+    </div>`;
 }
 
 function buildTicker(prefs){

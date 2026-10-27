@@ -69,6 +69,11 @@ jobs:
       - name: Phase 4 — entity typing and Bangla names (BUILD_PLAN 5.1, 5.2)
         run: python scripts/test_entity_typing.py
 
+      # The paired original-versus-translation comparison: pairing, fairness
+      # across scripts, and the interval and significance test.
+      - name: Phase 4 — translation loss (BUILD_PLAN 4.4)
+        run: python scripts/test_translation_loss.py
+
       # Network-free: every gazetteer test either calls a pure function or
       # stubs the HTTP layer, so CI never hits Nominatim or Wikidata.
       - name: Phase 4 — gazetteer and visibility (BUILD_PLAN 5.4)

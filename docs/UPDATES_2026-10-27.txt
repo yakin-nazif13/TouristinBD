@@ -267,6 +267,62 @@ After: the same place also shows what it offers
      apostrophe ("Cox's Bazar") cannot break a button.
 
 
+Part 5 - What translation loses (a measured result)
+---------------------------------------------------
+The project's rule is to extract from the reviewer's own words, never from a
+translation. This part measures why, on our own data.
+
+16. The experiment
+   - Google Maps gave 285 Bangla reviews (and 10 Banglish ones) in two versions:
+     what the reviewer wrote, and Google's English translation of it. Same
+     review, same person, same day, so translation is the only difference.
+   - The same extractor was run over both versions, and every place, food,
+     activity and transport mode was checked: found in the original, in the
+     translation, or both? (Tips are left out: their patterns are English-only,
+     so they could only ever fire on the translation, which would be unfair.)
+   - Program: scripts/translation_loss.py. Full write-up:
+     data/translation_loss_report.md. Every pair: data/translation_loss_pairs.csv.
+
+17. Results
+   - Of what the original names, the translation still names 50%
+     (95% interval 40-60%, bootstrap over reviews).
+   - Places: 24 of 53 survive translation (45%).
+       কটকা              -> "Katka"           (the map knows it as Kotka)
+       সাদা মাটির পাহাড়    -> "the white clay hills"
+       বিজয়পুর            -> "Vijaypur"        (the map knows Bijoypur)
+       চিনা মাটির পাহাড়    -> "Chinese clay hill"
+   - Even if every respelled name were recovered by fuzzy matching, at most 75%
+     would survive. The rest were turned into descriptions or dropped.
+   - Banglish: Google kept the meaning of 0 of 10. Examples:
+       "sei gorom" ("so hot")                 -> "six o'clock"
+       "Onek onek sundor" ("very beautiful")   -> "One piece one piece"
+       "Ekhane giye akta fuchka kine
+        kheyechilam..." (bought a fuchka here) -> "I've been working hard for a
+                                                  long time..." (fuchka gone)
+     The 10 judgements are in data/banglish_translation_check.csv, each with a
+     reason, and can be changed there. (One person's judgement.)
+
+18. It cuts both ways, and the report says so
+   - Our Bangla name list still misses 49 place mentions that the translation
+     catches. সুন্দরবন (Sundarbans, 11 times), কুয়াকাটা, জাফলং are not on it
+     yet. That is a gap in our own resources, listed as candidates to add.
+   - Which side misses what: of the places translation lost, 36% were little
+     known (V0-V1); of the places our Bangla list missed, 19%. So translation
+     tends to destroy the local names the gem engine is looking for, while our
+     gaps are mostly famous places that are easy to add.
+   - Honest status: Fisher exact test p = 0.225. On 285 reviews this is a
+     direction, not a proven result. More Bangla data (e.g. YouTube comments)
+     is what would settle it.
+
+19. Where to see it
+   - Website: Overview tab, "Lost in translation" panel
+     (docs/screenshots/2026-10-27_after_lost_in_translation.png).
+   - API: /api/research/translation-loss.
+   - 27 new tests (data pairing, cross-script fairness, the Fisher test checked
+     against a textbook value, reproducible bootstrap, recorded judgements never
+     overwritten) plus 4 API checks. 1,470 tests in 25 suites now.
+
+
 WHAT IS STILL OPEN
 ==================
 Needs a person

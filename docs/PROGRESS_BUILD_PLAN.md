@@ -308,12 +308,14 @@ a question.
 .venv\Scripts\python.exe scripts\build_gazetteer.py           # near-spellings of listed places arrive as `pending` in data\place_spellings.csv; after deciding, re-run resolve_entities and this
 .venv\Scripts\python.exe scripts\score_gems.py
 .venv\Scripts\python.exe scripts\place_attributes.py
+.venv\Scripts\python.exe scripts\translation_loss.py          # new Banglish pairs arrive as `pending` in data\banglish_translation_check.csv
+.venv\Scripts\python.exe scripts	ranslation_loss.py          # new Banglish pairs arrive as `pending` in dataanglish_translation_check.csv
 .venv\Scripts\python.exe scripts\analyze_audience.py
 .venv\Scripts\python.exe scripts\verification_queue.py --export-register
 .venv\Scripts\python.exe scripts\build_phase8_database.py
 .venv\Scripts\python.exe -m backend.main      # then open /app/#map for the gem map, /app/#discoveries for the table; API at /api/gems
 ```
-Tests: **1,438 across 24 suites**, all passing (test_admin's file-permission check fails on Windows only), about three minutes.
+Tests: **1,470 across 25 suites**, all passing (test_admin's file-permission check fails on Windows only), about three minutes.
 
 ## Next session, in priority order
 1. **Plan Phase 6's government dashboard** — the demo centrepiece, needs no new data,

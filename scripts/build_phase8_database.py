@@ -77,6 +77,8 @@ INPUTS = {
     "phase6_metrics": DATA_DIR / "phase6_sensitivity_metrics.csv",
     "phase6_mappings": DATA_DIR / "phase6_sensitivity_mappings.csv",
     "phase7_statistical_tests": DATA_DIR / "phase7_statistical_tests.json",
+    "translation_loss": DATA_DIR / "translation_loss_report.json",
+    "banglish_translation_check": DATA_DIR / "banglish_translation_check.csv",
     "place_geography": DATA_DIR / "place_geography.csv",
 }
 
@@ -1435,6 +1437,14 @@ def main() -> None:
         "phase4_local_specialities.csv", notes,
     )
     gem_report = load_json("phase4_gem_score_report", notes) or {}
+    # Small research results travel in metadata, like the Phase 7 tests: they
+    # are one document each, not tables anyone queries.
+    translation = load_json("translation_loss", notes)
+    banglish = load_csv("banglish_translation_check", notes)
+    if translation is not None and banglish is not None:
+        translation["banglish_pairs"] = (
+            project(banglish, ["original", "google_translation", "judgement", "reason"])
+            .astype(object).where(lambda f: f.notna(), None).to_dict("records"))
     recency_window = int(gem_report.get("recency_window_years") or DEFAULT_RECENCY_WINDOW_YEARS)
 
     built_at = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
@@ -1475,6 +1485,7 @@ def main() -> None:
             ("row_counts", json.dumps(row_counts)),
             ("recency_window_years", str(recency_window)),
             ("phase7_statistical_tests", json.dumps(p7_tests) if p7_tests else ""),
+            ("translation_loss", json.dumps(translation, ensure_ascii=False) if translation else ""),
             ("build_notes", json.dumps(notes)),
         ]
         conn.executemany("INSERT INTO metadata (key, value) VALUES (?, ?)", meta_rows)

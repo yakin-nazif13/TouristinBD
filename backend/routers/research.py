@@ -167,3 +167,20 @@ def statistical_tests(conn: sqlite3.Connection = Depends(db.get_conn)) -> dict:
             "note": "data/phase7_statistical_tests.json was absent at build time.",
         }
     return {"available": True, **payload}
+
+
+@router.get("/translation-loss", response_model=dict)
+def translation_loss(conn: sqlite3.Connection = Depends(db.get_conn)) -> dict:
+    """What Google's translation loses, measured on reviews given in both versions.
+
+    Built by scripts/translation_loss.py and carried through the build as-is,
+    with the Banglish pairs so every judgement can be read next to its text.
+    """
+    payload = db.meta_json(conn, "translation_loss")
+    if not payload:
+        return {
+            "available": False,
+            "note": "data/translation_loss_report.json was absent at build time; "
+                    "run scripts/translation_loss.py.",
+        }
+    return {"available": True, **payload}

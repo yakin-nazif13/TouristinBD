@@ -1,0 +1,111 @@
+{
+  "n_bangla_script_pairs": 285,
+  "n_banglish_pairs": 10,
+  "by_type": {
+    "PLACE": {
+      "in_original": 53,
+      "in_translation": 73,
+      "kept": 24,
+      "lost": 29,
+      "only_in_translation": 49,
+      "retention": 0.4528301886792453,
+      "retention_95ci": [
+        0.3269230769230769,
+        0.5769230769230769
+      ]
+    },
+    "FOOD": {
+      "in_original": 1,
+      "in_translation": 1,
+      "kept": 0,
+      "lost": 1,
+      "only_in_translation": 1,
+      "retention": 0.0,
+      "retention_95ci": [
+        0.0,
+        0.0
+      ]
+    },
+    "ACTIVITY": {
+      "in_original": 9,
+      "in_translation": 10,
+      "kept": 7,
+      "lost": 2,
+      "only_in_translation": 3,
+      "retention": 0.7777777777777778,
+      "retention_95ci": [
+        0.4444444444444444,
+        1.0
+      ]
+    },
+    "ACCESS": {
+      "in_original": 5,
+      "in_translation": 4,
+      "kept": 3,
+      "lost": 2,
+      "only_in_translation": 1,
+      "retention": 0.6,
+      "retention_95ci": [
+        0.2,
+        1.0
+      ]
+    }
+  },
+  "overall_retention": 0.5,
+  "overall_retention_95ci": [
+    0.4,
+    0.6
+  ],
+  "retention_if_respelled_recovered": 0.75,
+  "secondary_mentions": {
+    "in_original": 45,
+    "lost": 16,
+    "retention": 0.6444444444444445
+  },
+  "loss_reasons": {
+    "lost_translated_or_dropped": 17,
+    "lost_respelled": 17
+  },
+  "visibility_contrast": {
+    "lost_in_translation": {
+      "by_visibility": {
+        "V3": 12,
+        "V1": 9,
+        "V2": 4,
+        "not checked": 4
+      },
+      "little_known": 9,
+      "rated": 25,
+      "little_known_share": 0.36
+    },
+    "missing_from_bangla_lists": {
+      "by_visibility": {
+        "V3": 22,
+        "not checked": 17,
+        "V1": 6,
+        "V2": 4
+      },
+      "little_known": 6,
+      "rated": 32,
+      "little_known_share": 0.1875
+    },
+    "fisher_p_two_sided": 0.2251534741062669
+  },
+  "banglish_judgements": {
+    "meaning_lost": 8,
+    "untranslated": 2
+  },
+  "banglish_meaning_kept": 0,
+  "banglish_judged": 10,
+  "method": {
+    "compared_types": [
+      "PLACE",
+      "FOOD",
+      "ACTIVITY",
+      "ACCESS"
+    ],
+    "respelled_similarity": 75,
+    "bootstrap_samples": 2000,
+    "seed": 13
+  }
+}

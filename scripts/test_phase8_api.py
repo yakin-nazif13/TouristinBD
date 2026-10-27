@@ -544,6 +544,17 @@ def main() -> None:
 
     test_gems()
 
+    print("\ntranslation loss")
+    code, body = get("/api/research/translation-loss")
+    check("/api/research/translation-loss returns 200", code == 200, str(code))
+    if code == 200 and body.get("available"):
+        check("it reports retention with an interval",
+              body["overall_retention"] is not None and len(body["overall_retention_95ci"]) == 2)
+        check("it reports the significance test whatever it says",
+              "fisher_p_two_sided" in body["visibility_contrast"])
+        check("every Banglish pair carries its judgement and reason",
+              all({"original", "google_translation", "judgement", "reason"} <= set(r) for r in body["banglish_pairs"]))
+
     # ---- docs ------------------------------------------------------------
     print("\ndocs")
     r = client.get("/openapi.json")
