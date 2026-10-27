@@ -307,6 +307,17 @@
   .loading{color:var(--text-dim);font-size:0.88rem;margin-top:16px;}
   .error{color:var(--pink);font-size:0.88rem;margin-top:16px;}
 
+  /* Place cards: what a place offers */
+  .offer-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:16px;margin-top:10px;}
+  .offer-group{background:rgba(255,255,255,0.02);border:1px solid var(--line);border-radius:14px;padding:14px 16px;}
+  .offer-group h4{margin:0 0 10px;font-family:'Sora',sans-serif;font-size:0.95rem;color:var(--text-light);}
+  .offer{margin-bottom:12px;}
+  .offer-head{display:flex;flex-wrap:wrap;align-items:baseline;gap:8px;margin-bottom:4px;}
+  .offer .quote{margin:0;}
+  .offer-group details summary{cursor:pointer;margin:4px 0 10px;}
+  .speciality{background:rgba(245,165,36,0.1);border:1px solid rgba(245,165,36,0.35);border-radius:12px;padding:10px 14px;margin:8px 0;font-size:0.9rem;}
+  #specialityStrip{margin-top:14px;}
+
   /* Gem map */
   .map-frame{position:relative;margin-top:18px;border-radius:18px;overflow:hidden;border:1px solid var(--line);box-shadow:var(--shadow-md);}
   #gemMap{height:560px;width:100%;background:var(--bg-panel-2);}
@@ -550,8 +561,10 @@
     <h2>Explore places, preferences and reviews</h2>
     <p class="muted">
       One search across places, cities, preferences, topics and review text — the same
-      <span class="mono">/api/search</span> endpoint the chatbot falls back to.
+      <span class="mono">/api/search</span> endpoint the chatbot falls back to. Open a
+      place to see what it offers: food, things to do, how to get there, and visitors' tips.
     </p>
+    <div id="specialityStrip"></div>
     <div class="form-row">
       <label style="flex:1;min-width:240px;">Search
         <input type="text" id="exploreQuery" placeholder="e.g. swamp, heritage, sunset, Sylhet" style="width:100%;">
@@ -804,6 +817,10 @@ document.querySelectorAll('nav.tabs button').forEach(btn => {
     }
     // Leaflet measures its container when it is created, so the map is built
     // only once its panel is visible, and told to re-measure on every reopen.
+    if(btn.dataset.tab === 'explore' && !EXPLORE_LOADED){
+      EXPLORE_LOADED = true;
+      loadSpecialities();
+    }
     if(btn.dataset.tab === 'map'){
       if(!MAP_LOADED){ MAP_LOADED = true; loadGemMap(); }
       else if(GEM_MAP) GEM_MAP.invalidateSize();
@@ -811,6 +828,7 @@ document.querySelectorAll('nav.tabs button').forEach(btn => {
   });
 });
 let MAP_LOADED = false;
+let EXPLORE_LOADED = false;
 let DISCOVERIES_LOADED = false;
 let SHARE_LOADED = false;
 
@@ -819,13 +837,15 @@ function showTab(name){
   if(btn) btn.click();
 }
 
-// A tab can be linked to directly: /app/#map opens the gem map, and
-// /app/#map/E0016 opens it on one gem's evidence.
+// A tab can be linked to directly: /app/#map opens the gem map,
+// /app/#map/E0016 opens it on one gem's evidence, and
+// /app/#explore/Kuakata Sea Beach opens a place card.
 function showTabFromHash(){
-  const [name, entityId] = location.hash.replace('#', '').split('/');
+  const [name, ref] = location.hash.replace('#', '').split('/');
   if(!TABS.includes(name)) return;
   showTab(name);
-  if(name === 'map' && entityId) showGemDetail(decodeURIComponent(entityId));
+  if(name === 'map' && ref) showGemDetail(decodeURIComponent(ref));
+  if(name === 'explore' && ref) openPlace(decodeURIComponent(ref));
 }
 window.addEventListener('hashchange', showTabFromHash);
 
@@ -1223,29 +1243,114 @@ async function runSearch(){
   }
 }
 
-async function openPlace(placeId){
-  const out = document.getElementById('placeDetail');
+/* -------------------------- place cards -------------------------- *
+ * What a place offers — food, things to do, getting there, tips — each
+ * with one real sentence from a review and the year it was written.
+ * Transport and tips with no recent review are marked as possibly out of
+ * date: the reviews go back to 2011, and a bus fare from then misleads.
+ * ---------------------------------------------------------------- */
+const OFFER_GROUPS = [
+  ['FOOD', 'Food to try'],
+  ['ACTIVITY', 'Things to do'],
+  ['ACCESS', 'Getting there and around'],
+  ['TIP', 'Tips from visitors'],
+];
+const OFFERS_SHOWN = 5;
+
+function offerItemHtml(item){
+  const years = item.first_year && item.last_year && item.first_year !== item.last_year
+    ? `${item.first_year}–${item.last_year}` : (item.last_year || '');
+  return `
+    <div class="offer">
+      <div class="offer-head">
+        <strong>${escapeHtml(item.name)}</strong>
+        <span class="muted small">${escapeHtml(item.n_reviews)} review(s)${years ? ' · ' + escapeHtml(years) : ''}</span>
+        ${item.stale ? `<span class="badge old">may be out of date · last mentioned ${escapeHtml(item.last_year)}</span>` : ''}
+      </div>
+      <div class="quote">“${escapeHtml(item.example_sentence)}”
+        <span class="muted small">— ${escapeHtml(item.example_year || '')}</span></div>
+    </div>`;
+}
+
+async function placeOffersHtml(placeName){
+  const card = await api('/api/place-attributes' + qs({place: placeName}));
+  const specialities = card.local_specialities.map(s => `
+    <div class="speciality">🍽 Local speciality: <strong>${escapeHtml(s.name)}</strong>
+      <span class="muted small">— ${escapeHtml(s.reviews_in_district)} of ${escapeHtml(s.reviews_total)} reviews
+      that mention it are from ${escapeHtml(s.district)}</span></div>`).join('');
+  const groups = OFFER_GROUPS.map(([type, title]) => {
+    const items = card.attributes[type] || [];
+    if(!items.length) return '';
+    const shown = items.slice(0, OFFERS_SHOWN).map(offerItemHtml).join('');
+    const rest = items.slice(OFFERS_SHOWN);
+    return `
+      <div class="offer-group">
+        <h4>${escapeHtml(title)} <span class="muted small">(${items.length})</span></h4>
+        ${shown}
+        ${rest.length ? `<details><summary class="muted small">Show ${rest.length} more</summary>${rest.map(offerItemHtml).join('')}</details>` : ''}
+      </div>`;
+  }).join('');
+  if(!groups && !specialities){
+    return '<p class="muted small">No foods, activities, transport or tips found in this place\'s reviews yet.</p>';
+  }
+  return `
+    <p class="muted small" style="margin:16px 0 6px;">What this place offers, from its reviews.
+      Every line quotes a real review; recent reviews are quoted when there are any
+      (recent = since ${escapeHtml((card.recency.recent_since || '').slice(0, 4))}).</p>
+    ${specialities}
+    <div class="offer-grid">${groups}</div>`;
+}
+
+// One card for a place, used by Explore and by the map. `targetId` is the
+// element it is drawn into.
+async function openPlace(placeRef, targetId = 'placeDetail'){
+  const out = document.getElementById(targetId);
   out.innerHTML = '<p class="loading">Loading place…</p>';
   try{
-    const detail = await api(`/api/places/${encodeURIComponent(placeId)}` + qs({sample_reviews: 4}));
+    const detail = await api(`/api/places/${encodeURIComponent(placeRef)}` + qs({sample_reviews: 3}));
     const p = detail.place;
     out.innerHTML = `
       <div class="card" style="margin-top:18px;">
         <h3>${escapeHtml(p.place_name)}</h3>
         <p class="muted small">
           ${escapeHtml(p.city || '—')}${p.district ? ' · ' + escapeHtml(p.district) + ' district' : ''}
-          ${p.division ? ' · ' + escapeHtml(p.division) + ' division' : ''} · ${escapeHtml(p.category || '')}
+          ${p.division ? ' · ' + escapeHtml(p.division) + ' division' : ''}${p.category ? ' · ' + escapeHtml(p.category) : ''}
           · ${num(p.avg_review_rating, 2)}★ from ${p.review_count} reviews
           (${p.positive_reviews} positive, ${p.negative_reviews} negative)
         </p>
         <div style="margin:10px 0;">${detail.preferences.map(pref =>
           `<span class="tag-pill">${escapeHtml(pref.preference_label || pref.preference_id)} · ${pref.review_count}rv</span>`).join('') || '<span class="muted small">No mapped preference yet.</span>'}</div>
+        <div id="${escapeHtml(targetId)}Offers"><p class="loading">Loading what it offers…</p></div>
+        <p class="muted small" style="margin:16px 0 6px;">Sample reviews:</p>
         ${detail.sample_reviews.map(r =>
           `<div class="quote">“${escapeHtml((r.review_text_clean || '').slice(0, 260))}” — ${num(r.review_rating, 1)}★${r.preference_label ? ' · ' + escapeHtml(r.preference_label) : ''}</div>`).join('')}
       </div>`;
     out.scrollIntoView({behavior: 'smooth', block: 'nearest'});
+    const offers = document.getElementById(targetId + 'Offers');
+    try{
+      offers.innerHTML = await placeOffersHtml(p.place_name);
+    }catch(err){
+      offers.innerHTML = `<p class="error">${escapeHtml(err.message)}</p>`;
+    }
   }catch(err){
     out.innerHTML = `<p class="error">${escapeHtml(err.message)}</p>`;
+  }
+}
+
+// The local specialities strip at the top of Explore: each opens the card of
+// the place most of its reviews come from.
+async function loadSpecialities(){
+  const box = document.getElementById('specialityStrip');
+  try{
+    const data = await api('/api/local-specialities');
+    if(!data.specialities.length){ box.innerHTML = ''; return; }
+    box.innerHTML = `<p class="muted small" style="margin:0 0 8px;">Local food specialities found in the reviews
+      (most of a food's reviews come from one district):</p>
+      <div class="chip-row" style="margin-top:0;">${data.specialities.map(s => `
+        <button type="button" class="chip" data-place="${escapeHtml(s.places[0] || '')}" onclick="openPlace(this.dataset.place)"
+          title="${escapeHtml(s.example_sentence)}">${escapeHtml(s.name)} · ${escapeHtml(s.district)}</button>`).join('')}</div>`;
+  }catch(err){
+    box.innerHTML = '';
   }
 }
 document.getElementById('exploreQuery').addEventListener('keydown', e => { if(e.key === 'Enter') runSearch(); });
@@ -1437,7 +1542,9 @@ function renderGemMap(){
       L.circleMarker([lat, lng], {radius: 4, color: '#E5E7EB', weight: 1, fillColor: '#9CA3AF', fillOpacity: 0.8})
         .bindPopup(`<strong>${escapeHtml(p.place_name)}</strong><br>
           <span class="muted small">${escapeHtml([p.district, p.division].filter(Boolean).join(', '))}</span><br>
-          ${escapeHtml(p.review_count)} review(s) in our data · ${num(p.avg_review_rating, 1)}★`)
+          ${escapeHtml(p.review_count)} review(s) in our data · ${num(p.avg_review_rating, 1)}★<br>
+          <button class="link-btn" data-place="${escapeHtml(p.place_name)}"
+            onclick="openPlace(this.dataset.place, 'mapDetail')">What it offers</button>`)
         .addTo(PLACE_LAYER);
     });
   }

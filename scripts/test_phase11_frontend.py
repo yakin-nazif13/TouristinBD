@@ -37,6 +37,7 @@ SAMPLE_PARAMS = {
     "/api/search": "?q=beach&limit_per_kind=3",
     "/api/compare": "?places=Lalbagh Fort,Ahsan Manzil Museum&sample_reviews=2",
     "/api/itinerary": "?days=3&pace=standard&include_stays=true&preferences=P02",
+    "/api/place-attributes": "?place=Kuakata Sea Beach",
 }
 
 
@@ -245,6 +246,36 @@ def test_gem_map() -> None:
             check(f"gem evidence has {field}", field in detail["evidence"][0], "missing")
 
 
+def test_place_cards() -> None:
+    print("\nfrontend — place cards")
+    check("Explore has the local specialities strip", 'id="specialityStrip"' in HTML)
+    check("the map's place popups open a place card", "openPlace(this.dataset.place, 'mapDetail')" in HTML)
+    # A name with an apostrophe ("Cox's Bazar Beach") must not be pasted into
+    # an inline onclick string, where the browser decodes &#39; back to a quote.
+    check("place names reach onclick through data attributes, never inline strings",
+          not re.search(r"openPlace\('\$\{escapeHtml\(", HTML))
+
+    card = client.get("/api/place-attributes?place=Kuakata Sea Beach").json()
+    for field in ("attributes", "local_specialities", "recency"):
+        check(f"place card has {field}", field in card, str(sorted(card)))
+    groups = re.findall(r"\['(FOOD|ACTIVITY|ACCESS|TIP)', '", HTML)
+    check("the card shows all four kinds of attribute", set(groups) == {"FOOD", "ACTIVITY", "ACCESS", "TIP"},
+          str(groups))
+    item = next(iter(card["attributes"].values()))[0]
+    for field in ("name", "n_reviews", "first_year", "last_year", "stale", "example_sentence", "example_year"):
+        check(f"card item has {field}", field in item, str(sorted(item)))
+
+    specialities = client.get("/api/local-specialities").json()["specialities"]
+    check("there are specialities to show", bool(specialities))
+    for s in specialities:
+        r = client.get("/api/place-attributes", params={"place": s["places"][0]})
+        if r.status_code != 200 or not r.json()["local_specialities"]:
+            check(f"a speciality chip opens a card that names it ({s['name']})", False, str(r.status_code))
+            break
+    else:
+        check("every speciality chip opens a card that names the speciality", True)
+
+
 def main() -> None:
     print("Phase 11 — frontend/API contract tests")
     health = client.get("/health").json()
@@ -258,6 +289,7 @@ def main() -> None:
     test_no_mock_data()
     test_render_contracts()
     test_gem_map()
+    test_place_cards()
 
     print(f"\n{len(PASSED)} passed, {len(FAILED)} failed")
     if FAILED:

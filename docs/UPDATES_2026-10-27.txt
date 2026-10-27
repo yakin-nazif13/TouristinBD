@@ -231,6 +231,42 @@ After: a new "Gem map" tab (docs/screenshots/2026-10-27_after_gem_map.png and
      library, and every field the map reads is really returned by the API.
 
 
+Part 4 - Place cards: what each place offers
+--------------------------------------------
+Before: opening a place showed its rating, its preference tags and a few
+reviews (docs/screenshots/2026-10-27_before_place_view.png).
+After: the same place also shows what it offers
+(docs/screenshots/2026-10-27_after_place_card.png).
+
+13. The place card
+   - Four groups: Food to try, Things to do, Getting there and around, Tips from
+     visitors. Each item says how many reviews mention it and in which years, and
+     quotes one real sentence with the year it was written. Recent reviews are
+     quoted whenever there is one.
+   - Transport and tips with no review in the last 3 years are marked "may be
+     out of date - last mentioned <year>". Food and activities are not, since a
+     2018 mention of kulfi is still useful; a 2018 bus fare may not be.
+   - A local speciality is highlighted: "Local speciality: Kulfi - 10 of 10
+     reviews that mention it are from Kushtia".
+   - Long lists show 5 items and a "Show more".
+
+14. Where it appears
+   - Explore: search, then click a place. A strip of the 12 local specialities
+     sits at the top of Explore; each opens the place they come from.
+   - Gem map: click a grey place dot, then "What it offers".
+   - Direct link: /app/#explore/Kuakata Sea Beach.
+
+15. Honest limits, visible on the cards
+   - The food and activity list matches words, not meaning. "Mango" at the
+     Shilaidaha Kuthibari is the mango garden, not something to eat, and its
+     "speedboat ride" is Tagore's speedboat on display. Every item shows its
+     sentence, so a reader can see this, but the list is not a guarantee.
+   - Tips come from the older tip extractor and repeat themselves ("Bargaining",
+     "bargain", "bargain for a reasonable price" are separate items).
+   - 20 new website checks (169 now), including that a place name with an
+     apostrophe ("Cox's Bazar") cannot break a button.
+
+
 WHAT IS STILL OPEN
 ==================
 Needs a person
@@ -241,7 +277,8 @@ Needs a person
     on purpose, because "local name versus official name" is a human call.
   - Verify the 54 candidates in the verification queue.
 Needs building next
-  - Place cards on the website, using /api/place-attributes.
+  - Merge repeated tips, and tell a food from a place named after it
+    ("mango garden"), so place cards need less reading between the lines.
   - A few duplicates remain: "Hiron Point" / "Hiron Point (Nilkamal)",
     "varendra museum" / "Varendra Research Museum".
   - Finding places that are on no list at all from Bangla word patterns

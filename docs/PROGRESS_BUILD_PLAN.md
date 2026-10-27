@@ -313,7 +313,7 @@ a question.
 .venv\Scripts\python.exe scripts\build_phase8_database.py
 .venv\Scripts\python.exe -m backend.main      # then open /app/#map for the gem map, /app/#discoveries for the table; API at /api/gems
 ```
-Tests: **1,418 across 24 suites**, all passing (test_admin's file-permission check fails on Windows only), about three minutes.
+Tests: **1,438 across 24 suites**, all passing (test_admin's file-permission check fails on Windows only), about three minutes.
 
 ## Next session, in priority order
 1. **Plan Phase 6's government dashboard** — the demo centrepiece, needs no new data,
