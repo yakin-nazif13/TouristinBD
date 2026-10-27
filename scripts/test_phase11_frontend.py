@@ -210,6 +210,41 @@ def test_render_contracts() -> None:
     )
 
 
+def test_gem_map() -> None:
+    print("\nfrontend — the gem map")
+    check("there is a map tab", 'data-tab="map"' in HTML and 'id="gemMap"' in HTML)
+    for asset in ("leaflet.css", "leaflet.js"):
+        tag = re.search(rf'<[^>]+leaflet@([\d.]+)/dist/{asset}"[^>]*>', HTML, re.S)
+        check(f"{asset} is pinned to an exact version", tag is not None, "not found")
+        check(f"{asset} carries an integrity hash", tag is not None and 'integrity="sha256-' in tag.group(0))
+    check("the map works without Leaflet by saying so",
+          "typeof L === 'undefined'" in HTML, "no fallback when the library fails to load")
+    check("the map draws OpenStreetMap tiles with attribution",
+          "tile.openstreetmap.org" in HTML and "openstreetmap.org/copyright" in HTML)
+    check("a tab can be opened from the address (#map, #map/<id>)", "showTabFromHash" in HTML)
+
+    body = client.get("/api/gems/map").json()
+    gem = next(f["properties"] for f in body["features"] if f["properties"]["layer"] == "gem")
+    for field in ("entity_id", "canonical_name", "gem_rank", "gem_score", "visibility", "freshness",
+                  "coord_source", "near_place", "n_reviews", "n_recent_reviews", "recent_since",
+                  "last_evidence_year"):
+        check(f"map gem has {field}", field in gem, str(sorted(gem)))
+    place = next(f["properties"] for f in body["features"] if f["properties"]["layer"] == "place")
+    for field in ("place_name", "district", "division", "review_count", "avg_review_rating"):
+        check(f"map place has {field}", field in place, str(sorted(place)))
+    check("map payload lists the gems it cannot place", "unmapped_gems" in body)
+
+    detail = client.get(f"/api/gems/{gem['entity_id']}?evidence_limit=8").json()
+    for field in ("gem", "variants", "found_in_places", "evidence"):
+        check(f"gem detail has {field}", field in detail, str(sorted(detail)))
+    for field in ("term_mentions", "term_hidden", "term_distinct", "term_sentiment", "term_recency",
+                  "visibility_reason"):
+        check(f"gem detail's gem has {field}", field in detail["gem"], "missing")
+    if detail["evidence"]:
+        for field in ("sentence", "review_date", "found_in_place", "review_rating", "language"):
+            check(f"gem evidence has {field}", field in detail["evidence"][0], "missing")
+
+
 def main() -> None:
     print("Phase 11 — frontend/API contract tests")
     health = client.get("/health").json()
@@ -222,6 +257,7 @@ def main() -> None:
     test_dom_ids()
     test_no_mock_data()
     test_render_contracts()
+    test_gem_map()
 
     print(f"\n{len(PASSED)} passed, {len(FAILED)} failed")
     if FAILED:

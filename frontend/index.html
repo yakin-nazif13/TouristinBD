@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,6 +7,9 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<!-- Leaflet for the gem map, pinned and integrity-checked so a changed CDN file is refused. -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+      integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
 <style>
   :root{
     --bg-deep:#080B14;
@@ -93,12 +96,6 @@
   }
   nav.tabs button.active .num{background:rgba(255,255,255,0.25);color:#fff;}
   .rail-spacer{flex:1;}
-  .theme-toggle{
-    background:rgba(255,255,255,0.04);border:1px solid var(--line);color:var(--text-light);
-    width:44px;height:44px;border-radius:50%;cursor:pointer;font-size:1rem;flex:none;
-    display:inline-flex;align-items:center;justify-content:center;transition:border-color .15s ease, transform .2s ease;
-  }
-  .theme-toggle:hover{border-color:var(--accent);transform:rotate(18deg);}
 
   .main-col{flex:1;min-width:0;}
   .wrap{max-width:1180px;margin:0 auto;padding:36px 32px 72px;}
@@ -310,9 +307,32 @@
   .loading{color:var(--text-dim);font-size:0.88rem;margin-top:16px;}
   .error{color:var(--pink);font-size:0.88rem;margin-top:16px;}
 
+  /* Gem map */
+  .map-frame{position:relative;margin-top:18px;border-radius:18px;overflow:hidden;border:1px solid var(--line);box-shadow:var(--shadow-md);}
+  #gemMap{height:560px;width:100%;background:var(--bg-panel-2);}
+  .map-legend{display:flex;gap:16px;flex-wrap:wrap;margin-top:12px;font-size:0.8rem;color:var(--text-dim);align-items:center;}
+  .map-legend .dot{display:inline-block;width:12px;height:12px;border-radius:50%;margin-right:6px;vertical-align:-1px;border:2px solid rgba(0,0,0,0.25);}
+  .map-legend .dot.ring{background:transparent !important;border:2px dashed var(--text-dim);}
+  .map-legend .dot.place{width:8px;height:8px;background:var(--text-dim);}
+  .vis-filter{display:flex;gap:8px;flex-wrap:wrap;}
+  .vis-filter label{flex-direction:row !important;align-items:center;gap:6px !important;background:rgba(255,255,255,0.03);border:1px solid var(--line);border-radius:20px;padding:7px 12px;cursor:pointer;}
+  .vis-filter input{accent-color:var(--accent);}
+  .badge{display:inline-block;font-family:'IBM Plex Mono',monospace;font-size:0.66rem;padding:3px 9px;border-radius:20px;margin:0 6px 4px 0;border:1px solid var(--line);color:var(--text-light);}
+  .badge.v0{background:rgba(251,91,124,0.18);border-color:rgba(251,91,124,0.45);}
+  .badge.v1{background:rgba(245,165,36,0.18);border-color:rgba(245,165,36,0.45);}
+  .badge.v2{background:rgba(79,140,255,0.18);border-color:rgba(79,140,255,0.45);}
+  .badge.v3{background:rgba(139,150,173,0.18);}
+  .badge.old{background:rgba(245,165,36,0.1);color:var(--marigold);border-style:dashed;}
+  .badge.recent{background:rgba(34,197,152,0.12);color:var(--leaf);}
+  .badge.approx{border-style:dashed;color:var(--text-dim);}
+  .leaflet-popup-content{font-family:'Inter',sans-serif;font-size:0.85rem;line-height:1.45;}
+  .leaflet-popup-content strong{font-family:'Sora',sans-serif;}
+  .leaflet-popup-content .link-btn{font-size:0.85rem;}
+  @media (max-width:640px){ #gemMap{height:420px;} }
+
   footer{margin-top:48px;color:var(--text-dim);font-size:0.8rem;text-align:center;line-height:1.7;border-top:1px solid var(--line);padding-top:24px;}
 
-  /* Light theme */
+  /* The site is light only: these override the darker defaults above. */
   html[data-theme="light"]{
     --bg-deep:#EEF1F8;
     --bg-panel:#FFFFFF;
@@ -339,6 +359,8 @@
   html[data-theme="light"] .side-rail{background:rgba(255,255,255,0.75);}
   html[data-theme="light"] nav.tabs button{background:rgba(15,23,42,0.03);}
   html[data-theme="light"] nav.tabs button:hover{background:rgba(15,23,42,0.06);}
+  html[data-theme="light"] nav.tabs button.active{color:var(--accent);background:rgba(47,111,224,0.12);}
+  html[data-theme="light"] nav.tabs button.active .num{background:var(--accent);color:#fff;}
   html[data-theme="light"] .brand h1{
     background:linear-gradient(135deg, #1F2937 20%, var(--marigold) 90%);
     -webkit-background-clip:text;background-clip:text;color:transparent;
@@ -357,7 +379,6 @@
     .rail-logo{width:38px;height:38px;font-size:1.1rem;}
     nav.tabs button{width:44px;height:44px;border-radius:14px;}
     nav.tabs button .icon{width:18px;height:18px;}
-    .theme-toggle{width:38px;height:38px;}
     .wrap{padding:26px 18px 56px;}
   }
   @media (max-width:640px){
@@ -404,18 +425,20 @@
         <span class="num">06</span>
         <span class="tab-label">Discoveries</span>
       </button>
+      <button data-tab="map" title="Gem map">
+        <span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-6.5-5.6-6.5-11a6.5 6.5 0 0 1 13 0c0 5.4-6.5 11-6.5 11z"/><circle cx="12" cy="10" r="2.4"/></svg></span>
+        <span class="num">07</span>
+        <span class="tab-label">Gem map</span>
+      </button>
       <button data-tab="share" title="Share a review">
         <span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/></svg></span>
-        <span class="num">07</span>
+        <span class="num">08</span>
         <span class="tab-label">Share a review</span>
       </button>
     </nav>
 
     <div class="rail-spacer"></div>
 
-    <button type="button" class="theme-toggle" id="themeToggle" onclick="toggleTheme()" aria-label="Switch to light mode" title="Toggle light / dark mode">
-      <span id="themeIcon">🌙</span>
-    </button>
   </aside>
 
   <div class="main-col">
@@ -581,6 +604,45 @@
     <div id="discoveryEvidence"></div>
   </section>
 
+  <!-- GEM MAP (Phase 4 gem register on a map) -->
+  <section class="panel" id="tab-map" style="display:none;">
+    <h2>Hidden gems on the map</h2>
+    <p class="muted">
+      Every coloured point is a place found inside reviews of <em>somewhere else</em>, scored
+      by the gem engine. Colour is how well known it already is, from V0 (on no map or list)
+      to V3 (famous). Grey dots are the places our reviews were written about. Click a point
+      for the reviewers' own sentences.
+    </p>
+    <p class="muted small">
+      A dashed ring means the point is approximate: a V0 place has no coordinates of its own,
+      so it is shown at the place whose reviews mention it. A faded point has no review from
+      the last few years and needs a recent visit to confirm.
+    </p>
+    <div class="stat-grid" id="mapStats"></div>
+    <div class="form-row">
+      <div class="vis-filter" id="mapVisFilter">
+        <label><input type="checkbox" value="V0" checked> V0 on no map</label>
+        <label><input type="checkbox" value="V1" checked> V1 few reviews</label>
+        <label><input type="checkbox" value="V2" checked> V2 moderately known</label>
+        <label><input type="checkbox" value="V3"> V3 famous</label>
+      </div>
+      <label class="check"><input type="checkbox" id="mapShowPlaces" checked> Reviewed places</label>
+      <label class="check"><input type="checkbox" id="mapRecentOnly"> Recent evidence only</label>
+    </div>
+    <div class="map-frame"><div id="gemMap" role="region" aria-label="Map of hidden-gem candidates"></div></div>
+    <div class="map-legend" id="mapLegend">
+      <span><span class="dot" style="background:#FB5B7C"></span>V0 on no map</span>
+      <span><span class="dot" style="background:#F5A524"></span>V1 few reviews</span>
+      <span><span class="dot" style="background:#4F8CFF"></span>V2 moderately known</span>
+      <span><span class="dot" style="background:#8B96AD"></span>V3 famous</span>
+      <span><span class="dot ring"></span>approximate point</span>
+      <span><span class="dot place"></span>reviewed place</span>
+      <span>bigger = higher gem score</span>
+    </div>
+    <p class="muted small" id="mapUnmapped"></p>
+    <div id="mapDetail"></div>
+  </section>
+
   <!-- SHARE A REVIEW (visitor uploads) -->
   <section class="panel" id="tab-share" style="display:none;">
     <h2>Share your review</h2>
@@ -638,6 +700,8 @@
   </div>
 </div>
 
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 <script>
 /* ------------------------------------------------------------------ *
  * API wiring
@@ -693,26 +757,6 @@ const escapeHtml = (value) => String(value ?? '').replace(/[&<>"']/g, (ch) => (
 const num = (value, digits = 0) => value === null || value === undefined ? '—' : Number(value).toFixed(digits);
 const pct = (value) => value === null || value === undefined ? '—' : (Number(value) * 100).toFixed(0) + '%';
 
-/* ---------------------------- theme ---------------------------- */
-function applyTheme(theme){
-  const resolved = theme === 'light' ? 'light' : 'dark';
-  document.documentElement.setAttribute('data-theme', resolved);
-  const icon = document.getElementById('themeIcon');
-  if(icon) icon.textContent = resolved === 'light' ? '☀️' : '🌙';
-  const toggle = document.getElementById('themeToggle');
-  if(toggle) toggle.setAttribute('aria-label', resolved === 'light' ? 'Switch to dark mode' : 'Switch to light mode');
-  try{ localStorage.setItem('touristinbd_theme', resolved); }catch(e){}
-}
-function toggleTheme(){
-  const current = document.documentElement.getAttribute('data-theme') === 'light' ? 'light' : 'dark';
-  applyTheme(current === 'light' ? 'dark' : 'light');
-}
-(function initTheme(){
-  let saved = null;
-  try{ saved = localStorage.getItem('touristinbd_theme'); }catch(e){}
-  if(!saved && window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) saved = 'light';
-  applyTheme(saved === 'light' ? 'light' : 'dark');
-})();
 
 /* ------------------------- voice input ------------------------- */
 function voiceInput(targetId, onDone){
@@ -740,7 +784,7 @@ function voiceInput(targetId, onDone){
 }
 
 /* ---------------------------- tabs ---------------------------- */
-const TABS = ['overview','chat','itinerary','compare','explore','discoveries','share'];
+const TABS = ['overview','chat','itinerary','compare','explore','discoveries','map','share'];
 document.querySelectorAll('nav.tabs button').forEach(btn => {
   btn.addEventListener('click', () => {
     document.querySelectorAll('nav.tabs button').forEach(b => b.classList.remove('active'));
@@ -758,8 +802,15 @@ document.querySelectorAll('nav.tabs button').forEach(btn => {
       SHARE_LOADED = true;
       loadShareOptions();
     }
+    // Leaflet measures its container when it is created, so the map is built
+    // only once its panel is visible, and told to re-measure on every reopen.
+    if(btn.dataset.tab === 'map'){
+      if(!MAP_LOADED){ MAP_LOADED = true; loadGemMap(); }
+      else if(GEM_MAP) GEM_MAP.invalidateSize();
+    }
   });
 });
+let MAP_LOADED = false;
 let DISCOVERIES_LOADED = false;
 let SHARE_LOADED = false;
 
@@ -767,6 +818,16 @@ function showTab(name){
   const btn = document.querySelector(`nav.tabs button[data-tab="${name}"]`);
   if(btn) btn.click();
 }
+
+// A tab can be linked to directly: /app/#map opens the gem map, and
+// /app/#map/E0016 opens it on one gem's evidence.
+function showTabFromHash(){
+  const [name, entityId] = location.hash.replace('#', '').split('/');
+  if(!TABS.includes(name)) return;
+  showTab(name);
+  if(name === 'map' && entityId) showGemDetail(decodeURIComponent(entityId));
+}
+window.addEventListener('hashchange', showTabFromHash);
 
 /* ---------------------------- boot ---------------------------- */
 let PREFERENCES = [];
@@ -1299,6 +1360,206 @@ async function showEvidence(entityId){
   }
 }
 
+/* --------------------------- gem map --------------------------- *
+ * The gem register on a map. One request fetches every gem with a point
+ * plus the reviewed places; the filters then work on that copy, so ticking
+ * a box never waits for the network. Where a point came from is always
+ * shown: an approximate one is drawn with a dashed ring and says so.
+ * -------------------------------------------------------------- */
+const VIS_COLOURS = {V0: '#FB5B7C', V1: '#F5A524', V2: '#4F8CFF', V3: '#8B96AD'};
+const VIS_LABELS = {V0: 'V0 · on no map', V1: 'V1 · few reviews', V2: 'V2 · moderately known', V3: 'V3 · famous'};
+const COORD_LABELS = {
+  openstreetmap: 'point from OpenStreetMap',
+  google_maps_place_list: 'point from our Google Maps place list',
+  near_host_place: 'approximate point',
+};
+let GEM_MAP = null, GEM_LAYER = null, PLACE_LAYER = null, MAP_DATA = null, MAP_FITTED = false;
+
+function gemBadges(g){
+  const vis = g.visibility || 'unknown';
+  return `<span class="badge ${escapeHtml(vis.toLowerCase())}">${escapeHtml(VIS_LABELS[vis] || vis)}</span>`
+    + (g.freshness === 'old'
+        ? `<span class="badge old">old evidence · last ${escapeHtml(g.last_evidence_year ?? '?')}</span>`
+        : `<span class="badge recent">recent · ${escapeHtml(g.n_recent_reviews)} review(s) since ${escapeHtml((g.recent_since || '').slice(0, 4))}</span>`)
+    + (g.coord_source === 'near_host_place'
+        ? `<span class="badge approx">shown near ${escapeHtml(g.near_place)}</span>` : '');
+}
+
+async function loadGemMap(){
+  const box = document.getElementById('gemMap');
+  if(typeof L === 'undefined'){
+    MAP_LOADED = false;   // try again next time the tab is opened
+    box.innerHTML = '<p class="error" style="padding:20px;">The map library could not be loaded '
+      + '(is the internet connection down?). The same gems are listed in the Discoveries tab.</p>';
+    return;
+  }
+  try{
+    MAP_DATA = await api('/api/gems/map');
+  }catch(err){
+    MAP_LOADED = false;
+    box.innerHTML = `<p class="error" style="padding:20px;">${escapeHtml(err.message)}</p>`;
+    return;
+  }
+  GEM_MAP = L.map('gemMap', {scrollWheelZoom: false}).setView([23.7, 90.35], 7);
+  L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 18,
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+  }).addTo(GEM_MAP);
+  PLACE_LAYER = L.layerGroup().addTo(GEM_MAP);
+  GEM_LAYER = L.layerGroup().addTo(GEM_MAP);   // added last so gems sit above places
+  document.querySelectorAll('#mapVisFilter input, #mapShowPlaces, #mapRecentOnly')
+    .forEach(input => input.addEventListener('change', renderGemMap));
+
+  const unmapped = MAP_DATA.unmapped_gems || [];
+  document.getElementById('mapUnmapped').textContent = unmapped.length
+    ? `Not on the map (no coordinates anywhere yet): ${unmapped.map(g => g.canonical_name).join(', ')}.`
+    : '';
+  renderGemMap();
+}
+
+function renderGemMap(){
+  if(!GEM_MAP || !MAP_DATA) return;
+  const levels = new Set([...document.querySelectorAll('#mapVisFilter input:checked')].map(i => i.value));
+  const showPlaces = document.getElementById('mapShowPlaces').checked;
+  const recentOnly = document.getElementById('mapRecentOnly').checked;
+  GEM_LAYER.clearLayers();
+  PLACE_LAYER.clearLayers();
+
+  const features = MAP_DATA.features || [];
+  const gems = features.filter(f => f.properties.layer === 'gem'
+    && levels.has(f.properties.visibility)
+    && (!recentOnly || f.properties.freshness === 'recent'));
+
+  if(showPlaces){
+    features.filter(f => f.properties.layer === 'place').forEach(f => {
+      const p = f.properties;
+      const [lng, lat] = f.geometry.coordinates;
+      L.circleMarker([lat, lng], {radius: 4, color: '#E5E7EB', weight: 1, fillColor: '#9CA3AF', fillOpacity: 0.8})
+        .bindPopup(`<strong>${escapeHtml(p.place_name)}</strong><br>
+          <span class="muted small">${escapeHtml([p.district, p.division].filter(Boolean).join(', '))}</span><br>
+          ${escapeHtml(p.review_count)} review(s) in our data · ${num(p.avg_review_rating, 1)}★`)
+        .addTo(PLACE_LAYER);
+    });
+  }
+
+  // Gems drawn at the same spot (two V0 places both "near Kuakata") are fanned
+  // out in a small circle so neither hides the other. Only identical points
+  // move, and only by about 15 km; their popups still say approximate.
+  const atSpot = {};
+  gems.forEach(f => {
+    const key = f.geometry.coordinates.join(',');
+    (atSpot[key] = atSpot[key] || []).push(f);
+  });
+
+  gems.forEach(f => {
+    const g = f.properties;
+    let [lng, lat] = f.geometry.coordinates;
+    const shared = atSpot[f.geometry.coordinates.join(',')];
+    if(shared.length > 1){
+      const angle = 2 * Math.PI * shared.indexOf(f) / shared.length;
+      lat += 0.15 * Math.sin(angle);
+      lng += 0.15 * Math.cos(angle);
+    }
+    const approx = g.coord_source === 'near_host_place';
+    const old = g.freshness === 'old';
+    L.circleMarker([lat, lng], {
+      radius: 6 + 10 * (g.gem_score || 0),
+      color: approx ? (VIS_COLOURS[g.visibility] || '#8B96AD') : '#111827',
+      weight: approx ? 2.5 : 1.2,
+      dashArray: approx ? '4 4' : null,
+      fillColor: VIS_COLOURS[g.visibility] || '#8B96AD',
+      fillOpacity: approx ? 0.35 : (old ? 0.4 : 0.85),
+      opacity: old ? 0.55 : 1,
+    })
+      .bindPopup(`<strong>#${escapeHtml(g.gem_rank)} ${escapeHtml(g.canonical_name)}</strong>
+        · score ${num(g.gem_score, 2)}<br>
+        <div style="margin:6px 0;">${gemBadges(g)}</div>
+        ${escapeHtml(g.n_reviews)} independent review(s) · ${escapeHtml(COORD_LABELS[g.coord_source] || 'point')}<br>
+        <button class="link-btn" onclick="openGem('${escapeHtml(g.entity_id)}')">Read the evidence</button>`)
+      .bindTooltip(escapeHtml(g.canonical_name), {direction: 'top', offset: [0, -6]})
+      .addTo(GEM_LAYER);
+  });
+
+  const count = (fn) => gems.filter(f => fn(f.properties)).length;
+  document.getElementById('mapStats').innerHTML = [
+    [gems.length, 'gems shown'],
+    [count(g => g.visibility === 'V0'), 'on no map (V0)'],
+    [count(g => g.coord_source === 'near_host_place'), 'approximate points'],
+    [count(g => g.freshness === 'old'), 'need recent confirmation'],
+  ].map(([value, label]) =>
+    `<div class="stat"><div class="value">${escapeHtml(value)}</div><div class="label">${escapeHtml(label)}</div></div>`
+  ).join('');
+
+  if(!MAP_FITTED && gems.length){
+    MAP_FITTED = true;
+    GEM_MAP.fitBounds(L.latLngBounds(gems.map(f => [f.geometry.coordinates[1], f.geometry.coordinates[0]])),
+                      {padding: [30, 30], maxZoom: 9});
+  }
+}
+
+// Opening a gem goes through the address bar, so the page can be shared or
+// bookmarked on that gem. Re-opening the same gem has no hash change to react
+// to, so it is shown directly.
+function openGem(entityId){
+  const target = 'map/' + encodeURIComponent(entityId);
+  if(location.hash === '#' + target) showGemDetail(entityId);
+  else location.hash = target;
+}
+
+async function showGemDetail(entityId){
+  const out = document.getElementById('mapDetail');
+  out.innerHTML = '<p class="muted">Loading evidence…</p>';
+  try{
+    const detail = await api(`/api/gems/${encodeURIComponent(entityId)}?evidence_limit=8`);
+    const g = detail.gem;
+    const terms = [
+      ['mentions', g.term_mentions, 'independent reviews'],
+      ['hidden', g.term_hidden, 'how little known'],
+      ['distinct', g.term_distinct, 'how different from famous places'],
+      ['sentiment', g.term_sentiment, 'how positive (English sentences)'],
+      ['recency', g.term_recency, 'share of evidence that is recent'],
+    ].map(([name, value, help]) => `
+      <div class="bar-row" title="${escapeHtml(help)}">
+        <span class="name">${escapeHtml(name)} — ${escapeHtml(help)}</span>
+        <span class="bar-track"><span class="bar-fill" style="display:block;width:${value === null || value === undefined ? 0 : Math.round(value * 100)}%"></span></span>
+        <span class="num">${value === null || value === undefined ? 'n/a' : num(value, 2)}</span>
+      </div>`).join('');
+    const quotes = detail.evidence.map(m => `
+      <div class="quote">
+        “${escapeHtml(m.sentence || m.surface)}”
+        <div class="muted small" style="margin-top:6px;">
+          ${escapeHtml((m.review_date || '').slice(0, 10))}
+          · in a review of <strong>${escapeHtml(m.found_in_place || 'unknown')}</strong>
+          ${m.review_rating ? '· ' + num(m.review_rating, 1) + '★' : ''}
+          · <span class="mono">${escapeHtml(m.language || '')}</span>
+        </div>
+      </div>`).join('');
+    const foundIn = detail.found_in_places.map(p =>
+      `<span class="tag-pill">${escapeHtml(p.place_name)} · ${escapeHtml(p.n_reviews)}</span>`).join('');
+    const spellings = detail.variants.map(v =>
+      `<span class="tag-pill">${escapeHtml(v.surface)} · ${escapeHtml(v.mentions)}</span>`).join('');
+
+    out.innerHTML = `
+      <div class="card" style="margin-top:18px;">
+        <h3>#${escapeHtml(g.gem_rank)} ${escapeHtml(g.canonical_name)}
+          <span class="mono small">score ${num(g.gem_score, 2)}</span></h3>
+        <div>${gemBadges(g)}</div>
+        <p class="muted small">${escapeHtml(g.visibility_reason || '')}
+          ${g.coord_source === 'near_host_place'
+            ? `· it has no coordinates of its own, so it is drawn at ${escapeHtml(g.near_place)}, whose reviews mention it most` : ''}</p>
+        <p class="muted small" style="margin-bottom:6px;">How the score is made (five fixed parts):</p>
+        ${terms}
+        ${foundIn ? `<p class="muted small" style="margin:14px 0 4px;">Mentioned in reviews of:</p>${foundIn}` : ''}
+        ${spellings ? `<p class="muted small" style="margin:14px 0 4px;">Spellings seen:</p>${spellings}` : ''}
+        <p class="muted small" style="margin:14px 0 6px;">Evidence — the reviewers' own sentences, newest first:</p>
+        ${quotes || '<p class="muted small">No evidence rows.</p>'}
+      </div>`;
+    out.scrollIntoView({behavior: 'smooth', block: 'nearest'});
+  }catch(err){
+    out.innerHTML = `<p class="error">${escapeHtml(err.message)}</p>`;
+  }
+}
+
 /* ------------------------ share a review ------------------------ */
 const NEW_PLACE = '__new__';
 let SHARE_LIMITS = {min_text: 30, max_text: 3000};
@@ -1381,6 +1642,7 @@ async function submitReview(event){
 }
 
 boot();
+showTabFromHash();
 </script>
 </body>
 </html>

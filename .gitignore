@@ -7,6 +7,8 @@ data/touristinbd.db
 data/bertopic_model_dir/
 data/bertopic_model_dir_previous/
 *.png
+# Before/after screenshots for progress updates are kept.
+!docs/screenshots/*.png
 *.npy
 .pytest_cache/
 *.egg-info/

@@ -311,9 +311,9 @@ a question.
 .venv\Scripts\python.exe scripts\analyze_audience.py
 .venv\Scripts\python.exe scripts\verification_queue.py --export-register
 .venv\Scripts\python.exe scripts\build_phase8_database.py
-.venv\Scripts\python.exe -m backend.main      # then open /app/ and the Discoveries tab; gem register at /api/gems, map data at /api/gems/map
+.venv\Scripts\python.exe -m backend.main      # then open /app/#map for the gem map, /app/#discoveries for the table; API at /api/gems
 ```
-Tests: **1,374 across 24 suites**, all passing (test_admin's file-permission check fails on Windows only), about three minutes.
+Tests: **1,418 across 24 suites**, all passing (test_admin's file-permission check fails on Windows only), about three minutes.
 
 ## Next session, in priority order
 1. **Plan Phase 6's government dashboard** — the demo centrepiece, needs no new data,

@@ -189,6 +189,48 @@ Yes. Checked against the last commit:
   - New files are all reviewed lists or generated outputs.
 
 
+Part 3 - The gem map on the website
+-----------------------------------
+Before: the only way to see gems on the website was a table in the Discoveries
+tab (docs/screenshots/2026-10-27_before_gems_only_as_a_table.png).
+After: a new "Gem map" tab (docs/screenshots/2026-10-27_after_gem_map.png and
+2026-10-27_after_gem_evidence.png).
+
+9. What the map shows
+   - Every gem with a point, coloured by how well known it already is: V0 (on no
+     map) pink, V1 orange, V2 blue, V3 grey. Bigger point = higher gem score.
+   - The 100 places our reviews were written about, as small grey dots, so you
+     can see that the gems lie AROUND the famous places, not on them.
+   - A dashed ring marks an approximate point (a V0 place drawn near the place
+     whose reviews mention it). Two gems at the same approximate spot are fanned
+     out slightly so neither hides the other.
+   - A faded point has no review from the last 3 years.
+   - Filters: by level (V3 off by default, so famous places do not crowd the
+     map), reviewed places on/off, recent evidence only.
+   - The one gem with no coordinates anywhere (Madhabpur Lake) is listed under
+     the map instead of being placed somewhere wrong.
+
+10. Clicking a gem opens its evidence
+   - Its level and why, whether its evidence is recent, the five parts of its
+     score as bars, which places' reviews mention it, every spelling seen
+     (Gangamati: গঙ্গামতি, Gangamati, গঙ্গামাটি), and the reviewers' own
+     sentences, newest first, in Bangla and English.
+
+11. Direct links for the demo
+   - /app/#map opens the map; /app/#map/E0016 opens it on Gangamati's evidence.
+     Any tab works the same way (/app/#discoveries).
+
+12. How it is built
+   - Leaflet 1.9.4 with OpenStreetMap tiles, both free. The library is pinned to
+     an exact version and checked against its published fingerprint, so a
+     changed file from the internet is refused. If it cannot load, the tab says
+     so instead of showing a blank box.
+   - The map makes one request (/api/gems/map); the filters work on that copy.
+   - The website is now light-themed only; the dark mode switch was removed.
+   - 44 new checks in the website contract tests (149 now): the tab, the pinned
+     library, and every field the map reads is really returned by the API.
+
+
 WHAT IS STILL OPEN
 ==================
 Needs a person
@@ -199,7 +241,6 @@ Needs a person
     on purpose, because "local name versus official name" is a human call.
   - Verify the 54 candidates in the verification queue.
 Needs building next
-  - The map tab on the website, using /api/gems/map.
   - Place cards on the website, using /api/place-attributes.
   - A few duplicates remain: "Hiron Point" / "Hiron Point (Nilkamal)",
     "varendra museum" / "Varendra Research Museum".
